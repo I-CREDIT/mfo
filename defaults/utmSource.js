@@ -85,6 +85,15 @@ export const controlUtm = () => {
       cookie.set('clickid', getUrlParameter('v'), {expires: 30})
     }
   }
+  if(getUrlParameter('utm_source').length>0 && getUrlParameter('aff_id').length>0 && getUrlParameter('aff_sub').length>0) {
+    if(getUrlParameter('utm_source') === 'sales_doubler') {
+      newCookie()
+      localStorage.clear();
+      cookie.set('utm_source', getUrlParameter('utm_source'), {expires: 30})
+      cookie.set('utm_term', getUrlParameter('aff_id'), {expires: 30})
+      cookie.set('clickid', getUrlParameter('aff_sub'), {expires: 30})
+    }
+  }
   if(getUrlParameter('utm_source').length>0 && getUrlParameter('clickid').length>0) {
     if(getUrlParameter('utm_source') === 'upsala') {
       newCookie()
