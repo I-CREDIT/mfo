@@ -5,6 +5,7 @@ import Router from 'next/router'
 import usersReducer from '../../store/reducers/userReducer'
 
 const mapStateToProps = state => {
+  console.log(state.userStatus)
   return {userReducer: state.userReducer, userStatus: state.userStatus, userHistory: state.userHistory}
 }
 
@@ -142,7 +143,7 @@ class Status extends React.Component {
       case 3:
         return (
           <div className='mt-5'>
-            <div className='container alert alert-primary'>
+            {/* <div className='container alert alert-primary'>
               <h4 className='alert-heading'>Статус вашего текущего заима</h4>
               <hr/>
               <p className='mb-0'><b>Вы в просрочке.</b> Отдел взыскания: <b><a href="tel:+77788701029">+7 778 870 10 29</a></b>. Уточните сумму долга по номеру <b><a href="tel:+77272501500">+7 727 250 1500</a></b>, <b><a href="tel:+77007501500">+7 700 750 1500</a></b> или напишите в
@@ -152,9 +153,9 @@ class Status extends React.Component {
               У вас заим в статусе
               <b>
                  "Просрочен"</b>
-            </div>
+            </div> */}
             <div>
-              {/* <table className='vdolge'>
+              <table className='vdolge vprosrochke'>
                 <thead>
                   <tr>
                     <th>
@@ -165,6 +166,8 @@ class Status extends React.Component {
                     </th>
 
                     <th>Основной долг 💸</th>
+                    <th>Пеня</th>
+                    <th>Сумма вознагрождения</th>
                     <th>Сумма задолженности на текущую дату</th>
                     <th>Дата погашения 📅</th>
                   </tr>
@@ -174,11 +177,13 @@ class Status extends React.Component {
                     <td>{this.props.userStatus.userStatus.givenDate}</td>
                     <td>{this.props.userStatus.userStatus.amount}</td>
                     <td>{this.props.userStatus.userStatus.mainAmount}</td>
+                    <td>{this.props.userStatus.userStatus.penalty}</td>
+                    <td>{this.props.userStatus.userStatus.reward}</td>
                     <td>{this.props.userStatus.userStatus.todayAmount}</td>
                     <td>{this.props.userStatus.userStatus.endDate}</td>
                   </tr>
                 </tbody>
-              </table> */}
+              </table>
             </div>
           </div>
         )

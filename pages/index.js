@@ -58,7 +58,10 @@ class Home extends React.Component {
           </Head>
             <div className="view">
             <div className="container">
-
+              <ul className="mainphone-numbers phone-numbers">
+                <li className='phonenotworking'><span>Call center:</span><h1><i className="fa fa-phone" /><a href="tel:+77007501500">+7 700 <b className="black">750 15 00</b></a></h1><b className='phoneInfo'></b></li>
+                <li><span>Отдел взыскания:</span><i className="fa fa-phone" /><h1><a href="tel:+77788701029">+7 778 <b className="black">870 10 29</b></a></h1></li>
+              </ul>
                 <div className="mainbanner" styles={{ backgroundImage:`url(${banner})` }}>
         <div className="header-text row">
           <h1 className="secondary-header col-md-4 col-12">Микрозайм <span className="d-block">онлайн на карту</span> <span className="d-block">до <span className="red">145

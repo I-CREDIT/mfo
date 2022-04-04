@@ -696,7 +696,7 @@ button {
   line-height: 22px;
   font-size: "CTCSplachRounded" !important;
   letter-spacing: 0.08px;
-  display: none !important;
+  display: none;
   padding-left: 0;
 }
 .phone-numbers li {
@@ -2089,7 +2089,20 @@ a:hover {
   margin: 70px 0;
 }
 
+
+.mainphone-numbers {
+  display: none !important;
+}
+.mainphone-numbers li {
+  justify-content: unset;
+}
+
 @media only screen and (max-width: 768px) {
+  .mainphone-numbers {
+    display: block !important;
+    position: relative;
+    top: -15px;
+  }
   nav {
     background-color: white;
   }
@@ -2257,9 +2270,9 @@ a:hover {
   }
 }
 
-@media only screen and (min-width: 1024px) {
+@media only screen and (min-width: 768px) {
   .phone-numbers {
-    display: flex !important;
+    display: flex;
   }
 }
 
@@ -2793,6 +2806,28 @@ table td.r, table th.r {
     content: "Дата погашения 📅"
   }
 
+  .vprosrochke tr td:nth-child(1):before {
+    content: "Дата выдачи 📅"
+  }
+  .vprosrochke tr td:nth-child(2):before {
+    content: "Сумма на руки 💰"
+  }
+   .vprosrochke tr td:nth-child(3):before {
+    content: "Основной долг 💸"
+  }
+  .vprosrochke tr td:nth-child(4):before {
+    content: "Пеня"
+  }
+  .vprosrochke tr td:nth-child(5):before {
+    content: "Сумма вознагрождения"
+  }
+   .vprosrochke tr td:nth-child(6):before {
+    content: "Сумма задолженности на текущую дату"
+  }
+   .vprosrochke tr td:nth-child(7):before {
+    content: "Дата погашения 📅"
+  }
+
  
 
   .userHistory tr td {
@@ -2809,12 +2844,12 @@ table td.r, table th.r {
     content: "Дата возврата"
   }
 
-   .vdolge tr td:nth-child(4):before {
+   /* .vdolge tr td:nth-child(4):before {
     content: "Сумма задолженности на текущую дату"
   }
    .vdolge tr td:nth-child(5):before {
     content: "Дата погашения 📅"
-  }
+  } */
 }
 .cabinetmessage {
   position: fixed;
