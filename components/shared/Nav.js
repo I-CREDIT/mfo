@@ -21,12 +21,14 @@ const Navbar = () => {
   const [isNavOpen, setNavOpen] = useState(false);
   const [loader, setLoader] = useState(false)
   const router = useRouter()
+  
   useEffect(() => {
     var $win = $(window);
 
     $win.scroll(function () {
     if ($(window).width() > 550) {
-      if ($win.scrollTop() == 0) {
+      const navigationBar = document.querySelector('#navigationBar')
+      if (!navigationBar.classList.contains('show') && $win.scrollTop() == 0) {
         $(".navbar").removeClass("fade-color");
       } else if (!$win.scrollTop() == 0) {
         $(".navbar").addClass("fade-color");
@@ -53,6 +55,14 @@ const Navbar = () => {
     },300)
   }
 
+  const headerBackgroundOnClick = () => {
+    const navigationBar = document.querySelector('#navigationBar')
+    console.log(navigationBar.classList.contains('show'))
+    if(window.pageYOffset == 0) {
+      document.querySelector('.navbar').classList.toggle('fade-color')
+    }
+  }
+
   return (
     <div className={router.pathname.includes('admin') ? 'd-none' : ''}>
        {loader === true
@@ -63,27 +73,23 @@ const Navbar = () => {
 
           </div>
         }
-    <nav className=" mb-2 navbar navbar-expand-lg navbar-light  transparent ">
+    <nav className=" mb-2 navbar navbar-expand-lg navbar-light  transparent " onClick={headerBackgroundOnClick}>
     <div className="container">
  
     <AppLink href="/" className="navbar-brand logo">
       <img className='icreditlogo' src={require("../../img/logo.png")} alt="" />
     </AppLink>
-
-    <a href='/Поддержка во время ЧП.pdf' target="_blank" className="text-center paymentCenter ">Поддержка во время ЧП</a>
-      <button  onClick={toggleNav} className="navbar-toggler burger" type="button" data-toggle="collapse" data-target="#navigationBar" aria-controls="navigationBar" aria-expanded="false" aria-label="Toggle navigation">
-        <div className="animated-icon1"><span /><span /><span /></div>
-      </button>
      
       <ul className="phone-numbers">
         <li className='phonenotworking'><span>Call center:</span><h1><i className="fa fa-phone" /><a href="tel:+77007501500">+7 700 <b className="black">750 15 00</b></a></h1><b className='phoneInfo'></b></li>
         <li><span>Отдел взыскания:</span><i className="fa fa-phone" /><h1><a href="tel:+77788701029">+7 778 <b className="black">870 10 29</b></a></h1></li>
       </ul>
+      
+      <button  onClick={toggleNav} className="navbar-toggler burger" type="button" data-toggle="collapse" data-target="#navigationBar" aria-controls="navigationBar" aria-expanded="false" aria-label="Toggle navigation">
+        <div className="animated-icon1"><span /><span /><span /></div>
+      </button>
       <Collapse navbar isOpen={isNavOpen} className="text-center justify-content-end" id="navigationBar">
         <ul className="navbar-nav links">
-          <li className="nav-item mx-1"  onClick={toggleClose} >
-            <a href='/Поддержка во время ЧП.pdf' target="_blank"  className="nav-link align-items-center d-flex">Поддержка во время ЧП</a>
-          </li>
           <li className="nav-item mx-1"  onClick={toggleClose} >
             <AppLink className="nav-link align-items-center d-flex"  href='/payment_methods'> Способ
               оплаты</AppLink>
@@ -122,17 +128,17 @@ const Navbar = () => {
             </Fragment>)}
 
             <div className='mobphones mt-2'>
-            <li className="nav-item mx-1 mobphonenotworking" onClick={toggleClose} >
-            <a href='tel:+77007501500' className='nav-link mainnavphone'><i className="fa fa-phone" /> +77007501500</a>
-            {/* <b className='phoneInfo'>Этот номер временно не работает</b> */}
-          </li>
+            <li className='nav-item mx-1 mt-2 mobphonenotworking'><a className='redphone'>Call центр:</a></li>
+              <li className="nav-item mx-1 mobphonenotworking" onClick={toggleClose} >
+                <a href='tel:+77007501500' className='nav-link mainnavphone'><i className="fa fa-phone" /> +77007501500</a>
+                {/* <b className='phoneInfo'>Этот номер временно не работает</b> */}
+              </li>
 
-          <br></br>
-            <li className='nav-item mx-1 mobphonenotworking'><a className='redphone'>Отдел взыскания:</a></li>
-          <li className="nav-item mx-1 mobphonenotworking" onClick={toggleClose} >
-            <a href='tel:+77788701029' className='nav-link mainnavphone'><i className="fa fa-phone" /> +77788701029</a>
-            {/* <b className='phoneInfo'>Этот номер временно не работает</b> */}
-          </li>
+              <li className='nav-item mx-1 mt-2 mobphonenotworking'><a className='redphone'>Отдел взыскания:</a></li>
+              <li className="nav-item mx-1 mobphonenotworking" onClick={toggleClose} >
+                <a href='tel:+77788701029' className='nav-link mainnavphone'><i className="fa fa-phone" /> +77788701029</a>
+                {/* <b className='phoneInfo'>Этот номер временно не работает</b> */}
+              </li>
             </div>
 
           {/* <li  onClick={this.toggleClose} className="nav-item mx-1 "><i className="fa fa-phone" /><h1><a href="tel:+77272501500">+7 727 <b className="black">250 15 00</b></a></h1></li>
