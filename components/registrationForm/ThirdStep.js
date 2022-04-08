@@ -175,6 +175,51 @@ class FormRegister extends React.Component {
         other.cpa_source = cookie.get("utm_source")
         other.cpa_clickid = cookie.get("clickid")
       }
+      if(cookie.get('utm_source') === 'altel_2365') {
+        other.source = cookie.get("utm_source")
+        other.cpa_source = cookie.get("utm_source")
+        other.cpa_clickid = cookie.get("clickid")
+      }
+      if(cookie.get('utm_source') === 'altel_4291') {
+        other.source = cookie.get("utm_source")
+        other.cpa_source = cookie.get("utm_source")
+        other.cpa_clickid = cookie.get("clickid")
+      }
+      if(cookie.get('utm_source') === 'altel_7846') {
+        other.source = cookie.get("utm_source")
+        other.cpa_source = cookie.get("utm_source")
+        other.cpa_clickid = cookie.get("clickid")
+      }
+      if(cookie.get('utm_source') === 'altel_3954') {
+        other.source = cookie.get("utm_source")
+        other.cpa_source = cookie.get("utm_source")
+        other.cpa_clickid = cookie.get("clickid")
+      }
+      if(cookie.get('utm_source') === 'altel_8132') {
+        other.source = cookie.get("utm_source")
+        other.cpa_source = cookie.get("utm_source")
+        other.cpa_clickid = cookie.get("clickid")
+      }
+      if(cookie.get('utm_source') === 'altel_5673') {
+        other.source = cookie.get("utm_source")
+        other.cpa_source = cookie.get("utm_source")
+        other.cpa_clickid = cookie.get("clickid")
+      }
+      if(cookie.get('utm_source') === 'altel_6728') {
+        other.source = cookie.get("utm_source")
+        other.cpa_source = cookie.get("utm_source")
+        other.cpa_clickid = cookie.get("clickid")
+      }
+      if(cookie.get('utm_source') === 'altel_1589') {
+        other.source = cookie.get("utm_source")
+        other.cpa_source = cookie.get("utm_source")
+        other.cpa_clickid = cookie.get("clickid")
+      }
+      if(cookie.get('utm_source') === 'altel_4376') {
+        other.source = cookie.get("utm_source")
+        other.cpa_source = cookie.get("utm_source")
+        other.cpa_clickid = cookie.get("clickid")
+      }
     }
     other.finished_step = 3;
     const finalObjects = {

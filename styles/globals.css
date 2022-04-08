@@ -1476,7 +1476,7 @@ a,
   color: #adadad;
 }
 
-.oplata .oplataform .buttonForm {
+.oplata .oplataform .buttonForm, .otherPages .buttonForm {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -1484,6 +1484,15 @@ a,
 
 .oplata .oplataform--button {
   margin: 85px auto 40px;
+  text-align: center;
+  background-color: #ef2221;
+  color: white;
+  border: none;
+  padding: 17px calc(45px + (58 - 45) * ((100vw - 720px) / (1600 - 720)));
+  border-radius: 7px;
+}
+.otherPages .oplataform--button {
+  margin: 50px 0 0;
   text-align: center;
   background-color: #ef2221;
   color: white;
@@ -2786,6 +2795,9 @@ table td.r, table th.r {
 
 
   .vdolge tr td {
+    min-height: 40px;
+  }
+  .vprosrochke tr td:nth-child(6) {
     min-height: 75px;
   }
    .vdolge tr td:nth-child(1):before {

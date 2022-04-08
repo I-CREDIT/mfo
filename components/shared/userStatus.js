@@ -3,12 +3,15 @@ import {connect} from 'react-redux'
 import axios from 'axios'
 import Router from 'next/router'
 import usersReducer from '../../store/reducers/userReducer'
+import Spinner from 'react-spinner-material';
+import swal from 'sweetalert'
 
 const mapStateToProps = state => {
-  console.log(state.userStatus)
+  console.log(state)
   return {userReducer: state.userReducer, userStatus: state.userStatus, userHistory: state.userHistory}
 }
 
+// console.log(this.props.userStatus.userStatus.todayAmount)
 class Status extends React.Component {
 
   constructor(props) {
@@ -57,6 +60,47 @@ class Status extends React.Component {
     }
   }
 
+  handleSubmit() {
+    let values = {
+      iin: this.props.userReducer.user.UF_4,
+      amount: this.props.userStatus.userStatus.todayAmount
+    }
+    swal("Проверьте ваши данные", {
+      text: `Проверьте ваши данные
+
+      Ваш ИИН: ${values.iin}    Сумма оплаты: ${values.amount}`,
+      buttons: {
+        catch: {
+          text: "Подтвердить",
+          value: "catch",
+        },
+        cancel: "Отмена"
+      }
+    }).then(value=>{
+      switch (value) {
+        case "catch":
+          this.setState({
+            btnLoading: true,
+          });
+           axios.post(`https://api.money-men.kz/api/make_payment123`, values)
+            .then((response) => {
+              this.setState({
+                btnLoading: false
+              })
+              location.replace(response.data[0] + "?" + response.data[1])
+            })
+            .catch((error) => {
+              console.log(error)
+              this.setState({
+                btnLoading: false
+              })
+            });
+        case "cancel":
+          break
+      }
+    })
+  }
+
   render() {
     switch (this.props.userStatus.userStatus.stage) {
       case 1:
@@ -91,14 +135,19 @@ class Status extends React.Component {
                   <tr>
                     <td>{this.props.userStatus.userStatus.givenDate}</td>
                     {/* <td>{this.props.userStatus.userStatus.amount}</td> */}
-                    <td>{this.props.userStatus.userStatus.lp}</td>
-                    <td>{this.props.userStatus.userStatus.mainAmount}</td>
-                    <td>{this.props.userStatus.userStatus.lpAmount}</td>
-                    <td>{this.props.userStatus.userStatus.todayAmount}</td>
+                    <td>{(+this.props.userStatus.userStatus.lp).toLocaleString()} тг</td>
+                    <td>{(+this.props.userStatus.userStatus.mainAmount).toLocaleString()} тг</td>
+                    <td>{(+this.props.userStatus.userStatus.lpAmount).toLocaleString()} тг</td>
+                    <td>{(+this.props.userStatus.userStatus.todayAmount).toLocaleString()} тг</td>
                     <td>{this.props.userStatus.userStatus.endDate}</td>
                   </tr>
                 </tbody>
               </table>
+              <div className="buttonForm">
+                {this.state.btnLoading === true ?
+                  <Spinner className="loading" size={200} spinnerColor={"#ef2221"} spinnerWidth={2} visible={true} /> :
+                  <button onClick={() => this.handleSubmit()} className=" oplataform--button" type="submit">Погасить {(+this.props.userStatus.userStatus.todayAmount).toLocaleString("ru-RU")} тенге</button>}
+              </div>
             </div>
           </div>
         )
@@ -131,12 +180,17 @@ class Status extends React.Component {
                   <tr>
                     <td>{this.props.userStatus.userStatus.givenDate}</td>
                     {/* <td>{this.props.userStatus.userStatus.amount}</td> */}
-                    <td>{this.props.userStatus.userStatus.mainAmount}</td>
-                    <td>{this.props.userStatus.userStatus.todayAmount}</td>
+                    <td>{(+this.props.userStatus.userStatus.mainAmount).toLocaleString()} тг</td>
+                    <td>{(+this.props.userStatus.userStatus.todayAmount).toLocaleString()} тг</td>
                     <td>{this.props.userStatus.userStatus.endDate}</td>
                   </tr>
                 </tbody>
               </table>
+              <div className="buttonForm">
+                {this.state.btnLoading === true ?
+                  <Spinner className="loading" size={200} spinnerColor={"#ef2221"} spinnerWidth={2} visible={true} /> :
+                  <button onClick={() => this.handleSubmit()} className=" oplataform--button" type="submit">Погасить {(+this.props.userStatus.userStatus.todayAmount).toLocaleString("ru-RU")} тенге</button>}
+              </div>
             </div>
           </div>
         )
@@ -175,15 +229,20 @@ class Status extends React.Component {
                 <tbody>
                   <tr>
                     <td>{this.props.userStatus.userStatus.givenDate}</td>
-                    <td>{this.props.userStatus.userStatus.amount}</td>
-                    <td>{this.props.userStatus.userStatus.mainAmount}</td>
-                    <td>{this.props.userStatus.userStatus.penalty}</td>
-                    <td>{this.props.userStatus.userStatus.reward}</td>
-                    <td>{this.props.userStatus.userStatus.todayAmount}</td>
+                    <td>{(+this.props.userStatus.userStatus.amount).toLocaleString()} тг</td>
+                    <td>{(+this.props.userStatus.userStatus.mainAmount).toLocaleString()} тг</td>
+                    <td>{(+this.props.userStatus.userStatus.penalty).toLocaleString()} тг</td>
+                    <td>{(+this.props.userStatus.userStatus.reward).toLocaleString()} тг</td>
+                    <td>{(+this.props.userStatus.userStatus.todayAmount).toLocaleString()} тг</td>
                     <td>{this.props.userStatus.userStatus.endDate}</td>
                   </tr>
                 </tbody>
               </table>
+              <div className="buttonForm">
+                {this.state.btnLoading === true ?
+                  <Spinner className="loading" size={200} spinnerColor={"#ef2221"} spinnerWidth={2} visible={true} /> :
+                  <button onClick={() => this.handleSubmit()} className=" oplataform--button" type="submit">Погасить {(+this.props.userStatus.userStatus.todayAmount).toLocaleString("ru-RU")} тенге</button>}
+              </div>
             </div>
           </div>
         )

@@ -205,5 +205,87 @@ export const controlUtm = () => {
       cookie.set('clickid', getUrlParameter('click_id'), {expires: 30})
     }
   }
+
+  if(getUrlParameter('utm_source').length>0 && getUrlParameter('utm_medium').length>0 && getUrlParameter('utm_campaign').length>0) {
+    if(getUrlParameter('utm_source') === 'altel_2365') {
+      newCookie()
+      localStorage.clear();
+      cookie.set('utm_source', getUrlParameter('utm_source'), {expires: 30})
+      cookie.set('utm_medium', getUrlParameter('utm_medium'), {expires: 30})
+      cookie.set('utm_campaign', getUrlParameter('utm_campaign'), {expires: 30})
+    }
+  }
+  if(getUrlParameter('utm_source').length>0 && getUrlParameter('utm_medium').length>0 && getUrlParameter('utm_campaign').length>0) {
+    if(getUrlParameter('utm_source') === 'altel_4291') {
+      newCookie()
+      localStorage.clear();
+      cookie.set('utm_source', getUrlParameter('utm_source'), {expires: 30})
+      cookie.set('utm_medium', getUrlParameter('utm_medium'), {expires: 30})
+      cookie.set('utm_campaign', getUrlParameter('utm_campaign'), {expires: 30})
+    }
+  }
+  if(getUrlParameter('utm_source').length>0 && getUrlParameter('utm_medium').length>0 && getUrlParameter('utm_campaign').length>0) {
+    if(getUrlParameter('utm_source') === 'altel_7846') {
+      newCookie()
+      localStorage.clear();
+      cookie.set('utm_source', getUrlParameter('utm_source'), {expires: 30})
+      cookie.set('utm_medium', getUrlParameter('utm_medium'), {expires: 30})
+      cookie.set('utm_campaign', getUrlParameter('utm_campaign'), {expires: 30})
+    }
+  }
+  if(getUrlParameter('utm_source').length>0 && getUrlParameter('utm_medium').length>0 && getUrlParameter('utm_campaign').length>0) {
+    if(getUrlParameter('utm_source') === 'altel_3954') {
+      newCookie()
+      localStorage.clear();
+      cookie.set('utm_source', getUrlParameter('utm_source'), {expires: 30})
+      cookie.set('utm_medium', getUrlParameter('utm_medium'), {expires: 30})
+      cookie.set('utm_campaign', getUrlParameter('utm_campaign'), {expires: 30})
+    }
+  }
+  if(getUrlParameter('utm_source').length>0 && getUrlParameter('utm_medium').length>0 && getUrlParameter('utm_campaign').length>0) {
+    if(getUrlParameter('utm_source') === 'altel_8132') {
+      newCookie()
+      localStorage.clear();
+      cookie.set('utm_source', getUrlParameter('utm_source'), {expires: 30})
+      cookie.set('utm_medium', getUrlParameter('utm_medium'), {expires: 30})
+      cookie.set('utm_campaign', getUrlParameter('utm_campaign'), {expires: 30})
+    }
+  }
+  if(getUrlParameter('utm_source').length>0 && getUrlParameter('utm_medium').length>0 && getUrlParameter('utm_campaign').length>0) {
+    if(getUrlParameter('utm_source') === 'altel_5673') {
+      newCookie()
+      localStorage.clear();
+      cookie.set('utm_source', getUrlParameter('utm_source'), {expires: 30})
+      cookie.set('utm_medium', getUrlParameter('utm_medium'), {expires: 30})
+      cookie.set('utm_campaign', getUrlParameter('utm_campaign'), {expires: 30})
+    }
+  }
+  if(getUrlParameter('utm_source').length>0 && getUrlParameter('utm_medium').length>0 && getUrlParameter('utm_campaign').length>0) {
+    if(getUrlParameter('utm_source') === 'altel_6728') {
+      newCookie()
+      localStorage.clear();
+      cookie.set('utm_source', getUrlParameter('utm_source'), {expires: 30})
+      cookie.set('utm_medium', getUrlParameter('utm_medium'), {expires: 30})
+      cookie.set('utm_campaign', getUrlParameter('utm_campaign'), {expires: 30})
+    }
+  }
+  if(getUrlParameter('utm_source').length>0 && getUrlParameter('utm_medium').length>0 && getUrlParameter('utm_campaign').length>0) {
+    if(getUrlParameter('utm_source') === 'altel_1589') {
+      newCookie()
+      localStorage.clear();
+      cookie.set('utm_source', getUrlParameter('utm_source'), {expires: 30})
+      cookie.set('utm_medium', getUrlParameter('utm_medium'), {expires: 30})
+      cookie.set('utm_campaign', getUrlParameter('utm_campaign'), {expires: 30})
+    }
+  }
+  if(getUrlParameter('utm_source').length>0 && getUrlParameter('utm_medium').length>0 && getUrlParameter('utm_campaign').length>0) {
+    if(getUrlParameter('utm_source') === 'altel_4376') {
+      newCookie()
+      localStorage.clear();
+      cookie.set('utm_source', getUrlParameter('utm_source'), {expires: 30})
+      cookie.set('utm_medium', getUrlParameter('utm_medium'), {expires: 30})
+      cookie.set('utm_campaign', getUrlParameter('utm_campaign'), {expires: 30})
+    }
+  }
   else {}
 }
