@@ -17,7 +17,8 @@ const withAuth = WrappedComponent => {
     render() {
       if (cookie.get('token') && this.props.loggedIn) {
         return <WrappedComponent />;
-      } if (cookie.get('token') && (this.props.authenticatingUser || !this.props.loggedIn)) {
+      }
+      if (cookie.get('token') && (this.props.authenticatingUser || !this.props.loggedIn)) {
         return <div className="otherPages">
           <div className='pd-5 pt-5'></div>
           <div className="modelLoader"></div>

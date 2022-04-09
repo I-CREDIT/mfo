@@ -80,7 +80,7 @@ const ContinueStep3 = ({step,setStep, stepResult, userDate, srok,summa}) => {
   const [btnLoading, setBtnLoading] = useState(false)
   const onSubmit = (values) => {
     if(isValidIBANNumber2(iban.value)!==false) {
-      console.log(userDate)
+      console.log('USRDAT', userDate)
       var continue2=  {}
       values.UF_35 = iban.value;
       values.UF_47 = iban.text;

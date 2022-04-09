@@ -904,7 +904,7 @@ button {
 .repeatBtn, .cabinet-btn {
   padding: 40px 0;
 }
-.repeatBtn img, .cabinet-btn img {
+.cabinet-btn img {
   animation-name: imgIcon;
   animation-duration: 3s;
   animation-fill-mode:forwards;

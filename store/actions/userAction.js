@@ -48,16 +48,11 @@ export const loginUser = (values) => dispatch => {
       const error = new Error(`Error ${response.status}: ${response.statusText}`);
       error.response = response;
       throw error;
-    },
-      error => {
-        const errmess = new Error(error.message);
-        throw errmess;
-      })
+    })
     .then(response => response.json())
     .then(data => {
-      cookie.set('token', data.access_token, {expires: 2})
+      cookie.set('token', data.access_token, {expires: data.expires_in})
       var users = dispatch(fetchCurrentUser())
-      console.log(users)
       dispatch({ type: 'SET_CURRENT_USER', payload: 'user' })
       Router.push('/cabinet/loans')
     })
@@ -85,12 +80,11 @@ export const fetchCurrentUser = () => dispatch => {
     const error = new Error(`Error ${response.status}: ${response.statusText}`);
     error.response = response;
     throw error;
-  },
-    error => {
-      const errmess = new Error(error.message);
-      throw errmess;
-    })
-  .then(response => response.json())
+  })
+  // .then(response => {
+  //   console.log('ERROR ADOKN', response, response.json())
+  //   return response.json()
+  // })
   .then(data => {
     dispatch(setCurrentUser(data))
   })
@@ -115,11 +109,7 @@ export const fetchUserStatus = () => dispatch => {
     const error = new Error(`Error ${response.status}: ${response.statusText}`);
     error.response = response;
     throw error;
-  },
-    error => {
-      const errmess = new Error(error.message);
-      throw errmess;
-    })
+  })
   .then(response => response.json())
   .then(data => {
     dispatch(statusSuccess(data))
@@ -147,11 +137,7 @@ export const fetchUserHistory = () => dispatch => {
     const error = new Error(`Error ${response.status}: ${response.statusText}`);
     error.response = response;
     throw error;
-  },
-    error => {
-      const errmess = new Error(error.message);
-      throw errmess;
-    })
+  })
   .then(response => response.json())
   .then(data => {
     dispatch(historySuccess(data))
@@ -178,11 +164,7 @@ export const fetchAdmin = () => dispatch => {
     const error = new Error(`Error ${response.status}: ${response.statusText}`);
     error.response = response;
     throw error;
-  },
-    error => {
-      const errmess = new Error(error.message);
-      throw errmess;
-    })
+  })
   .then(response => response.json())
   .then(data => {
     dispatch(setCurrentUser(data))
