@@ -42,9 +42,8 @@ export const loginUser = (values) => dispatch => {
     body: JSON.stringify(values),
   })
     .then(response => {
-      if (response.ok) {
-        return response;
-      }
+      if (response.ok) return response;
+
       const error = new Error(`Error ${response.status}: ${response.statusText}`);
       error.response = response;
       throw error;
@@ -52,14 +51,16 @@ export const loginUser = (values) => dispatch => {
     .then(response => response.json())
     .then(data => {
       cookie.set('token', data.access_token, {expires: data.expires_in})
-      var users = dispatch(fetchCurrentUser())
+      let users = dispatch(fetchCurrentUser())
+      console.log('USERS:', users)
       dispatch({ type: 'SET_CURRENT_USER', payload: 'user' })
       Router.push('/cabinet/loans')
     })
     .catch((error) => {
-      if(error.message.includes('400')) {
+      if (error.message.includes('400')) {
         dispatch({type: 'FAILED_LOGIN', payload: 'Неправильный ИИН или пароль'})
-      }else {
+      }
+      else {
         dispatch({type: 'FAILED_LOGIN', payload: error.message})
       }
     })
