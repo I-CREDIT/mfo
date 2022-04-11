@@ -162,7 +162,7 @@ class Cabinet extends React.Component {
             (
                 <div>
                     <div className="repeatBtn form-group">
-                        <button className='mt-5' onClick={() => this.handleRepeated()}>
+                        <button onClick={() => this.handleRepeated()}>
                             Новая заявка
                         </button>
                     </div>

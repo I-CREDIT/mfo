@@ -910,7 +910,7 @@ button {
   animation-fill-mode:forwards;
   position:absolute
 }
-.repeatBtn button, .cabinet-btn button {
+.cabinet-btn button {
   opacity: 0;
   animation-name: btn;
   animation-duration: 4s;

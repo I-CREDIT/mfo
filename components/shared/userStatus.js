@@ -46,6 +46,7 @@ class Status extends React.Component {
 
   componentDidMount() {
     this.getCurrentStep()
+    console.log('STATUS', this.props.userStatus)
   }
 
   myFunc () {
@@ -222,7 +223,7 @@ class Status extends React.Component {
             </div>
           </div>
         )
-        case 7:
+      case 7:
         return (
           <div className='container'>
             <div className='alert alert-primary'>
