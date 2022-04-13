@@ -157,7 +157,7 @@ class Aggrement extends React.Component {
         })
 
         if(response.data.success){
-          swal("Успешно!", "success").then(()=>{
+          swal("Успешно!", "Наши специалисты свяжутся с Вами в течении 15 минут").then(()=>{
             Router.push('/')
           })
         }
