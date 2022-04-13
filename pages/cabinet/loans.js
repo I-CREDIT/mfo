@@ -157,7 +157,7 @@ class Cabinet extends React.Component {
         <p className='welcome text-center'>
             {helloUser()} {this.props.userReducer.user.UF_5} {" " + this.props.userReducer.user.UF_6}!
         </p>
-        {!this.props.userStatus.userStatus.success
+        {!this.props.userStatus.userStatus.success && !this.props.userStatus.isLoading
             ?
             (
                 <div>
