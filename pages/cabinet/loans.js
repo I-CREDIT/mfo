@@ -11,6 +11,7 @@ import Status from '../../components/shared/userStatus'
 import History from '../../components/shared/userHistory'
 import { ifSaled } from '../../defaults/saled'
 const mapStateToProps = state => {
+    console.log('FFF', state.userReducer.user.url, state.userReducer.UF_3, state.userReducer.UF_4)
   return {userReducer: state.userReducer, userStatus: state.userStatus, userHistory: state.userHistory}
 }
 

@@ -10,7 +10,6 @@ const usersReducer = /* FUNCTION */ (state = defaultState, action) => {
   switch (action.type) {
     // TODO: move to types
     case 'SET_CURRENT_USER':
-      // action.payload {username: 'Chandler Bing', bio: 'my user bio', avatar: 'some image url'}
       return {
         ...state, user: action.payload, error: null, loggedIn: true, authenticatingUser: false,
       };

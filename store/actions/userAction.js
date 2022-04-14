@@ -56,6 +56,7 @@ export const loginUser = (values) => dispatch => {
       dispatch({ type: 'SET_CURRENT_USER', payload: 'user' })
       Router.push('/cabinet/loans')
     })
+
     .catch((error) => {
       if (error.message.includes('400')) {
         dispatch({type: 'FAILED_LOGIN', payload: 'Неправильный ИИН или пароль'})
@@ -82,10 +83,7 @@ export const fetchCurrentUser = () => dispatch => {
     error.response = response;
     throw error;
   })
-  // .then(response => {
-  //   console.log('ERROR ADOKN', response, response.json())
-  //   return response.json()
-  // })
+  .then(response => response.json())
   .then(data => {
     dispatch(setCurrentUser(data))
   })

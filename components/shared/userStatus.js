@@ -28,25 +28,22 @@ class Status extends React.Component {
   }
   
   getCurrentStep() {
-    axios.get(`https://api.money-men.kz/api/notFull?iin=${this.props.userReducer.user.UF_4}`, {headers: {
-      "Access-Control-Allow-Origin": "*",
-    }})
-      .then(res => {
-        console.log(res) // нужно отсюда взять step!
-        if(res.data.success) {
-          this.setState({
-            step: res.data.step
-          })
-        }
-      })
-      .catch (
-        console.log('log')
-      )
+    axios
+        .get(
+            `https://api.money-men.kz/api/notFull?iin=${this.props.userReducer.user.UF_4}`,
+            { headers: {"Access-Control-Allow-Origin": "*",} })
+        .then(res => {
+          console.log('STEP', res) // нужно отсюда взять step!
+          console.log('STEP', res.data)
+          if(res.data.success) {
+            this.setState({step: res.data.step})
+          }
+        })
+        .catch(er => console.log(er))
   }
 
   componentDidMount() {
     this.getCurrentStep()
-    console.log('STATUS', this.props.userStatus)
   }
 
   myFunc () {
