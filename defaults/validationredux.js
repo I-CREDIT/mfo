@@ -295,7 +295,7 @@ export const expDateCardId = (val) => {
         return false
     }
   const today = new Date()
-  var todayM = today.getMonth() + 1;
+  var todayM = today.getMonth() + 2;
   var todayD = today.getDate();
   var todayY = today.getFullYear();
   var myM = myDate.getMonth() + 1;

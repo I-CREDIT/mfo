@@ -60,56 +60,15 @@ class Status extends React.Component {
     }
   }
 
-  handleSubmit() {
+  handleSubmit(money) {
     let values = {
       iin: this.props.userReducer.user.UF_4,
-      amount: this.props.userStatus.userStatus.todayAmount
+      amount: money
     }
     swal("Проверьте ваши данные", {
       text: `Проверьте ваши данные
 
-      Ваш ИИН: ${values.iin}    Сумма оплаты: ${values.amount}`,
-      buttons: {
-        catch: {
-          text: "Подтвердить",
-          value: "catch",
-        },
-        cancel: "Отмена"
-      }
-    }).then(value=>{
-      switch (value) {
-        case "catch":
-          this.setState({
-            btnLoading: true,
-          });
-           axios.post(`https://api.money-men.kz/api/make_payment123`, values)
-            .then((response) => {
-              this.setState({
-                btnLoading: false
-              })
-              location.replace(response.data[0] + "?" + response.data[1])
-            })
-            .catch((error) => {
-              console.log(error)
-              this.setState({
-                btnLoading: false
-              })
-            });
-        case "cancel":
-          break
-      }
-    })
-  }
-
-  restructuringHandleSubmit3() {
-    let values = {
-      iin: this.props.userReducer.user.UF_4,
-      amount: ((+this.props.userStatus.userStatus.todayAmount) - (+this.props.userStatus.userStatus.amount))
-    }
-    swal("Проверьте ваши данные", {
-      text: `Проверьте ваши данные
-
-      Ваш ИИН: ${values.iin}    Сумма оплаты: ${values.amount}`,
+      Ваш ИИН: ${values.iin}    Сумма оплаты: ${(+values.amount).toLocaleString("ru-RU")} тг`,
       buttons: {
         catch: {
           text: "Подтвердить",
@@ -230,6 +189,9 @@ class Status extends React.Component {
               <div className="buttonForm">
                 {this.state.btnLoading === true ?
                   <Spinner className="loading" size={200} spinnerColor={"#ef2221"} spinnerWidth={2} visible={true} /> :
+                  <button onClick={() => this.handleSubmit(this.props.userStatus.userStatus.prolongation)} className=" oplataform--button" type="submit">Продлить {(+this.props.userStatus.userStatus.prolongation).toLocaleString("ru-RU")} тенге</button>}
+                {this.state.btnLoading === true ?
+                  <Spinner className="loading" size={200} spinnerColor={"#ef2221"} spinnerWidth={2} visible={true} /> :
                   <button onClick={() => this.handleSubmit()} className=" oplataform--button" type="submit">Погасить {(+this.props.userStatus.userStatus.todayAmount).toLocaleString("ru-RU")} тенге</button>}
               </div>
             </div>
@@ -276,12 +238,12 @@ class Status extends React.Component {
                 </tbody>
               </table>
               <div className="buttonForm">
-                {/* {this.state.btnLoading === true ?
-                  <Spinner className="loading" size={200} spinnerColor={"#ef2221"} spinnerWidth={2} visible={true} /> :
-                  <button onClick={() => this.restructuringHandleSubmit3()} className=" oplataform--button" type="submit">Продлить {((+this.props.userStatus.userStatus.todayAmount) - (+this.props.userStatus.userStatus.amount)).toLocaleString("ru-RU")} тенге</button>} */}
                 {this.state.btnLoading === true ?
                   <Spinner className="loading" size={200} spinnerColor={"#ef2221"} spinnerWidth={2} visible={true} /> :
-                  <button onClick={() => this.handleSubmit()} className=" oplataform--button" type="submit">Погасить {(+this.props.userStatus.userStatus.todayAmount).toLocaleString("ru-RU")} тенге</button>}
+                  <button onClick={() => this.handleSubmit(this.props.userStatus.userStatus.prolongation)} className=" oplataform--button" type="submit">Продлить {(+this.props.userStatus.userStatus.prolongation).toLocaleString("ru-RU")} тенге</button>}
+                {this.state.btnLoading === true ?
+                  <Spinner className="loading" size={200} spinnerColor={"#ef2221"} spinnerWidth={2} visible={true} /> :
+                  <button onClick={() => this.handleSubmit(this.props.userStatus.userStatus.todayAmount)} className=" oplataform--button" type="submit">Погасить {(+this.props.userStatus.userStatus.todayAmount).toLocaleString("ru-RU")} тенге</button>}
               </div>
             </div>
           </div>

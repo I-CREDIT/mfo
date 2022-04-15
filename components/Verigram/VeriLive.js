@@ -116,7 +116,8 @@ const VeriLive = ({setLivePhoto}) => {
     return(
         <div>
             {/* <button className='check' onClick={() => checkButton()}></button> */}
-            <div id="id_verilive"></div>
+            {/* <div id="id_verilive"></div> */}
+            <div>Hello</div>
         </div>
     )
 }
