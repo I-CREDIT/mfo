@@ -115,7 +115,7 @@ export const iinValidation = (val) =>  {
             controll += a[i]*b2[i];
             controll = controll % 11;
         }
-        if(controll!=a[11]) error = 'Некорректный ИИН';
+        if(controll!=a[11] || a[6] == 0) error = 'Некорректный ИИН';
         return error;
     }
 	

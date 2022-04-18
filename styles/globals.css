@@ -1476,14 +1476,24 @@ a,
   color: #adadad;
 }
 
-.oplata .oplataform .buttonForm {
+.oplata .oplataform .buttonForm, .otherPages .buttonForm {
   display: flex;
   justify-content: center;
   align-items: center;
+  grid-column-gap: 36px;
 }
 
 .oplata .oplataform--button {
   margin: 85px auto 40px;
+  text-align: center;
+  background-color: #ef2221;
+  color: white;
+  border: none;
+  padding: 17px calc(45px + (58 - 45) * ((100vw - 720px) / (1600 - 720)));
+  border-radius: 7px;
+}
+.otherPages .oplataform--button {
+  margin: 50px 0 0;
   text-align: center;
   background-color: #ef2221;
   color: white;
@@ -1528,7 +1538,19 @@ a,
   justify-content: space-around;
 }
 
+@media only screen and (max-width: 568px) {
+  
+  .oplata .oplataform .buttonForm, .otherPages .buttonForm {
+    flex-direction: column;
+  }
+  .otherPages .oplataform--button {
+    margin: 20px 0 0
+  }
+}
+
 @media only screen and (max-width: 768px) {
+
+
   .kakoplatit .phones {
     display: flex;
     flex-direction: column;
@@ -2785,7 +2807,10 @@ table td.r, table th.r {
   }
 
 
-  .vdolge tr td {
+  .vprosrochke tr td, .vdolge tr td {
+    min-height: 40px;
+  }
+  .vprosrochke tr td:nth-child(5), .vdolge tr td:nth-child(3) {
     min-height: 75px;
   }
    .vdolge tr td:nth-child(1):before {
@@ -2809,22 +2834,19 @@ table td.r, table th.r {
   .vprosrochke tr td:nth-child(1):before {
     content: "Дата выдачи 📅"
   }
-  .vprosrochke tr td:nth-child(2):before {
-    content: "Сумма на руки 💰"
-  }
-   .vprosrochke tr td:nth-child(3):before {
+   .vprosrochke tr td:nth-child(2):before {
     content: "Основной долг 💸"
   }
-  .vprosrochke tr td:nth-child(4):before {
+  .vprosrochke tr td:nth-child(3):before {
     content: "Пеня"
   }
-  .vprosrochke tr td:nth-child(5):before {
+  .vprosrochke tr td:nth-child(4):before {
     content: "Сумма вознагрождения"
   }
-   .vprosrochke tr td:nth-child(6):before {
+   .vprosrochke tr td:nth-child(5):before {
     content: "Сумма задолженности на текущую дату"
   }
-   .vprosrochke tr td:nth-child(7):before {
+   .vprosrochke tr td:nth-child(6):before {
     content: "Дата погашения 📅"
   }
 
