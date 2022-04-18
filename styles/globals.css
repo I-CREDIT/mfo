@@ -1225,7 +1225,24 @@ a,
   }
 
   .header-text {
-    display: none !important
+    flex-direction: column;
+  }
+
+  .header-text h1 {
+    font-size: 52px;
+    width: fit-content;
+  }
+
+  .header-imgs {
+    transform: scale(0.5);
+    justify-content: center;
+    margin: -35px 0;
+  }
+
+  .header-imgs--right {
+    flex-direction: row;
+    width: 100%;
+    margin-left: 40px;
   }
 }
 
@@ -2167,10 +2184,6 @@ a:hover {
 
   .header-imgs img:first-child {
     margin-right: 15px;
-  }
-
-  .header-imgs--right img:last-child {
-    margin-bottom: 21px;
   }
 
   .bottom-banner {
