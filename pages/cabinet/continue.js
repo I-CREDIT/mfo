@@ -1,11 +1,10 @@
 import axios from "axios"
-import { useEffect, useState } from "react"
+import React, { useEffect, useState } from "react"
 import { connect } from "react-redux"
 import Router from 'next/router'
 import ContinueStep2 from "../../components/continue/ContinueStep2"
 import ContinueStep3 from "../../components/continue/ContinueStep3"
 import withAuth from "../../components/hocs/withAuth"
-import Progressbar from "../../components/shared/Progressbar"
 
 const mapStateToProps = state => {
   return {userReducer: state.userReducer, userStatus: state.userStatus, userHistory: state.userHistory}
@@ -22,8 +21,7 @@ const Continue = ({userReducer}) => {
     axios
     .get(`https://api.money-men.kz/api/repeatUser?iin=${userReducer.user.UF_4}`)
     .then((response) => {
-      console.log(response)
-      if (response.data.success == true) {
+      if (response.data.success) {
         // getCurrentStep()
       }
       // if (response.data.success == false) {
@@ -39,7 +37,6 @@ const Continue = ({userReducer}) => {
       "Access-Control-Allow-Origin": "*",
     }})
       .then(res => {
-        console.log(res)
         if(res.data.success) {
           if(res.data.step===3) {
             Router.push('/cabinet/loans')
@@ -49,9 +46,7 @@ const Continue = ({userReducer}) => {
           }
         }
       })
-      .catch (
-        console.log('log')
-      )
+      .catch(e => console.log(e))
   }
   
   useEffect(() => {
@@ -61,8 +56,9 @@ const Continue = ({userReducer}) => {
   const StepReg = () => {
     return(
       <>
-      {step=== 1? 
-       <ContinueStep2 next={step} setNext={setStep} userDate={userReducer.user}/> : <ContinueStep3 step={step} setStep={setStep} stepResult={stepResult} userDate={userReducer.user} summa={summa} srok={srok}/>}
+      {step === 1 ?
+       <ContinueStep2 next={step} setNext={setStep} userDate={userReducer.user}/> :
+          <ContinueStep3 step={step} setStep={setStep} stepResult={stepResult} userDate={userReducer.user} summa={summa} srok={srok}/>}
       </>
     )
   }
@@ -81,12 +77,8 @@ const Continue = ({userReducer}) => {
         </div> */}
       {/* <br></br><br></br> */}
         <h3 className='mt-5 mb-3 text-center'>Продолжить анкету</h3>
-        
 
         {stepResult === 1 ? <StepReg /> : <ContinueStep3 userDate={userReducer.user} summa={summa} srok={srok}/>}
-       {/* <ContinueStep3 /> */}
-      {/* <ContinueStep3 /> */}
-
       </div>
   )
 }

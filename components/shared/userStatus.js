@@ -5,7 +5,6 @@ import Router from 'next/router'
 import usersReducer from '../../store/reducers/userReducer'
 
 const mapStateToProps = state => {
-  console.log(state.userStatus)
   return {userReducer: state.userReducer, userStatus: state.userStatus, userHistory: state.userHistory}
 }
 
@@ -34,7 +33,6 @@ class Status extends React.Component {
             { headers: {"Access-Control-Allow-Origin": "*",} })
         .then(res => {
           console.log('STEP', res) // нужно отсюда взять step!
-          console.log('STEP', res.data)
           if(res.data.success) {
             this.setState({step: res.data.step})
           }
@@ -47,10 +45,8 @@ class Status extends React.Component {
   }
 
   myFunc () {
-    console.log(this.state.step)
     if(this.state.step === 1 || this.state.step === 2) {
       window.scrollTo(0,0)
-      console.log(2)
       Router.push(`/cabinet/continue`)
     }
   }

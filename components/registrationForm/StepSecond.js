@@ -146,8 +146,8 @@ class SecondStep extends React.Component {
   render() {
     return (
       <div>
-        <div class="progressBar">
-          <div class="progress-done" id="progress-done" data-done="55"></div>
+        <div className="progressBar">
+          <div className="progress-done" id="progress-done" data-done="55"></div>
           <p className="counter">Вероятность одобрения</p>
         </div>
         {this.props.loading === true
@@ -163,7 +163,7 @@ class SecondStep extends React.Component {
           model='registration2'
           onSubmit={(values) => this.handleSubmit(values)}>
           {this.props.somemessage.error !== null
-            ? <div class="alert alert-danger" role="alert">
+            ? <div className="alert alert-danger" role="alert">
                 <strong>
                   {this.props.somemessage.error}</strong>
               </div>
@@ -407,7 +407,7 @@ class SecondStep extends React.Component {
             </div>
             <div className="col-md-6 mb-3">
               <Label>Телефон номер</Label>
-              <div class="input-group">
+              <div className="input-group">
                 <Control
                   className="form-control"
                   placeholder="+7(705)000-00-00"
@@ -502,7 +502,7 @@ class SecondStep extends React.Component {
             </div>
             <div className="col-md-6 mb-3">
               <Label>Телефон номер</Label>
-              <div class="input-group">
+              <div className="input-group">
                 <Control
                   className="form-control"
                   placeholder="+7(705)000-00-00"
@@ -547,7 +547,7 @@ class SecondStep extends React.Component {
             </div>
           </Row>
           {this.props.somemessage.error !== null
-            ? <div class="alert alert-danger" role="alert">
+            ? <div className="alert alert-danger" role="alert">
                 <strong>
                   {this.props.somemessage.error || null}</strong>
               </div>

@@ -1,16 +1,13 @@
 import React from 'react'
-
 import {connect} from 'react-redux';
 import {changingMoney, changingDay,postRegistrationThird} from '../../store/actions/ActionCreators';
 import { Label, Row} from 'reactstrap';
 import {Control, Errors, Form} from 'react-redux-form';
 import InputMask from "react-input-mask";
 import $ from 'jquery'
-import Success from '../shared/SuccessSubmit';
 import {speciality} from '../../defaults/defaultRelative';
 import Spinner from 'react-spinner-material';
 import disableScroll from 'disable-scroll';
-import Router from 'next/router'
 import cookie from 'js-cookie';
 
 
@@ -289,7 +286,8 @@ class FormRegister extends React.Component {
           {this.props.somemessage.error !== null
             ? <div className="alert alert-danger" role="alert">
                 <strong>
-                  {null || this.props.somemessage.error.email || this.props.somemessage.error}</strong>
+                  {this.props.somemessage.error.email || this.props.somemessage.error || null}
+                </strong>
               </div>
             : null}
 
@@ -307,7 +305,6 @@ class FormRegister extends React.Component {
                 name='name_of_workplace'
                 placeholder='Место работы'
                 className="form-control"
-                className='form-control'
                 validators={{
                 required
               }}/>
@@ -331,7 +328,6 @@ class FormRegister extends React.Component {
                 name='type_id'
                 placeholder=''
                 className="form-control"
-                className='form-control'
                 validators={{
                 required
               }}>
@@ -360,7 +356,6 @@ class FormRegister extends React.Component {
                 name='work_experience'
                 placeholder=''
                 className="form-control"
-                className='form-control'
                 validators={{
                 required
               }}>
@@ -393,10 +388,9 @@ class FormRegister extends React.Component {
                 model='.birth_place'
                 id='birth_place'
                 name='birth_place'
-								placeholder='Место рождения'
-								autocomplete = 'off'
+                placeholder='Место рождения'
+                autocomplete = 'off'
                 className="form-control"
-                className='form-control'
                 validators={{
                 required
               }}/>
@@ -503,7 +497,6 @@ class FormRegister extends React.Component {
                 placeholder='МВД РК'
                 type="number"
                 className="form-control"
-                className='form-control'
                 validators={{
                 required
               }}>
@@ -530,12 +523,11 @@ class FormRegister extends React.Component {
               <Control.input
                 model='.income'
                 id='income'
-								name='income'
-								autocomplete = 'off'
+                name='income'
+                autocomplete = 'off'
                 placeholder='150000'
                 type="number"
                 className="form-control"
-                className='form-control'
                 validators={{
                 required
               }}/>
@@ -558,12 +550,11 @@ class FormRegister extends React.Component {
               <Control.input
                 model='.balance_on_deposit'
                 id='balance_on_deposit'
-								name='balance_on_deposit'
-								autocomplete = 'off'
+                name='balance_on_deposit'
+                autocomplete = 'off'
                 placeholder='500000'
                 type="number"
                 className="form-control"
-                className='form-control'
                 validators={{
                 required
               }}/>
@@ -612,11 +603,10 @@ class FormRegister extends React.Component {
               <Control.input
                 model='.amount_of_paid_loans_in_last_six_month'
                 id='amount_of_paid_loans_in_last_six_month'
-								name='amount_of_paid_loans_in_last_six_month'
-								autocomplete = 'off'
+                name='amount_of_paid_loans_in_last_six_month'
+                autocomplete = 'off'
                 placeholder='Сумма:'
                 className="form-control"
-                className='form-control'
                 validators={{
                 required
               }}/>
@@ -650,6 +640,7 @@ class FormRegister extends React.Component {
               <p>{ibanMessage}</p>
             </div>
           </Row>
+
           <Row className="form-group  mb-3 col-12 mx-auto">
             <Label htmlFor="card_number">Номер карты * :</Label>
             <Control
@@ -670,7 +661,7 @@ class FormRegister extends React.Component {
 
           </Row>
           <Row className="form-group  mb-3 col-12 mx-auto">
-            <Label htmlFor="expiration_date_of_bcard">Дата оканчания * :</Label>
+            <Label htmlFor="expiration_date_of_bcard">Дата окончания * :</Label>
             <Control
               className="form-control"
               model=".expiration_date_of_bcard"
@@ -737,7 +728,8 @@ class FormRegister extends React.Component {
                   visible={true}/>
               : <button
                 type="submit "
-                className="agreement-btn" to='/thanks'
+                className="agreement-btn"
+                to='/thanks'
                 onClick={() => this.handleFocus()}>Отправить</button>}
           </div>
         </Form>

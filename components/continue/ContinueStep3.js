@@ -6,26 +6,13 @@ import Router from 'next/router'
 import axios from 'axios'
 import { Formik, Form,  Field  } from 'formik';
 import {
-  iinValidation,
-  required,
-  phoneCheck,
-  validEmaill,
-  passwordCheck,
-  phoneValidation,
-  acceptCirrilic,
-  acceptCirrilicOnly,
-  validateConfirmPassword,
-  validage,
   getAge,
   requiredd,
-  validEmail,
   idNumber,
-  checkIdNumber,
   CheckGivedDate,
   CheckExpDate,
   onlyEnglish,
   textCheckCardValid,
-  ibanContinue
 } from '../../defaults/validations';
 import { isValidIBANNumber, isValidIBANNumber2 } from "../../defaults/validationredux";
 import swal from "sweetalert";
@@ -80,7 +67,6 @@ const ContinueStep3 = ({step,setStep, stepResult, userDate, srok,summa}) => {
   const [btnLoading, setBtnLoading] = useState(false)
   const onSubmit = (values) => {
     if(isValidIBANNumber2(iban.value)!==false) {
-      console.log('USRDAT', userDate)
       var continue2=  {}
       values.UF_35 = iban.value;
       values.UF_47 = iban.text;
@@ -263,9 +249,9 @@ const ContinueStep3 = ({step,setStep, stepResult, userDate, srok,summa}) => {
         UF_32: '',
         UF_34: '',
         UF_35: '',
-        UF_36: '0000000000000000',
-        UF_37: '00/00',
-        UF_38: '-',
+        UF_36: '',
+        UF_37: '',
+        UF_38: '',
         UF_39: '',
         UF_40: '',
         UF_41: '',
@@ -384,6 +370,7 @@ const ContinueStep3 = ({step,setStep, stepResult, userDate, srok,summa}) => {
           </div>
           {errors.UF_40 && touched.UF_40 && <p className='text-danger'>{errors.UF_40}</p>}
         </div>
+
         <div className='col-md-6 mb-3'>
           <label>Сумма *</label>
           <Field validate={requiredd} name='UF_41' type='' placeholder='Сумма платежей действующих кредитов:' className='form-control' disabled={checked}></Field>
@@ -394,21 +381,21 @@ const ContinueStep3 = ({step,setStep, stepResult, userDate, srok,summa}) => {
           <label>Сумма платежей закрытых кредитов последний 6 мес. *</label>
           <Field validate={requiredd} name='UF_39' type='' className='form-control' ></Field>
           {errors.UF_39 && touched.UF_39 && <p className='text-danger'>{errors.UF_39}</p>}
-        </div>  
-        
+        </div>
+      </div>
+
+      <h2 className="col-md-12 mt-5 mb-5">Информация о счетах</h2>
+      <div className='row form-group'>
         <div className='col-md-6 mb-3'>
           <label>IBAN счет *</label>
           <div className='input-group'>
-            <Field onChange={e=>setIbanValue(e)} value={iban.value}  className='form-control' name='UF_35'  component={IbanN} />
+            <Field onChange={e => setIbanValue(e)} value={iban.value}  className='form-control' name='UF_35'  component={IbanN} />
             <div className="hint">Номер банковского счета</div>
           </div>
           <p className='mt-2 text-info'>{iban.text}</p>
           {errors.UF_35 && touched.UF_35 && <p className='text-danger'>{errors.UF_35}</p>}
         </div>
-      </div>
-      {/* <h2 className="col-md-12 mt-5 mb-5">Информация о счетах</h2>
-      <div className='row form-group'>
-       
+
         <div className='col-md-6 mb-3'>
           <label>Номер карты *</label>
           <div className='input-group'>
@@ -416,11 +403,12 @@ const ContinueStep3 = ({step,setStep, stepResult, userDate, srok,summa}) => {
           </div>
           {errors.UF_36 && touched.UF_36 && <p className='text-danger'>{errors.UF_36}</p>}
         </div>
-        <div className='col-md-6 mb-3'>
-        <label>Дата оканчания *</label>
-        <Field className='form-control' name='UF_37' component={CardExp} />
 
+        <div className='col-md-6 mb-3'>
+        <label>Дата окончания *</label>
+        <Field className='form-control' name='UF_37' component={CardExp} />
         </div>
+
         <div className='col-md-6 mb-3'>
         <label htmlFor='name_of_owner'>Имя владельца карты латинскими буквами * :
         </label>
@@ -429,7 +417,7 @@ const ContinueStep3 = ({step,setStep, stepResult, userDate, srok,summa}) => {
             <div className="hint">Только на латинском</div>
           </div>
         </div>
-      </div> */}
+      </div>
       <div className="button form-group mb-5">
               <button
                 type="submit "
