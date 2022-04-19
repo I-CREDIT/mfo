@@ -206,7 +206,7 @@ class ProgressBar extends Component {
         <p className="text-center ">К возврату <b className="vozvrat">{vozvrat}</b></p>
             </div>
             <div className="secondary-info">
-              <p className="text-center head-p">Возращаете в том числе:</p>
+              <p className="text-center head-p">Возвращаете в том числе:</p>
               <div className="secondary-info--texts">
                 <div className="box">
                   <p className="text-center">Основной долг</p>
