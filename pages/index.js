@@ -108,9 +108,9 @@ class Home extends React.Component {
                 </div>
               </div>
             </div>
-            <div className="presents pt-5 mt-5 d-flex justify-content-center mx-auto">
+            <div className="presents">
               <div className="row presentblock">
-              <div className="col-md-6 mb-5  present">
+              <div className="col-md-6 present">
                   <div className="content">
                     <h2 className="red">100</h2>
                     <p>
@@ -146,7 +146,7 @@ class Home extends React.Component {
                 </div>
               </div>
             </div>
-            <p className="little-header mb-5">
+            <p className="little-header">
               {t('step-money-result-1')}<br/>
               {t('step-money-result-2')}
             </p>
@@ -158,7 +158,7 @@ class Home extends React.Component {
               </AppLink>
 
             </div>
-            <h2 className="mt-5 whyus">
+            <h2 className="whyus">
               {t('why-title')}
               <span className="whyus--little d-block">
                 {t('why-content')}
@@ -258,7 +258,7 @@ class Home extends React.Component {
             </div>
           </div>
         </section>
-        <div className="bottom-banner--text ">
+        <div className="bottom-banner--text">
           <p className="container">
             {t('bottom-banner-1')}
             <br/>

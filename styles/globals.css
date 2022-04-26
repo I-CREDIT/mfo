@@ -106,23 +106,12 @@ hr {
 }
 
 .view {
-  background: url("../img/banner.png");
-  background-repeat: no-repeat;
   background-size: cover;
-  background-position: center center;
-  padding-bottom: 200px;
+  background: url("../img/banner.png") no-repeat center center;
   height: 100%;
-  padding-top: 100px;
+  padding: 80px 0 200px;
 }
-/* html {
-  filter: invert(100%)
-}
-img:not([src*=".jpg"]),img:not([src*=".svg"]) video, iframe {
-  filter: invert(100%)
-}
-* {
-  background-color: inherit;
-} */
+
 html,
 body {
   overflow-x: hidden;
@@ -562,7 +551,7 @@ button {
 
 @media only screen and (min-width: 321px) and (max-width: 768px) {
   .finance .primary {
-    margin-top: 580px;
+    margin-top: 480px;
   }
 }
 
@@ -891,10 +880,6 @@ button {
   left: 50%;
   transform: translateX(-50%);
 }
-
-.modal {}
-
-.modal .calculator-band {}
 
 .calculator-band {
   display: flex;
@@ -1919,6 +1904,7 @@ main {
 .present {
   position: relative;
   font-weight: bold;
+  margin-bottom: 3rem;
 }
 
 .present:nth-child(2) .content h2 {
@@ -1977,6 +1963,7 @@ a:hover {
 }
 
 .stepmoney .little-header {
+  margin-bottom: 3rem;
   font-size: 18px;
   line-height: 23px;
   text-align: center;
@@ -1991,6 +1978,7 @@ a:hover {
   font-style: normal;
   font-weight: normal;
   text-align: center;
+  margin-top: 3rem;
 }
 
 .stepmoney .whyus--little {
@@ -2150,12 +2138,49 @@ a:hover {
 .mainphone-numbers li {
   justify-content: unset;
 }
+.presents {
+  padding-top: 3rem;
+  margin: 3rem auto 0;
+  display: flex;
+  justify-content: center;
+}
 
 @media only screen and (max-width: 768px) {
   .mainphone-numbers {
-    display: block !important;
+    display: flex !important;
+    justify-content: space-between;
     position: relative;
     top: -15px;
+    margin-bottom: 0;
+  }
+  .bottom-banner--text {
+    margin: 30px 0;
+  }
+  .stepmoney .whyus {
+    margin: 35px 0 15px;
+  }
+  .advantages .advantage {
+    margin-bottom: 20px;
+  }
+  .stepmoney .little-header {
+    margin-bottom: 15px;
+  }
+  .step img {
+    width: 75px;
+    height: auto;
+  }
+  .present {
+    margin-bottom: 0;
+  }
+  .presents {
+    margin-top: 0;
+    padding-top: 0;
+  }
+  .stepmoney {
+    padding-top: 20px;
+  }
+  .button {
+    margin: 0;
   }
   nav {
     background-color: white;
@@ -2175,7 +2200,7 @@ a:hover {
   }
 
   .advantages {
-    margin-top: 55px;
+    margin-top: 0;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -2218,6 +2243,7 @@ a:hover {
 
   .whyus-footer .whyus--little {
     font-size: 24px !important;
+    margin-bottom: 15px;
   }
 
   .stepmoney .rounded button {
@@ -3492,5 +3518,10 @@ nav[role="navigation"] .users a:before {
 @media(max-width: 768px) {
   .supportButton {
     display: none;
+  }
+  .calculator-band {
+    -webkit-box-shadow: 12px 30px 59px -22px rgba(0, 0, 0, 0.3);
+    -moz-box-shadow: 12px 30px 59px -22px rgba(0, 0, 0, 0.3);
+    box-shadow: 12px 30px 59px -22px rgba(0, 0, 0, 0.3);
   }
 }
