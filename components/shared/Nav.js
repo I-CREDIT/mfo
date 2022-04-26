@@ -2,8 +2,11 @@ import Link from 'next/link'
 import {Collapse} from 'reactstrap';
 import $ from 'jquery'
 import cookie from 'js-cookie';
-import React, { Fragment, useState, useEffect } from 'react';
+import React, {Fragment, useState, useEffect} from 'react';
 import Router,{useRouter} from 'next/router'
+
+// Перевод для функционального компонента
+import { useTranslation } from "react-i18next";
 
 const isLogged = () => {
   var bollean = false
@@ -17,11 +20,12 @@ const AppLink = ({children, className, href}) =>
   <Link href={href}>
     <a className={className}>{children}</a>
   </Link>
+
 const Navbar = () => {
   const [isNavOpen, setNavOpen] = useState(false);
   const [loader, setLoader] = useState(false)
   const router = useRouter()
-  
+
   useEffect(() => {
     var $win = $(window);
 
@@ -36,6 +40,7 @@ const Navbar = () => {
     }
     });
   },[])
+
   const toggleNav = () => {
     setNavOpen(!isNavOpen);
   }
@@ -63,6 +68,9 @@ const Navbar = () => {
     }
   }
 
+  // Translation
+  const { t, i18n } = useTranslation()
+
   return (
     <div className={router.pathname.includes('admin') ? 'd-none' : ''}>
        {loader === true
@@ -75,16 +83,23 @@ const Navbar = () => {
         }
     <nav className=" mb-2 navbar navbar-expand-lg navbar-light  transparent " onClick={headerBackgroundOnClick}>
     <div className="container">
- 
+
     <AppLink href="/" className="navbar-brand logo">
       <img className='icreditlogo' src={require("../../img/logo.png")} alt="" />
     </AppLink>
-     
+
       <ul className="phone-numbers">
         <li className='phonenotworking'><span>Call center:</span><h1><i className="fa fa-phone" /><a href="tel:+77007501500">+7 700 <b className="black">750 15 00</b></a></h1><b className='phoneInfo'></b></li>
-        <li><span>Отдел взыскания:</span><i className="fa fa-phone" /><h1><a href="tel:+77788701029">+7 778 <b className="black">870 10 29</b></a></h1></li>
+        <li><span>{t('collection-department')}</span><i className="fa fa-phone" /><h1><a href="tel:+77788701029">+7 778 <b className="black">870 10 29</b></a></h1></li>
       </ul>
-      
+
+      {/* Кнопки для изменения языка */}
+      <div className="language-buttons">
+        <button onClick={() => i18n.changeLanguage('ru')}>RU</button>
+        <span>|</span>
+        <button onClick={() => i18n.changeLanguage('kz')}>KZ</button>
+      </div>
+
       <button  onClick={toggleNav} className="navbar-toggler burger" type="button" data-toggle="collapse" data-target="#navigationBar" aria-controls="navigationBar" aria-expanded="false" aria-label="Toggle navigation">
         <div className="animated-icon1"><span /><span /><span /></div>
       </button>

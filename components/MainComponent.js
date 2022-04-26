@@ -1,11 +1,7 @@
 import Navbar from './shared/Nav'
 import Footer from './shared/Footer'
-import React, {Fragment} from 'react'
+import React from 'react'
 import { connect } from 'react-redux';
-import {createWrapper} from "next-redux-wrapper";
-import cookie from 'js-cookie';
-// import {ConfigureStore} from '../redux/reducers/configureStore'
-import {fetchCurrentUser} from '../store/actions/userAction'
 
 class Main extends React.Component {
 

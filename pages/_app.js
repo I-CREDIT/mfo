@@ -3,14 +3,14 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'font-awesome/css/font-awesome.css';
 import Navbar from '../components/shared/Nav'
 import Footer from '../components/shared/Footer'
-import cookie from 'js-cookie'
 import { Provider } from 'react-redux'
 import React, {Fragment} from 'react'
 import {createWrapper} from "next-redux-wrapper";
 import {connect} from 'react-redux'
 import store from '../store/store'
 import App from 'next/app';
-import MessageInfo from "../components/shared/MessageInfo";
+
+import "./i18n";
 
 class MyApp extends App {
   componentDidMount() {

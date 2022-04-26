@@ -691,6 +691,21 @@ button {
   text-transform: uppercase !important;
 }
 
+.language-buttons {
+  display: flex;
+  margin-left: 10px;
+}
+.language-buttons button {
+  border: none;
+  outline: none;
+  background: none;
+  cursor: pointer;
+  transition: all .3s;
+}
+.language-buttons button:hover {
+  opacity: .7;
+}
+
 .phone-numbers {
   font-size: 20px !important;
   line-height: 22px;

@@ -2,13 +2,14 @@ import React from 'react';
 import banner from '../img/banner.png'
 import ProgressBar from '../components/shared/ProgressBar';
 import bottomBanner from '../img/bottomBanner.png'
-import { Modal, ModalHeader, ModalBody } from 'reactstrap';
-import { useRouter, withRouter } from "next/router";
+import { Modal, ModalBody } from 'reactstrap';
+import { withRouter } from "next/router";
 import Head from 'next/head'
 import {controlUtm} from '../defaults/utmSource'
-import cookie from 'js-cookie';
-var scrollToElement = require('scroll-to-element');
 import Link from 'next/link'
+
+// Перевод для классового компонента
+import withUseTranslation from "../public/js/hocs/useTranslation";
 
 const AppLink = ({children, className, href}) =>
   <Link href={href}>
@@ -30,27 +31,16 @@ class Home extends React.Component {
     }
   }
 
-  testfunc = () => {
-    if(cookie.get('utm_source')) {
-      return true
-    }else{
-      return false
-    }
-  }
-  handleFocus() {
-    scrollToElement('.calculator-info', {
-      offset: 0,
-      align: 'middle',
-      ease: 'outExpo',
-      duration: 600
-    });
-  }
   componentDidMount() {
     controlUtm()
   }
+
   render() {
+  // Достаем функцию-переводчик
+  const { t, i18n } = this.props.useTranslationValue
+
   return (
-        <div className="">
+        <div>
           <Head>
             <title>
               Деньги в кредит онлайн микрозаймы на карту по Казахстану
@@ -60,7 +50,7 @@ class Home extends React.Component {
             <div className="container">
               <ul className="mainphone-numbers phone-numbers">
                 <li className='phonenotworking'><span>Call center:</span><h1><i className="fa fa-phone" /><a href="tel:+77007501500">+7 700 <b className="black">750 15 00</b></a></h1><b className='phoneInfo'></b></li>
-                <li><span>Отдел взыскания:</span><i className="fa fa-phone" /><h1><a href="tel:+77788701029">+7 778 <b className="black">870 10 29</b></a></h1></li>
+                <li><span>{t('collection-department')}</span><i className="fa fa-phone" /><h1><a href="tel:+77788701029">+7 778 <b className="black">870 10 29</b></a></h1></li>
               </ul>
                 <div className="mainbanner" styles={{ backgroundImage:`url(${banner})` }}>
         <div className="header-text row">
@@ -94,24 +84,27 @@ class Home extends React.Component {
       </div>
         <main className="container">
           <section className="finance">
-            <h2 className=" primary text-center">Онлайн сервис для легкого получения <br></br>микрокредита в кратчайший срок!</h2>
+            <h2 className=" primary text-center">
+              {t('online-service-easy-receipt')}<br/>
+              {t('micro-credit-shortest-time')}
+            </h2>
             <div className="advantages text-center">
               <div className="advantages--box">
                 <div>
-                  <h1><span className="red d-block">1</span>Быстро</h1>
-                  <p>Микрокредит за 10 минут без справок, поручителей и лишних вопросов</p>
+                  <h1><span className="red d-block">1</span>{t('fast')}</h1>
+                  <p>{t('fast-content')}</p>
                 </div>
               </div>
               <div className="advantages--box">
                 <div>
-                  <h1><span className="red d-block">2</span>Удобно</h1>
-                  <p>Вы узнаете об одобрении микрокредита и получите средства без посещения офиса</p>
+                  <h1><span className="red d-block">2</span>{t('conveniently')}</h1>
+                  <p>{t('conveniently-content')}</p>
                 </div>
               </div>
               <div className="advantages--box">
                 <div>
-                  <h1><span className="red d-block">3</span>Доступно</h1>
-                  <p>Ваша кредитная история не повлияет на одобрение микрокредита</p>
+                  <h1><span className="red d-block">3</span>{t('available')}</h1>
+                  <p>{t('available-content')}</p>
                 </div>
               </div>
             </div>
@@ -121,107 +114,105 @@ class Home extends React.Component {
                   <div className="content">
                     <h2 className="red">100</h2>
                     <p>
-                      ПРОЩАЕМ КРЕДИТ
-                      <span className="d-block">КАЖДОМУ 100-МУ</span>
-                      <span className="d-block">ЗАЕМЩИКУ</span>
+                      {t('forgive-credit-1')}
+                      <span className="d-block">{t('forgive-credit-2')}</span>
+                      <span className="d-block">{t('forgive-credit-3')}</span>
                     </p>
                   </div>
                   <AppLink href="/get_money">
                   <div className="content-bottom red">
-                          Получить деньги
+                    {t('get-money')}
                   </div>
                   </AppLink>
                   <img src={require("../img/Bitmap.png")} alt="" />
-
-
                 </div>
-                {/* <div className="mb-5 col-md-6 present">
-                  <div className="content">
-                    <h2 className="red">Онлайн  <span className="d-block">заим</span></h2>
-                    <p>по всему <span className="d-block">Казахстану</span></p>
-                  </div>
-                  <AppLink href="/get_money">
-                  <div className="content-bottom red">
-                        Получить деньги
-                  </div>
-                  </AppLink>
-                  <img src={require("../img/Bitmap1.png")} alt="" />
-                </div> */}
-                
-
               </div>
             </div>
           </section>
           <section className="stepmoney">
             <h2 className="primary text-center">
-              Два простых шага <br/>
-              и деньги у Вас!
+              {t('step-money-title-1')}<br/>
+              {t('step-money-title-2')}
             </h2>
             <div className="steps mt-5">
               <div className="row">
                 <div className="step mb-5 col-md-6">
                   <img src={require("../img/svg/icon 1.svg")}  className="mb-5" />
-                  <h4>Заполните анкету на <span> нашем сайте</span></h4>
+                  <h4>{t('step-money-step-1')}</h4>
                 </div>
                 <div className="step mb-5 col-md-6">
                   <img src={require("../img/svg/icon 2.svg")}  className="mb-5" />
-                  <h4>Ожидайте наше решение в течение 10 минут!</h4>
+                  <h4>{t('step-money-step-2')}</h4>
                 </div>
               </div>
             </div>
             <p className="little-header mb-5">
-              В случае одобрения займа, наш
-              <span className="d-block">кредитный менеджер свяжется с Вами.</span>
+              {t('step-money-result-1')}<br/>
+              {t('step-money-result-2')}
             </p>
             <div className="button rounded">
-              <AppLink href="/get_money"><button className="takebtn">  Получить деньги
-                 </button></AppLink>
+              <AppLink href="/get_money">
+                <button className="takebtn">
+                  {t('get-money')}
+                 </button>
+              </AppLink>
 
             </div>
-            <h2 className="mt-5 whyus">Почему именно мы? <span className="whyus--little d-block">Наши
-                преимущества</span></h2>
+            <h2 className="mt-5 whyus">
+              {t('why-title')}
+              <span className="whyus--little d-block">
+                {t('why-content')}
+              </span>
+            </h2>
             <div className="advantages">
               <div className="row">
                 <div className="advantage col-lg-4">
                   <img src={require("../img/ptichka.png")} alt="" />
-                  <h3 className="advantage--text">0% на первые 7 дней всегда</h3>
+                  <h3 className="advantage--text">{t('why-1')}</h3>
                 </div>
                 <div className="advantage col-lg-4">
                   <img src={require("../img/ptichka.png")} alt="" />
-                  <h3 className="advantage--text">Без залога и поручителей</h3>
+                  <h3 className="advantage--text">{t('why-2')}</h3>
                 </div>
                 <div className="advantage col-lg-4">
                   <img src={require("../img/ptichka.png")} alt="" />
-                  <h3 className="advantage--text">10 минут рассмотрение</h3>
+                  <h3 className="advantage--text">{t('why-3')}</h3>
                 </div>
                 <div className="advantage col-lg-4">
                   <img src={require("../img/ptichka.png")} alt="" />
-                  <h3 className="advantage--text">Без подтверждения ваших доходов</h3>
+                  <h3 className="advantage--text">{t('why-4')}</h3>
                 </div>
                 <div className="advantage col-lg-4">
                   <img src={require("../img/ptichka.png")} alt="" />
-                  <h3 className="advantage--text">Зачисление денег на счет любого банка</h3>
+                  <h3 className="advantage--text">{t('why-5')}</h3>
                 </div>
                 <div className="advantage col-lg-4">
                   <img src={require("../img/ptichka.png")} alt="" />
-                  <h3 className="advantage--text">Личные данные под надежной защитой</h3>
+                  <h3 className="advantage--text">{t('why-6')}</h3>
                 </div>
               </div>
             </div>
             <div className="whyus-footer">
-              <h2 className="whyus mt-5">
-                Одобряем займы на самых выгодных условиях в течение
-                <span className="red"> 10 <span>минут</span></span>
-                <span className="whyus--little d-block">
-                  Получите деньги на карту уже сегодня
-                </span>
-              </h2>
+              {i18n.language === 'ru' ?
+                  <h2 className="whyus mt-5">
+                    {t('why-footer-title')}
+                    <span className="red">10 <span>минут</span></span>
+                  </h2> :
+                  <h2 className="whyus mt-5">
+                    <span className="red">10 <span>минут</span></span>
+                    {t('why-footer-title')}
+                  </h2>
+              }
+              <span className="whyus--little d-block">
+                      {t('why-footer-content')}
+              </span>
             </div>
             <div className="button">
             <AppLink href="/get_money">
               <button className="takebtn">
-                        Получить деньги
-                    </button></AppLink>
+                {t('get-money')}
+              </button>
+            </AppLink>
             </div>
           </section>
         </main>
@@ -269,40 +260,33 @@ class Home extends React.Component {
         </section>
         <div className="bottom-banner--text ">
           <p className="container">
-            Вы столкнулись с ситуацией, когда понадобились финансы, но одолжить не у кого? Оплачиваете кредиты и
-            нуждаетесь в дополнительных денежных средствах для их погашения?
+            {t('bottom-banner-1')}
             <br/>
             <br/>
-            Оказались в безвыходном положении, когда деньги нужны здесь и сейчас? Мы предоставляем Вам возможность
-            получить нужную сумму уже сегодня, не выходя из дома!
+            {t('bottom-banner-2')}
             <br/>
             <br/>
-            Микрокредиты от онлайн сервиса I-credit —
-            это надежный способ решения материальной проблемы в кратчайший срок для каждого гражданина Казахстана. Мы
-            гарантируем экономию Вашего времени и нервов, так как процесс одобрения происходит онлайн и занимает всего
-            10 минут — необходимо лишь заполнить анкету на сайте.
+            {t('bottom-banner-3')}
             <br/>
             <br/>
-            Вы с нами впервые? — мы готовы предоставить такие же выгодные условия, как для опытных партнеров-заемщиков.
-            Первые 7 дней — без процентов!
+            {t('bottom-banner-4')}
             <br/>
             <br/>
-            Условия кредитования:
+            {t('bottom-banner-5')}
             <br/>
-            Максимальная ставка в день: 1%
+            {t('bottom-banner-6')}
             <br/>
-            Срок кредитования: от 15 до 30 дней
-            <br/>
-            <br/>
-            В случае нарушения установленного срока платежа по займу, заемщик будет обязан оплатить неустойку в размере
-            0,5% от суммы основного долга за каждый день просрочки, но не более 10% от суммы основного долга в год.
+            {t('bottom-banner-7')}
             <br/>
             <br/>
-            Кредитование доступно физическим лицам:
+            {t('bottom-banner-8')}
             <br/>
-            мужского пола: от 21 до 67 лет
             <br/>
-            женского пола: от 21 до 73 лет
+            {t('bottom-banner-9')}
+            <br/>
+            {t('bottom-banner-10')}
+            <br/>
+            {t('bottom-banner-11')}
           </p>
         </div>
 
@@ -331,5 +315,5 @@ class Home extends React.Component {
   }
 }
 
-export default withRouter(Home);
+export default withRouter(withUseTranslation(Home));
 
