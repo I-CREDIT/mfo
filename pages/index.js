@@ -54,10 +54,24 @@ class Home extends React.Component {
               </ul>
                 <div className="mainbanner" styles={{ backgroundImage:`url(${banner})` }}>
         <div className="header-text row">
-          <h1 className="secondary-header col-md-4 col-12">Микрозайм <span className="d-block">онлайн на карту</span> <span className="d-block">до <span className="red">145
-                000тг</span>
-            </span>
-          </h1>
+          {i18n.language === 'ru' ?
+              <h1 className="secondary-header col-md-4 col-12">
+                {t('header-text-1')}
+                <span className="d-block">{t('header-text-2')}</span>
+                <span className="d-block">
+                  {t('header-text-3')} <span className="red">{t('header-text-red')}</span>
+                </span>
+              </h1> :
+              <h1 className="secondary-header col-md-4 col-12">
+                <span>
+                  {t('header-text-3')} <span className="red">{t('header-text-red')}</span>
+                </span>
+                <span className="d-block">{t('header-text-1')}</span>
+                <span className="d-block">
+                  {t('header-text-2')}
+                </span>
+              </h1>
+          }
           <div className="header-imgs col-md-8 col-12 align-items-center">
             <div className="d-flex flex-xl-row flex-md-column">
               <h1 className="red" style={{fontSize: '50px', marginRight: '10px', textAlign:'center',}}>
@@ -67,15 +81,21 @@ class Home extends React.Component {
             </div>
             <div className="header-imgs--right">
               <img className="percentageZero" src={require("../img/percent.svg")} alt="" />
-              <img className="vsegdaPervidni" src={require("../img/Всегда первые 7 дней.svg")} alt="" />
+              <h1 className="col-md-4 col-12 secondary-header--right">
+                {t('always-first-1')}
+                <span className="d-block">{t('always-first-2')}</span>
+                <span className="d-block red">{t('always-first-red')}</span>
+              </h1>
             </div>
           </div>
         </div>
-        <p className="GESV" style={{marginTop: '10px', fontSize: '11px', textAlign: 'end'}}>*льготный период - первые 7 дней МФО не начисляет вознаграждение</p>
+        <p className="GESV" style={{marginTop: '10px', fontSize: '11px', textAlign: 'end'}}>
+          {t('GESV')}
+        </p>
         <section className="calculator container">
           <div className="texts">
-            <p>Калькулятор микрокредитов</p>
-            <p>Льготный период 7 дней</p>
+            <p>{t('calculator')}</p>
+            <p>{t('period')}</p>
           </div>
           <ProgressBar />
         </section>
@@ -223,14 +243,19 @@ class Home extends React.Component {
               <div className="topText">
                 <h1 className="red">100</h1>
                 <h4>
-                  Каждому 100-му <br></br>заемщиком<br></br>
-                  кредит в подарок
+                  {t('topText-1')}
+                  <br/>
+                  {t('topText-2')}
+                  <br/>
+                  {t('topText-3')}
                 </h4>
               </div>
-              <p className="bContent--text">Займи и стань счастливым заемщиком, которому мы простим кредит. Каждому 100-му клиенту прощается как проценты вознаграждения, так и сам заём! Успей стать 100-тым!</p>
+              <p className="bContent--text">
+                {t('bContent--text')}
+              </p>
               <div className="bContent--links">
-                <button className="takebtn">Хочу кредит в подарок</button>
-                <button>Узнать подробнее</button>
+                <button className="takebtn">{t('want-credit-btn')}</button>
+                <button>{t('more-info')}</button>
               </div>
             </div>
             <div className= "videolist">

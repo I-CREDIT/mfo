@@ -1,6 +1,9 @@
 import React, { Fragment } from 'react';
 import Link from 'next/link'
 import {useRouter} from 'next/router'
+// Перевод для функционального компонента
+import { useTranslation } from "react-i18next";
+
 const AppLink = ({children, className, href}) =>
   <Link href={href}>
     <a className={className}>{children}</a>
@@ -8,6 +11,9 @@ const AppLink = ({children, className, href}) =>
 
 const Footer = () => {
   const router = useRouter();
+  // Translation
+  const { t } = useTranslation()
+
   return (
     <footer className={router.pathname.includes('admin') ? 'd-none footer mt-5 mb-5' :  'footer mt-5 mb-5'}>
       <hr></hr>
@@ -15,10 +21,11 @@ const Footer = () => {
           <div className="row footerCols">
             <div className="col-md-4 footerCol">
               <AppLink href="/"><img className='icreditlogo mb-3' src={require("../../img/logo.png")} /> </AppLink>
-              <p>Прием заявок круглосуточно и без выходных.
-                <span className="d-block" />Рассмотрение и отправка денег Пн-Пт | 09:00-18:00</p>
+              <p>
+                {t('footerCol-1-1')}
+                <span className="d-block" />{t('footerCol-1-2')}</p>
               <div className="socials">
-                <p>Мы в соц сетях</p>
+                <p>{t('footerCol-1-3')}</p>
                 <div className="socials--icons">
                 <i className="fa fa-facebook" aria-hidden="true" />
                 <a className="instagramIcon" href="https://www.instagram.com/zaymi_kz" target="_blank">
@@ -28,15 +35,13 @@ const Footer = () => {
             </div>
             <div className="col-md-4 footerCol">
               <div className="lists">
-                <AppLink href="/conditions">Условия
-                  предоставления займов</AppLink>
-                  <AppLink href="/feedback">Оставить отзыв</AppLink>
-                  <AppLink href="/complaint">Оставить жалобу</AppLink>
-                <AppLink href="/moneystep">Как получить деньги</AppLink>
-                <AppLink href="/payment_methods">Как вернуть деньги</AppLink>
-                <AppLink href="/guide">Вопрос -
-                  ответ (помощь)</AppLink>
-                <AppLink href="/contacts">Контакты</AppLink>
+                <AppLink href="/conditions">{t('footerCol-2-1')}</AppLink>
+                  <AppLink href="/feedback">{t('footerCol-2-2')}</AppLink>
+                  <AppLink href="/complaint">{t('footerCol-2-3')}</AppLink>
+                <AppLink href="/moneystep">{t('footerCol-2-4')}</AppLink>
+                <AppLink href="/payment_methods">{t('footerCol-2-5')}</AppLink>
+                <AppLink href="/guide">{t('footerCol-2-6')}</AppLink>
+                <AppLink href="/contacts">{t('footerCol-2-7')}</AppLink>
               </div>
             </div>
             <div className="col-md-4 footerCol">
@@ -61,13 +66,25 @@ const Footer = () => {
             <div className="col-md-4  footerCol">
               <div className="extra-info">
                 <img src={require("../../img/svg/Оферта.svg")} />
-                <a href="https://i-credit.kz/docs/rules.pdf" target="_blank"><h5>Правила<br />предоставления займов</h5></a>
+                <a href="https://i-credit.kz/docs/rules.pdf" target="_blank">
+                  <h5>
+                    {t('extra-info-1-1')}
+                    <br/>
+                    {t('extra-info-1-2')}
+                  </h5>
+                </a>
               </div>
             </div>
             <div className="col-md-4 footerCol">
               <div className="extra-info">
                 <img src={require("../../img/svg/Оферта.svg")} />
-                <a href="https://i-credit.kz/docs/licence.pdf" target="_blank"><h5>Лицензия на осуществление микрофинансовой<br /> деятельности</h5></a>
+                <a href="https://i-credit.kz/docs/licence.pdf" target="_blank">
+                  <h5>
+                    {t('extra-info-2-1')}
+                    <br/>
+                    {t('extra-info-2-2')}
+                  </h5>
+                </a>
               </div>
             </div>
           </div>

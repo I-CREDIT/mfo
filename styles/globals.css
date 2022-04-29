@@ -664,6 +664,10 @@ button {
   animation: taadaa 0.5s;
 }
 
+.secondary-header--right {
+  max-width: unset !important;
+}
+
 .vsegdaPervidni {
   animation: taadaa 0.5s;
 }
@@ -1064,10 +1068,6 @@ a,
 }
 
 @media only screen and (max-width: 768px) {
-
-  /* .secondary-header {
-    display: none !important;
-  } */
   .otherPages--top .container {
     display: flex;
     justify-content: center;
