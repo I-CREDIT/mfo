@@ -10,7 +10,7 @@ import {connect} from 'react-redux'
 import store from '../store/store'
 import App from 'next/app';
 
-import "./i18n";
+import "../public/js/i18n"
 
 class MyApp extends App {
   componentDidMount() {
