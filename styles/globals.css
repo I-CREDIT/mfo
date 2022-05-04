@@ -2050,6 +2050,7 @@ a:hover {
 }
 
 .bottom-banner {
+  display: none;
   height: 100%;
   background: url("../img/bottomBanner2.png");
   background-repeat: no-repeat !important;
@@ -2139,10 +2140,15 @@ a:hover {
   justify-content: unset;
 }
 .presents {
+  display: none;
   padding-top: 3rem;
   margin: 3rem auto 0;
-  display: flex;
+  /*display: flex;*/
   justify-content: center;
+}
+
+.stepmoney {
+  margin-top: 3rem;
 }
 
 @media only screen and (max-width: 768px) {
@@ -2178,6 +2184,7 @@ a:hover {
   }
   .stepmoney {
     padding-top: 20px;
+    margin-top: 0;
   }
   .button {
     margin: 0;
