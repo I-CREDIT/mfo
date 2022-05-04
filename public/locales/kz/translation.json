@@ -90,5 +90,108 @@
   "extra-info-1-2": "беру қағидалары",
 
   "extra-info-2-1": "Микроқаржы қызметін жүзеге",
-  "extra-info-2-2": "асыруға лицензия"
+  "extra-info-2-2": "асыруға лицензия",
+
+  "nav-item-1": "Төлем әдісі",
+  "nav-item-2": "Төлемді өтеу",
+  "nav-item-3": "Жеке кабинет",
+
+  "otherPages-1": "Несиені келесі тәсілдердің",
+  "otherPages-2": "бірімен өтеуге болады:",
+
+  "voprosi--top-1": "QR-код арқылы",
+  "voprosi--top-2": "Qiwi терминалы",
+  "voprosi--top-3": "Касса24 терминалы",
+  "voprosi--top-4": "PLUS 24 мобильді қосымшасы арқылы Онлайн төлем",
+  "voprosi--top-5": "Халық банк қосымшасы арқылы homebank.kz",
+  "voprosi--top-6": "Халық банкінің кассасы арқылы банктік төлеммен",
+
+  "oplata--text-1": "Несиені төлеу",
+  "oplata--text-2": "Төлеу батырмасын басқаннан кейін сіз төлем бетіне қайта бағытталасыз",
+
+  "oplata--form-1": "Сіздің ЖСН:",
+  "oplata--form-2": "Сомасы:",
+  "enter-here": "Мұнда кіру",
+  "enter-cost": "Төлемді өтеу",
+
+  "login-title-1": "Жеке кабинетке кіру",
+  "login-form-title-1": "ЖСН:",
+  "login-form-label-1": "ЖСН енгізіңіз",
+  "login-form-title-2": "Құпия сөз:",
+  "login-form-label-2": "Құпия сөзді енгізіңіз",
+  "forget-password": "Құпия сөзді ұмыттыңыз ба?",
+  "log-in": "Кіру",
+
+  "get-money-step-1": "Тіркеу",
+  "get-money-step-2": "Сауалнаманы толтыру",
+  "get-money-step-3": "Сауалнаманы жіберу",
+
+  "registration": "Тіркеу",
+  "sum": "Сомасы:",
+  "change": "өзгерту...",
+  "days--uppercase": "Күн:",
+  "name": "Аты * :",
+  "surname": "Тегі * :",
+  "probability": "Мақұлдау ықтималдығы",
+  "patronymic": "Әкесінің есімі:",
+  "mail": "Электрондық адрес * :",
+  "iin": "ЖСН * :",
+  "enter-here--register": "Мұнда енгізіңіз",
+  "phone": "Телефон нөмірі * :",
+  "password": "Құпия сөз * :",
+  "password-repeat": "Құпия сөзді қайталаңыз * :",
+  "agree-1": "Мен",
+  "agree-2": "келісемін",
+  "agree-red": " деректерді өңдеуге арналған сайт шарттарымен ",
+
+  "mandatory-field": "Өрісті толтыру міндетті",
+  "no-operator": "Тиісті оператор жоқ",
+  "cyrillic-name-only": "Аты тек кириллицада",
+  "cyrillic-surname-only": "Тегі тек кириллицада",
+  "error-mail": "Қате email",
+  "error-iin": "Қате ЖСН",
+  "error-password": "Пароль кем дегенде 5 таңбадан тұруы керек",
+
+  "marital-status": "Отбасылық жағдайы* :",
+  "marital-status-1": "Үйленген/Тұрмыста",
+  "marital-status-2": "Бойдақ",
+
+  "education": "Білім* :",
+  "education-1": "Білімсіз",
+  "education-2": "Орта білім",
+  "education-3": "Жоғары білім",
+
+  "districts": "Аймақтар / Аудандар* :",
+  "districts-1": "Алдымен тізімнен қаланы/аймақты таңдаңыз",
+
+  "house": "Үй* :",
+  "children-amount": "Балалар саны* :",
+  "city": "Қала / Облыс* :",
+  "street": "Көше* :",
+  "apartment-number": "Пәтер нөмірі :",
+  "choose-one": "Опциялардың бірін таңдаңыз",
+  "private-house": "Жеке үй",
+
+  "relative": "Туысы",
+  "cyrillic-only": "Тек кириллицаға енгізу керек",
+  "relative-name": "Аты* :",
+  "relative-phone": "Телефон нөмірі",
+  "relative-surname": "Тегі* :",
+  "relative-connection": "Туыстық түрі* :",
+
+  "relative-additional": "Қосымша байланыс",
+  "relative-additional-connect": "Кіміңіз болады* :",
+
+  "mother": "Анасы",
+  "father": "Әкесі",
+  "brother-sister": "Ағасы / қарындасы",
+  "son-daughter": "Ұлы / қызы",
+  "spouse": "Жұбайы",
+  "other-relative": "Басқа туыс",
+  "friend": "Дос",
+  "colleague": "Әріптес",
+  "neighbor": "Көрші",
+  "familiar": "Таныс",
+
+  "send": "Жіберу"
 }

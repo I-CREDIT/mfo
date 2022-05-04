@@ -7,6 +7,9 @@ import { Formik, Form,  Field  } from 'formik';
 import axios from "axios";
 import Router from "next/router";
 
+// Перевод для функционального компонента
+import { useTranslation } from "react-i18next";
+
 const PhoneMask = ({ field, form, ...props}) => <InputMask 
 mask="+7(999)-999-9999"
   maskPlaceholder={null}
@@ -16,6 +19,9 @@ mask="+7(999)-999-9999"
 
 
 const ContinueStep2 = ({next,setNext}) => {
+  // Translation
+  const { t } = useTranslation()
+
   const [regions, setRegions] = useState({})
   const [checked, setChecked] = useState(cookie.get('continueChecked') ? cookie.get('continueChecked') : false)
   const [city,setCity] = useState(cookie.get('continue2') ? JSON.parse(cookie.get('continue2')).UF_17  : '')
@@ -135,19 +141,19 @@ const ContinueStep2 = ({next,setNext}) => {
             <div className='row form-group'>
             <div className='col-md-6 mb-3'>
               <label htmlFor=''>
-                Семейное положение *
+                  {t('marital-status')}
               </label>
               <Field as='select' name='UF_22' validate={requiredd} className='form-control'>
                 <option value=""></option>
-                <option value="Женат/Замужем">Женат/Замужем</option>
-                <option value="Холост/Не замужем">Холост/Не замужем</option>
+                <option value="Женат/Замужем">{t('marital-status-1')}</option>
+                <option value="Холост/Не замужем">{t('marital-status-2')}</option>
               </Field>
               {errors.UF_22 && touched.UF_22 && <p className='text-danger'>{errors.UF_22}</p>}
             </div>
 
             <div className='col-md-6 mb-3'>
               <label htmlFor=''>
-                Количество детей *
+                  {t('children-amount')}
               </label>
               <Field as='select' validate={requiredd} name='UF_23' className='form-control'>
                 <option value=""></option>
@@ -163,20 +169,20 @@ const ContinueStep2 = ({next,setNext}) => {
 
             <div className='col-md-6 mb-3'>
               <label htmlFor=''>
-                Образование *
+                  {t('education')}
               </label>
               <Field as='select' validate={requiredd} name='UF_24' className='form-control'>
                 <option value=""></option>
-                <option value="Без образования">Без образования</option>
-                <option value="Среднее">Среднее</option>
-                <option value="Высшее">Высшее</option>
+                <option value="Без образования">{t('education-1')}</option>
+                <option value="Среднее">{t('education-2')}</option>
+                <option value="Высшее">{t('education-3')}</option>
               </Field>
               {errors.UF_24 && touched.UF_24 && <p className='text-danger'>{errors.UF_24}</p>}
             </div>
 
             <div className='col-md-6 mb-3'>
               <label htmlFor=''>
-                Город/Область *
+                  {t('city')}
               </label>
               <Field  onChange={(e)=>fetchRegions(e)} value={city}  as='select' name='UF_17'   className='form-control'>
                 <option value="" disabled></option>
@@ -187,7 +193,7 @@ const ContinueStep2 = ({next,setNext}) => {
               {errors.UF_17 && touched.UF_17 && <p className='text-danger'>{errors.UF_17}</p>}
             </div>
             <div className='col-md-6 mb-3'>
-              <label>Регионы/Районы *</label>
+              <label>{t('districts')}</label>
               <div className='input-group'>
                 <Field as='select' validate={requiredd} name='UF_18' className='form-control'>
                   <option value="" ></option>
@@ -196,23 +202,23 @@ const ContinueStep2 = ({next,setNext}) => {
                   ))}
                 </Field>
               </div>
-              <div className="hint">Сначала выберите Город/Область из списка</div>
+              <div className="hint">{t('districts-1')}</div>
               
               {errors.UF_18 && touched.UF_18 && <p className='text-danger'>{errors.UF_18}</p>}
             </div>
             <div className='col-md-6 mb-3'>
-              <label>Улица *</label>
+              <label>{t('street')}</label>
               <Field name='UF_19' validate={requiredd} autocomplete='off' className='form-control'></Field>
               {errors.UF_19 && touched.UF_19 && <p className='text-danger'>{errors.UF_19}</p>}
             </div>
 
             <div className='col-md-6 mb-3'>
-              <label>Дом *</label>
+              <label>{t('house')}</label>
               <Field name='UF_20' validate={requiredd} autocomplete='off' className='form-control'/>
               {errors.UF_20 && touched.UF_20 && <p className='text-danger'>{errors.UF_20}</p>}
             </div>
             <div className='col-md-6 mb-3'>
-              <label>Номер квартиры *</label>
+              <label>{t('apartment-number')}</label>
               <Field name='UF_21' validate={!checked ? requiredd : ''} type='number' className='form-control' disabled={checked}/>
               {errors.UF_21 && touched.UF_21 && <p className={checked ? 'd-none' : 'text-danger'} >{errors.UF_21}</p>}
             </div>  
@@ -221,17 +227,17 @@ const ContinueStep2 = ({next,setNext}) => {
                 type="checkbox"
                 onChange={() => setChecked(!checked)}
                 defaultChecked={checked}/>
-              <label className="form-check-label ml-3">Частный дом</label>
+              <label className="form-check-label ml-3">{t('private-house')}</label>
             </div>
           </div>
-          <h2 className="mt-5 mb-5">Родственник</h2>
+          <h2 className="mt-5 mb-5">{t('relative')}</h2>
           <div className='row form-group'>
             <div className='col-md-6 mb-3'>
-              <label>Имя*</label>
+              <label>{t('relative-name')}</label>
               <div className='input-group'>
               <Field name='UF_25' validate={requiredd, acceptCirrilic} autocomplete='off' className='form-control'/>
            
-              <div className="hint">только на киррилице</div>
+              <div className="hint">{t('cyrillic-only')}</div>
               </div>
               {errors.UF_25 && touched.UF_25 && <p className='text-danger'>{errors.UF_25}</p>}
             </div>
@@ -241,7 +247,7 @@ const ContinueStep2 = ({next,setNext}) => {
                 <div className='input-group'>
                     <Field name='UF_31' validate={requiredd, acceptCirrilic} autocomplete='off' className='form-control'/>
 
-                    <div className="hint">только на киррилице</div>
+                    <div className="hint">{t('cyrillic-only')}</div>
                 </div>
                 {errors.UF_31 && touched.UF_31 && <p className='text-danger'>{errors.UF_31}</p>}
             </div>
@@ -272,14 +278,14 @@ const ContinueStep2 = ({next,setNext}) => {
             </div>
           </div>
 
-          <h2 className="mt-5 mb-5">Дополнительный контакт</h2>
+          <h2 className="mt-5 mb-5">{t('relative-additional')}</h2>
           <div className='row form-group'>
             <div className='col-md-6 mb-3'>
-              <label>Имя*</label>
+              <label>{t('relative-name')}</label>
               <div className='input-group'>
               <Field name='UF_28' validate={requiredd, acceptCirrilic} autocomplete='off' className='form-control' />
 
-              <div className="hint">только на киррилице</div>
+              <div className="hint">{t('cyrillic-only')}</div>
               </div>
               {errors.UF_28 && touched.UF_28 && <p className='text-danger'>{errors.UF_28}</p>}
             </div>
@@ -289,7 +295,7 @@ const ContinueStep2 = ({next,setNext}) => {
                 <div className='input-group'>
                     <Field name='UF_32' validate={requiredd, acceptCirrilic} autocomplete='off' className='form-control' />
 
-                    <div className="hint">только на киррилице</div>
+                    <div className="hint">{t('cyrillic-only')}</div>
                 </div>
                 {errors.UF_32 && touched.UF_32 && <p className='text-danger'>{errors.UF_32}</p>}
             </div>

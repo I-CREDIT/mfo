@@ -10,6 +10,10 @@ import {required, phoneCheck, acceptCirrilic} from '../../defaults/validationred
 import Spinner from 'react-spinner-material';
 import disableScroll from 'disable-scroll';
 import cookie from 'js-cookie';
+
+// Перевод для классового компонента
+import withUseTranslation from "../../public/js/hocs/useTranslation";
+
 var scrollToElement = require('scroll-to-element');
 const mapStateToProps = state => {
   return {somemessage: state.message, regionsReducer: state.regionsReducer, loading: state.loading, registration2: state.registration2}
@@ -24,6 +28,7 @@ const PhoneMask = (props) => <InputMask
   maskPlaceholder={null}
   className="my-input"
   {...props}/>;
+
 class SecondStep extends React.Component {
   constructor() {
     super();
@@ -144,6 +149,9 @@ class SecondStep extends React.Component {
   }
 
   render() {
+    // Достаем функцию-переводчик
+    const { t } = this.props.useTranslationValue
+
     return (
       <div>
         <div className="progressBar">
@@ -170,7 +178,7 @@ class SecondStep extends React.Component {
             : null}
           <Row className="form-group">
             <div className="col-md-6 mb-3">
-              <Label htmlFor="marital_status">Семейное положение* :</Label>
+              <Label htmlFor="marital_status">{t('marital-status')}</Label>
               <div className="input-group">
                 <Control.select
                   model=".marital_status"
@@ -180,8 +188,8 @@ class SecondStep extends React.Component {
                   required
                 }}>
                   <option value=""></option>
-                  <option value="Женат/Замужем">Женат/Замужем</option>
-                  <option value="Холост/Не замужем">Холост/Не замужем</option>
+                  <option value="Женат/Замужем">{t('marital-status-1')}</option>
+                  <option value="Холост/Не замужем">{t('marital-status-2')}</option>
                 </Control.select>
               </div>
               <Errors
@@ -189,11 +197,11 @@ class SecondStep extends React.Component {
                 model='.marital_status'
                 show='touched'
                 messages={{
-                  required: 'Выберите один из вариантов'
+                  required: t('choose-one')
                 }}/>
             </div>
             <div className="col-md-6 mb-3">
-              <Label htmlFor="child_amount">Количество детей* :</Label>
+              <Label htmlFor="child_amount">{t('children-amount')}</Label>
               <Control.select
                 model=".child_amount"
                 name="child_amound"
@@ -214,29 +222,29 @@ class SecondStep extends React.Component {
                 model='.child_amount'
                 show='touched'
                 messages={{
-                required: 'Выберите один из вариантов'
+                required: t('choose-one')
               }}/>
             </div>
             <div className="col-md-6 mb-3">
-              <Label htmlFor="education">Образование* :</Label>
+              <Label htmlFor="education">{t('education')}</Label>
               <Control.select model=".education" name="education" className="form-control"  validators={{
                 required
               }}>
                 <option value=""></option>
-                <option value="Без образования">Без образования</option>
-                <option value="Среднее">Среднее</option>
-                <option value="Высшее">Высшее</option>
+                <option value="Без образования">{t('education-1')}</option>
+                <option value="Среднее">{t('education-2')}</option>
+                <option value="Высшее">{t('education-3')}</option>
               </Control.select>
               <Errors
                 className='text-danger'
                 model='.education'
                 show='touched'
                 messages={{
-                  required: 'Выберите один из вариантов'
+                  required: t('choose-one')
                 }}/>
             </div>
             <div className="col-md-6 mb-3">
-              <Label>Город/Область* :</Label>
+              <Label>{t('city')}</Label>
               <Control.select
                 model=".city"
                 name="city"
@@ -255,11 +263,11 @@ class SecondStep extends React.Component {
                 model='.city'
                 show='touched'
                 messages={{
-                required: 'Выберите один из вариантов'
+                required: t('choose-one')
               }}/>
             </div>
             <div className="col-md-6 mb-3">
-              <Label>Регионы/Районы* :</Label>
+              <Label>{t('districts')}</Label>
               <div className="input-group">
                 <Control.select
                   model=".regionOfCity_id"
@@ -268,7 +276,7 @@ class SecondStep extends React.Component {
                   validators={{
                   required
                 }}>
-                  <option value="" disabled>Регионы</option>
+                  <option value="" disabled>{t('districts')}</option>
                   {this
                     .props
                     .regionsReducer
@@ -277,18 +285,18 @@ class SecondStep extends React.Component {
                       <option key={gorod.id} value={gorod.id}>{gorod.name}</option>
                     ))}
                 </Control.select>
-                <div className="hint">Сначала выберите Город/Область из списка</div>
+                <div className="hint">{t('districts-1')}</div>
               </div>
               <Errors
                 className='text-danger'
                 model='.regionOfCity_id'
                 show='touched'
                 messages={{
-                required: 'Выберите один из вариантов'
+                required: t('choose-one')
               }}/>
             </div>
             <div className="col-md-6 mb-3">
-              <Label>Улица* :
+              <Label>{t('street')}
               </Label>
               <Control.input
                 model=".street"
@@ -303,11 +311,11 @@ class SecondStep extends React.Component {
                 model='.street'
                 show='touched'
                 messages={{
-                required: 'Поле обязательно для заполнения'
+                required: t('mandatory-field')
               }}/>
             </div>
             <div className="col-md-6 mb-3">
-              <Label>Дом* :
+              <Label>{t('house')}
               </Label>
               <Control.input
                 model=".home"
@@ -322,12 +330,12 @@ class SecondStep extends React.Component {
                 model='.home'
                 show='touched'
                 messages={{
-                required: 'Поле обязательно для заполнения'
+                required: t('mandatory-field')
               }}/>
             </div>
             {this.state.checked
               ? <div className="col-md-6 mb-3">
-                  <Label>Номер квартиры :
+                  <Label>{t('apartment-number')}
                   </Label>
                   <Control.input
                     type="number"
@@ -337,7 +345,7 @@ class SecondStep extends React.Component {
                     disabled/>
                 </div>
               : <div className="col-md-6 mb-3">
-                <Label>Номер квартиры :
+                <Label>{t('apartment-number')}
                 </Label>
                 <Control.input
                   type="number"
@@ -351,14 +359,14 @@ class SecondStep extends React.Component {
                 type="checkbox"
                 onChange={this.handleCheck}
                 defaultChecked={this.state.checked}/>
-              <label className="form-check-label ml-3" for="exampleCheck1">Частный дом</label>
+              <label className="form-check-label ml-3" for="exampleCheck1">{t('private-house')}</label>
             </div>
           </Row>
 
-          <h2 className="mt-5 mb-5">Родственник</h2>
+          <h2 className="mt-5 mb-5">{t('relative')}</h2>
           <Row>
             <div className="col-md-6 mb-3">
-              <Label>Имя* :</Label>
+              <Label>{t('relative-name')}</Label>
               <div className="input-group ">
                 <Control.input
                   model=".relative_name"
@@ -369,7 +377,7 @@ class SecondStep extends React.Component {
                   required,
                   acceptCirrilic
                 }}/>
-                <div className="hint">Имя только на киррилице</div>
+                <div className="hint">{t('cyrillic-name-only')}</div>
 
               </div>
               <Errors
@@ -377,12 +385,12 @@ class SecondStep extends React.Component {
                   model='.relative_name'
                   show='touched'
                   messages={{
-                  required: 'Поле обязательно для заполнения ',
-                  acceptCirrilic: "Нужно вводить только на кириллице"
+                  required: t('mandatory-field'),
+                  acceptCirrilic: t('')
                 }}/>
             </div>
             <div className="col-md-6 mb-3">
-              <Label>Фамилия* :</Label>
+              <Label>{t('relative-surname')}</Label>
               <div className="input-group">
                 <Control.input
                   model=".relative_last_name"
@@ -393,7 +401,7 @@ class SecondStep extends React.Component {
                   required,
                   acceptCirrilic
                 }}/>
-                <div className="hint">Фамилия только на киррилице</div>
+                <div className="hint">{t('cyrillic-surname-only')}</div>
 
               </div>
               <Errors
@@ -401,12 +409,12 @@ class SecondStep extends React.Component {
                   model='.relative_last_name'
                   show='touched'
                   messages={{
-                  required: 'Поле обязательно для заполнения ',
-                  acceptCirrilic: "Нужно вводить только на кириллице"
+                  required: t('mandatory-field'),
+                  acceptCirrilic: t('')
                 }}/>
             </div>
             <div className="col-md-6 mb-3">
-              <Label>Телефон номер</Label>
+              <Label>{t('relative-phone')}</Label>
               <div className="input-group">
                 <Control
                   className="form-control"
@@ -424,11 +432,11 @@ class SecondStep extends React.Component {
                 model='.relative_phone_number'
                 show='touched'
                 messages={{
-                phoneCheck: 'Нет соответствующего оператора '
+                phoneCheck: t('no-operator')
               }}/>
             </div>
             <div className="col-md-6 mb-3">
-              <Label>Вид родства* :</Label>
+              <Label>{t('relative-connection')}</Label>
               <Control.select
                 model=".relative_type_id"
                 name="relative_type_id"
@@ -438,7 +446,7 @@ class SecondStep extends React.Component {
               }}>
                 <option value=""></option>
                 {relative_type.map(relative => (
-                  <option key={relative.id} value={relative.id}>{relative.name}</option>
+                  <option key={relative.id} value={relative.id}>{t(relative.name)}</option>
                 ))}
               </Control.select>
               <Errors
@@ -446,14 +454,14 @@ class SecondStep extends React.Component {
                 model='.relative_type_id'
                 show='touched'
                 messages={{
-                required: 'Выберите один из вариантов'
+                required: t('choose-one')
               }}/>
             </div>
           </Row>
-          <h2 className="mt-5 mb-5">Дополнительный контакт</h2>
+          <h2 className="mt-5 mb-5">{t('relative-additional')}</h2>
           <Row className="mb-5">
             <div className="col-md-6 mb-3">
-              <Label>Имя* :</Label>
+              <Label>{t('relative-name')}</Label>
               <div className="input-group">
                 <Control.input
                   model=".additional_contact_name"
@@ -464,7 +472,7 @@ class SecondStep extends React.Component {
                   required,
                   acceptCirrilic
                 }}/>
-                <div className="hint">Имя только на киррилице</div>
+                <div className="hint">{t('cyrillic-name-only')}</div>
 
               </div>
               <Errors
@@ -472,12 +480,12 @@ class SecondStep extends React.Component {
                   model='.additional_contact_name'
                   show='touched'
                   messages={{
-                  required: 'Поля обязателен для заполнения ',
-                  acceptCirrilic: "Нужно вводить только на кириллице"
+                  required: t('mandatory-field'),
+                  acceptCirrilic: t('')
                 }}/>
             </div>
             <div className="col-md-6 mb-3">
-              <Label>Фамилия* :</Label>
+              <Label>{t('relative-surname')}</Label>
               <div className="input-group">
                 <Control.input
                   model=".additional_contact_last_name"
@@ -488,7 +496,7 @@ class SecondStep extends React.Component {
                   required,
                   acceptCirrilic
                 }}/>
-                <div className="hint">Фамилия только на киррилице</div>
+                <div className="hint">{t('cyrillic-surname-only')}</div>
 
               </div>
               <Errors
@@ -496,12 +504,12 @@ class SecondStep extends React.Component {
                   model='.additional_contact_last_name'
                   show='touched'
                   messages={{
-                  required: 'Поля обязателен для заполнения ',
-                  acceptCirrilic: "Нужно вводить только на кириллице"
+                  required: t('mandatory-field'),
+                  acceptCirrilic: t('cyrillic-only')
                 }}/>
             </div>
             <div className="col-md-6 mb-3">
-              <Label>Телефон номер</Label>
+              <Label>{t('relative-phone')}</Label>
               <div className="input-group">
                 <Control
                   className="form-control"
@@ -520,11 +528,11 @@ class SecondStep extends React.Component {
                 model='.additional_contact_phone'
                 show='touched'
                 messages={{
-                phoneCheck: 'Нет соответствующего оператора '
+                phoneCheck: t('no-operator')
               }}/>
             </div>
             <div className="col-md-6 mb-3">
-              <Label>Кем приходится* :</Label>
+              <Label>{t('relative-additional-connect')}</Label>
               <Control.select
                 model=".additional_contact_type_id"
                 name="additional_contact_type_id"
@@ -534,7 +542,7 @@ class SecondStep extends React.Component {
               }}>
                 <option value=""></option>
                 {addition_contact_type.map(relative => (
-                  <option key={relative.id} value={relative.id}>{relative.name}</option>
+                  <option key={relative.id} value={relative.id}>{t(relative.name)}</option>
                 ))}
               </Control.select>
               <Errors
@@ -542,7 +550,7 @@ class SecondStep extends React.Component {
                 model='.additional_contact_type_id'
                 show='touched'
                 messages={{
-                required: 'Выберите один из вариантов'
+                required: t('choose-one')
               }}/>
             </div>
           </Row>
@@ -560,10 +568,10 @@ class SecondStep extends React.Component {
                   spinnerColor={"#ef2221"}
                   spinnerWidth={2}
                   visible={true}/>
-              : <button
+              : <buttonw
                 type="submit "
                 className="agreement-btn"
-                onClick={() => this.handleFocus()}>Отправить</button>}
+                onClick={() => this.handleFocus()}>{t('send')}</buttonw>}
           </div>
         </Form>
       </div>
@@ -572,4 +580,4 @@ class SecondStep extends React.Component {
   }
 }
 
-export default(connect(mapStateToProps, mapDispatchToProps)(SecondStep));
+export default(connect(mapStateToProps, mapDispatchToProps)(withUseTranslation(SecondStep)));

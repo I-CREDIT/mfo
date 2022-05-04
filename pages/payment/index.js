@@ -1,17 +1,17 @@
 import React from 'react';
-// import Link from 'next/link'
-// import { Control, Errors, Form,actions } from 'react-redux-form';
-// import { connect } from 'react-redux';
 import {iinValidation, requiredd} from '../../defaults/validations';
 import InputMask from "react-input-mask";
 import Spinner from 'react-spinner-material';
 import swal from "sweetalert";
-import * as Yup from 'yup';
 import MaskedInput from 'react-text-mask';
 import axios from 'axios'
 import { Formik, Form,  Field  } from 'formik';
 const maskIin = [/\d/,/\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/,/\d/,/\d/,/\d/,];
 import Head from 'next/head';
+
+// Перевод для классового компонента
+import withUseTranslation from "../../public/js/hocs/useTranslation";
+
 const mapStateToProps = state => {
   return {
     oplata: state.oplata,
@@ -25,6 +25,7 @@ const mapDispatchToProps = (dispatch) => ({
 })
 
 const IinMask = (props) => <InputMask mask="999999999999" maskPlaceholder={null} className="my-input" {...props} />;
+
 class Payment extends React.Component {
   constructor(props) {
     super(props);
@@ -70,7 +71,11 @@ class Payment extends React.Component {
       }
     })
   }
+
   render() {
+    // Достаем функцию-переводчик
+    const { t } = this.props.useTranslationValue
+
     return (
         <div>
           <Head>
@@ -80,8 +85,8 @@ class Payment extends React.Component {
         <div className="container">
           <section className="oplata row">
             <div className="col-lg-6 oplata--text mb-5">
-              <h2>Оплата кредита</h2>
-              <p>После нажатия кнопки оплатить вы будете перенаправлены на страницу оплаты</p>
+              <h2>{t('oplata--text-1')}</h2>
+              <p>{t('oplata--text-2')}</p>
             </div>
             <div className="col-lg-6 oplate--form">
             <Formik
@@ -98,7 +103,7 @@ class Payment extends React.Component {
               <Form className="oplataform">
                 <div className='input-group'>
                   <label htmlFor='iin'>
-                    <h2>Ваш ИИН: </h2>
+                    <h2>{t('oplata--form-1')}</h2>
                   </label>
                   <Field
                     name="iin"
@@ -108,7 +113,7 @@ class Payment extends React.Component {
                         {...field}
                         mask={maskIin}
                         id="iin"
-                        placeholder="Вводить сюда"
+                        placeholder={t('enter-here')}
                         type="text"
                       />
                     )}
@@ -118,16 +123,16 @@ class Payment extends React.Component {
                 </div>
                 <div className='input-group'>
                   <label htmlFor='iin'>
-                    <h2>Сумма: </h2>
+                    <h2>{t('oplata--form-2')}</h2>
                   </label>
-                  <Field name='amount' validate={requiredd} type='number' placeholder="Вводить сюда"/>
+                  <Field name='amount' validate={requiredd} type='number' placeholder={t('enter-here')}/>
                   {errors.amount && touched.amount && <div className='text-danger'>{errors.amount}</div>}
                 </div>
 
                 <div className="buttonForm">
                 {this.state.btnLoading === true ?
 								 <Spinner className="loading" size={200} spinnerColor={"#ef2221"} spinnerWidth={2} visible={true} /> :
-                 <button className=" oplataform--button" type="submit">Внести оплату</button>}
+                 <button className=" oplataform--button" type="submit">{t('enter-cost')}</button>}
                 </div>
                 </Form>
                   )}
@@ -140,4 +145,4 @@ class Payment extends React.Component {
     );}
 }
 
-export default Payment;
+export default withUseTranslation(Payment);

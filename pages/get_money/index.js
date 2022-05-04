@@ -11,7 +11,10 @@ import { connect } from 'react-redux';
 import $ from 'jquery'
 import Head from 'next/head'
 import { actions } from 'react-redux-form'
-const labels = [ 'Регистрация', 'Заполнения анкеты', 'Отправка анкеты',  ];
+
+// Перевод для классового компонента
+import withUseTranslation from "../../public/js/hocs/useTranslation";
+
 const handleSteps = step => {
     switch (step) {
         case 0:
@@ -39,11 +42,13 @@ const handleSteps = step => {
             break
     }
 }
+
 const mapStateToProps = state => {
     return {
         stepregistration: state.stepregistration
     }
 }
+
 const mapDispatchToProps = (dispatch) => ({
     stepRegistration: step =>{dispatch(stepRegistration(step))},
     resetRegistration: () => { dispatch(actions.reset('registration'))},
@@ -61,7 +66,6 @@ const stepcheck = (val) => {
     return 0;
 }
 // const registrationStep = window.localStorage.getItem('step')
-
 
 class FormStep extends React.Component {
     state = {
@@ -123,8 +127,12 @@ class FormStep extends React.Component {
 
 
     render() {
+        // Достаем функцию-переводчик
+        const { t } = this.props.useTranslationValue
+        const labels = [ t('get-money-step-1'), t('get-money-step-2'), t('get-money-step-3') ];
+
         return (
-    <React.Fragment>
+            <React.Fragment>
 				<React.Fragment>
                     {this.state.loading ? (
                     <div className="modelLoader"></div>) : (<div className="modelLoader loaded"></div>)}
@@ -146,4 +154,4 @@ class FormStep extends React.Component {
     }
 }
 
-export default (connect(mapStateToProps,mapDispatchToProps)(FormStep));
+export default (connect(mapStateToProps,mapDispatchToProps)(withUseTranslation(FormStep)));

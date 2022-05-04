@@ -3,6 +3,9 @@ import Link from 'next/link'
 import {Collapse} from 'reactstrap';
 import Head from 'next/head'
 
+// Перевод для классового компонента
+import withUseTranslation from "../../public/js/hocs/useTranslation";
+
 var scrollToElement = require('scroll-to-element');
 const AppLink = ({children, className, href}) =>
   <Link href={href}>
@@ -31,7 +34,11 @@ class Instruction extends React.Component {
         duration: 600
       }), 350 )
     }
+
     render () {
+    // Достаем функцию-переводчик
+    const { t } = this.props.useTranslationValue
+
     return (
         <div>
            <Head>
@@ -40,9 +47,14 @@ class Instruction extends React.Component {
         <section className="otherPages">
           <div className="otherPages--top hidden">
             <div className="container">
-              <h1>Погасить кредит можно <br />одним из следующих способов:</h1>
+              <h1>
+                {t('otherPages-1')}<br/>
+                {t('otherPages-2')}
+              </h1>
               <AppLink href="/get_money">
-              <button className="takebtn" data-toggle="modal" data-target="#modalmoney">Получить деньги</button>
+              <button className="takebtn" data-toggle="modal" data-target="#modalmoney">
+                {t('get-money')}
+              </button>
               </AppLink>
             </div>
           </div>
@@ -53,7 +65,7 @@ class Instruction extends React.Component {
               </div>
                 <div className="">
                   <div className="voprosi--top" onClick={this.toggleCollapse("qrcode")}>
-                    <h2>С помощью QR-код</h2>
+                    <h2>{t('voprosi--top-1')}</h2>
                     <a className="more" type="button" />
                   </div>
                   <Collapse isOpen={this.state.collapse === 'qrcode'} id="qrcode">
@@ -98,7 +110,7 @@ class Instruction extends React.Component {
               </div>
                 <div className="">
                   <div className="voprosi--top" onClick={this.toggleCollapse("qiwiterminal")}>
-                    <h2>Qiwi терминал</h2>
+                    <h2>{t('voprosi--top-2')}</h2>
                     <a className="more" type="button" />
                   </div>
                   <Collapse isOpen={this.state.collapse === 'qiwiterminal'} id="qiwiterminal">
@@ -164,7 +176,7 @@ class Instruction extends React.Component {
               </div>
                 <div className="">
                   <div className="voprosi--top " onClick={this.toggleCollapse("terkassa24")}>
-                    <h2 className='terkassa24'>Терминал Касса24</h2>
+                    <h2 className='terkassa24'>{t('voprosi--top-3')}</h2>
                     <a className="more" type="button" />
                   </div>
                   <Collapse isOpen={this.state.collapse === 'terkassa24'} id="terkassa24">
@@ -219,7 +231,7 @@ class Instruction extends React.Component {
               </div>
                 <div className="">
                   <div className="voprosi--top" onClick={this.toggleCollapse("pogasit2")}>
-                    <h2 className='pogasit2'>Онлайн-оплата через мобильное приложение PLUS 24</h2>
+                    <h2 className='pogasit2'>{t('voprosi--top-4')}</h2>
                     <a className="more" type="button" />
                   </div>
                   <Collapse isOpen={this.state.collapse === 'pogasit2'} id="pogasit2">
@@ -256,7 +268,7 @@ class Instruction extends React.Component {
               </div>
                 <div className="">
                   <div className="voprosi--top" onClick={this.toggleCollapse("pogasit3")}>
-                    <h2 className='pogasit3'>Через приложения Халык банка homebank.kz</h2>
+                    <h2 className='pogasit3'>{t('voprosi--top-5')}</h2>
                     <a className="more " type="button" />
                   </div>
                   <Collapse isOpen={this.state.collapse === 'pogasit3'} id="pogasit3">
@@ -294,7 +306,7 @@ class Instruction extends React.Component {
               </div>
                 <div className="">
                   <div className="voprosi--top" onClick={this.toggleCollapse("pogasit4")}>
-                    <h2 className='pogasit4'>Банковским платежом через кассу народного банка</h2>
+                    <h2 className='pogasit4'>{t('voprosi--top-6')}</h2>
                     <a className="more" type="button" />
                   </div>
                   <Collapse isOpen={this.state.collapse === 'pogasit4'} id="pogasit4">
@@ -320,4 +332,4 @@ class Instruction extends React.Component {
     }
 }
 
-export default Instruction
+export default withUseTranslation(Instruction)

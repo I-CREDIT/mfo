@@ -77,8 +77,8 @@ const Continue = ({userReducer}) => {
         </div> */}
       {/* <br></br><br></br> */}
         <h3 className='mt-5 mb-3 text-center'>Продолжить анкету</h3>
-
-        {stepResult === 1 ? <StepReg /> : <ContinueStep3 userDate={userReducer.user} summa={summa} srok={srok}/>}
+        <ContinueStep2 next={step} setNext={setStep} userDate={userReducer.user}/>
+        {/*{stepResult === 1 ? <StepReg /> : <ContinueStep3 userDate={userReducer.user} summa={summa} srok={srok}/>}*/}
       </div>
   )
 }

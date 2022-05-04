@@ -1,7 +1,7 @@
 export const requiredd = (val) => {
     let error;
     if(!val) {
-      error = 'Поле обязательно для заполнения'
+      error = 'mandatory-field'
     }
     return error;
 }
@@ -43,11 +43,11 @@ export const validEmail = (val) => {
     let error;
     let emailvalid = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(val);
     if(!val) {
-        error = 'Поле обязательно для заполнения'
+        error = 'mandatory-field'
     }
     if(val) {
         if(!emailvalid) {
-            error ='Неправильный email'
+            error ='error-mail'
         }
     }
     return error;
@@ -56,7 +56,7 @@ export const acceptCirrilic = val => {
     var falsy = /[a-zA-Z0-9_"*/]/i.test(val)
     let error;
     if(!val ) {
-        error = 'Поле обязательно для заполнения'
+        error = 'mandatory-field'
     }
     if(val) {
         if(falsy === true) {
@@ -81,9 +81,9 @@ export const checkAlphabet = (val) => /[a-zA-Z0-9_]/i.test(val);
 export const passwordCheck = (val)=> {
     let error;
     if(!val) {
-        error = 'Поле обязательно для заполнения'
+        error = 'mandatory-field'
     }
-	if(val && val.length < 5)  error = 'Пароль должен быть не меньше 5 символов';
+	if(val && val.length < 5)  error = 'error-password';
 	return error;
 }
 export const validateConfirmPassword = (pass, value) => {
@@ -115,7 +115,7 @@ export const iinValidation = (val) =>  {
             controll += a[i]*b2[i];
             controll = controll % 11;
         }
-        if(controll!=a[11] || a[6] == 0) error = 'Некорректный ИИН';
+        if(controll!=a[11] || a[6] == 0) error = 'error-iin';
         return error;
     }
 	
@@ -162,7 +162,7 @@ export const phoneValidation = (val) => {
     if(phoneCheck(val) === true) {
         error = ''
     }else {
-        error = 'Нет соответствующего оператора'
+        error = 'no-operator'
     }
     return error
 }

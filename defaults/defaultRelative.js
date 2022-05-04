@@ -1,23 +1,29 @@
-export const relative_type = [ {"id": 1,
-"name": "Мать"}, {
-	"id": 2,
-	"name": "Отец"},
-{
-	"id": 3,
-	"name": "брат/сестра"
-},
-{
-	"id": 5,
-	"name": "сын/дочь"
-},
-{
-	"id": 7,
-	"name": "супруг(-а)"
-},
-{
-	"id": 9,
-	"name": "Другой родственник"
-}];
+export const relative_type = [
+    {
+        "id": 1,
+        "name": "mother"
+    },
+    {
+        "id": 2,
+        "name": "father"
+    },
+    {
+        "id": 3,
+        "name": "brother-sister"
+    },
+    {
+        "id": 5,
+        "name": "son-daughter"
+    },
+    {
+        "id": 7,
+        "name": "spouse"
+    },
+    {
+        "id": 9,
+        "name": "other-relative"
+    }
+    ];
 
 export const gorods = [
     {
@@ -86,19 +92,19 @@ export const gorods = [
 export const addition_contact_type = [
     {
         "id": 1,
-        "name": "Друг(подруга)"
+        "name": "friend"
     },
     {
         "id": 2,
-        "name": "Коллега"
+        "name": "colleague"
     },
     {
         "id": 3,
-        "name": "Сосед"
+        "name": "neighbor"
     },
     {
         "id": 4,
-        "name": "Знакомый"
+        "name": "familiar"
     }
 ]
 

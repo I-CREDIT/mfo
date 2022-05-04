@@ -90,5 +90,107 @@
   "extra-info-1-2": "предоставления займов",
 
   "extra-info-2-1": "Лицензия на осуществление микрофинансовой",
-  "extra-info-2-2": "деятельности"
+  "extra-info-2-2": "деятельности",
+
+  "nav-item-1": "Способ оплаты",
+  "nav-item-2": "Внести оплату",
+  "nav-item-3": "Личный кабинет",
+
+  "otherPages-1": "Погасить кредит можно",
+  "otherPages-2": "одним из следующих способов:",
+
+  "voprosi--top-1": "С помощью QR-код",
+  "voprosi--top-2": "Qiwi терминал",
+  "voprosi--top-3": "Терминал Касса24",
+  "voprosi--top-4": "Онлайн-оплата через мобильное приложение PLUS 24",
+  "voprosi--top-5": "Через приложения Халык банка homebank.kz",
+  "voprosi--top-6": "Банковским платежом через кассу народного банка",
+
+  "oplata--text-1": "Оплата кредита",
+  "oplata--text-2": "После нажатия кнопки оплатить вы будете перенаправлены на страницу оплаты",
+
+  "oplata--form-1": "Ваш ИИН:",
+  "oplata--form-2": "Сумма:",
+  "enter-here": "Вводить сюда",
+  "enter-cost": "Внести оплату",
+
+  "login-title-1": "Войти в личный кабинет",
+  "login-form-title-1": "ИИН:",
+  "login-form-label-1": "Введите ИИН",
+  "login-form-title-2": "Пароль:",
+  "login-form-label-2": "Введите пароль",
+  "forget-password": "Забыли пароль?",
+  "log-in": "Войти",
+
+  "get-money-step-1": "Регистрация",
+  "get-money-step-2": "Заполнения анкеты",
+  "get-money-step-3": "Отправка анкеты",
+
+  "registration": "Регистрация",
+  "sum": "Сумма:",
+  "change": "Изменить...",
+  "days--uppercase": "Дней:",
+  "name": "Имя * :",
+  "surname": "Фамилия * :",
+  "probability": "Вероятность одобрения",
+  "patronymic": "Отчество:",
+  "mail": "Электронный адрес * :",
+  "iin": "ИИН * :",
+  "enter-here--register": "Введите сюда",
+  "phone": "Номер телефона * :",
+  "password": "Пароль * :",
+  "password-repeat": "Повторите пароль * :",
+  "agree-1": "Согласен на ",
+  "agree-red": "обработку данных с условиями сайта",
+
+  "mandatory-field": "Поле обязательно для заполнения",
+  "no-operator": "Нет соответствующего оператора",
+  "cyrillic-name-only": "Имя только на киррилице",
+  "cyrillic-surname-only": "Фамилия только на киррилице",
+  "error-mail": "Неправильный email",
+  "error-iin": "Некорректный ИИН",
+  "error-password": "Пароль должен быть не меньше 5 символов",
+
+  "marital-status": "Семейное положение* :",
+  "marital-status-1": "Женат/Замужем",
+  "marital-status-2": "Холост/Не замужем",
+
+  "education": "Образование* :",
+  "education-1": "Без образования",
+  "education-2": "Среднее",
+  "education-3": "Высшее",
+
+  "districts": "Регионы/Районы* :",
+  "districts-1": "Сначала выберите Город/Область из списка",
+
+  "house": "Дом* :",
+  "children-amount": "Количество детей* :",
+  "city": "Город/Область* :",
+  "street": "Улица* :",
+  "apartment-number": "Номер квартиры :",
+  "choose-one": "Выберите один из вариантов",
+  "private-house": "Частный дом",
+
+  "relative": "Родственник",
+  "cyrillic-only": "Нужно вводить только на кириллице",
+  "relative-name": "Имя* :",
+  "relative-phone": "Телефон номер",
+  "relative-surname": "Фамилия* :",
+  "relative-connection": "Вид родства* :",
+
+  "relative-additional": "Дополнительный контакт",
+  "relative-additional-connect": "Кем приходится* :",
+
+  "mother": "Мать",
+  "father": "Отец",
+  "brother-sister": "брат/сестра",
+  "son-daughter": "сын/дочь",
+  "spouse": "супруг(-а)",
+  "other-relative": "Другой родственник",
+  "friend": "Друг(подруга)",
+  "colleague": "Коллега",
+  "neighbor": "Сосед",
+  "familiar": "Знакомый",
+
+  "send": "Отправить"
 }

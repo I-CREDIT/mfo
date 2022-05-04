@@ -105,29 +105,35 @@ const Navbar = () => {
       </button>
       <Collapse navbar isOpen={isNavOpen} className="text-center justify-content-end" id="navigationBar">
         <ul className="navbar-nav links">
-          <li className="nav-item mx-1"  onClick={toggleClose} >
-            <AppLink className="nav-link align-items-center d-flex"  href='/payment_methods'> Способ
-              оплаты</AppLink>
+          <li className="nav-item mx-1"  onClick={toggleClose}>
+            <AppLink className="nav-link align-items-center d-flex"  href='/payment_methods'>
+              {t('nav-item-1')}
+            </AppLink>
           </li>
           <li className="nav-item mx-1"  onClick={toggleClose}>
             <AppLink  className="nav-link align-items-center d-flex font-weight-bold" href="/payment">
-              Внести оплату</AppLink>
+              {t('nav-item-2')}
+            </AppLink>
           </li>
 
           <li className="nav-item mx-1" onClick={toggleClose} >
             <AppLink className="nav-link mainnavphone" href="/guides">
-              Вопрос-ответ</AppLink>
+              Вопрос-ответ
+            </AppLink>
           </li>
           <li className="nav-item mx-1" onClick={toggleClose} >
             <AppLink className="nav-link mainnavphone" href="/complaint">
-              Оставить жалобу</AppLink>
+              Оставить жалобу
+            </AppLink>
           </li>
 
 
           {isLogged() === true ? (
             <Fragment>
               <li className="nav-item mx-1"  onClick={toggleClose}>
-                <AppLink  className="nav-link align-items-center d-flex"  href='/cabinet/loans'>Личный кабинет</AppLink>
+                <AppLink  className="nav-link align-items-center d-flex"  href='/cabinet/loans'>
+                  {t('nav-item-3')}
+                </AppLink>
               </li>
               <li className="nav-item mx-1" onClick={toggleLogOut}>
                 <a className="nav-link align-items-center d-flex">Выйти</a>
@@ -138,7 +144,9 @@ const Navbar = () => {
             (
             <Fragment>
               <li className="nav-item mx-1"  onClick={toggleClose}>
-                <AppLink  className="nav-link align-items-center d-flex"  href='/login'>Личный кабинет</AppLink>
+                <AppLink  className="nav-link align-items-center d-flex"  href='/login'>
+                  {t('nav-item-3')}
+                </AppLink>
               </li>
             </Fragment>)}
 
@@ -146,19 +154,13 @@ const Navbar = () => {
             <li className='nav-item mx-1 mt-2 mobphonenotworking'><a className='redphone'>Call центр:</a></li>
               <li className="nav-item mx-1 mobphonenotworking" onClick={toggleClose} >
                 <a href='tel:+77007501500' className='nav-link mainnavphone'><i className="fa fa-phone" /> +77007501500</a>
-                {/* <b className='phoneInfo'>Этот номер временно не работает</b> */}
               </li>
 
               <li className='nav-item mx-1 mt-2 mobphonenotworking'><a className='redphone'>Отдел взыскания:</a></li>
               <li className="nav-item mx-1 mobphonenotworking" onClick={toggleClose} >
                 <a href='tel:+77788701029' className='nav-link mainnavphone'><i className="fa fa-phone" /> +77788701029</a>
-                {/* <b className='phoneInfo'>Этот номер временно не работает</b> */}
               </li>
             </div>
-
-          {/* <li  onClick={this.toggleClose} className="nav-item mx-1 "><i className="fa fa-phone" /><h1><a href="tel:+77272501500">+7 727 <b className="black">250 15 00</b></a></h1></li>
-          <li  onClick={this.toggleClose} className="nav-item mx-1 phonenav"><i className="fa fa-phone" /><h1><a href="tel:+77007501500">+7 700 <b className="black">750 15 00</b></a></h1></li> */}
-
         </ul>
       </Collapse>
     </div>

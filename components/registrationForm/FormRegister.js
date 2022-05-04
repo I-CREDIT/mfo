@@ -9,14 +9,10 @@ import ProgressBar from '../shared/Progressbar';
 import swal from "sweetalert";
 import {
   iinValidation,
-  required,
-  phoneCheck,
-  validEmaill,
   passwordCheck,
   phoneValidation,
   acceptCirrilic,
   acceptCirrilicOnly,
-  validateConfirmPassword,
   validage,
   getAge,
   requiredd,
@@ -29,7 +25,8 @@ import { ifBlckList } from '../../defaults/blacklistPhones';
 import { ifSaled } from '../../defaults/saled';
 import { isFord } from '../../defaults/frods';
 
-
+// Перевод для классового компонента
+import withUseTranslation from "../../public/js/hocs/useTranslation";
 
 var scrollToElement = require('scroll-to-element');
 const mapStateToProps = state => {
@@ -235,16 +232,16 @@ class FormRegister extends React.Component {
     });
   }
   render() {
-    // const { history } = this.props;
-    // const history = this.props.history
-    
+    // Достаем функцию-переводчик
+    const { t, i18n } = this.props.useTranslationValue
+
     return (
       <div>
 
         <div className="progressBar">
           <div className="progress-done" id="progress-done" data-done="0"></div>
 
-          <p className="counter">Вероятность одобрения</p>
+          <p className="counter">{t('probability')}</p>
         </div>
         {this.props.loading === true
           ? <div className="modelLoader">
@@ -285,10 +282,10 @@ class FormRegister extends React.Component {
                   {this.props.somemessage.error}</strong>
               </div>
             : null}
-            <h2 className="text-center">Регистрация</h2>
+            <h2 className="text-center">{t('registration')}</h2>
             <div className='row form-group  mx-auto'>
               <div className='col-12 mb-2'>
-                <Label htmlFor='loan_amount'>Сумма:</Label>
+                <Label htmlFor='loan_amount'>{t('sum')}</Label>
                 <div className="input-group">
                   <Field
                     name='loan_amount'
@@ -302,12 +299,12 @@ class FormRegister extends React.Component {
                       data-toggle="modal"
                       data-target="#myModalCalc"
                       className="input-group-text"
-                      onClick={this.toggleModal}>Изменить...</a>
+                      onClick={this.toggleModal}>{t('change')}</a>
                   </div>
                 </div>
               </div>
               <div className='col-12 mb-2'>
-                <Label htmlFor='period_in_days'>Дней:</Label>
+                <Label htmlFor='period_in_days'>{t('days--uppercase')}</Label>
                 <div className="input-group">
                   <Field
                     name='period_in_days'
@@ -321,71 +318,71 @@ class FormRegister extends React.Component {
                       data-toggle="modal"
                       data-target="#myModalCalc"
                       className="input-group-text"
-                      onClick={this.toggleModal}>Изменить...</a>
+                      onClick={this.toggleModal}>{t('change')}</a>
                   </div>
                 </div>
               </div>
 
               <div className='col-12 mb-2'>
-                <Label htmlFor='name'>Имя * :</Label>
+                <Label htmlFor='name'>{t('name')}</Label>
                 <div className="input-group">
                   <Field
                     name='name'
                     autocomplete="off"
-                    placeholder = 'Имя'
+                    placeholder = {t('name')}
                     className='form-control  text-capitalize registerCyrril'
                     validate={acceptCirrilic}
                   />
-                  <div className="hint">Имя только на киррилице</div>
+                  <div className="hint">{t('cyrillic-name-only')}</div>
                 </div>
-                {errors.name && touched.name && <div className='text-danger'>{errors.name}</div>}
+                {errors.name && touched.name && <div className='text-danger'>{t(errors.name)}</div>}
               </div>
 
               <div className='col-12 mb-2'>
-                <Label htmlFor='middlename'>Фамилия * :</Label>
+                <Label htmlFor='middlename'>{t('surname')}</Label>
                 <div className="input-group">
                   <Field
                     name='middlename'
                     autocomplete="off"
-                    placeholder = 'Фамилия'
+                    placeholder = {t('surname')}
                     className='form-control  text-capitalize registerCyrril'
                     validate={acceptCirrilic}
                   />
-                  <div className="hint">Фамилия только на киррилице</div>
+                  <div className="hint">{t('cyrillic-surname-only')}</div>
                 </div>
-                {errors.middlename && touched.middlename && <div className='text-danger'>{errors.middlename}</div>}
+                {errors.middlename && touched.middlename && <div className='text-danger'>{t(errors.middlename)}</div>}
               </div>
 
               <div className='col-12 mb-2'>
-                <Label htmlFor='last_name'>Отчество:</Label>
+                <Label htmlFor='last_name'>{t('patronymic')}</Label>
                 <div className="input-group">
                   <Field
                     name='last_name'
                     autocomplete="off"
-                    placeholder = 'Отчество'
+                    placeholder = {t('patronymic')}
                     className='form-control  text-capitalize registerCyrril'
                     validate={acceptCirrilicOnly}
                   />
                   <div className="hint">Отчество только на киррилице</div>
                 </div>
-                {errors.last_name && touched.last_name && <div className='text-danger'>{errors.last_name}</div>}
+                {errors.last_name && touched.last_name && <div className='text-danger'>{t(errors.last_name)}</div>}
               </div>
 
               <div className='col-12 mb-2'>
-                <Label htmlFor='email'>Электронный адрес * :</Label>
+                <Label htmlFor='email'>{t('mail')}</Label>
                 <div className="input-group">
                   <Field
                     name='email'
                     className='form-control'
                     validate={validEmail}
-                    placeholder = 'Ваш email'
+                    placeholder = {t('mail')}
                   />
                 </div>
-                {errors.email && touched.email && <div className='text-danger'>{errors.email}</div>}
+                {errors.email && touched.email && <div className='text-danger'>{t(errors.email)}</div>}
               </div>
 
               <div className='col-12 mb-2'>
-                <Label htmlFor='iin'>ИИН * :</Label>
+                <Label htmlFor='iin'>{t('iin')}</Label>
                 <div className="input-group">
                   <Field
                     name='iin'
@@ -393,14 +390,14 @@ class FormRegister extends React.Component {
                     className='form-control'
                     validate={iinValidation}
                     component = {IinMask}
-                    placeholder = 'Введите сюда'
+                    placeholder = {t('enter-here--register')}
                   />
                 </div>
-                {errors.iin && touched.iin && <div className='text-danger'>{errors.iin}</div>}
+                {errors.iin && touched.iin && <div className='text-danger'>{t(errors.iin)}</div>}
               </div>
 
               <div className='col-12 mb-2'>
-                <Label htmlFor='phone'>Номер телефона * :</Label>
+                <Label htmlFor='phone'>{t('phone')}</Label>
                 <div className="input-group">
                   <Field
                     name='phone'
@@ -411,35 +408,35 @@ class FormRegister extends React.Component {
                     placeholder = '+7(705)000-00-00'
                   />
                 </div>
-                {errors.phone && touched.phone && <div className='text-danger'>{errors.phone}</div>}
+                {errors.phone && touched.phone && <div className='text-danger'>{t(errors.phone)}</div>}
               </div>
 
               <div className='col-12 mb-2'>
-                <Label htmlFor='phone'>Пароль * :</Label>
+                <Label htmlFor='phone'>{t('password')}</Label>
                 <div className="input-group">
                   <Field
                     name='password'
                     className='form-control'
                     validate={passwordCheck}
-                    placeholder = 'Пароль'
+                    placeholder = {t('password')}
                     type='password'
                   />
                 </div>
-                {errors.password && touched.password && <div className='text-danger'>{errors.password}</div>}
+                {errors.password && touched.password && <div className='text-danger'>{t(errors.password)}</div>}
               </div>
 
               <div className='col-12 mb-2'>
-                <Label htmlFor='phone'>Повторите пароль * :</Label>
+                <Label htmlFor='phone'>{t('password-repeat')}</Label>
                 <div className="input-group">
                   <Field
                     name='password_confirmation'
                     className='form-control'
                     type='password'
                     validate={requiredd}
-                    placeholder = 'Повторите пароль'
+                    placeholder = {t('password-repeat')}
                   />
                 </div>
-                {errors.password_confirmation && touched.password_confirmation && <div className='text-danger'>{errors.password_confirmation}</div>}
+                {errors.password_confirmation && touched.password_confirmation && <div className='text-danger'>{t(errors.password_confirmation)}</div>}
               </div>
             </div>
             <div className='col-12 mb-2 form-group d-flex align-items-center col-12 mx-auto'>
@@ -447,15 +444,28 @@ class FormRegister extends React.Component {
                 type="checkbox"
                 onChange={this.handleCheck}
                 defaultChecked={this.state.checked}/>
-              <label className="form-check-label ml-3" htmlFor="exampleCheck1">Согласен на <a
-                  className="agreement "
-                  href="https://api.money-men.kz/docs/approve.pdf"
-                  target="_blank">обработку данных с условиями сайта</a>
-              </label>
+              {i18n.language === 'ru' ?
+                  <label className="form-check-label ml-3" htmlFor="exampleCheck1">
+                    {t('agree-1')}
+                    <a
+                      className="agreement "
+                      href="https://api.money-men.kz/docs/approve.pdf"
+                      target="_blank">
+                      {t('agree-red')}
+                    </a>
+                  </label> :
+                  <label className="form-check-label ml-3" htmlFor="exampleCheck1">
+                    {t('agree-1')}
+                    <a
+                      className="agreement "
+                      href="https://api.money-men.kz/docs/approve.pdf"
+                      target="_blank">
+                      {t('agree-red')}
+                    </a>
+                    {t('agree-2')}
+                  </label>
+              }
             </div>
-
-
-
 							{this.props.somemessage.error !== null ?
 							<div className="alert alert-danger" role="alert">
         							<strong> {this.props.somemessage.error  || null}</strong>
@@ -493,4 +503,4 @@ class FormRegister extends React.Component {
   }
 }
 
-export default(connect(mapStateToProps, mapDispatchToProps)(FormRegister));
+export default(connect(mapStateToProps, mapDispatchToProps)(withUseTranslation(FormRegister)));
