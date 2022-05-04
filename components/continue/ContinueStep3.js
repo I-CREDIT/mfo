@@ -17,6 +17,8 @@ import {
 import { isValidIBANNumber, isValidIBANNumber2 } from "../../defaults/validationredux";
 import swal from "sweetalert";
 
+// Перевод для функционального компонента
+import { useTranslation } from "react-i18next";
 
 const IinMask = ({ field, form, ...props}) => <InputMask 
 mask="999999999"
@@ -64,6 +66,9 @@ const CardExp = ({ field, form, ...props}) => <InputMask
 />
 
 const ContinueStep3 = ({step,setStep, stepResult, userDate, srok,summa}) => {
+  // Translation
+  const { t } = useTranslation()
+
   const [btnLoading, setBtnLoading] = useState(false)
   const onSubmit = (values) => {
     if(isValidIBANNumber2(iban.value)!==false) {
@@ -275,7 +280,7 @@ const ContinueStep3 = ({step,setStep, stepResult, userDate, srok,summa}) => {
             Место работы *
           </label>
           <Field validate={requiredd} name='UF_31' className='form-control' placeholder='Место работы'></Field>
-          {errors.UF_31 && touched.UF_31 && <p className='text-danger'>{errors.UF_31}</p>}
+          {errors.UF_31 && touched.UF_31 && <p className='text-danger'>{t(errors.UF_31)}</p>}
         </div>
         <div className='col-md-6 mb-3'>
           <label htmlFor=''>
@@ -287,7 +292,7 @@ const ContinueStep3 = ({step,setStep, stepResult, userDate, srok,summa}) => {
               <option key={spec.id} value={spec.id}>{spec.name}</option>
             ))}
           </Field>
-          {errors.UF_33 && touched.UF_33 && <p className='text-danger'>{errors.UF_33}</p>}
+          {errors.UF_33 && touched.UF_33 && <p className='text-danger'>{t(errors.UF_33)}</p>}
         </div>
 
         <div className='col-md-6 mb-3'>
@@ -302,7 +307,7 @@ const ContinueStep3 = ({step,setStep, stepResult, userDate, srok,summa}) => {
             <option value="от 1 до 2лет">от 1 до 2лет</option>
             <option value="от 2 до 5лет">от 2 до 5лет</option>
           </Field>
-          {errors.UF_32 && touched.UF_32 && <p className='text-danger'>{errors.UF_32}</p>}
+          {errors.UF_32 && touched.UF_32 && <p className='text-danger'>{t(errors.UF_32)}</p>}
         </div>
         <h2 className="col-md-12 mt-5 mb-5">Информация о уд. личности</h2>
         <div className='col-md-6 mb-3'>
@@ -310,7 +315,7 @@ const ContinueStep3 = ({step,setStep, stepResult, userDate, srok,summa}) => {
             Место рождения *
           </label>
           <Field validate={requiredd} name='UF_46' className='form-control'></Field>
-          {errors.UF_46 && touched.UF_46 && <p className='text-danger'>{errors.UF_46}</p>}
+          {errors.UF_46 && touched.UF_46 && <p className='text-danger'>{t(errors.UF_46)}</p>}
         </div>
         <div className='col-md-6 mb-3'>
           <label htmlFor=''>
@@ -320,7 +325,7 @@ const ContinueStep3 = ({step,setStep, stepResult, userDate, srok,summa}) => {
           <Field  validate={idNumber} name='UF_42' className='form-control' component={IinMask}>
        
           </Field>
-          {errors.UF_42 && touched.UF_42 && <p className='text-danger'>{errors.UF_42}</p>}
+          {errors.UF_42 && touched.UF_42 && <p className='text-danger'>{t(errors.UF_42)}</p>}
         </div>
         <div className='col-md-6 mb-3'>
           <label htmlFor=''>
@@ -331,7 +336,7 @@ const ContinueStep3 = ({step,setStep, stepResult, userDate, srok,summa}) => {
           
           <div className="hint">Дата выдачи (ДД.ММ.ГГГГ)</div>
           </div>
-          {errors.UF_43 && touched.UF_43 && <p className='text-danger'>{errors.UF_43}</p>}
+          {errors.UF_43 && touched.UF_43 && <p className='text-danger'>{t(errors.UF_43)}</p>}
         </div>
         <div className='col-md-6 mb-3'>
           <label htmlFor=''>
@@ -342,7 +347,7 @@ const ContinueStep3 = ({step,setStep, stepResult, userDate, srok,summa}) => {
         
           <div className="hint">Срок действия  (ДД.ММ.ГГГГ)</div>
           </div>
-          {errors.UF_44 && touched.UF_44 && <p className='text-danger'>{errors.UF_44}</p>}
+          {errors.UF_44 && touched.UF_44 && <p className='text-danger'>{t(errors.UF_44)}</p>}
         </div>
         <div className='col-md-6 mb-3'>
           <label htmlFor=''>
@@ -353,13 +358,13 @@ const ContinueStep3 = ({step,setStep, stepResult, userDate, srok,summa}) => {
             <option value="МЮ РК">МЮ РК</option>
             <option value="МВД РК">МВД РК</option>
           </Field>
-          {errors.UF_45 && touched.UF_45 && <p className='text-danger'>{errors.UF_45}</p>}
+          {errors.UF_45 && touched.UF_45 && <p className='text-danger'>{t(errors.UF_45)}</p>}
         </div>  
 
         <div className='col-md-6 mb-3'>
           <label>Доход *</label>
           <Field validate={requiredd} autocomplete='off' name='UF_34' className='form-control' type=''></Field >
-          {errors.UF_34 && touched.UF_34 && <p className='text-danger'>{errors.UF_34}</p>}
+          {errors.UF_34 && touched.UF_34 && <p className='text-danger'>{t(errors.UF_34)}</p>}
         </div>
 
         <div className='col-md-6 mb-3'>
@@ -368,19 +373,19 @@ const ContinueStep3 = ({step,setStep, stepResult, userDate, srok,summa}) => {
             <Field validate={requiredd} name='UF_40' autocomplete='off' className='form-control' type=''></Field>
             <div className="hint">Чем больше сумма депозита тем больше сумма при одобрении заима</div>
           </div>
-          {errors.UF_40 && touched.UF_40 && <p className='text-danger'>{errors.UF_40}</p>}
+          {errors.UF_40 && touched.UF_40 && <p className='text-danger'>{t(errors.UF_40)}</p>}
         </div>
 
         <div className='col-md-6 mb-3'>
           <label>Сумма *</label>
           <Field validate={requiredd} name='UF_41' type='' placeholder='Сумма платежей действующих кредитов:' className='form-control' disabled={checked}></Field>
-          {errors.UF_41 && touched.UF_41 && <p className='text-danger'>{errors.UF_41}</p>}
+          {errors.UF_41 && touched.UF_41 && <p className='text-danger'>{t(errors.UF_41)}</p>}
         </div> 
 
         <div className='col-md-6 mb-3'>
           <label>Сумма платежей закрытых кредитов последний 6 мес. *</label>
           <Field validate={requiredd} name='UF_39' type='' className='form-control' ></Field>
-          {errors.UF_39 && touched.UF_39 && <p className='text-danger'>{errors.UF_39}</p>}
+          {errors.UF_39 && touched.UF_39 && <p className='text-danger'>{t(errors.UF_39)}</p>}
         </div>
       </div>
 
@@ -393,7 +398,7 @@ const ContinueStep3 = ({step,setStep, stepResult, userDate, srok,summa}) => {
             <div className="hint">Номер банковского счета</div>
           </div>
           <p className='mt-2 text-info'>{iban.text}</p>
-          {errors.UF_35 && touched.UF_35 && <p className='text-danger'>{errors.UF_35}</p>}
+          {errors.UF_35 && touched.UF_35 && <p className='text-danger'>{t(errors.UF_35)}</p>}
         </div>
 
         <div className='col-md-6 mb-3'>
@@ -401,7 +406,7 @@ const ContinueStep3 = ({step,setStep, stepResult, userDate, srok,summa}) => {
           <div className='input-group'>
           <Field className='form-control' name='UF_36' validate={textCheckCardValid} component={CardNumber} />
           </div>
-          {errors.UF_36 && touched.UF_36 && <p className='text-danger'>{errors.UF_36}</p>}
+          {errors.UF_36 && touched.UF_36 && <p className='text-danger'>{t(errors.UF_36)}</p>}
         </div>
 
         <div className='col-md-6 mb-3'>
