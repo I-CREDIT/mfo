@@ -174,7 +174,7 @@
   "relative": "Родственник",
   "cyrillic-only": "Нужно вводить только на кириллице",
   "relative-name": "Имя* :",
-  "relative-phone": "Телефон номер",
+  "relative-phone": "Номер телефона *",
   "relative-surname": "Фамилия* :",
   "relative-connection": "Вид родства* :",
 

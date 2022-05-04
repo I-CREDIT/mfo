@@ -148,7 +148,7 @@ const ContinueStep2 = ({next,setNext}) => {
                 <option value="Женат/Замужем">{t('marital-status-1')}</option>
                 <option value="Холост/Не замужем">{t('marital-status-2')}</option>
               </Field>
-              {errors.UF_22 && touched.UF_22 && <p className='text-danger'>{errors.UF_22}</p>}
+              {errors.UF_22 && touched.UF_22 && <p className='text-danger'>{t(errors.UF_22)}</p>}
             </div>
 
             <div className='col-md-6 mb-3'>
@@ -164,7 +164,7 @@ const ContinueStep2 = ({next,setNext}) => {
                 <option value="4">4</option>
                 <option value="5+">5+</option>
               </Field>
-              {errors.UF_23 && touched.UF_23 && <p className='text-danger'>{errors.UF_23}</p>}
+              {errors.UF_23 && touched.UF_23 && <p className='text-danger'>{t(errors.UF_23)}</p>}
             </div>
 
             <div className='col-md-6 mb-3'>
@@ -177,7 +177,7 @@ const ContinueStep2 = ({next,setNext}) => {
                 <option value="Среднее">{t('education-2')}</option>
                 <option value="Высшее">{t('education-3')}</option>
               </Field>
-              {errors.UF_24 && touched.UF_24 && <p className='text-danger'>{errors.UF_24}</p>}
+              {errors.UF_24 && touched.UF_24 && <p className='text-danger'>{t(errors.UF_24)}</p>}
             </div>
 
             <div className='col-md-6 mb-3'>
@@ -190,7 +190,7 @@ const ContinueStep2 = ({next,setNext}) => {
                   <option key={gorod.id} value={gorod.id}>{gorod.name}</option>
                 ))}
               </Field>
-              {errors.UF_17 && touched.UF_17 && <p className='text-danger'>{errors.UF_17}</p>}
+              {errors.UF_17 && touched.UF_17 && <p className='text-danger'>{t(errors.UF_17)}</p>}
             </div>
             <div className='col-md-6 mb-3'>
               <label>{t('districts')}</label>
@@ -204,23 +204,23 @@ const ContinueStep2 = ({next,setNext}) => {
               </div>
               <div className="hint">{t('districts-1')}</div>
               
-              {errors.UF_18 && touched.UF_18 && <p className='text-danger'>{errors.UF_18}</p>}
+              {errors.UF_18 && touched.UF_18 && <p className='text-danger'>{t(errors.UF_18)}</p>}
             </div>
             <div className='col-md-6 mb-3'>
               <label>{t('street')}</label>
               <Field name='UF_19' validate={requiredd} autocomplete='off' className='form-control'></Field>
-              {errors.UF_19 && touched.UF_19 && <p className='text-danger'>{errors.UF_19}</p>}
+              {errors.UF_19 && touched.UF_19 && <p className='text-danger'>{t(errors.UF_19)}</p>}
             </div>
 
             <div className='col-md-6 mb-3'>
               <label>{t('house')}</label>
               <Field name='UF_20' validate={requiredd} autocomplete='off' className='form-control'/>
-              {errors.UF_20 && touched.UF_20 && <p className='text-danger'>{errors.UF_20}</p>}
+              {errors.UF_20 && touched.UF_20 && <p className='text-danger'>{t(errors.UF_20)}</p>}
             </div>
             <div className='col-md-6 mb-3'>
               <label>{t('apartment-number')}</label>
               <Field name='UF_21' validate={!checked ? requiredd : ''} type='number' className='form-control' disabled={checked}/>
-              {errors.UF_21 && touched.UF_21 && <p className={checked ? 'd-none' : 'text-danger'} >{errors.UF_21}</p>}
+              {errors.UF_21 && touched.UF_21 && <p className={checked ? 'd-none' : 'text-danger'} >{t(errors.UF_21)}</p>}
             </div>  
             <div className="col-md-6 mb-3">
               <input
@@ -239,21 +239,21 @@ const ContinueStep2 = ({next,setNext}) => {
            
               <div className="hint">{t('cyrillic-only')}</div>
               </div>
-              {errors.UF_25 && touched.UF_25 && <p className='text-danger'>{errors.UF_25}</p>}
+              {errors.UF_25 && touched.UF_25 && <p className='text-danger'>{t(errors.UF_25)}</p>}
             </div>
 
             <div className='col-md-6 mb-3'>
-                <label>Фамилия*</label>
+                <label>{t('relative-surname')}</label>
                 <div className='input-group'>
                     <Field name='UF_31' validate={requiredd, acceptCirrilic} autocomplete='off' className='form-control'/>
 
                     <div className="hint">{t('cyrillic-only')}</div>
                 </div>
-                {errors.UF_31 && touched.UF_31 && <p className='text-danger'>{errors.UF_31}</p>}
+                {errors.UF_31 && touched.UF_31 && <p className='text-danger'>{t(errors.UF_31)}</p>}
             </div>
 
             <div className='col-md-6 mb-3'>
-                <label>Номер телефона *</label>
+                <label>{t('relative-phone')}</label>
                 <Field
                     name='UF_27'
                     className='form-control'
@@ -261,20 +261,20 @@ const ContinueStep2 = ({next,setNext}) => {
                     validate={phoneValidation}
                     component = {PhoneMask}
                 />
-                { errors.UF_27 && touched.UF_27 && <p className='text-danger'>{errors.UF_27}</p> }
+                { errors.UF_27 && touched.UF_27 && <p className='text-danger'>{t(errors.UF_27)}</p> }
             </div>
 
             <div className='col-md-6 mb-3'>
-              <label>Вид родства *</label>
+              <label>{t('relative-connection')}</label>
               <div className='input-group'>
                 <Field as='select' name='UF_26' validate={requiredd} className='form-control'>
                   <option value="" disabled></option>
                   {relative_type.map(relative => (
-                  <option key={relative.id} value={relative.id}>{relative.name}</option>
+                  <option key={relative.id} value={relative.id}>{t(relative.name)}</option>
                 ))}
                 </Field>
               </div>
-              {errors.UF_26 && touched.UF_26 && <p className='text-danger'>{errors.UF_26}</p>}
+              {errors.UF_26 && touched.UF_26 && <p className='text-danger'>{t(errors.UF_26)}</p>}
             </div>
           </div>
 
@@ -287,21 +287,21 @@ const ContinueStep2 = ({next,setNext}) => {
 
               <div className="hint">{t('cyrillic-only')}</div>
               </div>
-              {errors.UF_28 && touched.UF_28 && <p className='text-danger'>{errors.UF_28}</p>}
+              {errors.UF_28 && touched.UF_28 && <p className='text-danger'>{t(errors.UF_28)}</p>}
             </div>
 
             <div className='col-md-6 mb-3'>
-                <label>Фамилия*</label>
+                <label>{t('relative-surname')}</label>
                 <div className='input-group'>
                     <Field name='UF_32' validate={requiredd, acceptCirrilic} autocomplete='off' className='form-control' />
 
                     <div className="hint">{t('cyrillic-only')}</div>
                 </div>
-                {errors.UF_32 && touched.UF_32 && <p className='text-danger'>{errors.UF_32}</p>}
+                {errors.UF_32 && touched.UF_32 && <p className='text-danger'>{t(errors.UF_32)}</p>}
             </div>
  
             <div className='col-md-6 mb-3'>
-            <label>Номер телефона *</label>
+            <label>{t('relative-phone')}</label>
             <Field 
               name='UF_30'
               className='form-control'
@@ -310,20 +310,20 @@ const ContinueStep2 = ({next,setNext}) => {
               component = {PhoneMask}
             ></Field>
            
-           {errors.UF_30 && touched.UF_30 && <p className='text-danger'>{errors.UF_30}</p>}
+           {errors.UF_30 && touched.UF_30 && <p className='text-danger'>{t(errors.UF_30)}</p>}
             </div>
             <div className='col-md-6 mb-3'>
-              <label>Вид родства *</label>
+              <label>{t('relative-connection')}</label>
               <div className='input-group'>
                 <Field as='select' validate={requiredd} name='UF_29' className='form-control'>
                   <option value="" disabled></option>
                   {addition_contact_type.map(relative => (
-                  <option key={relative.id} value={relative.id}>{relative.name}</option>
+                  <option key={relative.id} value={relative.id}>{t(relative.name)}</option>
                 ))}
                 </Field>
               </div>
               
-              {errors.UF_29 && touched.UF_29 && <p className='text-danger'>{errors.UF_29}</p>}
+              {errors.UF_29 && touched.UF_29 && <p className='text-danger'>{t(errors.UF_29)}</p>}
             </div>
                     
           </div>
