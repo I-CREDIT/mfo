@@ -1,6 +1,7 @@
 import React, { Fragment } from 'react';
 import Link from 'next/link'
 import {useRouter} from 'next/router'
+import RulesMicrocreditDocument from '../document_1/rulesMicrocredit';
 const AppLink = ({children, className, href}) =>
   <Link href={href}>
     <a className={className}>{children}</a>
@@ -58,12 +59,7 @@ const Footer = () => {
                 № регистрации НБРК: 05.16.005
               </p>
             </div>
-            <div className="col-md-4  footerCol">
-              <div className="extra-info">
-                <img src={require("../../img/svg/Оферта.svg")} />
-                <a href="https://i-credit.kz/docs/rules.pdf" target="_blank"><h5>Правила<br />предоставления займов</h5></a>
-              </div>
-            </div>
+            <RulesMicrocreditDocument/>
             <div className="col-md-4 footerCol">
               <div className="extra-info">
                 <img src={require("../../img/svg/Оферта.svg")} />

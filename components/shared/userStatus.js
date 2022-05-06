@@ -5,6 +5,18 @@ import Router from 'next/router'
 import usersReducer from '../../store/reducers/userReducer'
 import Spinner from 'react-spinner-material';
 import swal from 'sweetalert'
+import MicrocreditAgreementDocument from '../document_1/microcreditAgreement'
+import MicrocreditInsuranceDocument from '../document_1/microcreditInsurance'
+import InsuranceApplicationDocument from '../document_1/insuranceApplication'
+import InsuranceContractDocument from '../document_1/insuranceContract'
+import ApplicationRestructuringDocument from '../document_1/applicationRestructuring'
+import RestructuringAgreementDocument from '../document_1/restructuringAgreement'
+
+// export const clientData = {
+//   name: props.userReducer.user.UF_5,
+//   secondName: props.userReducer.user.UF_6
+// }
+// console.log(clientData)
 
 const mapStateToProps = state => {
   console.log(state)
@@ -45,6 +57,7 @@ class Status extends React.Component {
       .catch (
         console.log('log')
       )
+      
   }
 
   componentDidMount() {
@@ -153,13 +166,14 @@ class Status extends React.Component {
       // }
     // })
   }
-
+  
   render() {
+  
     switch (this.props.userStatus.userStatus.stage) {
       case 1:
         return (
           <div className='mt-5'>
-            <h5 className='text-center'>Текущая завяка</h5>
+            <h5 className='text-center'>Текущая заявка</h5>
             <div className='cabinetmessage text-center'>
               У вас заим в статусе
               <b>
@@ -201,6 +215,144 @@ class Status extends React.Component {
                   <Spinner className="loading" size={200} spinnerColor={"#ef2221"} spinnerWidth={2} visible={true} /> :
                   <button onClick={() => this.handleSubmit()} className=" oplataform--button" type="submit">Погасить {(+this.props.userStatus.userStatus.todayAmount).toLocaleString("ru-RU")} тенге</button>}
               </div>
+                {this.props.userStatus.userStatus.doctype === 1 ? 
+                    <div className='documents'>
+                      <h4>
+                        Документы по договору <span>№{this.props.userStatus.userStatus.contractNumber} от {this.props.userStatus.userStatus.givenDate}</span>
+                      </h4>
+                      <ul className='documentsContainer'>
+                        <InsuranceApplicationDocument 
+                          fio={this.props.userStatus.userStatus.fio}
+                          dateOfBirth={this.props.userReducer.user.UF_10}
+                          address={this.props.userStatus.userStatus.address}
+                          phone={this.props.userStatus.userStatus.phone}
+                          email={this.props.userStatus.userStatus.email}
+                          placeOfWork={this.props.userReducer.user.UF_31}
+                          position={this.props.userReducer.user.UF_33}
+                          iin={this.props.userStatus.userStatus.iin}
+                          cardNumber={this.props.userStatus.userStatus.cardNumber}
+                          startCard={this.props.userStatus.userStatus.startCard}
+                          endCard={this.props.userStatus.userStatus.endCard}
+                          placeOfBirth={this.props.userReducer.user.UF_46}
+                          insuranceAmount={this.props.userStatus.userStatus.insuranceAmount}
+                          givenDate={this.props.userStatus.userStatus.givenDate}
+                          code={this.props.userStatus.userStatus.code}
+                          period={this.props.userStatus.userStatus.period}
+                        />
+                        <MicrocreditInsuranceDocument
+                          fio={this.props.userStatus.userStatus.fio}
+                          dateOfBirth={this.props.userReducer.user.UF_10}
+                          address={this.props.userStatus.userStatus.address}
+                          iin={this.props.userStatus.userStatus.iin}
+                          cardNumber={this.props.userStatus.userStatus.cardNumber}
+                          contractNumber={this.props.userStatus.userStatus.contractNumber}
+                          insuranceAmount={this.props.userStatus.userStatus.insuranceAmount}
+                          code={this.props.userStatus.userStatus.code}
+                          period={this.props.userStatus.userStatus.period}
+                        />
+                        <InsuranceContractDocument
+                          contractNumber={this.props.userStatus.userStatus.contractNumber}
+                          givenDate={this.props.userStatus.userStatus.givenDate}
+                          endDate={this.props.userStatus.userStatus.endDate}
+                          fio={this.props.userStatus.userStatus.fio}
+                          address={this.props.userStatus.userStatus.address}
+                          phone={this.props.userStatus.userStatus.phone}
+                          iin={this.props.userStatus.userStatus.iin}
+                          insuranceAmount={this.props.userStatus.userStatus.insuranceAmount}
+                          reward={this.props.userStatus.userStatus.reward}
+                          cardNumber={this.props.userStatus.userStatus.cardNumber}
+                          cardGiven={this.props.userStatus.userStatus.cardGiven}
+                          startCard={this.props.userStatus.userStatus.startCard}
+                          email={this.props.userStatus.userStatus.email}
+                          period={this.props.userStatus.userStatus.period}
+                        />
+                        <MicrocreditAgreementDocument
+                          main={this.props.userStatus.userStatus.main}
+                          reward={this.props.userStatus.userStatus.reward}
+                          fio={this.props.userStatus.userStatus.fio}
+                          iin={this.props.userStatus.userStatus.iin}
+                          address={this.props.userStatus.userStatus.address}
+                          cardNumber={this.props.userStatus.userStatus.cardNumber}
+                          cardGiven={this.props.userStatus.userStatus.cardGiven}
+                          startCard={this.props.userStatus.userStatus.startCard}
+                          endCard={this.props.userStatus.userStatus.endCard}
+                          dateOfBirth={this.props.userReducer.user.UF_10}
+                          phone={this.props.userStatus.userStatus.phone}
+                          iban={this.props.userStatus.userStatus.iban}
+                          email={this.props.userStatus.userStatus.email}
+                          contractNumber={this.props.userStatus.userStatus.contractNumber}
+                          givenDate={this.props.userStatus.userStatus.givenDate}
+                          endDate={this.props.userStatus.userStatus.endDate}
+                          total={this.props.userStatus.userStatus.total}
+                          period={this.props.userStatus.userStatus.period}
+                        />
+                      </ul>
+                    </div>
+                    :
+                    <div className='documents'>
+                      {/* <h4>
+                        Документы по договору <span>№{this.props.userStatus.userStatus.contractNumber} от {this.props.userStatus.userStatus.givenDate}</span>
+                      </h4>
+                      <ul className='documentsContainer'>
+                        <InsuranceApplicationDocument 
+                          fio={this.props.userStatus.userStatus.fio}
+                          dateOfBirth={this.props.userReducer.user.UF_10}
+                          address={this.props.userStatus.userStatus.address}
+                          phone={this.props.userStatus.userStatus.phone}
+                          email={this.props.userStatus.userStatus.email}
+                          placeOfWork={this.props.userReducer.user.UF_31}
+                          position={this.props.userReducer.user.UF_33}
+                          iin={this.props.userStatus.userStatus.iin}
+                          cardNumber={this.props.userStatus.userStatus.cardNumber}
+                          startCard={this.props.userStatus.userStatus.startCard}
+                          endCard={this.props.userStatus.userStatus.endCard}
+                          placeOfBirth={this.props.userReducer.user.UF_46}
+                          insuranceAmount={this.props.userStatus.userStatus.insuranceAmount}
+                          givenDate={this.props.userStatus.userStatus.givenDate}
+                          code={this.props.userStatus.userStatus.code}
+                          period={this.props.userStatus.userStatus.period}
+                        />
+                        <MicrocreditInsuranceDocument
+                          fio={this.props.userStatus.userStatus.fio}
+                          dateOfBirth={this.props.userReducer.user.UF_10}
+                          address={this.props.userStatus.userStatus.address}
+                          iin={this.props.userStatus.userStatus.iin}
+                          cardNumber={this.props.userStatus.userStatus.cardNumber}
+                          contractNumber={this.props.userStatus.userStatus.contractNumber}
+                          insuranceAmount={this.props.userStatus.userStatus.insuranceAmount}
+                          code={this.props.userStatus.userStatus.code}
+                          period={this.props.userStatus.userStatus.period}
+                        />
+                        <InsuranceContractDocument
+                          contractNumber={this.props.userStatus.userStatus.contractNumber}
+                          givenDate={this.props.userStatus.userStatus.givenDate}
+                          endDate={this.props.userStatus.userStatus.endDate}
+                          fio={this.props.userStatus.userStatus.fio}
+                          address={this.props.userStatus.userStatus.address}
+                          phone={this.props.userStatus.userStatus.phone}
+                          iin={this.props.userStatus.userStatus.iin}
+                          insuranceAmount={this.props.userStatus.userStatus.insuranceAmount}
+                          reward={this.props.userStatus.userStatus.reward}
+                          cardNumber={this.props.userStatus.userStatus.cardNumber}
+                          cardGiven={this.props.userStatus.userStatus.cardGiven}
+                          startCard={this.props.userStatus.userStatus.startCard}
+                          email={this.props.userStatus.userStatus.email}
+                          period={this.props.userStatus.userStatus.period}
+                        />
+                        <ApplicationRestructuringDocument
+                          fio={this.props.userStatus.userStatus.fio}
+                          iin={this.props.userStatus.userStatus.iin}
+                          cardNumber={this.props.userStatus.userStatus.cardNumber}
+                          phone={this.props.userStatus.userStatus.phone}
+                          period={this.props.userStatus.userStatus.period}
+                          moneyForRestructuring={(+this.props.userStatus.userStatus.reward) * 2}
+                          reward={this.props.userStatus.userStatus.reward}
+                          penalty={this.props.userStatus.userStatus.penalty ? this.props.userStatus.userStatus.penalty : 0}
+                        />
+                        <RestructuringAgreementDocument/>
+                    </ul> */}
+                  </div>
+                  }
             </div>
           </div>
         )
@@ -242,11 +394,146 @@ class Status extends React.Component {
               <div className="buttonForm">
                 {this.state.btnLoading === true ?
                   <Spinner className="loading" size={200} spinnerColor={"#ef2221"} spinnerWidth={2} visible={true} /> :
-                  <button onClick={() => this.handleSubmitProlongation()} className=" oplataform--button" type="submit">Продлить {(+this.props.userStatus.userStatus.prolongation).toLocaleString("ru-RU")} тенге</button>}
-                {this.state.btnLoading === true ?
-                  <Spinner className="loading" size={200} spinnerColor={"#ef2221"} spinnerWidth={2} visible={true} /> :
                   <button onClick={() => this.handleSubmit()} className=" oplataform--button" type="submit">Погасить {(+this.props.userStatus.userStatus.todayAmount).toLocaleString("ru-RU")} тенге</button>}
               </div>
+                  {this.props.userStatus.userStatus.doctype === 1 ? 
+                    <div className='documents'>
+                      <h4>
+                        Документы по договору <span>№{this.props.userStatus.userStatus.contractNumber} от {this.props.userStatus.userStatus.givenDate}</span>
+                      </h4>
+                      <ul className='documentsContainer'>
+                        <InsuranceApplicationDocument 
+                          fio={this.props.userStatus.userStatus.fio}
+                          dateOfBirth={this.props.userReducer.user.UF_10}
+                          address={this.props.userStatus.userStatus.address}
+                          phone={this.props.userStatus.userStatus.phone}
+                          email={this.props.userStatus.userStatus.email}
+                          placeOfWork={this.props.userReducer.user.UF_31}
+                          position={this.props.userReducer.user.UF_33}
+                          iin={this.props.userStatus.userStatus.iin}
+                          cardNumber={this.props.userStatus.userStatus.cardNumber}
+                          startCard={this.props.userStatus.userStatus.startCard}
+                          endCard={this.props.userStatus.userStatus.endCard}
+                          placeOfBirth={this.props.userReducer.user.UF_46}
+                          insuranceAmount={this.props.userStatus.userStatus.insuranceAmount}
+                          givenDate={this.props.userStatus.userStatus.givenDate}
+                          code={this.props.userStatus.userStatus.code}
+                          period={this.props.userStatus.userStatus.period}
+                        />
+                        <MicrocreditInsuranceDocument
+                          fio={this.props.userStatus.userStatus.fio}
+                          dateOfBirth={this.props.userReducer.user.UF_10}
+                          address={this.props.userStatus.userStatus.address}
+                          iin={this.props.userStatus.userStatus.iin}
+                          cardNumber={this.props.userStatus.userStatus.cardNumber}
+                          contractNumber={this.props.userStatus.userStatus.contractNumber}
+                          insuranceAmount={this.props.userStatus.userStatus.insuranceAmount}
+                          code={this.props.userStatus.userStatus.code}
+                          period={this.props.userStatus.userStatus.period}
+                        />
+                        <InsuranceContractDocument
+                          contractNumber={this.props.userStatus.userStatus.contractNumber}
+                          givenDate={this.props.userStatus.userStatus.givenDate}
+                          endDate={this.props.userStatus.userStatus.endDate}
+                          fio={this.props.userStatus.userStatus.fio}
+                          address={this.props.userStatus.userStatus.address}
+                          phone={this.props.userStatus.userStatus.phone}
+                          iin={this.props.userStatus.userStatus.iin}
+                          insuranceAmount={this.props.userStatus.userStatus.insuranceAmount}
+                          reward={this.props.userStatus.userStatus.reward}
+                          cardNumber={this.props.userStatus.userStatus.cardNumber}
+                          cardGiven={this.props.userStatus.userStatus.cardGiven}
+                          startCard={this.props.userStatus.userStatus.startCard}
+                          email={this.props.userStatus.userStatus.email}
+                          period={this.props.userStatus.userStatus.period}
+                        />
+                        <MicrocreditAgreementDocument
+                          main={this.props.userStatus.userStatus.main}
+                          reward={this.props.userStatus.userStatus.reward}
+                          fio={this.props.userStatus.userStatus.fio}
+                          iin={this.props.userStatus.userStatus.iin}
+                          address={this.props.userStatus.userStatus.address}
+                          cardNumber={this.props.userStatus.userStatus.cardNumber}
+                          cardGiven={this.props.userStatus.userStatus.cardGiven}
+                          startCard={this.props.userStatus.userStatus.startCard}
+                          endCard={this.props.userStatus.userStatus.endCard}
+                          dateOfBirth={this.props.userReducer.user.UF_10}
+                          phone={this.props.userStatus.userStatus.phone}
+                          iban={this.props.userStatus.userStatus.iban}
+                          email={this.props.userStatus.userStatus.email}
+                          contractNumber={this.props.userStatus.userStatus.contractNumber}
+                          givenDate={this.props.userStatus.userStatus.givenDate}
+                          endDate={this.props.userStatus.userStatus.endDate}
+                          total={this.props.userStatus.userStatus.total}
+                          period={this.props.userStatus.userStatus.period}
+                        />
+                      </ul>
+                    </div>
+                    :
+                    <div className='documents'>
+                      {/* <h4>
+                        Документы по договору <span>№{this.props.userStatus.userStatus.contractNumber} от {this.props.userStatus.userStatus.givenDate}</span>
+                      </h4>
+                      <ul className='documentsContainer'>
+                        <InsuranceApplicationDocument 
+                          fio={this.props.userStatus.userStatus.fio}
+                          dateOfBirth={this.props.userReducer.user.UF_10}
+                          address={this.props.userStatus.userStatus.address}
+                          phone={this.props.userStatus.userStatus.phone}
+                          email={this.props.userStatus.userStatus.email}
+                          placeOfWork={this.props.userReducer.user.UF_31}
+                          position={this.props.userReducer.user.UF_33}
+                          iin={this.props.userStatus.userStatus.iin}
+                          cardNumber={this.props.userStatus.userStatus.cardNumber}
+                          startCard={this.props.userStatus.userStatus.startCard}
+                          endCard={this.props.userStatus.userStatus.endCard}
+                          placeOfBirth={this.props.userReducer.user.UF_46}
+                          insuranceAmount={this.props.userStatus.userStatus.insuranceAmount}
+                          givenDate={this.props.userStatus.userStatus.givenDate}
+                          code={this.props.userStatus.userStatus.code}
+                          period={this.props.userStatus.userStatus.period}
+                        />
+                        <MicrocreditInsuranceDocument
+                          fio={this.props.userStatus.userStatus.fio}
+                          dateOfBirth={this.props.userReducer.user.UF_10}
+                          address={this.props.userStatus.userStatus.address}
+                          iin={this.props.userStatus.userStatus.iin}
+                          cardNumber={this.props.userStatus.userStatus.cardNumber}
+                          contractNumber={this.props.userStatus.userStatus.contractNumber}
+                          insuranceAmount={this.props.userStatus.userStatus.insuranceAmount}
+                          code={this.props.userStatus.userStatus.code}
+                          period={this.props.userStatus.userStatus.period}
+                        />
+                        <InsuranceContractDocument
+                          contractNumber={this.props.userStatus.userStatus.contractNumber}
+                          givenDate={this.props.userStatus.userStatus.givenDate}
+                          endDate={this.props.userStatus.userStatus.endDate}
+                          fio={this.props.userStatus.userStatus.fio}
+                          address={this.props.userStatus.userStatus.address}
+                          phone={this.props.userStatus.userStatus.phone}
+                          iin={this.props.userStatus.userStatus.iin}
+                          insuranceAmount={this.props.userStatus.userStatus.insuranceAmount}
+                          reward={this.props.userStatus.userStatus.reward}
+                          cardNumber={this.props.userStatus.userStatus.cardNumber}
+                          cardGiven={this.props.userStatus.userStatus.cardGiven}
+                          startCard={this.props.userStatus.userStatus.startCard}
+                          email={this.props.userStatus.userStatus.email}
+                          period={this.props.userStatus.userStatus.period}
+                        />
+                        <ApplicationRestructuringDocument
+                          fio={this.props.userStatus.userStatus.fio}
+                          iin={this.props.userStatus.userStatus.iin}
+                          cardNumber={this.props.userStatus.userStatus.cardNumber}
+                          phone={this.props.userStatus.userStatus.phone}
+                          period={this.props.userStatus.userStatus.period}
+                          moneyForRestructuring={(+this.props.userStatus.userStatus.reward) * 2}
+                          reward={this.props.userStatus.userStatus.reward}
+                          penalty={this.props.userStatus.userStatus.penalty ? this.props.userStatus.userStatus.penalty : 0}
+                        />
+                        <RestructuringAgreementDocument/>
+                      </ul> */}
+                    </div>
+                  }
             </div>
           </div>
         )
@@ -298,6 +585,144 @@ class Status extends React.Component {
                   <Spinner className="loading" size={200} spinnerColor={"#ef2221"} spinnerWidth={2} visible={true} /> :
                   <button onClick={() => this.handleSubmit()} className=" oplataform--button" type="submit">Погасить {(+this.props.userStatus.userStatus.todayAmount).toLocaleString("ru-RU")} тенге</button>}
               </div>
+                {this.props.userStatus.userStatus.doctype === 1 ? 
+                    <div className='documents'>
+                      <h4>
+                        Документы по договору <span>№{this.props.userStatus.userStatus.contractNumber} от {this.props.userStatus.userStatus.givenDate}</span>
+                      </h4>
+                      <ul className='documentsContainer'>
+                        <InsuranceApplicationDocument 
+                          fio={this.props.userStatus.userStatus.fio}
+                          dateOfBirth={this.props.userReducer.user.UF_10}
+                          address={this.props.userStatus.userStatus.address}
+                          phone={this.props.userStatus.userStatus.phone}
+                          email={this.props.userStatus.userStatus.email}
+                          placeOfWork={this.props.userReducer.user.UF_31}
+                          position={this.props.userReducer.user.UF_33}
+                          iin={this.props.userStatus.userStatus.iin}
+                          cardNumber={this.props.userStatus.userStatus.cardNumber}
+                          startCard={this.props.userStatus.userStatus.startCard}
+                          endCard={this.props.userStatus.userStatus.endCard}
+                          placeOfBirth={this.props.userReducer.user.UF_46}
+                          insuranceAmount={this.props.userStatus.userStatus.insuranceAmount}
+                          givenDate={this.props.userStatus.userStatus.givenDate}
+                          code={this.props.userStatus.userStatus.code}
+                          period={this.props.userStatus.userStatus.period}
+                        />
+                        <MicrocreditInsuranceDocument
+                          fio={this.props.userStatus.userStatus.fio}
+                          dateOfBirth={this.props.userReducer.user.UF_10}
+                          address={this.props.userStatus.userStatus.address}
+                          iin={this.props.userStatus.userStatus.iin}
+                          cardNumber={this.props.userStatus.userStatus.cardNumber}
+                          contractNumber={this.props.userStatus.userStatus.contractNumber}
+                          insuranceAmount={this.props.userStatus.userStatus.insuranceAmount}
+                          code={this.props.userStatus.userStatus.code}
+                          period={this.props.userStatus.userStatus.period}
+                        />
+                        <InsuranceContractDocument
+                          contractNumber={this.props.userStatus.userStatus.contractNumber}
+                          givenDate={this.props.userStatus.userStatus.givenDate}
+                          endDate={this.props.userStatus.userStatus.endDate}
+                          fio={this.props.userStatus.userStatus.fio}
+                          address={this.props.userStatus.userStatus.address}
+                          phone={this.props.userStatus.userStatus.phone}
+                          iin={this.props.userStatus.userStatus.iin}
+                          insuranceAmount={this.props.userStatus.userStatus.insuranceAmount}
+                          reward={this.props.userStatus.userStatus.reward}
+                          cardNumber={this.props.userStatus.userStatus.cardNumber}
+                          cardGiven={this.props.userStatus.userStatus.cardGiven}
+                          startCard={this.props.userStatus.userStatus.startCard}
+                          email={this.props.userStatus.userStatus.email}
+                          period={this.props.userStatus.userStatus.period}
+                        />
+                        <MicrocreditAgreementDocument
+                          main={this.props.userStatus.userStatus.main}
+                          reward={this.props.userStatus.userStatus.reward}
+                          fio={this.props.userStatus.userStatus.fio}
+                          iin={this.props.userStatus.userStatus.iin}
+                          address={this.props.userStatus.userStatus.address}
+                          cardNumber={this.props.userStatus.userStatus.cardNumber}
+                          cardGiven={this.props.userStatus.userStatus.cardGiven}
+                          startCard={this.props.userStatus.userStatus.startCard}
+                          endCard={this.props.userStatus.userStatus.endCard}
+                          dateOfBirth={this.props.userReducer.user.UF_10}
+                          phone={this.props.userStatus.userStatus.phone}
+                          iban={this.props.userStatus.userStatus.iban}
+                          email={this.props.userStatus.userStatus.email}
+                          contractNumber={this.props.userStatus.userStatus.contractNumber}
+                          givenDate={this.props.userStatus.userStatus.givenDate}
+                          endDate={this.props.userStatus.userStatus.endDate}
+                          total={this.props.userStatus.userStatus.total}
+                          period={this.props.userStatus.userStatus.period}
+                        />
+                      </ul>
+                    </div>
+                    :
+                    <div className='documents'>
+                      {/* <h4>
+                        Документы по договору <span>№{this.props.userStatus.userStatus.contractNumber} от {this.props.userStatus.userStatus.givenDate}</span>
+                      </h4>
+                      <ul className='documentsContainer'>
+                        <InsuranceApplicationDocument 
+                          fio={this.props.userStatus.userStatus.fio}
+                          dateOfBirth={this.props.userReducer.user.UF_10}
+                          address={this.props.userStatus.userStatus.address}
+                          phone={this.props.userStatus.userStatus.phone}
+                          email={this.props.userStatus.userStatus.email}
+                          placeOfWork={this.props.userReducer.user.UF_31}
+                          position={this.props.userReducer.user.UF_33}
+                          iin={this.props.userStatus.userStatus.iin}
+                          cardNumber={this.props.userStatus.userStatus.cardNumber}
+                          startCard={this.props.userStatus.userStatus.startCard}
+                          endCard={this.props.userStatus.userStatus.endCard}
+                          placeOfBirth={this.props.userReducer.user.UF_46}
+                          insuranceAmount={this.props.userStatus.userStatus.insuranceAmount}
+                          givenDate={this.props.userStatus.userStatus.givenDate}
+                          code={this.props.userStatus.userStatus.code}
+                          period={this.props.userStatus.userStatus.period}
+                        />
+                        <MicrocreditInsuranceDocument
+                          fio={this.props.userStatus.userStatus.fio}
+                          dateOfBirth={this.props.userReducer.user.UF_10}
+                          address={this.props.userStatus.userStatus.address}
+                          iin={this.props.userStatus.userStatus.iin}
+                          cardNumber={this.props.userStatus.userStatus.cardNumber}
+                          contractNumber={this.props.userStatus.userStatus.contractNumber}
+                          insuranceAmount={this.props.userStatus.userStatus.insuranceAmount}
+                          code={this.props.userStatus.userStatus.code}
+                          period={this.props.userStatus.userStatus.period}
+                        />
+                        <InsuranceContractDocument
+                          contractNumber={this.props.userStatus.userStatus.contractNumber}
+                          givenDate={this.props.userStatus.userStatus.givenDate}
+                          endDate={this.props.userStatus.userStatus.endDate}
+                          fio={this.props.userStatus.userStatus.fio}
+                          address={this.props.userStatus.userStatus.address}
+                          phone={this.props.userStatus.userStatus.phone}
+                          iin={this.props.userStatus.userStatus.iin}
+                          insuranceAmount={this.props.userStatus.userStatus.insuranceAmount}
+                          reward={this.props.userStatus.userStatus.reward}
+                          cardNumber={this.props.userStatus.userStatus.cardNumber}
+                          cardGiven={this.props.userStatus.userStatus.cardGiven}
+                          startCard={this.props.userStatus.userStatus.startCard}
+                          email={this.props.userStatus.userStatus.email}
+                          period={this.props.userStatus.userStatus.period}
+                        />
+                        <ApplicationRestructuringDocument
+                          fio={this.props.userStatus.userStatus.fio}
+                          iin={this.props.userStatus.userStatus.iin}
+                          cardNumber={this.props.userStatus.userStatus.cardNumber}
+                          phone={this.props.userStatus.userStatus.phone}
+                          period={this.props.userStatus.userStatus.period}
+                          moneyForRestructuring={(+this.props.userStatus.userStatus.reward) * 2}
+                          reward={this.props.userStatus.userStatus.reward}
+                          penalty={this.props.userStatus.userStatus.penalty ? this.props.userStatus.userStatus.penalty : 0}
+                        />
+                        <RestructuringAgreementDocument/>
+                      </ul> */}
+                    </div>
+                  }
             </div>
           </div>
         )
@@ -348,6 +773,191 @@ class Status extends React.Component {
             <img alt='loading' src={require("../../img/svg/loadingCircle.svg")}/>
               <button onClick={() => this.myFunc()}>Дозаполнить анкету</button>
             </div> 
+          </div>
+        )
+        case 8:
+        return (
+          <div className='mt-5'>
+              <h5 className='text-center'>Текущая завяка</h5>
+            <div className='cabinetmessage text-center'>
+              У вас заим в статусе
+              <b>
+                "Стандартный заим"</b>
+            </div>
+            <div>
+              <table className='vdolge'>
+                <thead>
+                  <tr>
+                    <th>
+                      Дата выдачи 📅
+                    </th>
+                    {/* <th>
+                      Сумма на руки 💰
+                    </th> */}
+
+                    <th>Основной долг 💸</th>
+                    <th>Сумма задолженности на текущую дату</th>
+                    <th>Дата погашения 📅</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>{this.props.userStatus.userStatus.givenDate}</td>
+                    {/* <td>{this.props.userStatus.userStatus.amount}</td> */}
+                    <td>{(+this.props.userStatus.userStatus.mainAmount).toLocaleString()} тг</td>
+                    <td>{(+this.props.userStatus.userStatus.todayAmount).toLocaleString()} тг</td>
+                    <td>{this.props.userStatus.userStatus.endDate}</td>
+                  </tr>
+                </tbody>
+              </table>
+              <div className="buttonForm">
+                {this.state.btnLoading === true ?
+                  <Spinner className="loading" size={200} spinnerColor={"#ef2221"} spinnerWidth={2} visible={true} /> :
+                  <button onClick={() => this.handleSubmitProlongation()} className=" oplataform--button" type="submit">Продлить {(+this.props.userStatus.userStatus.prolongation).toLocaleString("ru-RU")} тенге</button>}
+                {this.state.btnLoading === true ?
+                  <Spinner className="loading" size={200} spinnerColor={"#ef2221"} spinnerWidth={2} visible={true} /> :
+                  <button onClick={() => this.handleSubmit()} className=" oplataform--button" type="submit">Погасить {(+this.props.userStatus.userStatus.todayAmount).toLocaleString("ru-RU")} тенге</button>}
+              </div>
+              
+                  {this.props.userStatus.userStatus.doctype === 1 ? 
+                    <div className='documents'>
+                      <h4>
+                        Документы по договору <span>№{this.props.userStatus.userStatus.contractNumber} от {this.props.userStatus.userStatus.givenDate}</span>
+                      </h4>
+                      <ul className='documentsContainer'>
+                        <InsuranceApplicationDocument 
+                          fio={this.props.userStatus.userStatus.fio}
+                          dateOfBirth={this.props.userReducer.user.UF_10}
+                          address={this.props.userStatus.userStatus.address}
+                          phone={this.props.userStatus.userStatus.phone}
+                          email={this.props.userStatus.userStatus.email}
+                          placeOfWork={this.props.userReducer.user.UF_31}
+                          position={this.props.userReducer.user.UF_33}
+                          iin={this.props.userStatus.userStatus.iin}
+                          cardNumber={this.props.userStatus.userStatus.cardNumber}
+                          startCard={this.props.userStatus.userStatus.startCard}
+                          endCard={this.props.userStatus.userStatus.endCard}
+                          placeOfBirth={this.props.userReducer.user.UF_46}
+                          insuranceAmount={this.props.userStatus.userStatus.insuranceAmount}
+                          givenDate={this.props.userStatus.userStatus.givenDate}
+                          code={this.props.userStatus.userStatus.code}
+                          period={this.props.userStatus.userStatus.period}
+                        />
+                        <MicrocreditInsuranceDocument
+                          fio={this.props.userStatus.userStatus.fio}
+                          dateOfBirth={this.props.userReducer.user.UF_10}
+                          address={this.props.userStatus.userStatus.address}
+                          iin={this.props.userStatus.userStatus.iin}
+                          cardNumber={this.props.userStatus.userStatus.cardNumber}
+                          contractNumber={this.props.userStatus.userStatus.contractNumber}
+                          insuranceAmount={this.props.userStatus.userStatus.insuranceAmount}
+                          code={this.props.userStatus.userStatus.code}
+                          period={this.props.userStatus.userStatus.period}
+                        />
+                        <InsuranceContractDocument
+                          contractNumber={this.props.userStatus.userStatus.contractNumber}
+                          givenDate={this.props.userStatus.userStatus.givenDate}
+                          endDate={this.props.userStatus.userStatus.endDate}
+                          fio={this.props.userStatus.userStatus.fio}
+                          address={this.props.userStatus.userStatus.address}
+                          phone={this.props.userStatus.userStatus.phone}
+                          iin={this.props.userStatus.userStatus.iin}
+                          insuranceAmount={this.props.userStatus.userStatus.insuranceAmount}
+                          reward={this.props.userStatus.userStatus.reward}
+                          cardNumber={this.props.userStatus.userStatus.cardNumber}
+                          cardGiven={this.props.userStatus.userStatus.cardGiven}
+                          startCard={this.props.userStatus.userStatus.startCard}
+                          email={this.props.userStatus.userStatus.email}
+                          period={this.props.userStatus.userStatus.period}
+                        />
+                        <MicrocreditAgreementDocument
+                          main={this.props.userStatus.userStatus.main}
+                          reward={this.props.userStatus.userStatus.reward}
+                          fio={this.props.userStatus.userStatus.fio}
+                          iin={this.props.userStatus.userStatus.iin}
+                          address={this.props.userStatus.userStatus.address}
+                          cardNumber={this.props.userStatus.userStatus.cardNumber}
+                          cardGiven={this.props.userStatus.userStatus.cardGiven}
+                          startCard={this.props.userStatus.userStatus.startCard}
+                          endCard={this.props.userStatus.userStatus.endCard}
+                          dateOfBirth={this.props.userReducer.user.UF_10}
+                          phone={this.props.userStatus.userStatus.phone}
+                          iban={this.props.userStatus.userStatus.iban}
+                          email={this.props.userStatus.userStatus.email}
+                          contractNumber={this.props.userStatus.userStatus.contractNumber}
+                          givenDate={this.props.userStatus.userStatus.givenDate}
+                          endDate={this.props.userStatus.userStatus.endDate}
+                          total={this.props.userStatus.userStatus.total}
+                          period={this.props.userStatus.userStatus.period}
+                        />
+                      </ul>
+                    </div>
+                    :
+                    <div className='documents'>
+                      {/* <h4>
+                        Документы по договору <span>№{this.props.userStatus.userStatus.contractNumber} от {this.props.userStatus.userStatus.givenDate}</span>
+                      </h4>
+                      <ul className='documentsContainer'>
+                        <InsuranceApplicationDocument 
+                          fio={this.props.userStatus.userStatus.fio}
+                          dateOfBirth={this.props.userReducer.user.UF_10}
+                          address={this.props.userStatus.userStatus.address}
+                          phone={this.props.userStatus.userStatus.phone}
+                          email={this.props.userStatus.userStatus.email}
+                          placeOfWork={this.props.userReducer.user.UF_31}
+                          position={this.props.userReducer.user.UF_33}
+                          iin={this.props.userStatus.userStatus.iin}
+                          cardNumber={this.props.userStatus.userStatus.cardNumber}
+                          startCard={this.props.userStatus.userStatus.startCard}
+                          endCard={this.props.userStatus.userStatus.endCard}
+                          placeOfBirth={this.props.userReducer.user.UF_46}
+                          insuranceAmount={this.props.userStatus.userStatus.insuranceAmount}
+                          givenDate={this.props.userStatus.userStatus.givenDate}
+                          code={this.props.userStatus.userStatus.code}
+                          period={this.props.userStatus.userStatus.period}
+                        />
+                        <MicrocreditInsuranceDocument
+                          fio={this.props.userStatus.userStatus.fio}
+                          dateOfBirth={this.props.userReducer.user.UF_10}
+                          address={this.props.userStatus.userStatus.address}
+                          iin={this.props.userStatus.userStatus.iin}
+                          cardNumber={this.props.userStatus.userStatus.cardNumber}
+                          contractNumber={this.props.userStatus.userStatus.contractNumber}
+                          insuranceAmount={this.props.userStatus.userStatus.insuranceAmount}
+                          code={this.props.userStatus.userStatus.code}
+                          period={this.props.userStatus.userStatus.period}
+                        />
+                        <InsuranceContractDocument
+                          contractNumber={this.props.userStatus.userStatus.contractNumber}
+                          givenDate={this.props.userStatus.userStatus.givenDate}
+                          endDate={this.props.userStatus.userStatus.endDate}
+                          fio={this.props.userStatus.userStatus.fio}
+                          address={this.props.userStatus.userStatus.address}
+                          phone={this.props.userStatus.userStatus.phone}
+                          iin={this.props.userStatus.userStatus.iin}
+                          insuranceAmount={this.props.userStatus.userStatus.insuranceAmount}
+                          reward={this.props.userStatus.userStatus.reward}
+                          cardNumber={this.props.userStatus.userStatus.cardNumber}
+                          cardGiven={this.props.userStatus.userStatus.cardGiven}
+                          startCard={this.props.userStatus.userStatus.startCard}
+                          email={this.props.userStatus.userStatus.email}
+                          period={this.props.userStatus.userStatus.period}
+                        />
+                        <ApplicationRestructuringDocument
+                          fio={this.props.userStatus.userStatus.fio}
+                          iin={this.props.userStatus.userStatus.iin}
+                          cardNumber={this.props.userStatus.userStatus.cardNumber}
+                          phone={this.props.userStatus.userStatus.phone}
+                          period={this.props.userStatus.userStatus.period}
+                          moneyForRestructuring={(+this.props.userStatus.userStatus.reward) * 2}
+                          reward={this.props.userStatus.userStatus.reward}
+                          penalty={this.props.userStatus.userStatus.penalty ? this.props.userStatus.userStatus.penalty : 0}
+                        />
+                        <RestructuringAgreementDocument/>
+                      </ul> */}
+                    </div>
+                  }
+            </div>
           </div>
         )
       default:

@@ -3,6 +3,25 @@ import Router from 'next/router'
 import axios from 'axios'
 import swal from 'sweetalert'
 import Head from 'next/head'
+import pdfMake from "pdfmake/build/pdfmake";
+import pdfFonts from "pdfmake/build/vfs_fonts";
+import insuranceApplication from '../components/document_1/insuranceApplication'
+import microcreditInsurance from '../components/document_1/microcreditInsurance'
+import insuranceContract from '../components/document_1/insuranceContract'
+import microcreditAgreement from '../components/document_1/microcreditAgreement'
+
+pdfMake.vfs = pdfFonts.pdfMake.vfs;
+pdfMake.fonts = {
+  TimesNewRoman: {
+    normal: 'TimesNewRoman.ttf',
+    bold: 'TimesNewRomanBold.ttf',
+    italics: 'TimesNewRomanItalics.ttf',
+    bolditalics: 'TimesNewRomanBoldItalics.ttf'
+  },
+  emptyCheckbox: {
+    normal: 'emptyCheckbox.ttf'
+  }
+}
 
 function getUrlParameter(name) {
   name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
@@ -183,8 +202,8 @@ class Aggrement extends React.Component {
     this.getUserDocument(userToken())
   }
 
-
   render() {
+
     return (
       <div className="container otherPages">
         <Head><title>Соглашение</title></Head>
@@ -197,8 +216,12 @@ class Aggrement extends React.Component {
                 <ul className='complete'>
                 {this.state.docs.map(doc=> (
                     <li className={doc.link===null? 'd-none' : ''}><img className='checkedComplete' src={require("../img/checked.png")} /><a href={doc.link} target="_blank">{doc.name}</a></li>
-                ))
-                }</ul>
+                ))}
+                  {/* <li><img className='checkedComplete' src={require("../img/checked.png")} /><a onClick={() => pdfMake.createPdf(insuranceApplication).open()}>Заявление на страхование</a></li>
+                  <li><img className='checkedComplete' src={require("../img/checked.png")} /><a onClick={() => pdfMake.createPdf(microcreditInsurance).open()}>Согласие на страхование микрокредита</a></li>
+                  <li><img className='checkedComplete' src={require("../img/checked.png")} /><a onClick={() => pdfMake.createPdf(insuranceContract).open()}>Договор добровольного срочного страхования жизни</a></li>
+                  <li><img className='checkedComplete' src={require("../img/checked.png")} /><a onClick={() => pdfMake.createPdf(microcreditAgreement).open()}>Договор о предоставлении микрокредита</a></li> */}
+                </ul>
           <div className="repeatBtn form-group" >
             {this.state.rest === true ?   <button onClick={() => this.sendAgreementStatusWithRest()} className='mt-5' >Соглашаюсь</button> :
               <button onClick={() => this.sendAgreementStatus()} className='mt-5' >Соглашаюсь</button>

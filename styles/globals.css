@@ -560,6 +560,38 @@ button {
   padding-top: calc(12px + (50 - 12) * ((100vw - 320px) / (768 - 320))) !important;
 } */
 
+
+.documents {
+  max-width: 1200px;
+  margin: auto
+}
+.documents h4 {
+  background-color: rgb(234 220 220);
+  margin: 60px 0 0;
+  font-size: 20px;
+  padding: 10px;
+  border-radius: 6px 6px 0 0;
+}
+.documents h4 span {
+  color: #ef2221 !important;
+}
+.documents .documentsContainer {
+  background-color: rgba(17,83,75,.123);
+  border-radius: 0 0 6px 6px;
+  padding: 10px;
+}
+.documents .documentsContainer li {
+  margin: 0px 0px 10px;
+}
+.documents .documentsContainer li a {
+  font-weight: bold;
+  transition: .3s;
+}
+.documents .documentsContainer li a:hover {
+  color: #ef2221 !important;
+  opacity: .8;
+}
+
 @media only screen and (min-width: 321px) and (max-width: 768px) {
   .finance .primary {
     margin-top: 580px;
