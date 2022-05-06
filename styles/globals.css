@@ -26,6 +26,20 @@
   font-style: normal;
 }
 
+@font-face {
+  font-family: "Roboto";
+  src: url("../fonts/Roboto-Regular.ttf") format("opentype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Roboto-Bold";
+  src: url("../fonts/Roboto-Bold.ttf") format("opentype");
+  font-weight: normal;
+  font-style: normal;
+}
+
 *,
 *::after,
 *::before {
@@ -76,7 +90,8 @@ i {
 }
 
 p {
-  font-family: "AvenirNext" !important;
+  /*font-family: "AvenirNext" !important;*/
+  font-family: "Roboto" !important;
 }
 
 a {
@@ -98,7 +113,7 @@ h2,
 h3,
 h4,
 h5 {
-  font-family: "CTCSplachRounded" !important;
+  font-family: "Roboto-Bold" !important;
 }
 
 hr {
@@ -122,13 +137,14 @@ body {
   display: flex;
   flex-direction: column;
   width: 100%;
-  font-family: "CTCSplachRounded";
+  font-family: "Roboto";
 }
 .center-line {
   text-decoration: line-through;
 }
 form {
-  font-family: 'AvenirNext';
+  /*font-family: 'AvenirNext';*/
+  font-family: 'Roboto';
 }
 
 @media (max-width: 740px) {
@@ -152,7 +168,7 @@ form {
 .footer .footerCol .lists {
   font-size: 14px;
   line-height: 30px;
-  font-family: "CTCSplachRounded";
+  font-family: "Roboto";
   text-align: left;
   letter-spacing: 0.056px;
 }
@@ -1177,7 +1193,7 @@ a,
   outline: none;
   color: #ef2221;
   font-size: calc(24px + (48 - 24) * ((100vw - 320px) / (1600 - 320))) !important;
-  font-family: "CTCSplachRounded";
+  font-family: "Roboto";
 }
 
 .otherPages .voprosi--top a.collapsed:after {
@@ -1185,7 +1201,7 @@ a,
   outline: none;
   color: #ef2221;
   font-size: 48px;
-  font-family: "CTCSplachRounded";
+  font-family: "Roboto";
 }
 
 .otherPages .voprosi--otvet .otvet {
@@ -1468,7 +1484,8 @@ a,
   letter-spacing: 0.064px;
   color: black;
   text-align: center;
-  font-family: "CTCSplachRounded";
+  /*font-family: "CTCSplachRounded";*/
+  font-family: "Roboto";
   transition: 0.5s;
 }
 
@@ -1606,7 +1623,7 @@ a,
   outline: none;
   color: #ef2221;
   font-size: calc(34px + (48 - 34) * ((100vw - 320px) / (1600 - 320))) !important;
-  font-family: "CTCSplachRounded";
+  font-family: "Roboto";
 }
 
 .pogasit:first-child {
@@ -1920,7 +1937,7 @@ main {
   padding: 5px;
   top: 15%;
   position: absolute;
-  font-family: "CTCSplachRounded";
+  font-family: "Roboto";
   text-align: left;
 }
 .presentblock {
@@ -1972,7 +1989,7 @@ a:hover {
 
 .stepmoney .whyus {
   font-size: 50px !important;
-  font-family: "CTCSplachRounded";
+  font-family: "Roboto";
   line-height: 56px;
   letter-spacing: 0.2px;
   font-style: normal;
@@ -1985,7 +2002,8 @@ a:hover {
   font-size: 30px;
   line-height: 38px;
   letter-spacing: 0.12px;
-  font-family: "AvenirNext";
+  /*font-family: "AvenirNext";*/
+  font-family: "Roboto";
   font-style: normal;
   font-weight: normal;
 }
