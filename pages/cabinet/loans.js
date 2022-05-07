@@ -74,7 +74,7 @@ class Cabinet extends React.Component {
 
   async handleRepeated() {
     if (!this.state.sendRepeat) {
-      await swal("Oops!", `${this.state.repeatMessage || "Вам пока отказано подавать повторный займ"} `, "error");
+      await swal("Oops!", `${this.state.repeatMessage || "Вам пока отказано подавать повторный микрокредит"} `, "error");
     }
     else if (this.state.step !== 3 && this.state.canSendRepeat) {
         await Router.push(`/cabinet/continue`)
@@ -90,7 +90,7 @@ class Cabinet extends React.Component {
                 }
                 else {
                     this.setState({btnLoading: false})
-                    swal("Oops!", `${response.data.message || "Вам пока отказано подавать повторный займ"} `, "error");
+                    swal("Oops!", `${response.data.message || "Вам пока отказано подавать повторный микрокредит"} `, "error");
                 }
             })
     }

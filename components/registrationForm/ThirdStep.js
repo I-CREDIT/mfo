@@ -603,7 +603,7 @@ class FormRegister extends React.Component {
                 validators={{
                 required
               }}/>
-              <div className="hint">Чем больше сумма депозита тем больше сумма при одобрении заима</div>
+              <div className="hint">Чем больше сумма депозита тем больше сумма при одобрении микрокредита</div>
             </div>
 
             <Errors
@@ -624,7 +624,7 @@ class FormRegister extends React.Component {
                 id='amount_of_payments_for_current_loans'
 								name='amount_of_payments_for_current_loans'
 								autocomplete = 'off'
-                placeholder='Сумма платежей действующих кредитов:'
+                placeholder='Сумма платежей действующих микрокредитов:'
                 type="number"
                 className='form-control'
                 validators={{
@@ -642,7 +642,7 @@ class FormRegister extends React.Component {
           </Row>
 
           <Row className="form-group  mb-3 col-12 mx-auto">
-            <Label htmlFor='amount_of_paid_loans_in_last_six_month'>Сумма платежей закрытых кредитов последний 6 мес. * :
+            <Label htmlFor='amount_of_paid_loans_in_last_six_month'>Сумма платежей закрытых микрокредитов последний 6 мес. * :
             </Label>
             <div className="input-group">
               <Control.input

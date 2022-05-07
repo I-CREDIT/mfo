@@ -14,7 +14,7 @@ class History extends React.Component {
             <thead>
                 <tr>
                   <th>
-                    Сумма заима
+                    Сумма микрокредита
                   </th>
                   <th>
                     Дата выдачи

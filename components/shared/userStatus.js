@@ -156,7 +156,7 @@ class Status extends React.Component {
           <div className='mt-5'>
             <h5 className='text-center'>Текущая завяка</h5>
             <div className='cabinetmessage text-center'>
-              У вас заим в статусе
+              У вас микрокредит в статусе
               <b>
                 "Льготный период"</b>
             </div>
@@ -204,9 +204,9 @@ class Status extends React.Component {
           <div className='mt-5'>
               <h5 className='text-center'>Текущая завяка</h5>
             <div className='cabinetmessage text-center'>
-              У вас заим в статусе
+              У вас микрокредит в статусе
               <b>
-                "Стандартный заим"</b>
+                "Стандартный микрокредит"</b>
             </div>
             <div>
               <table className='vdolge'>
@@ -248,17 +248,6 @@ class Status extends React.Component {
       case 3:
         return (
           <div className='mt-5'>
-            {/* <div className='container alert alert-primary'>
-              <h4 className='alert-heading'>Статус вашего текущего заима</h4>
-              <hr/>
-              <p className='mb-0'><b>Вы в просрочке.</b> Отдел взыскания: <b><a href="tel:+77788701029">+7 778 870 10 29</a></b>. Уточните сумму долга по номеру <b><a href="tel:+77272501500">+7 727 250 1500</a></b>, <b><a href="tel:+77007501500">+7 700 750 1500</a></b> или напишите в
-                <b><a classname="whatsapptext" href='https://api.whatsapp.com/send?phone=+77015382439' target="_blank"> WhatsApp <i class="fa fa-whatsapp" aria-hidden="true"></i></a></b> </p>
-            </div>
-            <div className='cabinetmessage text-center'>
-              У вас заим в статусе
-              <b>
-                 "Просрочен"</b>
-            </div> */}
             <div>
               <table className='vprosrochke'>
                 <thead>
@@ -300,12 +289,12 @@ class Status extends React.Component {
         return (
           <div className='container'>
             <div className='alert alert-primary'>
-              <h4 className='alert-heading'>Статус вашего текущего заима</h4>
+              <h4 className='alert-heading'>Статус вашего текущего микрокредита</h4>
               <hr/>
               <p className='mb-0'><b>Вы в просрочке.</b> Уточните сумма долга по номеру <a classname="whatsapp" href='https://api.whatsapp.com/send?phone=+77015382439' target="_blank"><i class="fa fa-whatsapp" aria-hidden="true"></i>  +7 701 538 2439 (WhatsApp)</a></p>
             </div>
             <div className='cabinetmessage text-center'>
-              У вас заим в статусе
+              У вас микрокредит в статусе
               <b>
                 "Просрочен"</b>
             </div>
@@ -315,7 +304,7 @@ class Status extends React.Component {
         return (
           <div className='container'>
             <div className='alert alert-primary'>
-              <h4 className='alert-heading'>Статус вашего последного заима</h4>
+              <h4 className='alert-heading'>Статус вашего последного микрокредита</h4>
               <hr/>
               <p className='mb-0'>{this.props.userStatus.userStatus.message}</p>
             </div>

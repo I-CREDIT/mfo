@@ -18,6 +18,7 @@ i18n
         interpolation: {
             escapeValue: false,
         },
+        nonExplicitWhitelist: true,
     })
 
 export default i18n

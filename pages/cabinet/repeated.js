@@ -43,7 +43,7 @@ class Cabinet extends React.Component {
     return (
       <div className='otherPages'>
           <Head>
-            <title>Повторный займ</title>
+            <title>Повторный микрокредит</title>
           </Head>
           {this.state.btnLoading ? ( <div className="modelLoader"></div>) : (<div className="modelLoader loaded"></div>)}
         <h3 className=' text-center'>{helloUser()}   {this.props.userReducer.user.UF_5} {this.props.userReducer.user.UF_6} !</h3>

@@ -64,7 +64,7 @@ const Continue = ({userReducer}) => {
   }
   return(
       <div className='otherPages container'>
-        <div className='alert alert-info'><b>{userReducer.user.UF_5} {userReducer.user.UF_6}, вам необходимо дозаполнить анкету, чтобы получить займ</b></div>
+        <div className='alert alert-info'><b>{userReducer.user.UF_5} {userReducer.user.UF_6}, вам необходимо дозаполнить анкету, чтобы получить микрокредит</b></div>
         {/* <div className='inputs_continue '>
           <div className='range-group'>
           <label>Сумма : {summa} тг</label>

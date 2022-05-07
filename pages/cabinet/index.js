@@ -53,7 +53,7 @@ class Cabinet extends React.Component {
           <h5>Мои заявки</h5>
           <h5 className='text-center'>Ваша заявка еще на обработке1</h5>
           <div className="repeatBtn form-group" >
-          <button className='mt-3' onClick={() => this.handleRepeated()}>Повторный займ</button>
+          <button className='mt-3' onClick={() => this.handleRepeated()}>Повторный микрокредит</button>
           </div>
         </div>
       </div>

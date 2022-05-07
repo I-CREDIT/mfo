@@ -2549,7 +2549,7 @@ a:hover {
   }
 }
 
-/* повысить свои шансы на одобрение займа заполнив анкету */
+/* повысить свои шансы на одобрение микрокредита заполнив анкету */
 
 .progressBar {
   position: fixed !important;
@@ -2935,7 +2935,7 @@ table td.r, table th.r {
     min-height: 75px;
   }
    .userHistory tr td:nth-child(1):before {
-    content: "Сумма заима"
+    content: "Сумма микрокредита"
   }
    .userHistory tr td:nth-child(2):before {
     content: "Дата выдачи"

@@ -47,7 +47,7 @@ class Questionans extends React.Component {
         <div className="container">
           <div className="voprosi voprosi1">
             <div className="voprosi--top" data-toggle="collapse" data-target="#voprosi" onClick={this.toggleCollapse("voprosi1")}>
-              <h2>Кто может взять заем?</h2>
+              <h2>Кто может взять микрокредит?</h2>
               <a className="more" type="button" />
             </div>
             <Collapse isOpen={this.state.collapse === 'voprosi1'} id="voprosi1">
@@ -73,13 +73,13 @@ class Questionans extends React.Component {
           </div>
           <div className="voprosi voprosi2">
             <div className="voprosi--top" data-toggle="collapse" data-target="#voprosi2" onClick={this.toggleCollapse("voprosi2")}>
-              <h2>Какие документы понадобятся для того чтобы оформить заем?</h2>
+              <h2>Какие документы понадобятся для того чтобы оформить микрокредит?</h2>
               <a className="more" type="button" />
             </div>
             <Collapse isOpen={this.state.collapse === 'voprosi2'}  id="voprosi2">
               <div className="voprosi--otvet">
                 <p className="otvet mb-5">
-                  * Для того, чтобы получить заем, достаточно удостоверения личности или паспорта.
+                  * Для того, чтобы получить микрокредит, достаточно удостоверения личности или паспорта.
                 </p>
                 <div className="polezen">
                   <h3 className="mb-3">Был ли полезен вам ответ?</h3>
@@ -121,14 +121,14 @@ class Questionans extends React.Component {
           </div>
           <div className="voprosi voprosi4">
             <div className="voprosi--top" data-toggle="collapse" data-target="#voprosi" onClick={this.toggleCollapse("voprosi4")}>
-              <h2>Как узнать,дадут ли мне заем?</h2>
+              <h2>Как узнать,дадут ли мне микрокредит?</h2>
               <a className="more" type="button" />
             </div>
             <Collapse isOpen={this.state.collapse === 'voprosi4'} id="voprosi4">
               <div className="voprosi--otvet">
                 <p className="otvet mb-5">
                   * После подачи заявки вы получите смс сообщение на ваш номер и электронную почту, где будет указано одобрена или отказана ваша заявка.
-                  В случае одобрения займа, деньги будут перечислены на ваш текущий счет в банке.
+                  В случае одобрения микрокредита, деньги будут перечислены на ваш текущий счет в банке.
                 </p>
                 <div className="polezen">
                   <h3 className="mb-3">Был ли полезен вам ответ?</h3>
@@ -146,7 +146,7 @@ class Questionans extends React.Component {
           </div>
           <div className="voprosi voprosi5">
             <div className="voprosi--top" data-toggle="collapse" data-target="#voprosi" onClick={this.toggleCollapse("voprosi5")}>
-              <h2>В каком городе можно взять заем?</h2>
+              <h2>В каком городе можно взять микрокредит?</h2>
               <a className="more" type="button" />
             </div>
             <Collapse isOpen={this.state.collapse === 'voprosi5'} id="voprosi5">
@@ -230,7 +230,7 @@ class Questionans extends React.Component {
                 * Ф.И.О. владельца банковского счета должны совпадать с Ф.И.О. в профиле на нашем сайте, иначе
                   средства не будут переведены на указанный счет.
                   Если заявка одобрена с неверными реквизитами, то средства будут возвращены нам вашим банком по
-                  истечении 1-14 дней, после чего мы закроем заем без дополнительных взысканий, и вы сможете подать новую заявку с верными реквизитами.
+                  истечении 1-14 дней, после чего мы закроем микрокредит без дополнительных взысканий, и вы сможете подать новую заявку с верными реквизитами.
                 </p>
                 <div className="polezen">
                   <h3 className="mb-3">Был ли полезен вам ответ?</h3>
@@ -300,13 +300,13 @@ class Questionans extends React.Component {
           </div>
           <div className="voprosi voprosi11">
             <div className="voprosi--top" data-toggle="collapse" data-target="#voprosi" onClick={this.toggleCollapse("voprosi11")}>
-              <h2>Как я могу погасить заем?</h2>
+              <h2>Как я могу погасить микрокредит?</h2>
               <a className="more" type="button" />
             </div>
             <Collapse isOpen={this.state.collapse === 'voprosi11'} id="voprosi11">
               <div className="voprosi--otvet">
                 <p className="otvet mb-5">
-                * Чтобы погасить заем Вам необходимо пройти в раздел «Способы оплаты» и выбрать наиболее удобный для вас вариант.
+                * Чтобы погасить микрокредит Вам необходимо пройти в раздел «Способы оплаты» и выбрать наиболее удобный для вас вариант.
                 </p>
                 <div className="polezen">
                   <h3 className="mb-3">Был ли полезен вам ответ?</h3>
@@ -325,13 +325,13 @@ class Questionans extends React.Component {
 
           <div className="voprosi voprosi12">
             <div className="voprosi--top" data-toggle="collapse" data-target="#voprosi" onClick={this.toggleCollapse("voprosi12")}>
-              <h2>Могу ли я погасить заем досрочно?</h2>
+              <h2>Могу ли я погасить микрокредит досрочно?</h2>
               <a className="more" type="button" />
             </div>
             <Collapse isOpen={this.state.collapse === 'voprosi12'} id="voprosi12">
               <div className="voprosi--otvet">
                 <p className="otvet mb-5">
-                * Вы можете в любой момент совершить полное досрочное погашение займа. Ваша задолженность будет указана в личном кабинете.
+                * Вы можете в любой момент совершить полное досрочное погашение микрокредита. Ваша задолженность будет указана в личном кабинете.
                 </p>
                 <div className="polezen">
                   <h3 className="mb-3">Был ли полезен вам ответ?</h3>

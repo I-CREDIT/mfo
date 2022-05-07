@@ -43,7 +43,7 @@ class Home extends React.Component {
         <div>
           <Head>
             <title>
-              Деньги в кредит онлайн микрозаймы на карту по Казахстану
+              Деньги в кредит онлайн микрокредиты на карту по Казахстану
             </title>
           </Head>
             <div className="view">

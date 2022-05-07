@@ -10,9 +10,8 @@ class MyDocument extends Document {
     return (
       <Html>
         <Head />
-        {/* <title>Деньги в кредит онлайн микрозаймы на карту по Казахстану</title> */}
             <meta name="description"
-              content="Деньги в кредит, сервис получения микрозаймов онлайн, удобный калькулятор расчета кредита на карту, первые 7 дней без процентов, каждому 100 клиенту займ в подарок" />
+              content="Деньги в кредит, сервис получения микрозаймов онлайн, удобный калькулятор расчета микрокредита на карту, первые 7 дней без процентов, каждому 100 клиенту займ в подарок" />
             <meta name="yandex-verification" content="a9d4b76bb5e15aa6" />
             <meta name="yandex-verification" content="a9d4b76bb5e15aa6" />
             <link rel="apple-touch-icon" href="/logo192.png" />
