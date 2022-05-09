@@ -231,18 +231,19 @@ class FormRegister extends React.Component {
         });
     });
   }
+
   render() {
     // Достаем функцию-переводчик
     const { t, i18n } = this.props.useTranslationValue
 
     return (
       <div>
-
         <div className="progressBar">
           <div className="progress-done" id="progress-done" data-done="0"></div>
 
           <p className="counter">{t('probability')}</p>
         </div>
+
         {this.props.loading === true
           ? <div className="modelLoader">
               {disableScroll.on()}
@@ -251,6 +252,7 @@ class FormRegister extends React.Component {
             {disableScroll.off()}
           </div>
         }
+
         <Formik
           initialValues = {{
             loan_amount: '',

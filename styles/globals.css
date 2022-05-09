@@ -3550,3 +3550,28 @@ nav[role="navigation"] .users a:before {
     box-shadow: 12px 30px 59px -22px rgba(0, 0, 0, 0.3);
   }
 }
+
+.c-camera-feed--holder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.c-camera-feed button {
+  width: fit-content;
+  border: none;
+  background-color: #ef2221;
+  color: white;
+  text-align: center;
+  padding: 15px;
+  border-radius: 15px;
+  margin-top: 10px;
+}
+
+.c-camera-feed .c-camera-feed__stage {
+  width: 100%;
+}
+
+.c-camera-feed .c-camera-feed__stage .canvas {
+  width: 100%;
+}

@@ -10,15 +10,14 @@ i18n
     .use(initReactI18next)
     .init({
         fallbackLng: 'ru',
-        debug: true,
+        supportedLngs: ['ru', 'kz'],
+        debug: false,
         react: {
             useSuspense: false
         },
-
         interpolation: {
             escapeValue: false,
         },
-        nonExplicitWhitelist: true,
     })
 
 export default i18n
