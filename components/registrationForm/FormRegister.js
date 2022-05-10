@@ -61,6 +61,7 @@ const PhoneMask = ({ field, form, ...props }) => <InputMask
   className="my-input"
   {...field}
   {...props}/>;
+
 const IinMask = ({ field, form, ...props}) => <InputMask 
   mask="999999999999"
   maskPlaceholder={null}
@@ -481,7 +482,7 @@ class FormRegister extends React.Component {
 								</div>
 								  :
 
-								<button disabled={!this.state.checked} type="submit " onClick={() => this.handleFocus()} className="agreement-btn">Получить код</button>}
+								<button disabled={!this.state.checked} type="submit " onClick={() => this.handleFocus()} className="agreement-btn">{t('get-code')}</button>}
                 </div>
 
             </Form>

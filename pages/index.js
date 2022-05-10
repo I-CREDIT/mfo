@@ -75,7 +75,7 @@ class Home extends React.Component {
           <div className="header-imgs col-md-8 col-12 align-items-center">
             <div className="d-flex flex-xl-row flex-md-column">
               <h1 className="red" style={{fontSize: '50px', marginRight: '10px', textAlign:'center',}}>
-                ГЭСВ*
+                {t('GESV')}*
               </h1>
               <img className="bigzerotext" src={require("../img/0.svg")} alt="" />
             </div>

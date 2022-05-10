@@ -57,6 +57,12 @@
   user-select: none;
 }
 
+.whyus-footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .navbar {
   position: fixed !important;
   width: 100%;
