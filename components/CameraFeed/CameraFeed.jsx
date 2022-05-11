@@ -68,8 +68,6 @@ export class CameraFeed extends Component {
     sendPhoto = () => {
         const { sendFile } = this.props;
         this.canvas.toBlob(sendFile);
-
-        Router.push("/")
     }
 
     render() {
