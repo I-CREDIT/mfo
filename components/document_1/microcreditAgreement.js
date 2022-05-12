@@ -107,6 +107,40 @@ function intToWords(int, names) {
 }
 
 const MicrocreditAgreementDocument = (props) => {
+  let GESV
+  if((+props.period) == 15) {
+    GESV = 59140.89
+  } else if ((+props.period) == 16) {
+    GESV = 39649.60
+  } else if ((+props.period) == 17) {
+    GESV = 27853.15
+  } else if ((+props.period) == 18) {
+    GESV = 20341.75
+  } else if ((+props.period) == 19) {
+    GESV = 15349.41
+  } else if ((+props.period) == 20) {
+    GESV = 11907.88
+  } else if ((+props.period) == 21) {
+    GESV = 9459.69
+  } else if ((+props.period) == 22) {
+    GESV = 7670.05
+  } else if ((+props.period) == 23) {
+    GESV = 6330.30
+  } else if ((+props.period) == 24) {
+    GESV = 5306.15
+  } else if ((+props.period) == 25) {
+    GESV = 4508.64
+  } else if ((+props.period) == 26) {
+    GESV = 3877.31
+  } else if ((+props.period) == 27) {
+    GESV = 3370.13
+  } else if ((+props.period) == 28) {
+    GESV = 2957.26
+  } else if ((+props.period) == 29) {
+    GESV = 2617.16
+  } else if ((+props.period) == 30) {
+    GESV = 2333.95
+  }
   let microcreditAgreement = {
     content: [
       {
@@ -252,7 +286,7 @@ const MicrocreditAgreementDocument = (props) => {
                 alignment: 'justify'
               },
               {
-                text: '1110%',
+                text: `${GESV}%`,
                 alignment: 'justify'
               },
             ],

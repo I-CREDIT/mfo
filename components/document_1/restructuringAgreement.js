@@ -15,6 +15,40 @@ pdfMake.fonts = {
 }
 
 const RestructuringAgreementDocument = (props) => {
+  let GESV
+  if((+props.period) == 15) {
+    GESV = 59140.89
+  } else if ((+props.period) == 16) {
+    GESV = 39649.60
+  } else if ((+props.period) == 17) {
+    GESV = 27853.15
+  } else if ((+props.period) == 18) {
+    GESV = 20341.75
+  } else if ((+props.period) == 19) {
+    GESV = 15349.41
+  } else if ((+props.period) == 20) {
+    GESV = 11907.88
+  } else if ((+props.period) == 21) {
+    GESV = 9459.69
+  } else if ((+props.period) == 22) {
+    GESV = 7670.05
+  } else if ((+props.period) == 23) {
+    GESV = 6330.30
+  } else if ((+props.period) == 24) {
+    GESV = 5306.15
+  } else if ((+props.period) == 25) {
+    GESV = 4508.64
+  } else if ((+props.period) == 26) {
+    GESV = 3877.31
+  } else if ((+props.period) == 27) {
+    GESV = 3370.13
+  } else if ((+props.period) == 28) {
+    GESV = 2957.26
+  } else if ((+props.period) == 29) {
+    GESV = 2617.16
+  } else if ((+props.period) == 30) {
+    GESV = 2333.95
+  }
   let restructuringAgreement = {
     content: [
       {
@@ -24,7 +58,7 @@ const RestructuringAgreementDocument = (props) => {
         alignment: 'center'
       },
       {
-        text: '№_____________',
+        text: `№${props.contractNumber}`,
         fontSize: 12,
         bold: true,
         alignment: 'center'
@@ -57,7 +91,7 @@ const RestructuringAgreementDocument = (props) => {
                 alignment: 'justify'
               },
               {
-                text: '____.____.202___г/ж',
+                text: `${props.givenDate} г/ж`,
                 fontSize: 12,
                 alignment: 'justify'
               },
@@ -91,7 +125,8 @@ const RestructuringAgreementDocument = (props) => {
                 ]
               },
               {
-                text: '',
+                text: `${props.fio}`,
+                fontSize: 12,
               },
             ],
             [
@@ -101,7 +136,7 @@ const RestructuringAgreementDocument = (props) => {
                 alignment: 'justify'
               },
               {
-                text: '_________ тенге',
+                text: `${props.main} тенге`,
                 fontSize: 12,
                 alignment: 'justify'
               },
@@ -113,7 +148,7 @@ const RestructuringAgreementDocument = (props) => {
                 alignment: 'justify'
               },
               {
-                text: '___календарных дней/күнтізбелік күн',
+                text: `${props.period} календарных дней/күнтізбелік күн`,
                 fontSize: 12,
                 alignment: 'justify'
               },
@@ -137,7 +172,7 @@ const RestructuringAgreementDocument = (props) => {
                 alignment: 'justify'
               },
               {
-                text: '1110%',
+                text:`${GESV}%`,
                 fontSize: 12,
                 alignment: 'justify'
               },
@@ -214,6 +249,45 @@ const RestructuringAgreementDocument = (props) => {
         text: ' '
       },
       {
+        text: ' '
+      },
+      {
+        text: ' '
+      },
+      {
+        text: ' '
+      },
+      {
+        text: ' '
+      },
+      {
+        text: ' '
+      },
+      {
+        text: ' '
+      },
+      {
+        text: ' '
+      },
+      {
+        text: ' '
+      },
+      {
+        text: ' '
+      },
+      {
+        text: ' '
+      },
+      {
+        text: ' '
+      },
+      {
+        text: ' '
+      },
+      {
+        text: ' '
+      },
+      {
         table: {
           widths: ['*', '*'],
           body: [
@@ -221,12 +295,12 @@ const RestructuringAgreementDocument = (props) => {
               {
                 stack: [
                   {
-                    text: '1.2. В соответствии с настоящим Договором и Заявлением Заемщика МФО предоставляет реструктуризацию задолженности Заемщика перед МФО по договору №___________от ____.___.20___г. по состоянию на дату подписания данного Договора в размере ________тенге.',
+                    text: `1.2. В соответствии с настоящим Договором и Заявлением Заемщика МФО предоставляет реструктуризацию задолженности Заемщика перед МФО по договору №${props.contractNumber} от ${props.givenDate}г. по состоянию на дату подписания данного Договора в размере ${props.main}тенге.`,
                     fontSize: 12,
                     alignment: 'justify'
                   },
                   {
-                    text: '1.3. Реструктуризация долга осуществляется путем предоставления отсрочки по уплате долга по договору №___________от ____.___.20___г.',
+                    text: `1.3. Реструктуризация долга осуществляется путем предоставления отсрочки по уплате долга по договору №${props.contractNumber} от ${props.givenDate}г.`,
                     fontSize: 12,
                     alignment: 'justify'
                   },
@@ -1304,37 +1378,37 @@ const RestructuringAgreementDocument = (props) => {
                     italics: true
                   },
                   {
-                    text: 'ФИО________ ',
+                    text: `${props.fio}`,
                     fontSize: 12,
                     alignment: 'justify'
                   },
                   {
-                    text: 'ИИН ________',
+                    text: `ИИН ${props.iin}`,
                     fontSize: 12,
                     alignment: 'justify'
                   },
                   {
-                    text: 'удостоверение личности №_____________,',
+                    text: `удостоверение личности ${props.cardNumber},`,
                     fontSize: 12,
                     alignment: 'justify'
                   },
                   {
-                    text: 'выдано _______ РК от _________',
+                    text: `выдано ${props.cardGiven} от ${props.startCard}`,
                     fontSize: 12,
                     alignment: 'justify'
                   },
                   {
-                    text: 'адрес:__________________',
+                    text: `адрес: ${props.address}`,
                     fontSize: 12,
                     alignment: 'justify'
                   },
                   {
-                    text: 'тел.____________________',
+                    text: `тел. +${props.phone}`,
                     fontSize: 12,
                     alignment: 'justify'
                   },
                   {
-                    text: 'e-mail:__________________',
+                    text: `e-mail: ${props.email}`,
                     fontSize: 12,
                     alignment: 'justify'
                   },
@@ -1343,12 +1417,12 @@ const RestructuringAgreementDocument = (props) => {
               {
                 stack: [
                   {
-                    text: '1.2. МҚҰ осы Шартқа және Қарыз алушының өтінішіне сәйкес ___.___.20__ж №________электрондық тәсілмен микрокредит беру туралы шарт бойынша Қарыз алушының МҚҰ алдындағы осы Шартқа қол қойылған күнгі ___________ теңге мөлшерінде берешегін қайта құрылымдауды ұсынады.',
+                    text: `1.2. МҚҰ осы Шартқа және Қарыз алушының өтінішіне сәйкес ${props.givenDate}ж №${props.contractNumber} электрондық тәсілмен микрокредит беру туралы шарт бойынша Қарыз алушының МҚҰ алдындағы осы Шартқа қол қойылған күнгі ${props.main} теңге мөлшерінде берешегін қайта құрылымдауды ұсынады.`,
                     fontSize: 12,
                     alignment: 'justify'
                   },
                   {
-                    text: '1.3. Борышты қайта құрылымдау ___.___.20__ж №___ электрондық тәсілмен микрокредит беру туралы шарт бойынша борышты төлеу мерзімін кейінге қалдыруды беру арқылы жүзеге асырылады.',
+                    text: `1.3. Борышты қайта құрылымдау ${props.givenDate}ж №${props.contractNumber} электрондық тәсілмен микрокредит беру туралы шарт бойынша борышты төлеу мерзімін кейінге қалдыруды беру арқылы жүзеге асырылады.`,
                     fontSize: 12,
                     alignment: 'justify'
                   },
@@ -1693,7 +1767,7 @@ const RestructuringAgreementDocument = (props) => {
                     alignment: 'justify'
                   },
                   {
-                    text: '4.3. МҚҰ:',
+                    text: '4.3. МҚҰ міндеттенеді:',
                     fontSize: 12,
                     alignment: 'justify',
                     bold: true
@@ -1829,7 +1903,7 @@ const RestructuringAgreementDocument = (props) => {
                     alignment: 'justify'
                   },
                   {
-                    text: '4.4. МҚҰ:',
+                    text: '4.4. МҚҰ құқылы:',
                     fontSize: 12,
                     alignment: 'justify',
                     bold: true
@@ -1920,7 +1994,7 @@ const RestructuringAgreementDocument = (props) => {
                     alignment: 'justify'
                   },
                   {
-                    text: '4.5.МҚҰ:',
+                    text: '4.5.МҚҰ құқығы жоқ:',
                     fontSize: 12,
                     alignment: 'justify',
                     bold: true
@@ -2442,37 +2516,37 @@ const RestructuringAgreementDocument = (props) => {
                     italics: true
                   },
                   {
-                    text: 'Т.А.Ә.а. ___________________',
+                    text: `Т.А.Ә.а. ${props.fio}`,
                     fontSize: 12,
                     alignment: 'justify'
                   },
                   {
-                    text: 'ЖСН _____________________',
+                    text: `ЖСН ${props.iin}`,
                     fontSize: 12,
                     alignment: 'justify'
                   },
                   {
-                    text: 'жеке куәлік № _____________',
+                    text: `жеке куәлік № ${props.cardNumber}`,
                     fontSize: 12,
                     alignment: 'justify'
                   },
                   {
-                    text: 'берілді _______ҚР_____________ж.',
+                    text: `берілді ${props.cardGiven} ${props.startCard}ж.`,
                     fontSize: 12,
                     alignment: 'justify'
                   },
                   {
-                    text: 'мекен жайы: _____________',
+                    text: `мекен жайы: ${props.address}`,
                     fontSize: 12,
                     alignment: 'justify'
                   },
                   {
-                    text: 'ұ/тел:  __________________',
+                    text: `ұ/тел:  ${props.phone}`,
                     fontSize: 12,
                     alignment: 'justify'
                   },
                   {
-                    text: 'e-mail:__________________',
+                    text: `e-mail:${props.email}`,
                     fontSize: 12,
                     alignment: 'justify'
                   },
@@ -2519,14 +2593,50 @@ const RestructuringAgreementDocument = (props) => {
         text: ' '
       },
       {
+        text: ' '
+      },
+      {
+        text: ' '
+      },
+      {
+        text: ' '
+      },
+      {
+        text: ' '
+      },
+      {
+        text: ' '
+      },
+      {
+        text: ' '
+      },
+      {
+        text: ' '
+      },
+      {
+        text: ' '
+      },
+      {
+        text: ' '
+      },
+      {
+        text: ' '
+      },
+      {
+        text: ' '
+      },
+      {
+        text: ' '
+      },
+      {
         stack: [
           {
-            text: 'Приложение к договору №__________от___.___.20___г./',
+            text: `Приложение к договору №${props.contractNumber} от ${props.givenDate}г./`,
             fontSize: 12,
             alignment: 'right'
           },
           {
-            text: '______.______ж. № ___________Шартқа қосымша',
+            text: `${props.givenDate}ж. №${props.contractNumber} Шартқа қосымша`,
             fontSize: 12,
             alignment: 'right'
           }
@@ -2550,6 +2660,7 @@ const RestructuringAgreementDocument = (props) => {
       {
         text: ' '
       },
+      
       {
         stack: [
           {
@@ -2623,16 +2734,25 @@ const RestructuringAgreementDocument = (props) => {
             ],
             [
               {
-                text: ' '
+                text: `${props.total}`,
+                fontSize: 12,
+                alignment: 'center'
               },
   
               {
-                text: ' '
+                text: `${props.main}`,
+                fontSize: 12,
+                alignment: 'center'
               },
               {
-                text: ' '
-              },{
-                text: ' '
+                text: `${props.reward}`,
+                fontSize: 12,
+                alignment: 'center'
+              },
+              {
+                text: `${props.endDate}`,
+                fontSize: 12,
+                alignment: 'center'
               },
             ]
           ]
@@ -2686,26 +2806,54 @@ const RestructuringAgreementDocument = (props) => {
                   {
                     text: 'ТОО/ЖШС «МФО «I-CREDIT.KZ»',
                     fontSize: 12,
-                    alignment: 'center'
                   },
                   {
                     text: 'БИН/БСН 070440003902',
                     fontSize: 12,
-                    alignment: 'center'
+                  },
+                  {
+                    text: 'ИИК/ЖСК KZ976017131000000372',
+                    fontSize: 12,
+                  },
+                  {
+                    text: 'АО "Народный Банк Казахстана"',
+                    fontSize: 12,
+                  },
+                  {
+                    text: 'БИК/БСК HSBKKZKX',
+                    fontSize: 12,
                   },
                 ]
               },
               {
                 stack: [
                   {
-                    text: 'ФИО',
+                    text: `ФИО/Т.А.Ә.а. ${props.fio}`,
                     fontSize: 12,
-                    alignment: 'center'
                   },
                   {
-                    text: 'ИИН',
+                    text: `ИИН/ЖСН ${props.iin}`,
                     fontSize: 12,
-                    alignment: 'center'
+                  },
+                  {
+                    text: `удостоверение личности/жеке куәлік ${props.cardNumber}`,
+                    fontSize: 12,
+                  },
+                  {
+                    text: `выдано/берілді ${props.cardGiven} ${props.startCard}`,
+                    fontSize: 12,
+                  },
+                  {
+                    text: `адрес/мекен жайы: ${props.address}`,
+                    fontSize: 12,
+                  },
+                  {
+                    text: `тел: ${props.phone}`,
+                    fontSize: 12,
+                  },
+                  {
+                    text: `e-mail: ${props.email}`,
+                    fontSize: 12,
                   },
                 ]
               }

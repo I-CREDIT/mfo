@@ -90,10 +90,12 @@ const Footer = () => {
                     <a><h5>Правила добровольного онлайн страхования</h5></a>
                   </div>
                 </a>
-                {/* <Typography>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex,
-                  sit amet blandit leo lobortis eget.
-                </Typography> */}
+                {/* <a href="/License.pdf" target="_blank" className="footerCol">
+                  <div className="extra-info">
+                    <img src={require("../../img/svg/Оферта.svg")} />
+                    <a><h5>Лицензия на осуществление микрофинансовой деятельности</h5></a>
+                  </div>
+                </a> */}
               </AccordionDetails>
             </Accordion>
           </div>

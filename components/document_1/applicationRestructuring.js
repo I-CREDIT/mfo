@@ -20,7 +20,7 @@ const ApplicationRestructuringDocument = (props) => {
       {
         stack: [
           {
-            text: `от ФИО ${props.fio}`,
+            text: `от ${props.fio}`,
             fontSize: 12,
             alignment: 'right'
           },
@@ -59,7 +59,7 @@ const ApplicationRestructuringDocument = (props) => {
         text: ' ',
       },
       {
-        text: `Прошу реструктуризовать мою задолженность по договору (далее - договор) путем заключения договора реструктуризации долга (далее - вновь заключаемый договор) со ставкой вознаграждения в размере ?????????????___%, на срок ${props.period} дней, для чего оплачиваю сумму в размере ${props.penalty ? props.moneyForRestructuring + (+props.penalty) : props.moneyForRestructuring} тенге, которую прошу распределить на:`,
+        text: `Прошу реструктуризовать мою задолженность по договору (далее - договор) путем заключения договора реструктуризации долга (далее - вновь заключаемый договор) со ставкой вознаграждения в размере ${props.period}%, на срок ${props.period} дней, для чего оплачиваю сумму в размере ${props.penalty ? props.moneyForRestructuring + (+props.penalty) : props.moneyForRestructuring} тенге, которую прошу распределить на:`,
         fontSize: 12,
         alignment: 'justify'
       },
@@ -70,7 +70,7 @@ const ApplicationRestructuringDocument = (props) => {
         fontSize: 12,
         alignment: 'justify',
         ul: [
-          `погашение неустойки (при её наличии) по договору в размере ${props.penalty ? props.penalty : ''} тенге;`,
+          `погашение неустойки (при её наличии) по договору в размере ${props.penalty ? props.penalty : 0} тенге;`,
           `погашение вознаграждения в размере ${props.reward} тенге по договору;`,
           `оплату суммы страховой премии в размере ${props.reward} тенге, по вновь заключаемому договору, которую прошу перечислить страховой организации на основании договора добровольного страхования жизни;`
         ]

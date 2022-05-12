@@ -291,7 +291,7 @@ class Status extends React.Component {
                     </div>
                     :
                     <div className='documents'>
-                      {/* <h4>
+                      <h4>
                         Документы по договору <span>№{this.props.userStatus.userStatus.contractNumber} от {this.props.userStatus.userStatus.givenDate}</span>
                       </h4>
                       <ul className='documentsContainer'>
@@ -351,8 +351,26 @@ class Status extends React.Component {
                           reward={this.props.userStatus.userStatus.reward}
                           penalty={this.props.userStatus.userStatus.penalty ? this.props.userStatus.userStatus.penalty : 0}
                         />
-                        <RestructuringAgreementDocument/>
-                    </ul> */}
+                        <RestructuringAgreementDocument
+                          contractNumber={this.props.userStatus.userStatus.contractNumber}
+                          iin={this.props.userStatus.userStatus.iin}
+                          givenDate={this.props.userStatus.userStatus.givenDate}
+                          fio={this.props.userStatus.userStatus.fio}
+                          penalty={this.props.userStatus.userStatus.penalty ? this.props.userStatus.userStatus.penalty : 0}
+                          moneyForRestructuring={(+this.props.userStatus.userStatus.reward) * 2}
+                          period={this.props.userStatus.userStatus.period}
+                          cardNumber={this.props.userStatus.userStatus.cardNumber}
+                          startCard={this.props.userStatus.userStatus.startCard}
+                          endCard={this.props.userStatus.userStatus.endCard}
+                          cardGiven={this.props.userStatus.userStatus.cardGiven}
+                          address={this.props.userStatus.userStatus.address}
+                          phone={this.props.userStatus.userStatus.phone}
+                          email={this.props.userStatus.userStatus.email}
+                          main={this.props.userStatus.userStatus.main}
+                          total={this.props.userStatus.userStatus.total}
+                          reward={this.props.userStatus.userStatus.reward}
+                          endDate={this.props.userStatus.userStatus.endDate}/>
+                    </ul>
                   </div>
                   }
             </div>
@@ -474,7 +492,7 @@ class Status extends React.Component {
                     </div>
                     :
                     <div className='documents'>
-                      {/* <h4>
+                      <h4>
                         Документы по договору <span>№{this.props.userStatus.userStatus.contractNumber} от {this.props.userStatus.userStatus.givenDate}</span>
                       </h4>
                       <ul className='documentsContainer'>
@@ -534,8 +552,26 @@ class Status extends React.Component {
                           reward={this.props.userStatus.userStatus.reward}
                           penalty={this.props.userStatus.userStatus.penalty ? this.props.userStatus.userStatus.penalty : 0}
                         />
-                        <RestructuringAgreementDocument/>
-                      </ul> */}
+                        <RestructuringAgreementDocument
+                          contractNumber={this.props.userStatus.userStatus.contractNumber}
+                          iin={this.props.userStatus.userStatus.iin}
+                          givenDate={this.props.userStatus.userStatus.givenDate}
+                          fio={this.props.userStatus.userStatus.fio}
+                          penalty={this.props.userStatus.userStatus.penalty ? this.props.userStatus.userStatus.penalty : 0}
+                          moneyForRestructuring={(+this.props.userStatus.userStatus.reward) * 2}
+                          period={this.props.userStatus.userStatus.period}
+                          cardNumber={this.props.userStatus.userStatus.cardNumber}
+                          startCard={this.props.userStatus.userStatus.startCard}
+                          endCard={this.props.userStatus.userStatus.endCard}
+                          cardGiven={this.props.userStatus.userStatus.cardGiven}
+                          address={this.props.userStatus.userStatus.address}
+                          phone={this.props.userStatus.userStatus.phone}
+                          email={this.props.userStatus.userStatus.email}
+                          main={this.props.userStatus.userStatus.main}
+                          total={this.props.userStatus.userStatus.total}
+                          reward={this.props.userStatus.userStatus.reward}
+                          endDate={this.props.userStatus.userStatus.endDate}/>
+                      </ul>
                     </div>
                   }
             </div>
@@ -665,7 +701,7 @@ class Status extends React.Component {
                     </div>
                     :
                     <div className='documents'>
-                      {/* <h4>
+                      <h4>
                         Документы по договору <span>№{this.props.userStatus.userStatus.contractNumber} от {this.props.userStatus.userStatus.givenDate}</span>
                       </h4>
                       <ul className='documentsContainer'>
@@ -725,8 +761,26 @@ class Status extends React.Component {
                           reward={this.props.userStatus.userStatus.reward}
                           penalty={this.props.userStatus.userStatus.penalty ? this.props.userStatus.userStatus.penalty : 0}
                         />
-                        <RestructuringAgreementDocument/>
-                      </ul> */}
+                        <RestructuringAgreementDocument
+                          contractNumber={this.props.userStatus.userStatus.contractNumber}
+                          iin={this.props.userStatus.userStatus.iin}
+                          givenDate={this.props.userStatus.userStatus.givenDate}
+                          fio={this.props.userStatus.userStatus.fio}
+                          penalty={this.props.userStatus.userStatus.penalty ? this.props.userStatus.userStatus.penalty : 0}
+                          moneyForRestructuring={(+this.props.userStatus.userStatus.reward) * 2}
+                          period={this.props.userStatus.userStatus.period}
+                          cardNumber={this.props.userStatus.userStatus.cardNumber}
+                          startCard={this.props.userStatus.userStatus.startCard}
+                          endCard={this.props.userStatus.userStatus.endCard}
+                          cardGiven={this.props.userStatus.userStatus.cardGiven}
+                          address={this.props.userStatus.userStatus.address}
+                          phone={this.props.userStatus.userStatus.phone}
+                          email={this.props.userStatus.userStatus.email}
+                          main={this.props.userStatus.userStatus.main}
+                          total={this.props.userStatus.userStatus.total}
+                          reward={this.props.userStatus.userStatus.reward}
+                          endDate={this.props.userStatus.userStatus.endDate}/>
+                      </ul>
                     </div>
                   }
             </div>
@@ -901,7 +955,7 @@ class Status extends React.Component {
                     </div>
                     :
                     <div className='documents'>
-                      {/* <h4>
+                      <h4>
                         Документы по договору <span>№{this.props.userStatus.userStatus.contractNumber} от {this.props.userStatus.userStatus.givenDate}</span>
                       </h4>
                       <ul className='documentsContainer'>
@@ -961,8 +1015,27 @@ class Status extends React.Component {
                           reward={this.props.userStatus.userStatus.reward}
                           penalty={this.props.userStatus.userStatus.penalty ? this.props.userStatus.userStatus.penalty : 0}
                         />
-                        <RestructuringAgreementDocument/>
-                      </ul> */}
+                        <RestructuringAgreementDocument
+                          contractNumber={this.props.userStatus.userStatus.contractNumber}
+                          iin={this.props.userStatus.userStatus.iin}
+                          givenDate={this.props.userStatus.userStatus.givenDate}
+                          fio={this.props.userStatus.userStatus.fio}
+                          penalty={this.props.userStatus.userStatus.penalty ? this.props.userStatus.userStatus.penalty : 0}
+                          moneyForRestructuring={(+this.props.userStatus.userStatus.reward) * 2}
+                          period={this.props.userStatus.userStatus.period}
+                          cardNumber={this.props.userStatus.userStatus.cardNumber}
+                          startCard={this.props.userStatus.userStatus.startCard}
+                          endCard={this.props.userStatus.userStatus.endCard}
+                          cardGiven={this.props.userStatus.userStatus.cardGiven}
+                          address={this.props.userStatus.userStatus.address}
+                          phone={this.props.userStatus.userStatus.phone}
+                          email={this.props.userStatus.userStatus.email}
+                          main={this.props.userStatus.userStatus.main}
+                          total={this.props.userStatus.userStatus.total}
+                          reward={this.props.userStatus.userStatus.reward}
+                          endDate={this.props.userStatus.userStatus.endDate}
+                        />
+                      </ul>
                     </div>
                   }
             </div>
