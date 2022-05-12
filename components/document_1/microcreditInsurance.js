@@ -61,7 +61,7 @@ const MicrocreditInsuranceDocument = (props) => {
                     text: ' ',
                   },
                   {
-                    text: `С условиями добровольного страхованияжизни по договору №${props.contractNumber} добровольного страхования полностью согласен.`,
+                    text: `С Правилами страхования, размещенными на интернет ресурсе Страховщика и/или ТОО «МФО«i- credit.kz» ознакомлен (-а).`,
                     style: 'regular11',
                     alignment: 'justify',
                   },
@@ -96,7 +96,15 @@ const MicrocreditInsuranceDocument = (props) => {
                     text: ' ',
                   },
                   {
-                    text: `Сонымен қатар, сақтандыру сомасының жарнасын мөлшері ${props.reward} теңгені ${props.period} күн сақтандыру мерзіміне АҚ «Freedom Finance Life» сақтандыру компаниясының №${props.contractNumber} өмірді ерікті мерзімді сақтандыру шартымен толық келісемін. №${props.contractNumber} өмірді ерікті мерзімді сақтандыру шартымен толық келісемін.`,
+                    text: `Сонымен қатар, сақтандыру сомасының жарнасын мөлшері ${props.reward} теңгені ${props.period} күн сақтандыру мерзіміне АҚ «Freedom Finance Life» сақтандыру компаниясының №${props.contractNumber} өмірді ерікті мерзімді сақтандыру шартымен толық келісемін.`,
+                    style: 'regular11',
+                    alignment: 'justify',
+                  },
+                  {
+                    text: ' '
+                  },
+                  {
+                    text: 'Сақтандырушының және/немесе"МҚҰ"i- credit.kz" ЖШС интернет ресурсында орналастырылған сақтандыру қағидаларымен таныстым.',
                     style: 'regular11',
                     alignment: 'justify',
                   },

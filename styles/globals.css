@@ -596,6 +596,9 @@ button {
   .finance .primary {
     margin-top: 580px;
   }
+  .MuiButtonBase-root {
+    margin-top: 0
+  }
 }
 
 .agreement-btn:disabled {
@@ -3497,4 +3500,9 @@ nav[role="navigation"] .users a:before {
   .supportButton {
     display: none;
   }
+}
+
+
+.MuiAccordion-root:before {
+  display: none;
 }

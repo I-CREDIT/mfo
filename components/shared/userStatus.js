@@ -249,6 +249,7 @@ class Status extends React.Component {
                           insuranceAmount={this.props.userStatus.userStatus.insuranceAmount}
                           code={this.props.userStatus.userStatus.code}
                           period={this.props.userStatus.userStatus.period}
+                          reward={this.props.userStatus.userStatus.reward}
                         />
                         <InsuranceContractDocument
                           contractNumber={this.props.userStatus.userStatus.contractNumber}
@@ -322,6 +323,7 @@ class Status extends React.Component {
                           insuranceAmount={this.props.userStatus.userStatus.insuranceAmount}
                           code={this.props.userStatus.userStatus.code}
                           period={this.props.userStatus.userStatus.period}
+                          reward={this.props.userStatus.userStatus.reward}
                         />
                         <InsuranceContractDocument
                           contractNumber={this.props.userStatus.userStatus.contractNumber}
@@ -430,6 +432,7 @@ class Status extends React.Component {
                           insuranceAmount={this.props.userStatus.userStatus.insuranceAmount}
                           code={this.props.userStatus.userStatus.code}
                           period={this.props.userStatus.userStatus.period}
+                          reward={this.props.userStatus.userStatus.reward}
                         />
                         <InsuranceContractDocument
                           contractNumber={this.props.userStatus.userStatus.contractNumber}
@@ -503,6 +506,7 @@ class Status extends React.Component {
                           insuranceAmount={this.props.userStatus.userStatus.insuranceAmount}
                           code={this.props.userStatus.userStatus.code}
                           period={this.props.userStatus.userStatus.period}
+                          reward={this.props.userStatus.userStatus.reward}
                         />
                         <InsuranceContractDocument
                           contractNumber={this.props.userStatus.userStatus.contractNumber}
@@ -619,6 +623,7 @@ class Status extends React.Component {
                           insuranceAmount={this.props.userStatus.userStatus.insuranceAmount}
                           code={this.props.userStatus.userStatus.code}
                           period={this.props.userStatus.userStatus.period}
+                          reward={this.props.userStatus.userStatus.reward}
                         />
                         <InsuranceContractDocument
                           contractNumber={this.props.userStatus.userStatus.contractNumber}
@@ -692,6 +697,7 @@ class Status extends React.Component {
                           insuranceAmount={this.props.userStatus.userStatus.insuranceAmount}
                           code={this.props.userStatus.userStatus.code}
                           period={this.props.userStatus.userStatus.period}
+                          reward={this.props.userStatus.userStatus.reward}
                         />
                         <InsuranceContractDocument
                           contractNumber={this.props.userStatus.userStatus.contractNumber}
@@ -853,6 +859,7 @@ class Status extends React.Component {
                           insuranceAmount={this.props.userStatus.userStatus.insuranceAmount}
                           code={this.props.userStatus.userStatus.code}
                           period={this.props.userStatus.userStatus.period}
+                          reward={this.props.userStatus.userStatus.reward}
                         />
                         <InsuranceContractDocument
                           contractNumber={this.props.userStatus.userStatus.contractNumber}
@@ -926,6 +933,7 @@ class Status extends React.Component {
                           insuranceAmount={this.props.userStatus.userStatus.insuranceAmount}
                           code={this.props.userStatus.userStatus.code}
                           period={this.props.userStatus.userStatus.period}
+                          reward={this.props.userStatus.userStatus.reward}
                         />
                         <InsuranceContractDocument
                           contractNumber={this.props.userStatus.userStatus.contractNumber}
