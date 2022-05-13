@@ -1041,6 +1041,51 @@ class Status extends React.Component {
             </div>
           </div>
         )
+        case 9:
+        return (
+          <div className='container'>
+            <div className='alert alert-primary' 
+              style={{
+                borderRadius: '40px',
+              }}
+            >
+              <h3 className='alert-heading'
+                style={{
+                  textAlign: 'center'
+                }}
+              >К сожалению по Вашей заявке отказано.</h3>
+              <p className='mb-0'
+                style={{
+                  textAlign: 'center'
+                }}
+              >Вы не сможете подавать повторную заявку до {this.props.userStatus.userStatus.expiration}.</p>
+              <hr/>
+              <h3
+                style={{
+                  textAlign: 'center',
+                  margin: '20px 0'
+                }}
+              >
+                Но наши партнеры уже одобрили Вам кредит на ту же сумму!
+              </h3>
+              <div className="cabinet-btn"
+                style={{
+                  padding: '0'
+                }}
+              >
+                <a href="https://bit.ly/3o94MgI" target="_blank">
+                  <button 
+                    style={{
+                      position: 'unset',
+                      opacity: '1',
+                      borderRadius: '20px'
+                    }}
+                  >Получить предложение партнеров</button>
+                </a>
+              </div> 
+            </div>
+          </div>
+        )
       default:
         return (
           <div></div>

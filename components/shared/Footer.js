@@ -5,6 +5,7 @@ import RulesMicrocreditDocument from '../document_1/rulesMicrocredit';
 import { Accordion, AccordionDetails, AccordionSummary, Typography } from '@material-ui/core';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import { makeStyles } from '@material-ui/core/styles';
+import LicenseDocument from '../document_1/license';
 const useStyles = makeStyles((theme) => ({
   root: {
     width: '100%',
@@ -25,7 +26,7 @@ const Footer = () => {
   const classes = useStyles();
   return (
     <footer className={router.pathname.includes('admin') ? 'd-none footer mt-5 mb-5' :  'footer mt-5 mb-5'}>
-      <hr></hr>
+      
         <div className="container">
           <div className="row footerCols">
             <div className="col-md-4 footerCol">
@@ -90,12 +91,9 @@ const Footer = () => {
                     <a><h5>Правила добровольного онлайн страхования</h5></a>
                   </div>
                 </a>
-                {/* <a href="/License.pdf" target="_blank" className="footerCol">
-                  <div className="extra-info">
-                    <img src={require("../../img/svg/Оферта.svg")} />
-                    <a><h5>Лицензия на осуществление микрофинансовой деятельности</h5></a>
-                  </div>
-                </a> */}
+                <div className='footerCol'>
+                  <LicenseDocument/>
+                </div>
               </AccordionDetails>
             </Accordion>
           </div>

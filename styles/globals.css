@@ -963,6 +963,13 @@ button {
   justify-content: center;
   align-items: center;
 }
+.alert .cabinet-btn button {
+  animation-name: btn2;
+}
+@keyframes btn2 {
+  0% {opacity: 1;}
+  100% {opacity: 1;}
+}
 @keyframes imgIcon {
   0% {opacity: 1;}
   99% {opacity: 1;}
@@ -1099,7 +1106,9 @@ a,
 }
 
 @media only screen and (max-width: 768px) {
-
+  .otherPages {
+    padding-top: 80px!important;
+  }
   /* .secondary-header {
     display: none !important;
   } */
@@ -2325,6 +2334,11 @@ a:hover {
   .footerCols .footerCol:nth-child(4) {
     order: 6;
   }
+}
+
+.footer {
+  border-top: 1px solid #dbdbdb;
+  padding-top: 20px;
 }
 
 @media only screen and (min-width: 768px) {

@@ -133,7 +133,7 @@ const MicrocreditInsuranceDocument = (props) => {
         }
       },
       {
-        text: 'Поручение / Согласие на страхование микрокредита',
+        text: 'Поручение / Согласие на страхование',
         style: 'bold11',
         alignment: 'center'
       },
