@@ -63,10 +63,10 @@ const Footer = () => {
             </div>
             <div className="col-md-4 footerCol">
               <div className="lists">
-                <p>ТОО «МФО «I-Credit.kz» </p>
-                <p>г. Алматы, 050057</p>
-                <p>ул. Толе би 101</p>
-                <p>БЦ "Толе би", 3 этаж, блок D</p>
+                <p>{t('footer-1')}</p>
+                <p>{t('footer-2')}, 050057</p>
+                <p>{t('footer-3')}, 101</p>
+                <p>{t('footer-4')}</p>
                 <p>БИН: 070440003902</p>
                 <p>ОКЭД: 64929</p>
                 <p>Р/сч: KZ976017131000000372</p>

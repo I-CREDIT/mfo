@@ -72,27 +72,27 @@ class Instruction extends React.Component {
                     <div className="pogasit--otvet">
                       <div className="instruction">
                         <img className='text-center mb-4 instruction--img' src={require("../../img/qrcode/qrcode.jpg")} />
-                        <p>Инструкция</p>
+                        <p>{t('instruction')}</p>
                         <p className="instTop">
-                        1.	Откройте любое приложение с QR-сканером на Вашем телефоне.
+                        1. {t('voprosi--top-1-1')}
                         </p>
                         {/* <div className="instruction--img mb-5">
                           <img src={require("../../img/qiwi/qw.png")} />
                         </div> */}
                         <p className="instTop">
-                          2.	Наведите на QR-код выше. Откроется страница для совершения платежа.
+                          2. {t('voprosi--top-1-2')}
                         </p>
                         {/* <div className="instruction--img mb-5">
                           <img src={require("../../img/qiwi/qw2.png")} />
                         </div> */}
                         <p className="instTop">
-                          3.	Выберите метод оплаты и введите Ваши платёжные данные
+                          3. {t('voprosi--top-1-3')}
                         </p>
                         {/* <div className="instruction--img mb-5">
                           <img src={require("../../img/qiwi/qw3.png")} />
                         </div> */}
                         <p className="instTop">
-                          4.	Получите подтверждение об оплате и наслаждайтесь
+                          4. {t('voprosi--top-1-4')}
                         </p>
                         {/* <div className="instruction--img mb-5">
                           <img src={require("../../img/qiwi/qw4.png")} />
