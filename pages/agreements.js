@@ -3,11 +3,29 @@ import Router from 'next/router'
 import axios from 'axios'
 import swal from 'sweetalert'
 import Head from 'next/head'
+import pdfMake from "pdfmake/build/pdfmake";
+import pdfFonts from "pdfmake/build/vfs_fonts";
+import insuranceApplication from '../components/document_1/insuranceApplication'
+import microcreditInsurance from '../components/document_1/microcreditInsurance'
+import insuranceContract from '../components/document_1/insuranceContract'
+import microcreditAgreement from '../components/document_1/microcreditAgreement'
 
 // camera (catch photo)
 import { CameraFeed } from "../components/CameraFeed/CameraFeed";
 import {Modal, ModalBody, ModalHeader} from "reactstrap";
-import ProgressBar from "../components/shared/Progressbar";
+
+pdfMake.vfs = pdfFonts.pdfMake.vfs;
+pdfMake.fonts = {
+  TimesNewRoman: {
+    normal: 'TimesNewRoman.ttf',
+    bold: 'TimesNewRomanBold.ttf',
+    italics: 'TimesNewRomanItalics.ttf',
+    bolditalics: 'TimesNewRomanBoldItalics.ttf'
+  },
+  emptyCheckbox: {
+    normal: 'emptyCheckbox.ttf'
+  }
+}
 
 function getUrlParameter(name) {
   name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
@@ -28,6 +46,7 @@ const userToken = () => {
 class Agreement extends React.Component {
   constructor(props) {
     super(props);
+
     this.state = {
       token: null,
       loading: false,
@@ -40,8 +59,10 @@ class Agreement extends React.Component {
       errorInCode: null,
       phone: null,
       rest: null,
-      isModalOpen: false,
+      isModalOpen: true,
     }
+
+    this.toggleModal = this.toggleModal.bind(this)
   }
 
   async getUserDocument(token) {
@@ -49,8 +70,7 @@ class Agreement extends React.Component {
       loading: true
     })
 
-    await axios
-        .get(`https://api.money-men.kz/api/getData?token=${token}`)
+    await axios.get(`https://api.money-men.kz/api/getData?token=${token}`)
         .then((response) => {
           if(response.data.success) {
             this.setState({
@@ -65,12 +85,12 @@ class Agreement extends React.Component {
           else {
             Router.push('/')
           }
+
         })
         .catch(error => {
           this.setState({
             loading: false
           })
-          console.log(error)
           Router.push('/')
         })
   }
@@ -80,18 +100,18 @@ class Agreement extends React.Component {
       headers: {
         'Content-Type': 'application/json',
         'Accept': 'application/json',
-     }
+      }
     })
-    .then(response => {
-        if(response.success) {
-          this.setState({
-            isCodeSent: true
-          })
-        }
-    })
-    .catch(error=> {
-        console.log(error)
-    })
+        .then(response => {
+          if(response.success) {
+            this.setState({
+              isCodeSent: true
+            })
+          }
+        })
+        .catch(error=> {
+          console.log(error)
+        })
   }
 
   async sendAgreementStatusForRest() {
@@ -111,17 +131,16 @@ class Agreement extends React.Component {
           'Accept': 'application/json',
         }
       })
-      .then(response=> {
-        if(response.success) {
-          swal("Успешно!", `${response.message}`, "success")
-              .then(() => {
-            Router.push('/')
+          .then(response=> {
+            if(response.success) {
+              swal("Успешно!", `${response.message}`, "success").then(() => {
+                Router.push('/')
+              })
+            }
           })
-        }
-      })
-      .catch(error => {
-        console.log(error)
-      })
+          .catch(error => {
+            console.log(error)
+          })
     }
   }
 
@@ -130,23 +149,23 @@ class Agreement extends React.Component {
       loading:true
     })
     axios.get(`https://api.money-men.kz/api/prolongationAgreement?sign=y&request_id=${this.state.id}`)
-      .then(res=> {
-        this.setState({
-          loading: false
-        })
-        if(res.data.success){
-          swal("Успешно!", "success").then(()=>{
-            Router.push('/')
+        .then(res=> {
+          this.setState({
+            loading: false
           })
-        }
-      })
-      .catch(error=>{
-        this.setState({
-          loading: false
+          if(res.data.success){
+            swal("Успешно!", "success").then(()=>{
+              Router.push('/')
+            })
+          }
         })
-        console.log(error)
-        Router.push('/')
-      })
+        .catch(error=>{
+          this.setState({
+            loading: false
+          })
+          console.log(error)
+          Router.push('/')
+        })
   }
 
   async sendAgreementStatus(){
@@ -155,35 +174,32 @@ class Agreement extends React.Component {
     })
 
     try{
-      axios
-          .get('https://api.money-men.kz/api/agreement',{
-            params: {
-              id:this.state.id,
-              phone:this.state.phone,
-              token:this.state.token,
-              id_req: this.state.id_req,
-              sign: 'y'
-            },
-          })
-          .then((response) => {
+      axios.get('https://api.money-men.kz/api/agreement',{ params:{
+          id:this.state.id,
+          phone:this.state.phone,
+          token:this.state.token,
+          id_req: this.state.id_req,
+          sign: 'y'
+        }})
+          .then((response) =>{
             this.setState({
               loading: false
             })
 
             if(response.data.success){
-              swal("Успешно!", "Наши специалисты свяжутся с Вами в течении 15 минут")
-                  .then(()=>{
-                    Router.push('/')
-                  })
+              swal("Успешно!", "Наши специалисты свяжутся с Вами в течении 15 минут").then(()=>{
+                Router.push('/')
+              })
             }
           })
     }
-    catch(error) {
+    catch(error){
       this.setState({
         loading: false
       })
       console.log(error)
       Router.push('/')
+
     }
   }
 
@@ -207,8 +223,7 @@ class Agreement extends React.Component {
   componentDidMount(){
     // if(getUrlParameter('token').length === 0) {
     //   Router.push('/')
-    // }
-    // else {
+    // }else {
     //   this.setState ({
     //     token: getUrlParameter('token')
     //   })
@@ -217,11 +232,12 @@ class Agreement extends React.Component {
   }
 
   render() {
+
     return (
         <div className="container otherPages">
           { /* Модалка с получением фотки */ }
           <Modal
-              isOpen={true}
+              isOpen={ this.state.isModalOpen }
               class="modal modal-calculator"
               size="lg"
           >
@@ -241,8 +257,12 @@ class Agreement extends React.Component {
                 <ul className='complete'>
                   {this.state.docs.map(doc=> (
                       <li className={doc.link===null? 'd-none' : ''}><img className='checkedComplete' src={require("../img/checked.png")} /><a href={doc.link} target="_blank">{doc.name}</a></li>
-                  ))
-                }</ul>
+                  ))}
+                  {/* <li><img className='checkedComplete' src={require("../img/checked.png")} /><a onClick={() => pdfMake.createPdf(insuranceApplication).open()}>Заявление на страхование</a></li>
+                  <li><img className='checkedComplete' src={require("../img/checked.png")} /><a onClick={() => pdfMake.createPdf(microcreditInsurance).open()}>Согласие на страхование микрокредита</a></li>
+                  <li><img className='checkedComplete' src={require("../img/checked.png")} /><a onClick={() => pdfMake.createPdf(insuranceContract).open()}>Договор добровольного срочного страхования жизни</a></li>
+                  <li><img className='checkedComplete' src={require("../img/checked.png")} /><a onClick={() => pdfMake.createPdf(microcreditAgreement).open()}>Договор о предоставлении микрокредита</a></li> */}
+                </ul>
                 <div className="repeatBtn form-group" >
                   {this.state.rest === true ?   <button onClick={() => this.sendAgreementStatusWithRest()} className='mt-5' >Соглашаюсь</button> :
                       <button onClick={() => this.sendAgreementStatus()} className='mt-5' >Соглашаюсь</button>

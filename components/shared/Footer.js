@@ -6,6 +6,10 @@ import { Accordion, AccordionDetails, AccordionSummary, Typography } from '@mate
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import { makeStyles } from '@material-ui/core/styles';
 import LicenseDocument from '../document_1/license';
+
+// Перевод для функционального компонента
+import { useTranslation } from "react-i18next";
+
 const useStyles = makeStyles((theme) => ({
   root: {
     width: '100%',
