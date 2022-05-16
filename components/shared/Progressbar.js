@@ -69,7 +69,7 @@ class ProgressBar extends Component {
           UF4:values.UF_4 ,
           UF5:values.UF_5 ,
           UF6:values.UF_6 ,
-          UF7:values.UF_7 ,
+          UF7:values.UF_7 || '-' ,
           UF8:values.UF_8 ,
           UF9:values.UF_9 ,
           UF10:values.UF_10 ,

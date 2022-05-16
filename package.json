@@ -11,8 +11,9 @@
   },
   "dependencies": {
     "@material-ui/core": "^4.11.0",
-    "axios": "^0.21.0",
-    "bootstrap": "^4.5.3",
+    "@material-ui/icons": "^4.11.3",
+    "axios": "^0.21.4",
+    "bootstrap": "^4.6.1",
     "cross-env": "^7.0.2",
     "disable-scroll": "^0.5.1",
     "dotenv": "^8.2.0",
@@ -29,6 +30,7 @@
     "next-express": "^1.0.1",
     "next-images": "^1.6.2",
     "next-redux-wrapper": "^6.0.2",
+    "pdfmake": "^0.2.5",
     "query-string": "^6.13.7",
     "react": "17.0.1",
     "react-dom": "17.0.1",
@@ -46,7 +48,6 @@
     "redux-thunk": "^2.3.0",
     "scroll-to-element": "^2.0.3",
     "sweetalert": "^2.1.2",
-    "win-node-env": "^0.4.0",
     "yup": "^0.29.3"
   },
   "optionalDependencies": {

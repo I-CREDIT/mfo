@@ -1,8 +1,20 @@
 import React, { Fragment } from 'react';
 import Link from 'next/link'
 import {useRouter} from 'next/router'
-// Перевод для функционального компонента
-import { useTranslation } from "react-i18next";
+import RulesMicrocreditDocument from '../document_1/rulesMicrocredit';
+import { Accordion, AccordionDetails, AccordionSummary, Typography } from '@material-ui/core';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import { makeStyles } from '@material-ui/core/styles';
+import LicenseDocument from '../document_1/license';
+const useStyles = makeStyles((theme) => ({
+  root: {
+    width: '100%',
+  },
+  heading: {
+    fontSize: theme.typography.pxToRem(15),
+    fontWeight: theme.typography.fontWeightRegular,
+  },
+}));
 
 const AppLink = ({children, className, href}) =>
   <Link href={href}>
@@ -14,9 +26,10 @@ const Footer = () => {
   // Translation
   const { t } = useTranslation()
 
+  const classes = useStyles();
   return (
     <footer className={router.pathname.includes('admin') ? 'd-none footer mt-5 mb-5' :  'footer mt-5 mb-5'}>
-      <hr></hr>
+
         <div className="container">
           <div className="row footerCols">
             <div className="col-md-4 footerCol">
@@ -63,30 +76,52 @@ const Footer = () => {
                 № регистрации НБРК: 05.16.005
               </p>
             </div>
-            <div className="col-md-4  footerCol">
-              <div className="extra-info">
-                <img src={require("../../img/svg/Оферта.svg")} />
-                <a href="https://i-credit.kz/docs/rules.pdf" target="_blank">
-                  <h5>
-                    {t('extra-info-1-1')}
-                    <br/>
-                    {t('extra-info-1-2')}
-                  </h5>
+            <Accordion className='col-md-8' elevation={2} style={{borderRadius: '20px', marginTop: '10px'}}>
+              <AccordionSummary
+                expandIcon={<ExpandMoreIcon />}
+                aria-controls="panel1a-content"
+                id="panel1a-header"
+                style={{marginTop: '16px'}}
+              >
+                <Typography style={{fontWeight:'bold', margin:'auto', fontSize: '18px', fontFamily: 'CTCSplachRounded'}}>Документы</Typography>
+              </AccordionSummary>
+              <AccordionDetails style={{flexDirection: 'column'}}>
+                <RulesMicrocreditDocument/>
+                <a href="https://ffin.life/uploads/documents/%D0%9F%D1%80%D0%B0%D0%B2%D0%B8%D0%BB%D0%B0%20%D0%B4%D0%BE%D0%B1%D1%80%D0%BE%D0%B2%D0%BE%D0%BB%D1%8C%D0%BD%D0%BE%D0%B3%D0%BE%20%D0%BE%D0%BD%D0%BB%D0%B0%D0%B9%D0%BD%20%D1%81%D1%82%D1%80%D0%B0%D1%85%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D1%8F%20%D0%BE%D1%82%20%D0%BD%D0%B5%D1%81%D1%87%D0%B0%D1%81%D1%82%D0%BD%D0%BE%D0%B3%D0%BE%20%D1%81%D0%BB%D1%83%D1%87%D0%B0%D1%8F,%20%D0%A1%D0%94%20%D0%BE%D1%82%2005.03.2021%20%D0%B3%20%D1%81%20%D0%B8%D0%B7%D0%BC%D0%B5%D0%BD%D0%B5%D0%BD%D0%B8%D1%8F%D0%BC%D0%B8%20%D0%BD%D0%B0%2015112021.pdf" target="_blank" className="footerCol">
+                  <div className="extra-info">
+                    <img src={require("../../img/svg/Оферта.svg")} />
+                    <a><h5>Правила добровольного онлайн страхования</h5></a>
+                  </div>
                 </a>
-              </div>
-            </div>
-            <div className="col-md-4 footerCol">
-              <div className="extra-info">
-                <img src={require("../../img/svg/Оферта.svg")} />
-                <a href="https://i-credit.kz/docs/licence.pdf" target="_blank">
-                  <h5>
-                    {t('extra-info-2-1')}
-                    <br/>
-                    {t('extra-info-2-2')}
-                  </h5>
-                </a>
-              </div>
-            </div>
+                <div className='footerCol'>
+                  <LicenseDocument/>
+                </div>
+              </AccordionDetails>
+            </Accordion>
+            {/*<div className="col-md-4  footerCol">*/}
+            {/*  <div className="extra-info">*/}
+            {/*    <img src={require("../../img/svg/Оферта.svg")} />*/}
+            {/*    <a href="https://i-credit.kz/docs/rules.pdf" target="_blank">*/}
+            {/*      <h5>*/}
+            {/*        {t('extra-info-1-1')}*/}
+            {/*        <br/>*/}
+            {/*        {t('extra-info-1-2')}*/}
+            {/*      </h5>*/}
+            {/*    </a>*/}
+            {/*  </div>*/}
+            {/*</div>*/}
+            {/*<div className="col-md-4 footerCol">*/}
+            {/*  <div className="extra-info">*/}
+            {/*    <img src={require("../../img/svg/Оферта.svg")} />*/}
+            {/*    <a href="https://i-credit.kz/docs/licence.pdf" target="_blank">*/}
+            {/*      <h5>*/}
+            {/*        {t('extra-info-2-1')}*/}
+            {/*        <br/>*/}
+            {/*        {t('extra-info-2-2')}*/}
+            {/*      </h5>*/}
+            {/*    </a>*/}
+            {/*  </div>*/}
+            {/*</div>*/}
           </div>
         </div>
       </footer>

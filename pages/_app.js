@@ -33,10 +33,10 @@ class MyApp extends App {
       const compName = Component.name
       return (
           <Provider store={store}>
-             <div className="chatBlock">
-            <a href="https://t.me/icredit_kzbot" target="_blank">
-            <img className='imgwhatsapp mb-3' src={require("../img/svg/telegram.svg")}></img></a>
-            <a href="https://api.whatsapp.com/send?phone=+77752163255" target="_blank"><img className="imgwhatsapp" src={require("../img/svg/whatsapp.svg")} alt="" /></a>
+            <div className="chatBlock">
+              <a href="https://t.me/icredit_kzbot" target="_blank">
+              <img className='imgwhatsapp mb-3' src={require("../img/svg/telegram.svg")}></img></a>
+              <a href="https://api.whatsapp.com/send?phone=+77752163255" target="_blank"><img className="imgwhatsapp" src={require("../img/svg/whatsapp.svg")} alt="" /></a>
             </div>
             <Navbar />
             <Component {...pageProps}/>

@@ -571,9 +571,44 @@ button {
   padding-top: calc(12px + (50 - 12) * ((100vw - 320px) / (768 - 320))) !important;
 } */
 
+
+.documents {
+  max-width: 1200px;
+  margin: auto
+}
+.documents h4 {
+  background-color: rgb(234 220 220);
+  margin: 60px 0 0;
+  font-size: 20px;
+  padding: 10px;
+  border-radius: 6px 6px 0 0;
+}
+.documents h4 span {
+  color: #ef2221 !important;
+}
+.documents .documentsContainer {
+  background-color: rgba(17,83,75,.123);
+  border-radius: 0 0 6px 6px;
+  padding: 10px;
+}
+.documents .documentsContainer li {
+  margin: 0px 0px 10px;
+}
+.documents .documentsContainer li a {
+  font-weight: bold;
+  transition: .3s;
+}
+.documents .documentsContainer li a:hover {
+  color: #ef2221 !important;
+  opacity: .8;
+}
+
 @media only screen and (min-width: 321px) and (max-width: 768px) {
   .finance .primary {
     margin-top: 480px;
+  }
+  .MuiButtonBase-root {
+    margin-top: 0
   }
 }
 
@@ -954,6 +989,13 @@ button {
   justify-content: center;
   align-items: center;
 }
+.alert .cabinet-btn button {
+  animation-name: btn2;
+}
+@keyframes btn2 {
+  0% {opacity: 1;}
+  100% {opacity: 1;}
+}
 @keyframes imgIcon {
   0% {opacity: 1;}
   99% {opacity: 1;}
@@ -1090,6 +1132,12 @@ a,
 }
 
 @media only screen and (max-width: 768px) {
+  .otherPages {
+    padding-top: 80px!important;
+  }
+  /* .secondary-header {
+    display: none !important;
+  } */
   .otherPages--top .container {
     display: flex;
     justify-content: center;
@@ -2377,6 +2425,11 @@ a:hover {
   }
 }
 
+.footer {
+  border-top: 1px solid #dbdbdb;
+  padding-top: 20px;
+}
+
 @media only screen and (min-width: 768px) {
   .phone-numbers {
     display: flex;
@@ -3580,4 +3633,9 @@ nav[role="navigation"] .users a:before {
 
 .c-camera-feed .c-camera-feed__stage .canvas {
   width: 100%;
+}
+
+
+.MuiAccordion-root:before {
+  display: none;
 }

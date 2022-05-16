@@ -1,3 +1,7 @@
 {
-    "editor.tabSize": 2
+    "editor.tabSize": 2,
+    "editor.fontSize": 14,
+    "editor.hover.enabled": false,
+    "editor.mouseWheelZoom": true,
+    "editor.formatOnSave": true
 }
