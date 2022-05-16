@@ -116,15 +116,15 @@ class Instruction extends React.Component {
                   <Collapse isOpen={this.state.collapse === 'qiwiterminal'} id="qiwiterminal">
                     <div className="pogasit--otvet">
                       <div className="instruction">
-                        <p>Инструкция</p>
+                        <p>{t('instruction')}</p>
                         <p className="instTop">
-                        1.	В сенсорной панели Qiwi терминала нажать на «Оплату услуг».
+                        1. {t('voprosi--top-2-1')}
                         </p>
                         <div className="instruction--img mb-5">
                           <img src={require("../../img/qiwi/qw.png")} />
                         </div>
                         <p className="instTop">
-                          2.	Нажать на категорию Погашение кредитов/фин. услуги
+                          2. {t('voprosi--top-2-2')}
                         </p>
                         <div className="instruction--img mb-5">
                           <img src={require("../../img/qiwi/qw2.png")} />
