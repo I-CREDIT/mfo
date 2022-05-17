@@ -130,37 +130,37 @@ class Instruction extends React.Component {
                           <img src={require("../../img/qiwi/qw2.png")} />
                         </div>
                         <p className="instTop">
-                          3.	В открывшемся меню нажать на подкатегорию МКО и МФО
+                          3. {t('voprosi--top-2-3')}
                         </p>
                         <div className="instruction--img mb-5">
                           <img src={require("../../img/qiwi/qw3.png")} />
                         </div>
                         <p className="instTop">
-                          4.	С помощью кнопки Вперед найти микрофинансовую организацию «I-credit».
+                          4. {t('voprosi--top-2-4')}
                         </p>
                         <div className="instruction--img mb-5">
                           <img src={require("../../img/qiwi/qw4.png")} />
                         </div>
                         <p className="instTop">
-                          5.	На 3 странице кликнуть логотип МКО «I-credit».
+                          5. {t('voprosi--top-2-5')}
                         </p>
                         <div className="instruction--img mb-5">
                           <img src={require("../../img/qiwi/qw5.png")} />
                         </div>
                         <p className="instTop">
-                          6.	Ввести свой ИИН и нажать на кнопку Вперед
+                          6. {t('voprosi--top-2-6')}
                         </p>
                         <div className="instruction--img mb-5">
                           <img src={require("../../img/qiwi/qw6.png")} />
                         </div>
                         <p className="instTop">
-                          7.	Перепроверить верно ли введен ИИН заемщика, для подтверждения данных нажать на кнопку Вперед.
+                          7. {t('voprosi--top-2-7')}
                         </p>
                         <div className="instruction--img mb-5">
                           <img src={require("../../img/qiwi/qw7.png")} />
                         </div>
                         <p className="instTop">
-                          8.	Внесите сумму в купюроприемник терминала «Qiwi» и нажать на кнопку Оплатить.
+                          8. {t('voprosi--top-2-8')}
                         </p>
                         <div className="instruction--img mb-5">
                           <img src={require("../../img/qiwi/qw8.png")} />
@@ -183,40 +183,40 @@ class Instruction extends React.Component {
                     <div className="pogasit--otvet">
 
                     <p className="instruction font-weight-bold">
-                      Инструкция
+                      {t('instruction')}
                     </p>
                       <p className="instTop">
-                          1.	В сенсорной панели Касса24 нажать на «Оплату услуг».
+                          1. {t('voprosi--top-3-1')}
                         </p>
                         <div className="instruction--img mb-5">
                           <img src={require("../../img/kassa24/1.png")} />
                         </div>
                         <p className="instTop">
-                          2. Нажать на категорию Финансовые организации:
+                          2. {t('voprosi--top-3-2')}
                         </p>
                         <div className="instruction--img mb-5">
                           <img src={require("../../img/kassa24/2.png")} />
                         </div>
                         <p className="instTop">
-                          3.	Найдите в списке микрофинансовую организацию «I-credit». Для этого воспользуйтесь инструментом скролла экрана справа.
+                          3.  {t('voprosi--top-3-3')}
                         </p>
                         <div className="instruction--img mb-5">
                           <img src={require("../../img/kassa24/3.png")} />
                         </div>
                         <p className="instTop">
-                          4.	Кликните на логотип МКО «I-credit»
+                          4. {t('voprosi--top-3-4')}
                         </p>
                         <div className="instruction--img mb-5">
                           <img src={require("../../img/kassa24/4.png")} />
                         </div>
                         <p className="instTop">
-                          5.	Введите ИИН заемщика и кнопку Продолжить
+                          5. {t('voprosi--top-3-5')}
                         </p>
                         <div className="instruction--img mb-5">
                           <img src={require("../../img/kassa24/5.png")} />
                         </div>
                         <p className="instTop">
-                          6.	Внесите сумму в купюроприемник терминала «Касса24» и нажмите кнопку Оплатить.
+                          6. {t('voprosi--top-3-6')}
                         </p>
                         <div className="instruction--img mb-5">
                           <img src={require("../../img/kassa24/6.png")} />
@@ -237,26 +237,26 @@ class Instruction extends React.Component {
                   <Collapse isOpen={this.state.collapse === 'pogasit2'} id="pogasit2">
                     <div className="pogasit--otvet">
                     <p className="instruction font-weight-bold">
-                      Инструкция
+                      {t('instruction')}
                     </p>
                       <p className="instTop">
-                          1. Прежде необходимо усстановить на телефон мобильное приложение "Plus24".
+                          1. {t('voprosi--top-4-1')}
                         </p>
                         <div className="instruction--img mb-5">
                           <img src={require("../../img/plus24App/inst.jpg")} />
                         </div>
                         <p className="instTop">
-                          2.Пройти регистрацию и пополнить баланс Plus24 с помощью банковской карты или других способов.
+                          2. {t('voprosi--top-4-2')}
                         </p>
 
                         <p className="instTop">
-                          3.В поле поиска «Найти услугу или компанию» напишите "I-Credit". И перейти по найденной услуге.
+                          3. {t('voprosi--top-4-3')}
                         </p>
                         <div className="instruction--img mb-5">
                           <img src={require("../../img/plus24App/searchplus.jpg")} />
                         </div>
                         <p className="instTop">
-                          3.Заполните данные ИИН и сумма к оплате. И нажать кнопку «Оплатить».
+                          4. {t('voprosi--top-4-4')}
                         </p>
                     </div>
                   </Collapse>
@@ -275,25 +275,25 @@ class Instruction extends React.Component {
                     <div className="pogasit--otvet">
 
                     <p className="instruction font-weight-bold">
-                      Инструкция
+                      {t('instruction')}
                     </p>
                       <p className="instTop">
-                        1.Откройте приложение Homebank и перейдите во вкладку «Платежи»
+                        1. {t('voprosi--top-5-1')}
                       </p>
                       <div className="instruction--img mb-5">
                         <img src={require("../../img/homebank/halikstep1.jpg")} />
                       </div>
                       <p className="instTop">
-                        2.Далее в поиске напишите "I-Credit" и найдете услугу "I-CREDIT.KZ"
+                        2. {t('voprosi--top-5-2')}
                       </p>
                       <div className="instruction--img mb-5">
                         <img src={require("../../img/homebank/haliksearch.jpg")} />
                       </div>
                       <p className="instTop">
-                        3.Заполните данные: ваш ФИО и ИИН. Далее в поле «Сумма к оплате» внесите сумму полного погашения вашего микрокредита.
+                        3. {t('voprosi--top-5-3')}
                       </p>
                       <p className="instTop">
-                        4. После заполнения суммы необходимо выбрать банковскую карту для оплаты из выпадающего списка. И нажать кнопку «Оплатить».
+                        4. {t('voprosi--top-5-4')}
                       </p>
                     </div>
                   </Collapse>
@@ -314,10 +314,10 @@ class Instruction extends React.Component {
 
                       <div className="instruction">
                       <p className="instruction font-weight-bold">
-                        Инструкция
+                        {t('instruction')}
                       </p>
                       <p className="instTop">
-                        1.Обратиться в ближайшее отделение Halyk банка
+                        1. {t('voprosi--top-6-1')}
                       </p>
                         <div className="instruction--img">
                         </div>
