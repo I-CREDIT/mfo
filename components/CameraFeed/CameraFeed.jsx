@@ -4,7 +4,9 @@ export class CameraFeed extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            isCameraVisible: true
+            isCameraVisible: false,
+            isCameraLoading: true,
+            isVerificationCompleted: false,
         }
     }
 
@@ -39,6 +41,19 @@ export class CameraFeed extends Component {
     async componentDidMount() {
         const cameras = await navigator.mediaDevices.enumerateDevices();
         this.processDevices(cameras);
+
+        setTimeout(() => {
+            this.setState({
+                isCameraLoading: false,
+                isCameraVisible: true,
+            })
+        }, 1000)
+
+        setTimeout(() => {
+            this.setState({
+                isVerificationCompleted: true,
+            })
+        }, 10000)
     }
 
     /**
@@ -73,12 +88,17 @@ export class CameraFeed extends Component {
     render() {
         return (
             <div className="c-camera-feed">
+                <div className={`modelLoader ${this.state.isCameraLoading ? '' : 'd-none'}`}/>
+
                 <div className={`c-camera-feed--holder ${this.state.isCameraVisible ? '' : 'd-none'}`}>
                     <div className="c-camera-feed__viewer">
-                        {this.state.isCameraVisible}
                         <video ref={ref => (this.videoPlayer = ref)} width="100%" height="100%" />
+                        <div className={`face-id ${this.state.isVerificationCompleted ? 'd-none' : ''}`}>
+                            <div className="face-id__frame"/>
+                            <p className="face-id__text">Пожалуйста, поместите лицо в рамку</p>
+                        </div>
                     </div>
-                    <button onClick={this.takePhoto}>Сфотографировать</button>
+                    <button className={`${this.state.isVerificationCompleted ? '' : 'd-none'}`} onClick={this.takePhoto}>Сфотографировать</button>
                 </div>
 
                 <div className={`c-camera-feed--holder ${!this.state.isCameraVisible ? '' : 'd-none'}`}>
