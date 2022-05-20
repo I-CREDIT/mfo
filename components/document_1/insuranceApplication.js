@@ -17,10 +17,12 @@ pdfMake.fonts = {
 const InsuranceApplicationDocument = (props) => {
   
   const gender = () => {
-    if ((+props.iin[6]) % 2 === 1) {
-      return 'М'
-    } else {
-      return 'Ж'
+    if(props.iin) {
+      if ((+props.iin[6]) % 2 === 1) {
+        return 'М'
+      } else {
+        return 'Ж'
+      }
     }
   }
 

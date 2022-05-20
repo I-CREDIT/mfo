@@ -205,6 +205,14 @@ export const controlUtm = () => {
       cookie.set('clickid', getUrlParameter('click_id'), {expires: 30})
     }
   }
+  if(getUrlParameter('utm_source').length>0) {
+    if(getUrlParameter('utm_source') === 'sales_doubler') {
+      newCookie()
+      localStorage.clear();
+      cookie.set('utm_source', getUrlParameter('utm_source'), {expires: 30})
+      cookie.set('clickid', getUrlParameter('aff_sub'), {expires: 30})
+    }
+  }
 
   if(getUrlParameter('utm_source').length>0 && getUrlParameter('utm_medium').length>0 && getUrlParameter('utm_campaign').length>0) {
     if(getUrlParameter('utm_source') === 'altel_2365') {
