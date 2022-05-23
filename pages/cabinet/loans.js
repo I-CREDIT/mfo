@@ -10,8 +10,11 @@ import axios from 'axios'
 import Status from '../../components/shared/userStatus'
 import History from '../../components/shared/userHistory'
 import { ifSaled } from '../../defaults/saled'
+
+// Перевод для классового компонента
+import withUseTranslation from "../../public/js/hocs/useTranslation";
+
 const mapStateToProps = state => {
-    console.log('FFF', state.userReducer.user.url, state.userReducer.UF_3, state.userReducer.UF_4)
   return {userReducer: state.userReducer, userStatus: state.userStatus, userHistory: state.userHistory}
 }
 
@@ -31,7 +34,6 @@ class Cabinet extends React.Component {
     }
   }
 
-
   canSendRepeat() {
     axios
         .get(`https://api.money-men.kz/api/repeatUser?iin=${this.props.userReducer.user.UF_4}`)
@@ -49,6 +51,7 @@ class Cabinet extends React.Component {
           }
         })
   }
+
   getCurrentStep() {
     axios.get(`https://api.money-men.kz/api/notFull?iin=${this.props.userReducer.user.UF_4}`, {headers: {
       "Access-Control-Allow-Origin": "*",
@@ -94,8 +97,6 @@ class Cabinet extends React.Component {
                 }
             })
     }
-    // else {
-    //   console.log('hello')
       // this.setState({btnLoading: true})
       // await axios
       //   .get(`https://api.money-men.kz/api/repeatUser?iin=${this.props.userReducer.user.UF_4}`)
@@ -115,11 +116,14 @@ class Cabinet extends React.Component {
   }
 
   render() {
+    // Достаем функцию-переводчик
+    const { t } = this.props.useTranslationValue
+
     if(ifSaled(this.props.userReducer.user.UF_4)) {
       // проданные на ID collect
       return (
         <div className='container otherPages'>
-          <p className='welcome text-center'>{helloUser()} {this.props.userReducer.user.UF_5}
+          <p className='welcome text-center'>{t(helloUser())} {this.props.userReducer.user.UF_5}
           {" "+this.props.userReducer.user.UF_6}
           !</p>
           <div className="alert alert-info" role="alert">
@@ -133,7 +137,8 @@ class Cabinet extends React.Component {
       </div>
       )
       
-    }else {
+    }
+    else {
     return (
       <div className='otherPages'>
         <Head>
@@ -156,7 +161,7 @@ class Cabinet extends React.Component {
           )}
            
         <p className='welcome text-center'>
-            {helloUser()} {this.props.userReducer.user.UF_5} {" " + this.props.userReducer.user.UF_6}!
+            {t(helloUser())} {this.props.userReducer.user.UF_5} {" " + this.props.userReducer.user.UF_6}!
         </p>
         {!this.props.userStatus.userStatus.success && !this.props.userStatus.isLoading
             ?
@@ -209,4 +214,4 @@ class Cabinet extends React.Component {
 // const mapStateToProps = ({ usersReducer: { user: { UF9} } }) => ({
 // username: UF9 })
 
-export default withAuth(connect(mapStateToProps, mapDispatchToProps)(Cabinet));
+export default withAuth(connect(mapStateToProps, mapDispatchToProps)(withUseTranslation(Cabinet)));

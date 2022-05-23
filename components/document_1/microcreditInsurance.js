@@ -1,6 +1,9 @@
 import pdfMake from "pdfmake/build/pdfmake";
 import pdfFonts from "pdfmake/build/vfs_fonts";
 
+// Перевод для функционального компонента
+import { useTranslation } from "react-i18next";
+
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 pdfMake.fonts = {
   TimesNewRoman: {
@@ -15,6 +18,9 @@ pdfMake.fonts = {
 }
 
 const MicrocreditInsuranceDocument = (props) => {
+  // Translation
+  const { t } = useTranslation()
+
   let microcreditInsurance = {
     content: [
       {
@@ -158,7 +164,7 @@ const MicrocreditInsuranceDocument = (props) => {
   return (
     <li>
       <a onClick={() => pdfMake.createPdf(microcreditInsurance).open()}>
-        2. Согласие на страхование микрокредита
+        2. {t('consent-to-microcredit-insurance')}
       </a>
     </li>
   )

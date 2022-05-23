@@ -12,6 +12,9 @@ import InsuranceContractDocument from '../document_1/insuranceContract'
 import ApplicationRestructuringDocument from '../document_1/applicationRestructuring'
 import RestructuringAgreementDocument from '../document_1/restructuringAgreement'
 
+// Перевод для классового компонента
+import withUseTranslation from "../../public/js/hocs/useTranslation";
+
 // export const clientData = {
 //   name: props.userReducer.user.UF_5,
 //   secondName: props.userReducer.user.UF_6
@@ -162,23 +165,36 @@ class Status extends React.Component {
   }
 
   render() {
+    // Достаем функцию-переводчик
+    const { t, i18n } = this.props.useTranslationValue
 
     switch (this.props.userStatus.userStatus.stage) {
       case 1:
         return (
           <div className='mt-5'>
-            <h5 className='text-center'>Текущая заявка</h5>
-            <div className='cabinetmessage text-center'>
-              У вас микрокредит в статусе
-              <b>
-                "Льготный период"</b>
-            </div>
+            <h5 className='text-center'>{t('current-application')}</h5>
+              {
+                  i18n.language === 'ru' ?
+                      <div className='cabinetmessage text-center'>
+                          У вас микрокредит в статусе
+                          <b>
+                              "Льготный период"
+                          </b>
+                      </div> :
+                      <div className='cabinetmessage text-center'>
+                          Сізде
+                          <b>
+                              "Льготный период"
+                          </b>
+                          мәртебесінде шағын несие бар
+                      </div>
+              }
             <div>
               <table className='lperiod'>
                 <thead>
                   <tr>
                     <th>
-                      Дата выдачи 📅
+                        {t('give-date')} 📅
                     </th>
                     {/* <th>
                       Сумма на руки 💰
@@ -186,10 +202,10 @@ class Status extends React.Component {
                     <th>
                       Дата окончания льготного периода 📅
                     </th>
-                    <th>Основной долг 💸</th>
+                    <th>{t('main-debt')} 💸</th>
                     <th>Cумма погашения льготный период 💸</th>
-                    <th>Сумма задолженности на текущую дату</th>
-                    <th>Дата погашения 📅</th>
+                    <th>{t('debt-sum')}</th>
+                    <th>{t('pay-date')} 📅</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -207,14 +223,27 @@ class Status extends React.Component {
               <div className="buttonForm">
                 {this.state.btnLoading === true ?
                   <Spinner className="loading" size={200} spinnerColor={"#ef2221"} spinnerWidth={2} visible={true} /> :
-                  <button onClick={() => this.handleSubmit()} className=" oplataform--button" type="submit">Погасить {(+this.props.userStatus.userStatus.todayAmount).toLocaleString("ru-RU")} тенге</button>}
+                  <button onClick={() => this.handleSubmit()} className=" oplataform--button" type="submit">
+                      {
+                          i18n.language === 'ru' ?
+                          `Погасить ${(+this.props.userStatus.userStatus.todayAmount).toLocaleString("ru-RU")} тенге` :
+                              `${(+this.props.userStatus.userStatus.todayAmount).toLocaleString("ru-RU")} теңгені өтеу`
+                      }
+                  </button>
+                }
               </div>
                 {this.props.userStatus.userStatus.doctype === 1 ?
                     <div className='documents'>
-                      <h4>
-                        Документы по договору <span>№{this.props.userStatus.userStatus.contractNumber} от {this.props.userStatus.userStatus.givenDate}</span>
-                      </h4>
-                      <ul className='documentsContainer'>
+                        {
+                            i18n.language === 'ru' ?
+                                <h4>
+                                    Документы по договору <span>№{this.props.userStatus.userStatus.contractNumber} от {this.props.userStatus.userStatus.givenDate}</span>
+                                </h4> :
+                                <h4>
+                                    <span>№{this.props.userStatus.userStatus.contractNumber} {this.props.userStatus.userStatus.givenDate}</span> келісім-шарт бойынша құжаттар
+                                </h4>
+                        }
+                        <ul className='documentsContainer'>
                         <InsuranceApplicationDocument
                           fio={this.props.userStatus.userStatus.fio}
                           dateOfBirth={this.props.userReducer.user.UF_10}
@@ -285,9 +314,15 @@ class Status extends React.Component {
                     </div>
                     :
                     <div className='documents'>
-                      <h4>
-                        Документы по договору <span>№{this.props.userStatus.userStatus.contractNumber} от {this.props.userStatus.userStatus.givenDate}</span>
-                      </h4>
+                        {
+                            i18n.language === 'ru' ?
+                                <h4>
+                                    Документы по договору <span>№{this.props.userStatus.userStatus.contractNumber} от {this.props.userStatus.userStatus.givenDate}</span>
+                                </h4> :
+                                <h4>
+                                    <span>№{this.props.userStatus.userStatus.contractNumber} {this.props.userStatus.userStatus.givenDate}</span> келісім-шарт бойынша құжаттар
+                                </h4>
+                        }
                       <ul className='documentsContainer'>
                         <InsuranceApplicationDocument
                           fio={this.props.userStatus.userStatus.fio}
@@ -373,26 +408,37 @@ class Status extends React.Component {
       case 2:
         return (
           <div className='mt-5'>
-              <h5 className='text-center'>Текущая завяка</h5>
-            <div className='cabinetmessage text-center'>
-              У вас микрокредит в статусе
-              <b>
-                "Стандартный микрокредит"</b>
-            </div>
+              <h5 className='text-center'>{t('current-application')}</h5>
+              {
+                  i18n.language === 'ru' ?
+                      <div className='cabinetmessage text-center'>
+                          У вас микрокредит в статусе
+                          <b>
+                              "Стандартный микрокредит"
+                          </b>
+                      </div> :
+                      <div className='cabinetmessage text-center'>
+                          Сізде
+                          <b>
+                              "Стандартты шағын несие"
+                          </b>
+                          мәртебесінде шағын несие бар
+                      </div>
+              }
             <div>
               <table className='vdolge'>
                 <thead>
                   <tr>
                     <th>
-                      Дата выдачи 📅
+                        {t('give-date')} 📅
                     </th>
                     {/* <th>
                       Сумма на руки 💰
                     </th> */}
 
-                    <th>Основной долг 💸</th>
-                    <th>Сумма задолженности на текущую дату</th>
-                    <th>Дата погашения 📅</th>
+                    <th>{t('main-debt')} 💸</th>
+                    <th>{t('debt-sum')}</th>
+                    <th>{t('pay-date')} 📅</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -407,23 +453,40 @@ class Status extends React.Component {
                 </tbody>
               </table>
               <div className="buttonForm">
-                {/* {this.state.btnLoading === true ?
-                  <Spinner className="loading" size={200} spinnerColor={"#ef2221"} spinnerWidth={2} visible={true} /> :
-                  <button onClick={() => this.handleSubmit()} className=" oplataform--button" type="submit">Погасить {(+this.props.userStatus.userStatus.todayAmount).toLocaleString("ru-RU")} тенге</button>} */}
-                {+this.props.userStatus.userStatus.todayAmount > +this.props.userStatus.userStatus.mainAmount * 2.001 ?
-                this.state.btnLoading === true ?
-                  <Spinner className="loading" size={200} spinnerColor={"#ef2221"} spinnerWidth={2} visible={true} /> :
-                  <button onClick={() => this.handleSubmit()} className=" oplataform--button" type="submit">Погасить {(+this.props.userStatus.userStatus.mainAmount * 2).toLocaleString()} тенге</button>
-                :
-                this.state.btnLoading === true ?
-                  <Spinner className="loading" size={200} spinnerColor={"#ef2221"} spinnerWidth={2} visible={true} /> :
-                  <button onClick={() => this.handleSubmit()} className=" oplataform--button" type="submit">Погасить {(+this.props.userStatus.userStatus.todayAmount).toLocaleString()} тенге</button>}
+                {
+                    +this.props.userStatus.userStatus.todayAmount > +this.props.userStatus.userStatus.mainAmount * 2.001 ?
+                        this.state.btnLoading === true ?
+                            <Spinner className="loading" size={200} spinnerColor={"#ef2221"} spinnerWidth={2} visible={true} /> :
+                            <button onClick={() => this.handleSubmit()} className=" oplataform--button" type="submit">
+                                {
+                                    i18n.language === 'ru' ?
+                                        `Погасить ${(+this.props.userStatus.userStatus.mainAmount * 2).toLocaleString()} тенге` :
+                                        `${(+this.props.userStatus.userStatus.mainAmount * 2).toLocaleString()} теңгені өтеу`
+                                }
+                            </button>
+                        :
+                        this.state.btnLoading === true ?
+                            <Spinner className="loading" size={200} spinnerColor={"#ef2221"} spinnerWidth={2} visible={true} /> :
+                            <button onClick={() => this.handleSubmit()} className=" oplataform--button" type="submit">
+                                {
+                                    i18n.language === 'ru' ?
+                                        `Погасить ${(+this.props.userStatus.userStatus.todayAmount).toLocaleString()} тенге` :
+                                        `${(+this.props.userStatus.userStatus.todayAmount).toLocaleString()} теңгені өтеу`
+                                }
+                            </button>
+                }
               </div>
                   {this.props.userStatus.userStatus.doctype === 1 ?
                     <div className='documents'>
-                      <h4>
-                        Документы по договору <span>№{this.props.userStatus.userStatus.contractNumber} от {this.props.userStatus.userStatus.givenDate}</span>
-                      </h4>
+                        {
+                            i18n.language === 'ru' ?
+                                <h4>
+                                    Документы по договору <span>№{this.props.userStatus.userStatus.contractNumber} от {this.props.userStatus.userStatus.givenDate}</span>
+                                </h4> :
+                                <h4>
+                                    <span>№{this.props.userStatus.userStatus.contractNumber} {this.props.userStatus.userStatus.givenDate}</span> келісім-шарт бойынша құжаттар
+                                </h4>
+                        }
                       <ul className='documentsContainer'>
                         <InsuranceApplicationDocument
                           fio={this.props.userStatus.userStatus.fio}
@@ -495,9 +558,15 @@ class Status extends React.Component {
                     </div>
                     :
                     <div className='documents'>
-                      <h4>
-                        Документы по договору <span>№{this.props.userStatus.userStatus.contractNumber} от {this.props.userStatus.userStatus.givenDate}</span>
-                      </h4>
+                        {
+                            i18n.language === 'ru' ?
+                                <h4>
+                                    Документы по договору <span>№{this.props.userStatus.userStatus.contractNumber} от {this.props.userStatus.userStatus.givenDate}</span>
+                                </h4> :
+                                <h4>
+                                    <span>№{this.props.userStatus.userStatus.contractNumber} {this.props.userStatus.userStatus.givenDate}</span> келісім-шарт бойынша құжаттар
+                                </h4>
+                        }
                       <ul className='documentsContainer'>
                         <InsuranceApplicationDocument
                           fio={this.props.userStatus.userStatus.fio}
@@ -588,14 +657,14 @@ class Status extends React.Component {
                 <thead>
                   <tr>
                     <th>
-                      Дата выдачи 📅
+                        {t('give-date')} 📅
                     </th>
 
-                    <th>Основной долг 💸</th>
-                    <th>Пеня</th>
-                    <th>Сумма вознагрождения</th>
-                    <th>Сумма задолженности на текущую дату</th>
-                    <th>Дата погашения 📅</th>
+                    <th>{t('main-debt')} 💸</th>
+                    <th>{t('penalty')}</th>
+                    <th>{t('remuneration-sum')}</th>
+                    <th>{t('debt-sum')}</th>
+                    <th>{t('pay-date')} 📅</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -612,34 +681,46 @@ class Status extends React.Component {
                 </tbody>
               </table>
               <div className="buttonForm">
-                {/* {this.state.btnLoading === true ?
-                  <Spinner className="loading" size={200} spinnerColor={"#ef2221"} spinnerWidth={2} visible={true} /> :
-                  <button onClick={() => this.handleSubmitProlongation()} className=" oplataform--button" type="submit">Продлить {(+this.props.userStatus.userStatus.prolongation).toLocaleString("ru-RU")} тенге</button>}
-                {this.state.btnLoading === true ?
-                  <Spinner className="loading" size={200} spinnerColor={"#ef2221"} spinnerWidth={2} visible={true} /> :
-                  <button onClick={() => this.handleSubmit()} className=" oplataform--button" type="submit">Погасить {(+this.props.userStatus.userStatus.todayAmount).toLocaleString("ru-RU")} тенге</button>} */}
                 {+this.props.userStatus.userStatus.todayAmount > +this.props.userStatus.userStatus.mainAmount * 2.001 ?
                 this.state.btnLoading === true ?
                   <Spinner className="loading" size={200} spinnerColor={"#ef2221"} spinnerWidth={2} visible={true} /> :
-                  <button onClick={() => this.handleSubmitProlongation()} className=" oplataform--button" type="submit">Продлить {((+this.props.userStatus.userStatus.mainAmount * 2) - (+this.props.userStatus.userStatus.amount)).toLocaleString("ru-RU")} тенге</button>
+                  <button onClick={() => this.handleSubmitProlongation()} className=" oplataform--button" type="submit">{t('extend')} {((+this.props.userStatus.userStatus.mainAmount * 2) - (+this.props.userStatus.userStatus.amount)).toLocaleString("ru-RU")} тенге</button>
                 :
                 this.state.btnLoading === true ?
                   <Spinner className="loading" size={200} spinnerColor={"#ef2221"} spinnerWidth={2} visible={true} /> :
-                  <button onClick={() => this.handleSubmitProlongation()} className=" oplataform--button" type="submit">Продлить {(+this.props.userStatus.userStatus.prolongation).toLocaleString("ru-RU")} тенге</button>}
+                  <button onClick={() => this.handleSubmitProlongation()} className=" oplataform--button" type="submit">{t('extend')} {(+this.props.userStatus.userStatus.prolongation).toLocaleString("ru-RU")} тенге</button>}
                 {+this.props.userStatus.userStatus.todayAmount > +this.props.userStatus.userStatus.mainAmount * 2.001 ?
                 this.state.btnLoading === true ?
                   <Spinner className="loading" size={200} spinnerColor={"#ef2221"} spinnerWidth={2} visible={true} /> :
-                  <button onClick={() => this.handleSubmit()} className=" oplataform--button" type="submit">Погасить {(+this.props.userStatus.userStatus.mainAmount * 2).toLocaleString()} тенге</button>
+                  <button onClick={() => this.handleSubmit()} className=" oplataform--button" type="submit">
+                      {
+                          i18n.language === 'ru' ?
+                              `Погасить ${(+this.props.userStatus.userStatus.mainAmount * 2).toLocaleString()} тенге` :
+                              `${(+this.props.userStatus.userStatus.mainAmount * 2).toLocaleString()} теңгені өтеу`
+                      }
+                  </button>
                 :
                 this.state.btnLoading === true ?
                   <Spinner className="loading" size={200} spinnerColor={"#ef2221"} spinnerWidth={2} visible={true} /> :
-                  <button onClick={() => this.handleSubmit()} className=" oplataform--button" type="submit">Погасить {(+this.props.userStatus.userStatus.todayAmount).toLocaleString()} тенге</button>}
+                  <button onClick={() => this.handleSubmit()} className=" oplataform--button" type="submit">
+                      {
+                          i18n.language === 'ru' ?
+                              `Погасить ${(+this.props.userStatus.userStatus.todayAmount).toLocaleString()} тенге` :
+                              `${(+this.props.userStatus.userStatus.todayAmount).toLocaleString()} теңгені өтеу`
+                      }
+                  </button>}
               </div>
                 {this.props.userStatus.userStatus.doctype === 1 ?
                     <div className='documents'>
-                      <h4>
-                        Документы по договору <span>№{this.props.userStatus.userStatus.contractNumber} от {this.props.userStatus.userStatus.givenDate}</span>
-                      </h4>
+                        {
+                            i18n.language === 'ru' ?
+                                <h4>
+                                    Документы по договору <span>№{this.props.userStatus.userStatus.contractNumber} от {this.props.userStatus.userStatus.givenDate}</span>
+                                </h4> :
+                                <h4>
+                                    <span>№{this.props.userStatus.userStatus.contractNumber} {this.props.userStatus.userStatus.givenDate}</span> келісім-шарт бойынша құжаттар
+                                </h4>
+                        }
                       <ul className='documentsContainer'>
                         <InsuranceApplicationDocument
                           fio={this.props.userStatus.userStatus.fio}
@@ -711,9 +792,15 @@ class Status extends React.Component {
                     </div>
                     :
                     <div className='documents'>
-                      <h4>
-                        Документы по договору <span>№{this.props.userStatus.userStatus.contractNumber} от {this.props.userStatus.userStatus.givenDate}</span>
-                      </h4>
+                        {
+                            i18n.language === 'ru' ?
+                                <h4>
+                                    Документы по договору <span>№{this.props.userStatus.userStatus.contractNumber} от {this.props.userStatus.userStatus.givenDate}</span>
+                                </h4> :
+                                <h4>
+                                    <span>№{this.props.userStatus.userStatus.contractNumber} {this.props.userStatus.userStatus.givenDate}</span> келісім-шарт бойынша құжаттар
+                                </h4>
+                        }
                       <ul className='documentsContainer'>
                         <InsuranceApplicationDocument
                           fio={this.props.userStatus.userStatus.fio}
@@ -804,18 +891,29 @@ class Status extends React.Component {
               <hr/>
               <p className='mb-0'><b>Вы в просрочке.</b> Уточните сумма долга по номеру <a classname="whatsapp" href='https://api.whatsapp.com/send?phone=+77015382439' target="_blank"><i class="fa fa-whatsapp" aria-hidden="true"></i>  +7 701 538 2439 (WhatsApp)</a></p>
             </div>
-            <div className='cabinetmessage text-center'>
-              У вас микрокредит в статусе
-              <b>
-                "Просрочен"</b>
-            </div>
+              {
+                  i18n.language === 'ru' ?
+                      <div className='cabinetmessage text-center'>
+                          У вас микрокредит в статусе
+                          <b>
+                              "Просрочен"
+                          </b>
+                      </div> :
+                      <div className='cabinetmessage text-center'>
+                          Сізде
+                          <b>
+                              "Просрочен"
+                          </b>
+                          мәртебесінде шағын несие бар
+                      </div>
+              }
           </div>
         )
       case 5:
         return (
           <div className='container'>
             <div className='alert alert-primary'>
-              <h4 className='alert-heading'>Статус вашего последного микрокредита</h4>
+              <h4 className='alert-heading'>{t('status-last-micro-credit')}</h4>
               <hr/>
               <p className='mb-0'>{this.props.userStatus.userStatus.message}</p>
             </div>
@@ -825,7 +923,7 @@ class Status extends React.Component {
         return (
           <div className='container'>
             <div className='alert alert-primary'>
-              <h4 className='alert-heading'>Статус вашей последней заявки</h4>
+              <h4 className='alert-heading'>{t('status-last')}</h4>
               <hr/>
               <p className='mb-0'>{this.props.userStatus.userStatus.message}</p>
             </div>
@@ -835,20 +933,20 @@ class Status extends React.Component {
         return (
           <div className='container'>
             <div className='alert alert-primary'>
-              <h4 className='alert-heading'>Статус вашей последней заявки</h4>
+              <h4 className='alert-heading'>{t('status-last')}</h4>
               <hr/>
-              <p className='mb-0'>Вы не донца заполнили анкетные данные. Пожалуйста дозаполните нажав кнопку ниже</p>
+              <p className='mb-0'>{t('please-complete')}</p>
             </div>
             <div className="cabinet-btn">
             <img alt='loading' src={require("../../img/svg/loadingCircle.svg")}/>
-              <button onClick={() => this.myFunc()}>Дозаполнить анкету</button>
+              <button onClick={() => this.myFunc()}>{t('complete')}</button>
             </div> 
           </div>
         )
         case 8:
         return (
           <div className='mt-5'>
-              <h5 className='text-center'>Текущая завяка</h5>
+              <h5 className='text-center'>{t('current-application')}</h5>
             <div className='cabinetmessage text-center'>
               У вас заим в статусе
               <b>
@@ -859,15 +957,11 @@ class Status extends React.Component {
                 <thead>
                   <tr>
                     <th>
-                      Дата выдачи 📅
+                        {t('give-date')} 📅
                     </th>
-                    {/* <th>
-                      Сумма на руки 💰
-                    </th> */}
-
-                    <th>Основной долг 💸</th>
-                    <th>Сумма задолженности на текущую дату</th>
-                    <th>Дата погашения 📅</th>
+                    <th>{t('main-debt')} 💸</th>
+                    <th>{t('debt-sum')}</th>
+                    <th>{t('pay-date')} 📅</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -883,17 +977,29 @@ class Status extends React.Component {
               <div className="buttonForm">
                 {this.state.btnLoading === true ?
                   <Spinner className="loading" size={200} spinnerColor={"#ef2221"} spinnerWidth={2} visible={true} /> :
-                  <button onClick={() => this.handleSubmitProlongation()} className=" oplataform--button" type="submit">Продлить {(+this.props.userStatus.userStatus.prolongation).toLocaleString("ru-RU")} тенге</button>}
+                  <button onClick={() => this.handleSubmitProlongation()} className=" oplataform--button" type="submit">{t('extend')} {(+this.props.userStatus.userStatus.prolongation).toLocaleString("ru-RU")} тенге</button>}
                 {this.state.btnLoading === true ?
                   <Spinner className="loading" size={200} spinnerColor={"#ef2221"} spinnerWidth={2} visible={true} /> :
-                  <button onClick={() => this.handleSubmit()} className=" oplataform--button" type="submit">Погасить {(+this.props.userStatus.userStatus.todayAmount).toLocaleString("ru-RU")} тенге</button>}
+                  <button onClick={() => this.handleSubmit()} className=" oplataform--button" type="submit">
+                      {
+                          i18n.language === 'ru' ?
+                              `Погасить ${(+this.props.userStatus.userStatus.todayAmount).toLocaleString("ru-RU")} тенге` :
+                              `${(+this.props.userStatus.userStatus.todayAmount).toLocaleString("ru-RU")} теңгені өтеу`
+                      }
+                  </button>}
               </div>
 
                   {this.props.userStatus.userStatus.doctype === 1 ?
                     <div className='documents'>
-                      <h4>
-                        Документы по договору <span>№{this.props.userStatus.userStatus.contractNumber} от {this.props.userStatus.userStatus.givenDate}</span>
-                      </h4>
+                        {
+                            i18n.language === 'ru' ?
+                                <h4>
+                                    Документы по договору <span>№{this.props.userStatus.userStatus.contractNumber} от {this.props.userStatus.userStatus.givenDate}</span>
+                                </h4> :
+                                <h4>
+                                    <span>№{this.props.userStatus.userStatus.contractNumber} {this.props.userStatus.userStatus.givenDate}</span> келісім-шарт бойынша құжаттар
+                                </h4>
+                        }
                       <ul className='documentsContainer'>
                         <InsuranceApplicationDocument
                           fio={this.props.userStatus.userStatus.fio}
@@ -965,9 +1071,15 @@ class Status extends React.Component {
                     </div>
                     :
                     <div className='documents'>
-                      <h4>
-                        Документы по договору <span>№{this.props.userStatus.userStatus.contractNumber} от {this.props.userStatus.userStatus.givenDate}</span>
-                      </h4>
+                        {
+                            i18n.language === 'ru' ?
+                                <h4>
+                                    Документы по договору <span>№{this.props.userStatus.userStatus.contractNumber} от {this.props.userStatus.userStatus.givenDate}</span>
+                                </h4> :
+                                <h4>
+                                    <span>№{this.props.userStatus.userStatus.contractNumber} {this.props.userStatus.userStatus.givenDate}</span> келісім-шарт бойынша құжаттар
+                                </h4>
+                        }
                       <ul className='documentsContainer'>
                         <InsuranceApplicationDocument
                           fio={this.props.userStatus.userStatus.fio}
@@ -1063,12 +1175,24 @@ class Status extends React.Component {
                 style={{
                   textAlign: 'center'
                 }}
-              >К сожалению по Вашей заявке отказано.</h3>
-              <p className='mb-0'
-                style={{
-                  textAlign: 'center'
-                }}
-              >Вы не сможете подавать повторную заявку до {this.props.userStatus.userStatus.expiration}.</p>
+              >{t('sorry')}</h3>
+              {
+                i18n.language === 'ru' ?
+                    <p className='mb-0'
+                       style={{
+                         textAlign: 'center'
+                       }}
+                    >
+                      Вы не сможете подавать повторную заявку до {this.props.userStatus.userStatus.expiration}.
+                    </p> :
+                    <p className='mb-0'
+                       style={{
+                         textAlign: 'center'
+                       }}
+                    >
+                      Сіз {this.props.userStatus.userStatus.expiration} дейін қайта өтініш бере алмайсыз.
+                    </p>
+              }
               <hr/>
               <h3
                 style={{
@@ -1076,7 +1200,7 @@ class Status extends React.Component {
                   margin: '20px 0'
                 }}
               >
-                Но наши партнеры уже одобрили Вам кредит на ту же сумму!
+                {t('agreed-partners')}
               </h3>
               <div className="cabinet-btn"
                 style={{
@@ -1090,7 +1214,7 @@ class Status extends React.Component {
                       opacity: '1',
                       borderRadius: '20px'
                     }}
-                  >Получить предложение партнеров</button>
+                  >{t('get-offer')}</button>
                 </a>
               </div>
             </div>
@@ -1101,15 +1225,7 @@ class Status extends React.Component {
           <div></div>
         )
     }
-
-    // return (   <div>     <table>       <thead>         <tr>           <th> Дата
-    // выдачи 📅           </th>           <th>             Сумма на руки 💰 </th>
-    //       <th>             Основной долг 💸 </th> <th>Example</th>
-    // <th>Example</th> <th>Example</th> <th>Example</th>         </tr> </thead>
-    // <tbody>         <tr> <td>12.12.2020</td>           <td>10000</td>
-    // <td>15000</td>  <td>1/2"</td>           <td>Kangal / Coil</td> </tr> </tbody>
-    //    </table>   </div> )
   }
 }
 
-export default(connect(mapStateToProps)(Status));
+export default(connect(mapStateToProps)(withUseTranslation(Status)));

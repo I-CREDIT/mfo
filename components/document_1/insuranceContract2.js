@@ -1,6 +1,9 @@
 import pdfMake from "pdfmake/build/pdfmake";
 import pdfFonts from "pdfmake/build/vfs_fonts";
 
+// Перевод для функционального компонента
+import { useTranslation } from "react-i18next";
+
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 pdfMake.fonts = {
   TimesNewRoman: {
@@ -107,6 +110,8 @@ function intToWords(int, names) {
 }
 
 const InsuranceContractDocument = (props) => {
+  // Translation
+  const { t } = useTranslation()
 
   let insuranceContract = {
     header: {
@@ -1130,7 +1135,7 @@ const InsuranceContractDocument = (props) => {
   return (
     <li>
       <a onClick={() => pdfMake.createPdf(insuranceContract).open()}>
-        3. Договор добровольного срочного страхования жизни
+        3. {t('life-insurance')}
       </a>
     </li>
   )

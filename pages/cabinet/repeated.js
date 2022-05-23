@@ -8,13 +8,15 @@ import Router from 'next/router'
 import swal from "sweetalert";
 import Head from 'next/head'
 import axios from 'axios'
+
+// Перевод для классового компонента
+import withUseTranslation from "../../public/js/hocs/useTranslation";
+
 const mapStateToProps = state => {
   return {
     userReducer: state.userReducer
   }
 }
-
-
 
 class Cabinet extends React.Component {
   constructor(props) {
@@ -40,13 +42,16 @@ class Cabinet extends React.Component {
     })
   }
   render() {
+    // Достаем функцию-переводчик
+    const { t } = this.props.useTranslationValue
+
     return (
       <div className='otherPages'>
           <Head>
             <title>Повторный микрокредит</title>
           </Head>
           {this.state.btnLoading ? ( <div className="modelLoader"></div>) : (<div className="modelLoader loaded"></div>)}
-        <h3 className=' text-center'>{helloUser()}   {this.props.userReducer.user.UF_5} {this.props.userReducer.user.UF_6} !</h3>
+        <h3 className=' text-center'>{t(helloUser())}   {this.props.userReducer.user.UF_5} {this.props.userReducer.user.UF_6} !</h3>
         <p className='container mt-3 repeatedinfo alert alert-info'>Выберите срок и сумма. Затем нажмите на кнопку "Получить деньги" чтобы совершить повторный заим</p>
         <div className="repeatBtn form-group" >
         </div>
@@ -58,4 +63,4 @@ class Cabinet extends React.Component {
   }
 }
 
-export default withAuth(connect(mapStateToProps)(Cabinet));
+export default withAuth(connect(mapStateToProps)(withUseTranslation(Cabinet)));
