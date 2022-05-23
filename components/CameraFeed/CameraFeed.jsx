@@ -7,6 +7,9 @@ export class CameraFeed extends Component {
             isCameraVisible: false,
             isCameraLoading: true,
             isVerificationCompleted: false,
+            isScanning: false,
+            isVerificationSecond: false,
+            isVerificationThird: false,
         }
     }
 
@@ -47,13 +50,54 @@ export class CameraFeed extends Component {
                 isCameraLoading: false,
                 isCameraVisible: true,
             })
-        }, 1000)
 
-        setTimeout(() => {
-            this.setState({
-                isVerificationCompleted: true,
-            })
-        }, 10000)
+            setTimeout(() => {
+                // 2 секунды - Поместить лицо в рамку, начать сканирование
+                this.setState({
+                    isScanning: true,
+                })
+
+                // 1 секунда - Конец сканирования, улыбнуться
+                setTimeout(() => {
+                    this.setState({
+                        isScanning: false,
+                        isVerificationSecond: true,
+                    })
+
+                    // 2 секунды - Улыбнуться, начать сканирование
+                    setTimeout(() => {
+                        this.setState({
+                            isVerificationSecond: false,
+                            isScanning: true,
+                        })
+
+                        // 1 секунда - Конец сканирования, отдалиться
+                        setTimeout(() => {
+                            this.setState({
+                                isScanning: false,
+                                isVerificationThird: true,
+                            })
+
+                            // 2 секунды - Отдалиться, закончить верификацию
+                            setTimeout(() => {
+                                this.setState({
+                                    isScanning: true,
+                                })
+
+                                // 1 секунда - Конец сканирования, отдалиться
+                                setTimeout(() => {
+                                    this.setState({
+                                        isScanning: false,
+                                        isVerificationThird: false,
+                                        isVerificationCompleted: true,
+                                    })
+                                }, 1000)
+                            }, 2000)
+                        }, 1000)
+                    }, 2000)
+                }, 1000)
+            }, 2000)
+        }, 1000)
     }
 
     /**
@@ -94,10 +138,20 @@ export class CameraFeed extends Component {
                     <div className="c-camera-feed__viewer">
                         <video ref={ref => (this.videoPlayer = ref)} width="100%" height="100%" />
                         <div className={`face-id ${this.state.isVerificationCompleted ? 'd-none' : ''}`}>
-                            <div className="face-id__frame"/>
-                            <p className="face-id__text">Пожалуйста, поместите лицо в рамку</p>
+                            <div className={`face-id__frame ${this.state.isVerificationThird ? 'scale-smaller' : ''}`}>
+                                <div className={`face-id__scanner ${this.state.isScanning ? '' : 'd-none'}`}/>
+                            </div>
                         </div>
                     </div>
+                    <p className={`face-id__text ${!this.state.isVerificationCompleted ? '' : 'd-none'}`}>
+                        {
+                            this.state.isVerificationSecond ?
+                                "Улыбнитесь" :
+                                this.state.isVerificationThird ?
+                                    "Отдалитесь" :
+                                    "Поместите лицо в рамку"
+                        }
+                    </p>
                     <button className={`${this.state.isVerificationCompleted ? '' : 'd-none'}`} onClick={this.takePhoto}>Сфотографировать</button>
                 </div>
 
