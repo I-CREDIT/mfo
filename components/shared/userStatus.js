@@ -70,7 +70,7 @@ class Status extends React.Component {
   handleSubmit() {
     let values = {
       iin: this.props.userReducer.user.UF_4,
-      amount: +this.props.userStatus.userStatus.todayAmount
+      amount: +this.props.userStatus.userStatus.todayAmount > +this.props.userStatus.userStatus.mainAmount * 2.001 ? +this.props.userStatus.userStatus.mainAmount * 2 : +this.props.userStatus.userStatus.todayAmount
     }
     this.setState({
       btnLoading: true
@@ -117,7 +117,7 @@ class Status extends React.Component {
   handleSubmitProlongation() {
     let values = {
       iin: this.props.userReducer.user.UF_4,
-      amount: this.props.userStatus.userStatus.prolongation
+      amount: +this.props.userStatus.userStatus.todayAmount > +this.props.userStatus.userStatus.mainAmount * 2.001 ? (+this.props.userStatus.userStatus.mainAmount * 2) - (+this.props.userStatus.userStatus.amount) : this.props.userStatus.userStatus.prolongation
     }
     this.setState({
       btnLoading: true
@@ -400,15 +400,24 @@ class Status extends React.Component {
                     <td>{this.props.userStatus.userStatus.givenDate}</td>
                     {/* <td>{this.props.userStatus.userStatus.amount}</td> */}
                     <td>{(+this.props.userStatus.userStatus.mainAmount).toLocaleString()} тг</td>
-                    <td>{(+this.props.userStatus.userStatus.todayAmount).toLocaleString()} тг</td>
+                    <td>{+this.props.userStatus.userStatus.todayAmount > +this.props.userStatus.userStatus.mainAmount * 2.001 ? (+this.props.userStatus.userStatus.mainAmount * 2).toLocaleString() : (+this.props.userStatus.userStatus.todayAmount).toLocaleString()} тг</td>
+                    {/* <td>{(+this.props.userStatus.userStatus.todayAmount).toLocaleString()} тг</td> */}
                     <td>{this.props.userStatus.userStatus.endDate}</td>
                   </tr>
                 </tbody>
               </table>
               <div className="buttonForm">
-                {this.state.btnLoading === true ?
+                {/* {this.state.btnLoading === true ?
                   <Spinner className="loading" size={200} spinnerColor={"#ef2221"} spinnerWidth={2} visible={true} /> :
-                  <button onClick={() => this.handleSubmit()} className=" oplataform--button" type="submit">Погасить {(+this.props.userStatus.userStatus.todayAmount).toLocaleString("ru-RU")} тенге</button>}
+                  <button onClick={() => this.handleSubmit()} className=" oplataform--button" type="submit">Погасить {(+this.props.userStatus.userStatus.todayAmount).toLocaleString("ru-RU")} тенге</button>} */}
+                {+this.props.userStatus.userStatus.todayAmount > +this.props.userStatus.userStatus.mainAmount * 2.001 ?
+                this.state.btnLoading === true ?
+                  <Spinner className="loading" size={200} spinnerColor={"#ef2221"} spinnerWidth={2} visible={true} /> :
+                  <button onClick={() => this.handleSubmit()} className=" oplataform--button" type="submit">Погасить {(+this.props.userStatus.userStatus.mainAmount * 2).toLocaleString()} тенге</button>
+                :
+                this.state.btnLoading === true ?
+                  <Spinner className="loading" size={200} spinnerColor={"#ef2221"} spinnerWidth={2} visible={true} /> :
+                  <button onClick={() => this.handleSubmit()} className=" oplataform--button" type="submit">Погасить {(+this.props.userStatus.userStatus.todayAmount).toLocaleString()} тенге</button>}
               </div>
                   {this.props.userStatus.userStatus.doctype === 1 ?
                     <div className='documents'>
@@ -594,19 +603,37 @@ class Status extends React.Component {
                     <td>{this.props.userStatus.userStatus.givenDate}</td>
                     <td>{(+this.props.userStatus.userStatus.mainAmount).toLocaleString()} тг</td>
                     <td>{(+this.props.userStatus.userStatus.penalty).toLocaleString()} тг</td>
-                    <td>{(+this.props.userStatus.userStatus.reward).toLocaleString()} тг</td>
-                    <td>{(+this.props.userStatus.userStatus.todayAmount).toLocaleString()} тг</td>
+                    {/* <td>{(+this.props.userStatus.userStatus.reward).toLocaleString()} тг</td> */}
+                    <td>{+this.props.userStatus.userStatus.todayAmount > +this.props.userStatus.userStatus.mainAmount * 2.001 ? ((+this.props.userStatus.userStatus.mainAmount * 2) - ((+this.props.userStatus.userStatus.todayAmount) - (+this.props.userStatus.userStatus.reward))).toLocaleString() : (+this.props.userStatus.userStatus.reward).toLocaleString()} тг</td>
+                    {/* <td>{(+this.props.userStatus.userStatus.todayAmount).toLocaleString()} тг</td> */}
+                    <td>{+this.props.userStatus.userStatus.todayAmount > +this.props.userStatus.userStatus.mainAmount * 2.001 ? (+this.props.userStatus.userStatus.mainAmount * 2).toLocaleString() : (+this.props.userStatus.userStatus.todayAmount).toLocaleString()} тг</td>
                     <td>{this.props.userStatus.userStatus.endDate}</td>
                   </tr>
                 </tbody>
               </table>
               <div className="buttonForm">
-                {this.state.btnLoading === true ?
+                {/* {this.state.btnLoading === true ?
                   <Spinner className="loading" size={200} spinnerColor={"#ef2221"} spinnerWidth={2} visible={true} /> :
                   <button onClick={() => this.handleSubmitProlongation()} className=" oplataform--button" type="submit">Продлить {(+this.props.userStatus.userStatus.prolongation).toLocaleString("ru-RU")} тенге</button>}
                 {this.state.btnLoading === true ?
                   <Spinner className="loading" size={200} spinnerColor={"#ef2221"} spinnerWidth={2} visible={true} /> :
-                  <button onClick={() => this.handleSubmit()} className=" oplataform--button" type="submit">Погасить {(+this.props.userStatus.userStatus.todayAmount).toLocaleString("ru-RU")} тенге</button>}
+                  <button onClick={() => this.handleSubmit()} className=" oplataform--button" type="submit">Погасить {(+this.props.userStatus.userStatus.todayAmount).toLocaleString("ru-RU")} тенге</button>} */}
+                {+this.props.userStatus.userStatus.todayAmount > +this.props.userStatus.userStatus.mainAmount * 2.001 ?
+                this.state.btnLoading === true ?
+                  <Spinner className="loading" size={200} spinnerColor={"#ef2221"} spinnerWidth={2} visible={true} /> :
+                  <button onClick={() => this.handleSubmitProlongation()} className=" oplataform--button" type="submit">Продлить {((+this.props.userStatus.userStatus.mainAmount * 2) - (+this.props.userStatus.userStatus.amount)).toLocaleString("ru-RU")} тенге</button>
+                :
+                this.state.btnLoading === true ?
+                  <Spinner className="loading" size={200} spinnerColor={"#ef2221"} spinnerWidth={2} visible={true} /> :
+                  <button onClick={() => this.handleSubmitProlongation()} className=" oplataform--button" type="submit">Продлить {(+this.props.userStatus.userStatus.prolongation).toLocaleString("ru-RU")} тенге</button>}
+                {+this.props.userStatus.userStatus.todayAmount > +this.props.userStatus.userStatus.mainAmount * 2.001 ?
+                this.state.btnLoading === true ?
+                  <Spinner className="loading" size={200} spinnerColor={"#ef2221"} spinnerWidth={2} visible={true} /> :
+                  <button onClick={() => this.handleSubmit()} className=" oplataform--button" type="submit">Погасить {(+this.props.userStatus.userStatus.mainAmount * 2).toLocaleString()} тенге</button>
+                :
+                this.state.btnLoading === true ?
+                  <Spinner className="loading" size={200} spinnerColor={"#ef2221"} spinnerWidth={2} visible={true} /> :
+                  <button onClick={() => this.handleSubmit()} className=" oplataform--button" type="submit">Погасить {(+this.props.userStatus.userStatus.todayAmount).toLocaleString()} тенге</button>}
               </div>
                 {this.props.userStatus.userStatus.doctype === 1 ?
                     <div className='documents'>
@@ -1056,7 +1083,7 @@ class Status extends React.Component {
                   padding: '0'
                 }}
               >
-                <a href="https://bit.ly/3o94MgI" target="_blank">
+                <a href="https://kaz-zaem.online/" target="_blank">
                   <button
                     style={{
                       position: 'unset',

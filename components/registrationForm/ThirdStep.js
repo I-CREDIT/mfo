@@ -172,6 +172,11 @@ class FormRegister extends React.Component {
         other.cpa_source = cookie.get("utm_source")
         other.cpa_clickid = cookie.get("clickid")
       }
+      if(cookie.get('utm_source') === 'sales_doubler') {
+        other.source = cookie.get("utm_source")
+        other.cpa_source = cookie.get("utm_source")
+        other.cpa_clickid = cookie.get("clickid")
+      }
       if(cookie.get('utm_source') === 'altel_2365') {
         other.source = cookie.get("utm_source")
         other.cpa_source = cookie.get("utm_source")
