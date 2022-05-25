@@ -394,7 +394,7 @@ const ContinueStep3 = ({step,setStep, stepResult, userDate, srok,summa}) => {
         <div className='col-md-6 mb-3'>
           <label>IBAN счет *</label>
           <div className='input-group'>
-            <Field onChange={e => setIbanValue(e)} value={iban.value}  className='form-control' name='UF_35'  component={IbanN} />
+            <Field onChange={e => setIbanValue(e)} value={iban.value.toUpperCase()}  className='form-control' name='UF_35'  component={IbanN} />
             <div className="hint">Номер банковского счета</div>
           </div>
           <p className='mt-2 text-info'>{iban.text}</p>

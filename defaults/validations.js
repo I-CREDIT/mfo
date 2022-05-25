@@ -557,7 +557,7 @@ export const checkStringName = val => {
 }
 
 export const idNumber = (val)=> {
-	var res = String(val).replace(/_/g, "");
+	var res = String(val).replace(/ /g, "");
     var error;
     if(res.length !== 9) {
         error = 'Неправильный номер'

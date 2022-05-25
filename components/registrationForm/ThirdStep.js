@@ -57,7 +57,8 @@ class FormRegister extends React.Component {
     this.state = {
       isModalOpen: false,
       checked: false,
-      clicked: false
+      clicked: false,
+      value: ''
     };
     this.toggleModal = this.toggleModal.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -307,6 +308,13 @@ class FormRegister extends React.Component {
   render() {
     const {history} = this.props;
     const ibanMessage = isValidIBANNumber(null || this.props.registration3.iban_account);
+
+    const IbanToUppercase = (e) => {
+      this.setState({
+        value: e.target.value.toUpperCase()
+      })
+    }
+
     return (
       <div>
 
@@ -678,6 +686,8 @@ class FormRegister extends React.Component {
             <div className="input-group">
               <Control
                 component={IbanInput}
+                onInput={(e) => IbanToUppercase(e)}
+                value={this.state.value}
                 model=".iban_account"
                 id="iban_account"
                 placeholder="KZ__________________"
