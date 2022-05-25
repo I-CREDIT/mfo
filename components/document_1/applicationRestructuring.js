@@ -1,6 +1,9 @@
 import pdfMake from "pdfmake/build/pdfmake";
 import pdfFonts from "pdfmake/build/vfs_fonts";
 
+// Перевод для функционального компонента
+import { useTranslation } from "react-i18next";
+
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 pdfMake.fonts = {
   TimesNewRoman: {
@@ -15,6 +18,9 @@ pdfMake.fonts = {
 }
 
 const ApplicationRestructuringDocument = (props) => {
+  // Translation
+  const { t } = useTranslation()
+
   let ApplicationRestructuring = {
     content: [
       {
@@ -99,12 +105,10 @@ const ApplicationRestructuringDocument = (props) => {
   return (
     <li>
       <a onClick={() => pdfMake.createPdf(ApplicationRestructuring).open()}>
-        4. Заявление-Оферта на реструктуризацию долга
+        4. {t('application-offer')}
       </a>
     </li>
   )
 }
-
-
 
 export default ApplicationRestructuringDocument

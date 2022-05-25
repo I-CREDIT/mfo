@@ -200,10 +200,10 @@ class Status extends React.Component {
                       Сумма на руки 💰
                     </th> */}
                     <th>
-                      Дата окончания льготного периода 📅
+                      {t('grace-period-end-date')} 📅
                     </th>
                     <th>{t('main-debt')} 💸</th>
-                    <th>Cумма погашения льготный период 💸</th>
+                    <th>{t('repayment-amount-grace-period')} 💸</th>
                     <th>{t('debt-sum')}</th>
                     <th>{t('pay-date')} 📅</th>
                   </tr>

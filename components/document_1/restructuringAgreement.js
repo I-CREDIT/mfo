@@ -1,6 +1,9 @@
 import pdfMake from "pdfmake/build/pdfmake";
 import pdfFonts from "pdfmake/build/vfs_fonts";
 
+// Перевод для функционального компонента
+import { useTranslation } from "react-i18next";
+
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 pdfMake.fonts = {
   TimesNewRoman: {
@@ -15,6 +18,9 @@ pdfMake.fonts = {
 }
 
 const RestructuringAgreementDocument = (props) => {
+  // Translation
+  const { t } = useTranslation()
+
   let GESV
   if((+props.period) == 15) {
     GESV = 1875.34
@@ -2876,7 +2882,7 @@ const RestructuringAgreementDocument = (props) => {
   return (
     <li>
       <a onClick={() => pdfMake.createPdf(restructuringAgreement).open()}>
-        5. Договор реструктуризации долга
+        5. {t('restructuring-agreement')}
       </a>
     </li>
   )
