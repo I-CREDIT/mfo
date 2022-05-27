@@ -13,6 +13,11 @@ import microcreditAgreement from '../components/document_1/microcreditAgreement'
 // camera (catch photo)
 import { CameraFeed } from "../components/CameraFeed/CameraFeed";
 import {Modal, ModalBody, ModalHeader} from "reactstrap";
+import {connect} from "react-redux";
+
+const mapStateToProps = state => {
+  return {userReducer: state.userReducer}
+}
 
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 pdfMake.fonts = {
@@ -46,7 +51,6 @@ const userToken = () => {
 class Agreement extends React.Component {
   constructor(props) {
     super(props);
-
     this.state = {
       token: null,
       loading: false,
@@ -85,7 +89,6 @@ class Agreement extends React.Component {
           else {
             Router.push('/')
           }
-
         })
         .catch(error => {
           this.setState({
@@ -210,14 +213,21 @@ class Agreement extends React.Component {
   }
 
   // Отправка фото на бэк
-  async uploadImage(file) {
-    console.log('File send', file)
-
+  uploadImage = (file) => {
+    console.log(this.props.userReducer.user, "STATE")
     const formData = new FormData()
-    formData.append('file', file)
+    formData.append('iin', this.props.userReducer.user?.UF_4)
+    formData.append('photo', file)
+    formData.append('leadID', this.props.userReducer.user?.UF_4)
 
     // Попытка отправления фото по эндпоинту
-    Router.push("/")
+    axios.post(`https://api.money-men.kz/biometria/public/api/comparePhotos`, formData)
+        .then(() => {
+          Router.push("/")
+        })
+        .catch(error => {
+          console.log(error)
+        })
   }
 
   componentDidMount(){
@@ -232,7 +242,6 @@ class Agreement extends React.Component {
   }
 
   render() {
-
     return (
         <div className="container otherPages">
           { /* Модалка с получением фотки */ }
@@ -277,4 +286,4 @@ class Agreement extends React.Component {
   }
 }
 
-export default Agreement
+export default(connect(mapStateToProps)(Agreement))

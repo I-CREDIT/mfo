@@ -22,7 +22,6 @@ import withUseTranslation from "../../public/js/hocs/useTranslation";
 // console.log(clientData)
 
 const mapStateToProps = state => {
-  console.log(state)
   return {userReducer: state.userReducer, userStatus: state.userStatus, userHistory: state.userHistory}
 }
 

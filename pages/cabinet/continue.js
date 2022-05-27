@@ -2,9 +2,12 @@ import axios from "axios"
 import React, { useEffect, useState } from "react"
 import { connect } from "react-redux"
 import Router from 'next/router'
+
+// components
 import ContinueStep2 from "../../components/continue/ContinueStep2"
 import ContinueStep3 from "../../components/continue/ContinueStep3"
 import withAuth from "../../components/hocs/withAuth"
+import { Modal, ModalHeader, ModalBody } from 'reactstrap';
 
 const mapStateToProps = state => {
   return {userReducer: state.userReducer, userStatus: state.userStatus, userHistory: state.userHistory}
@@ -65,17 +68,6 @@ const Continue = ({userReducer}) => {
   return(
       <div className='otherPages container'>
         <div className='alert alert-info'><b>{userReducer.user.UF_5} {userReducer.user.UF_6}, вам необходимо дозаполнить анкету, чтобы получить микрокредит</b></div>
-        {/* <div className='inputs_continue '>
-          <div className='range-group'>
-          <label>Сумма : {summa} тг</label>
-          <input value={summa} onChange={e=>setSumma(e.target.value)} type='range' step='5000' min='10000' max='145000' className='range'></input>
-          </div>
-          <div className='range-group'>
-          <label>Срок : {srok} дней</label>
-          <input value={srok} onChange={e=>setSrok(e.target.value)} type='range' min='15' max='30' className='range'></input>
-          </div>
-        </div> */}
-      {/* <br></br><br></br> */}
         <h3 className='mt-5 mb-3 text-center'>Продолжить анкету</h3>
 
         {stepResult === 1 ? <StepReg /> : <ContinueStep3 userDate={userReducer.user} summa={summa} srok={srok}/>}
