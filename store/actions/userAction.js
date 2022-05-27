@@ -79,6 +79,7 @@ export const fetchCurrentUser = () => dispatch => {
     if (response.ok) {
       return response;
     }
+
     const error = new Error(`Error ${response.status}: ${response.statusText}`);
     error.response = response;
     throw error;
@@ -120,7 +121,6 @@ export const fetchUserStatus = () => dispatch => {
   })
 }
 
-
 export const fetchUserHistory = () => dispatch => {
   dispatch(dateLoading(true));
   fetch("https://api.money-men.kz/api/history", {
@@ -147,9 +147,6 @@ export const fetchUserHistory = () => dispatch => {
     console.log(error.message || 'Error')
   })
 }
-
-
-
 
 export const fetchAdmin = () => dispatch => {
   dispatch(authenticatingUser());

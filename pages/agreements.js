@@ -9,11 +9,13 @@ import insuranceApplication from '../components/document_1/insuranceApplication'
 import microcreditInsurance from '../components/document_1/microcreditInsurance'
 import insuranceContract from '../components/document_1/insuranceContract'
 import microcreditAgreement from '../components/document_1/microcreditAgreement'
+import usersReducer from "../store/reducers/userReducer";
 
 // camera (catch photo)
 import { CameraFeed } from "../components/CameraFeed/CameraFeed";
 import {Modal, ModalBody, ModalHeader} from "reactstrap";
 import {connect} from "react-redux";
+import withAuth from "../components/hocs/withAuth";
 
 const mapStateToProps = state => {
   return {userReducer: state.userReducer}
@@ -67,6 +69,7 @@ class Agreement extends React.Component {
     }
 
     this.toggleModal = this.toggleModal.bind(this)
+    this.uploadImage = this.uploadImage.bind(this)
   }
 
   async getUserDocument(token) {
@@ -213,15 +216,14 @@ class Agreement extends React.Component {
   }
 
   // Отправка фото на бэк
-  uploadImage = (file) => {
-    console.log(this.props.userReducer.user, "STATE")
+  async uploadImage(file) {
     const formData = new FormData()
     formData.append('iin', this.props.userReducer.user?.UF_4)
     formData.append('photo', file)
-    formData.append('leadID', this.props.userReducer.user?.UF_4)
+    formData.append('leadID', this.props.userReducer.user?.UF_1)
 
     // Попытка отправления фото по эндпоинту
-    axios.post(`https://api.money-men.kz/biometria/public/api/comparePhotos`, formData)
+    await axios.post(`https://178.170.221.75/biometria/public/api/comparePhotos`, formData)
         .then(() => {
           Router.push("/")
         })
@@ -286,4 +288,4 @@ class Agreement extends React.Component {
   }
 }
 
-export default(connect(mapStateToProps)(Agreement))
+export default withAuth(connect(mapStateToProps)(Agreement))

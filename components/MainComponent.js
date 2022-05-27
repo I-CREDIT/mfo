@@ -13,6 +13,7 @@ class Main extends React.Component {
   // }
   componentDidMount() {
     if(cookie.get('token') && !this.props.loggedIn) {
+        console.log("FROM MAIN")
       this.props.fetchCurrentUser();
     }
   }

@@ -27,7 +27,6 @@ const mapStateToProps = state => {
 
 // console.log(this.props.userStatus.userStatus.todayAmount)
 class Status extends React.Component {
-
   constructor(props) {
     super(props);
     this.state = {
