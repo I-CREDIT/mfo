@@ -109,37 +109,46 @@ function intToWords(int, names) {
 const MicrocreditAgreementDocument = (props) => {
   let GESV
   if((+props.period) == 15) {
-    GESV = 59140.89
+    GESV = 1875.34
   } else if ((+props.period) == 16) {
-    GESV = 39649.60
+    GESV = 1539.32
   } else if ((+props.period) == 17) {
-    GESV = 27853.15
+    GESV = 1290.63
   } else if ((+props.period) == 18) {
-    GESV = 20341.75
+    GESV = 1101.44
   } else if ((+props.period) == 19) {
-    GESV = 15349.41
+    GESV = 954.08
   } else if ((+props.period) == 20) {
-    GESV = 11907.88
+    GESV = 836.98
   } else if ((+props.period) == 21) {
-    GESV = 9459.69
+    GESV = 742.28
   } else if ((+props.period) == 22) {
-    GESV = 7670.05
+    GESV = 664.52
   } else if ((+props.period) == 23) {
-    GESV = 6330.30
+    GESV = 599.81
   } else if ((+props.period) == 24) {
-    GESV = 5306.15
+    GESV = 545.32
   } else if ((+props.period) == 25) {
-    GESV = 4508.64
+    GESV = 498.94
   } else if ((+props.period) == 26) {
-    GESV = 3877.31
+    GESV = 459.09
   } else if ((+props.period) == 27) {
-    GESV = 3370.13
+    GESV = 424.57
   } else if ((+props.period) == 28) {
-    GESV = 2957.26
+    GESV = 394.42
   } else if ((+props.period) == 29) {
-    GESV = 2617.16
+    GESV = 367.91
   } else if ((+props.period) == 30) {
-    GESV = 2333.95
+    GESV = 344.45
+  }
+
+  let RewardLimitPercent
+  if(props.givenDate) {
+    if(+props.givenDate.split('').slice(0, 2).join('') < 15 && +props.givenDate.split('').slice(3, 5).join('') <= 3 && +props.givenDate.split('').slice(8).join('') <= 22) {
+      RewardLimitPercent = '30%'
+    } else {
+      RewardLimitPercent = '25%'
+    }
   }
   let microcreditAgreement = {
     content: [
@@ -276,7 +285,7 @@ const MicrocreditAgreementDocument = (props) => {
                 alignment: 'justify'
               },
               {
-                text: '25%',
+                text: `${RewardLimitPercent}`,
                 alignment: 'justify'
               },
             ],
@@ -2447,11 +2456,9 @@ const MicrocreditAgreementDocument = (props) => {
     },
   }
   return (
-    <li>
-      <a onClick={() => pdfMake.createPdf(microcreditAgreement).open()}>
-        4. Договор о предоставлении микрокредита
-      </a>
-    </li>
+    <a onClick={() => pdfMake.createPdf(microcreditAgreement).open()}>
+      4. Договор о предоставлении микрокредита
+    </a>
   )
 }
 

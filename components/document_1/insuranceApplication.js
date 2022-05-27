@@ -17,10 +17,12 @@ pdfMake.fonts = {
 const InsuranceApplicationDocument = (props) => {
   
   const gender = () => {
-    if ((+props.iin[6]) % 2 === 1) {
-      return 'М'
-    } else {
-      return 'Ж'
+    if(props.iin) {
+      if ((+props.iin[6]) % 2 === 1) {
+        return 'М'
+      } else {
+        return 'Ж'
+      }
     }
   }
 
@@ -304,11 +306,9 @@ const InsuranceApplicationDocument = (props) => {
   }
 
   return (
-    <li>
-      <a onClick={() => pdfMake.createPdf(insuranceApplication).open()}>
-        1. Заявление на страхование
-      </a>
-    </li>
+    <a onClick={() => pdfMake.createPdf(insuranceApplication).open()}>
+      1. Заявление на страхование
+    </a>
   )
 }
 

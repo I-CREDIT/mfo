@@ -6,6 +6,25 @@ export const requiredd = (val) => {
     return error;
 }
 
+export const requiredStreet = (val) => {
+    var falsy = /^[\d\w]/i.test(val)
+    let error;
+    if(!val) {
+        error = 'Поле обязательно для заполнения'
+    } else if (val && !falsy) {
+        error = 'Поле должно начинаться с цифры или буквы'
+    }
+    return error;
+}
+
+export const depositeValidation = (val) => {
+    let error;
+    if(!val) {
+      error = 'Поле обязательно для заполнения'
+    }
+    return error;
+}
+
 export const required = (val) => val && val.length;
 export const iin = (val) =>  {
 	if(val && val.length!==12) return false;
@@ -53,7 +72,10 @@ export const validEmail = (val) => {
     return error;
 }
 export const acceptCirrilic = val => {
-    var falsy = /[a-zA-Z0-9_"*/]/i.test(val)
+    var falsy = /[a-zA-Z0-9+=!№;%:?()@#$^&\|{}[\]_"*/]/i.test(val)
+    if (val.slice(0, 1)[0] == "-") {
+        falsy = true
+    }
     let error;
     if(!val ) {
         error = 'Поле обязательно для заполнения'
@@ -62,17 +84,32 @@ export const acceptCirrilic = val => {
         if(falsy === true) {
             error = 'Нужно вводить только на кириллице'
         }
+        if(val.length <= 4 && val.slice(0, 4).toLowerCase() == "нету") {
+            error = 'Укажите достоверную фамилию'
+        }
+        if(val.length <= 3 && val.slice(0, 3).toLowerCase() == "нет") {
+            error = 'Укажите достоверную фамилию'
+        }
     }
 
     return error;
 }
 export const acceptCirrilicOnly = val => {
-    var falsy = /[a-zA-Z0-9_"*/]/i.test(val)
+    var falsy = /[a-zA-Z0-9+=!№;%:?()@#$^&\|{}[\]_"*/]/i.test(val)
     let error;
     if(val) {
-      if(falsy === true) {
-        error = 'Нужно вводить только на кириллице'
-      }
+        if(falsy === true) {
+            error = 'Нужно вводить только на кириллице'
+        }
+        if (val.slice(0, 1)[0] == "-") {
+            error = 'Нужно вводить только на кириллице'
+        }
+        if(val.length <= 4 && val.slice(0, 4).toLowerCase() == "нету") {
+            error = 'Необязательное поле'
+        }
+        if(val.length <= 3 && val.slice(0, 3).toLowerCase() == "нет") {
+            error = 'Необязательное поле'
+        }
     }
     return error;
 }
@@ -557,7 +594,7 @@ export const checkStringName = val => {
 }
 
 export const idNumber = (val)=> {
-	var res = String(val).replace(/_/g, "");
+	var res = String(val).replace(/ /g, "");
     var error;
     if(res.length !== 9) {
         error = 'Неправильный номер'

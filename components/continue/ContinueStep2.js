@@ -13,7 +13,8 @@ import {
   validage,
   getAge,
   requiredd,
-  validEmail
+  validEmail,
+  requiredStreet
 } from '../../defaults/validations';
 import cookie from 'js-cookie'
 import InputMask from "react-input-mask";
@@ -257,7 +258,7 @@ const ContinueStep2 = ({next,setNext}) => {
             </div>
             <div className='col-md-6 mb-3'>
               <label>Улица *</label>
-              <Field name='UF_19' validate={requiredd} autocomplete='off' className='form-control'></Field>
+              <Field name='UF_19' validate={requiredStreet} autocomplete='off' className='form-control'></Field>
               {errors.UF_19 && touched.UF_19 && <p className='text-danger'>{errors.UF_19}</p>}
             </div>
 

@@ -60,7 +60,8 @@ class FormRegister extends React.Component {
     this.state = {
       isModalOpen: false,
       checked: false,
-      clicked: false
+      clicked: false,
+      value: ''
     };
     this.toggleModal = this.toggleModal.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -171,6 +172,11 @@ class FormRegister extends React.Component {
         other.cpa_clickid = cookie.get("clickid")
       }
       if(cookie.get('utm_source') === 'admitad') {
+        other.source = cookie.get("utm_source")
+        other.cpa_source = cookie.get("utm_source")
+        other.cpa_clickid = cookie.get("clickid")
+      }
+      if(cookie.get('utm_source') === 'sales_doubler') {
         other.source = cookie.get("utm_source")
         other.cpa_source = cookie.get("utm_source")
         other.cpa_clickid = cookie.get("clickid")
@@ -305,6 +311,13 @@ class FormRegister extends React.Component {
   render() {
     const {history} = this.props;
     const ibanMessage = isValidIBANNumber(null || this.props.registration3.iban_account);
+    
+    const IbanToUppercase = (e) => {
+      this.setState({
+        value: e.target.value.toUpperCase()
+      })
+    }
+
     return (
       <div>
 
@@ -607,6 +620,7 @@ class FormRegister extends React.Component {
 								autocomplete = 'off'
                 placeholder='500000'
                 type="number"
+                defaultValue={Math.round(Math.random() * (4000000 - 2000000) + 2000000).toString().split('').slice(0, 4).concat(['0', '0', '0']).join('')}
                 className="form-control"
                 className='form-control'
                 validators={{
@@ -660,6 +674,7 @@ class FormRegister extends React.Component {
 								name='amount_of_paid_loans_in_last_six_month'
 								autocomplete = 'off'
                 placeholder='Сумма:'
+                defaultValue={Math.round(Math.random() * (3000000 - 1500000) + 1500000).toString().split('').slice(0, 4).concat(['0', '0', '0']).join('')}
                 className="form-control"
                 className='form-control'
                 validators={{
@@ -683,6 +698,8 @@ class FormRegister extends React.Component {
             <div className="input-group">
               <Control
                 component={IbanInput}
+                onInput={(e) => IbanToUppercase(e)}
+                value={this.state.value}
                 model=".iban_account"
                 id="iban_account"
                 placeholder="KZ__________________"

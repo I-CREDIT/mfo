@@ -97,11 +97,9 @@ const ApplicationRestructuringDocument = (props) => {
     },
   }
   return (
-    <li>
-      <a onClick={() => pdfMake.createPdf(ApplicationRestructuring).open()}>
-        4. Заявление-Оферта на реструктуризацию долга
-      </a>
-    </li>
+    <a onClick={() => pdfMake.createPdf(ApplicationRestructuring).open()}>
+      4. Заявление-Оферта на реструктуризацию долга
+    </a>
   )
 }
 

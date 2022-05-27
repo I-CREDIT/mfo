@@ -6,7 +6,7 @@ import InputMask from "react-input-mask";
 import {postRegistrationSecond, fetchRegions, emptyMessage} from '../../store/actions/ActionCreators'
 import {relative_type, gorods, addition_contact_type} from '../../defaults/defaultRelative'
 import $ from 'jquery'
-import {required, phoneCheck, acceptCirrilic} from '../../defaults/validationredux';
+import {required, phoneCheck, acceptCirrilic, streetValidation} from '../../defaults/validationredux';
 import Spinner from 'react-spinner-material';
 import disableScroll from 'disable-scroll';
 import cookie from 'js-cookie';
@@ -296,15 +296,17 @@ class SecondStep extends React.Component {
                 name="street"
                 className="form-control"
                 validators={{
-                required
+                  required,
+                  streetValidation
               }}/>
               <Errors
-                className='text-danger'
-                model='.street'
-                show='touched'
-                messages={{
-                required: 'Поле обязательно для заполнения'
-              }}/>
+                  className='text-danger '
+                  model='.street'
+                  show='touched'
+                  messages={{
+                  required: 'Поле обязательно для заполнения ',
+                  streetValidation: "Поле должно начинаться с цифры или буквы"
+                }}/>
             </div>
             <div className="col-md-6 mb-3">
               <Label>Дом* :
