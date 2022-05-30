@@ -145,7 +145,7 @@ class Cabinet extends React.Component {
             <br></br>Email: <a href='mailto:info@idcollect.kz'><b>info@idcollect.kz</b></a>
             </p>
           </div>
-      </div>
+        </div>
       )
       
     }else {

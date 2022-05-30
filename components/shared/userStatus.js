@@ -1185,6 +1185,19 @@ class Status extends React.Component {
             </div>
           </div>
         )
+        case 10:
+          return (
+            <div className="container">
+              <div className="alert alert-info" role="alert">
+                <h4 className="alert-heading">Ваш контракт продан</h4>
+                <p>Ваш контракт ПРОДАН в <b>ТОО “Коллекторское агентство “АйДи Коллект”</b></p>
+                <p className="m-b-0">
+                контактный номер <b ><a href='tel:+77000037733'>телефона</a>/<a  href="https://api.whatsapp.com/send?phone=+77000037733" target="_blank">Whatsapp</a>: +7 700 003 77 33</b>
+                <br></br>Email: <a href='mailto:info@idcollect.kz'><b>info@idcollect.kz</b></a>
+                </p>
+              </div>
+            </div>
+          )
       default:
         return (
           <div></div>
