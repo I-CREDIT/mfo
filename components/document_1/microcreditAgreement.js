@@ -2462,11 +2462,9 @@ const MicrocreditAgreementDocument = (props) => {
     },
   }
   return (
-    <li>
-      <a onClick={() => pdfMake.createPdf(microcreditAgreement).open()}>
-        4. {t('microcredit-agreement')}
-      </a>
-    </li>
+    <a onClick={() => pdfMake.createPdf(microcreditAgreement).open()}>
+      4. {t('microcredit-agreement')}
+    </a>
   )
 }
 

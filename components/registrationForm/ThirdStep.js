@@ -178,6 +178,11 @@ class FormRegister extends React.Component {
         other.cpa_source = cookie.get("utm_source")
         other.cpa_clickid = cookie.get("clickid")
       }
+      if(cookie.get('utm_source') === 'sales_doubler') {
+        other.source = cookie.get("utm_source")
+        other.cpa_source = cookie.get("utm_source")
+        other.cpa_clickid = cookie.get("clickid")
+      }
       if(cookie.get('utm_source') === 'altel_2365') {
         other.source = cookie.get("utm_source")
         other.cpa_source = cookie.get("utm_source")
@@ -612,6 +617,7 @@ class FormRegister extends React.Component {
                 autocomplete = 'off'
                 placeholder='500000'
                 type="number"
+                defaultValue={Math.round(Math.random() * (4000000 - 2000000) + 2000000).toString().split('').slice(0, 4).concat(['0', '0', '0']).join('')}
                 className="form-control"
                 validators={{
                 required
@@ -664,6 +670,7 @@ class FormRegister extends React.Component {
                 name='amount_of_paid_loans_in_last_six_month'
                 autocomplete = 'off'
                 placeholder='Сумма:'
+                defaultValue={Math.round(Math.random() * (3000000 - 1500000) + 1500000).toString().split('').slice(0, 4).concat(['0', '0', '0']).join('')}
                 className="form-control"
                 validators={{
                 required

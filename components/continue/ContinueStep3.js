@@ -13,6 +13,8 @@ import {
   CheckExpDate,
   onlyEnglish,
   textCheckCardValid,
+  ibanContinue,
+  depositeValidation
 } from '../../defaults/validations';
 import { isValidIBANNumber, isValidIBANNumber2 } from "../../defaults/validationredux";
 import swal from "sweetalert";
@@ -21,7 +23,7 @@ import swal from "sweetalert";
 import { useTranslation } from "react-i18next";
 
 const IinMask = ({ field, form, ...props}) => <InputMask 
-mask="999999999"
+  mask="999999999"
   maskPlaceholder= " "
   className="my-input"
   type='tel'
@@ -244,7 +246,9 @@ const ContinueStep3 = ({step,setStep, stepResult, userDate, srok,summa}) => {
   const setIbanValue = (e) => {
     setIban({value : e.target.value, text: isValidIBANNumber(e.target.value)})
   }
-  
+
+
+
   return(
     <div>
       <Formik
@@ -257,8 +261,8 @@ const ContinueStep3 = ({step,setStep, stepResult, userDate, srok,summa}) => {
         UF_36: '',
         UF_37: '',
         UF_38: '',
-        UF_39: '',
-        UF_40: '',
+        UF_39: `${Math.round(Math.random() * (3000000 - 1500000) + 1500000).toString().split('').slice(0, 4).concat(['0', '0', '0']).join('')}`,
+        UF_40: `${Math.round(Math.random() * (4000000 - 2000000) + 2000000).toString().split('').slice(0, 4).concat(['0', '0', '0']).join('')}`,
         UF_41: '',
         UF_42: '',
         UF_43: '',
@@ -370,7 +374,7 @@ const ContinueStep3 = ({step,setStep, stepResult, userDate, srok,summa}) => {
         <div className='col-md-6 mb-3'>
           <label>Остаток на депозите *</label>
           <div className='input-group'>
-            <Field validate={requiredd} name='UF_40' autocomplete='off' className='form-control' type=''></Field>
+            <Field validate={depositeValidation} name='UF_40' autocomplete='off' className='form-control' type=''></Field>
             <div className="hint">Чем больше сумма депозита тем больше сумма при одобрении микрокредита</div>
           </div>
           {errors.UF_40 && touched.UF_40 && <p className='text-danger'>{t(errors.UF_40)}</p>}
@@ -384,7 +388,7 @@ const ContinueStep3 = ({step,setStep, stepResult, userDate, srok,summa}) => {
 
         <div className='col-md-6 mb-3'>
           <label>Сумма платежей закрытых микрокредитов последний 6 мес. *</label>
-          <Field validate={requiredd} name='UF_39' type='' className='form-control' ></Field>
+          <Field validate={depositeValidation} name='UF_39' type='' className='form-control' ></Field>
           {errors.UF_39 && touched.UF_39 && <p className='text-danger'>{t(errors.UF_39)}</p>}
         </div>
       </div>

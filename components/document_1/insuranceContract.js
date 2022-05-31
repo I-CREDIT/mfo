@@ -681,11 +681,9 @@ const InsuranceContractDocument = (props) => {
   }
 
   return (
-    <li>
-      <a onClick={() => pdfMake.createPdf(insuranceContract).open()}>
-        3. {t('life-insurance')}
-      </a>
-    </li>
+    <a onClick={() => pdfMake.createPdf(insuranceContract).open()}>
+      3. {t('life-insurance')}
+    </a>
   )
 }
 

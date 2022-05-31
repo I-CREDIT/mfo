@@ -20,7 +20,7 @@ pdfMake.fonts = {
 const InsuranceApplicationDocument = (props) => {
   // Translation
   const { t } = useTranslation()
-  
+
   const gender = () => {
     if(props.iin) {
       if ((+props.iin[6]) % 2 === 1) {
@@ -311,11 +311,9 @@ const InsuranceApplicationDocument = (props) => {
   }
 
   return (
-    <li>
-      <a onClick={() => pdfMake.createPdf(insuranceApplication).open()}>
-        1. {t('insurance-application')}
-      </a>
-    </li>
+    <a onClick={() => pdfMake.createPdf(insuranceApplication).open()}>
+      1. {t('insurance-application')}
+    </a>
   )
 }
 

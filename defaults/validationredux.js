@@ -8,6 +8,13 @@ export const acceptCirrilic = val => {
     }
     return false;
 }
+export const streetValidation = val => {
+var falsy = /^[\d\w]/i.test(val)
+if(falsy === true) {
+    return true
+}
+return false;
+}
 export const confirmPassword  = (allValues) => {
     if(null || allValues.password) {
         if(allValues.password === allValues.password_confirmation) {

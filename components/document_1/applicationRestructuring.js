@@ -103,11 +103,9 @@ const ApplicationRestructuringDocument = (props) => {
     },
   }
   return (
-    <li>
-      <a onClick={() => pdfMake.createPdf(ApplicationRestructuring).open()}>
-        4. {t('application-offer')}
-      </a>
-    </li>
+    <a onClick={() => pdfMake.createPdf(ApplicationRestructuring).open()}>
+      4. {t('application-offer')}
+    </a>
   )
 }
 

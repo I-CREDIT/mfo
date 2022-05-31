@@ -1,6 +1,21 @@
 import { useEffect, useState } from "react";
 import { addition_contact_type, gorods, relative_type } from "../../defaults/defaultRelative";
-import {phoneValidation, acceptCirrilic, getAge, requiredd,} from '../../defaults/validations';
+import {
+  iinValidation,
+  required,
+  phoneCheck,
+  validEmaill,
+  passwordCheck,
+  phoneValidation,
+  acceptCirrilic,
+  acceptCirrilicOnly,
+  validateConfirmPassword,
+  validage,
+  getAge,
+  requiredd,
+  validEmail,
+  requiredStreet
+} from '../../defaults/validations';
 import cookie from 'js-cookie'
 import InputMask from "react-input-mask";
 import { Formik, Form,  Field  } from 'formik';
@@ -208,7 +223,7 @@ const ContinueStep2 = ({next,setNext}) => {
             </div>
             <div className='col-md-6 mb-3'>
               <label>{t('street')}</label>
-              <Field name='UF_19' validate={requiredd} autocomplete='off' className='form-control'></Field>
+              <Field name='UF_19' validate={requiredStreet} autocomplete='off' className='form-control'></Field>
               {errors.UF_19 && touched.UF_19 && <p className='text-danger'>{t(errors.UF_19)}</p>}
             </div>
 
@@ -236,7 +251,7 @@ const ContinueStep2 = ({next,setNext}) => {
               <label>{t('relative-name')}</label>
               <div className='input-group'>
               <Field name='UF_25' validate={requiredd, acceptCirrilic} autocomplete='off' className='form-control'/>
-           
+
               <div className="hint">{t('cyrillic-only')}</div>
               </div>
               {errors.UF_25 && touched.UF_25 && <p className='text-danger'>{t(errors.UF_25)}</p>}
@@ -299,7 +314,7 @@ const ContinueStep2 = ({next,setNext}) => {
                 </div>
                 {errors.UF_32 && touched.UF_32 && <p className='text-danger'>{t(errors.UF_32)}</p>}
             </div>
- 
+
             <div className='col-md-6 mb-3'>
             <label>{t('relative-phone')}</label>
             <Field 

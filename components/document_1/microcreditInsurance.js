@@ -162,11 +162,9 @@ const MicrocreditInsuranceDocument = (props) => {
     }
   }
   return (
-    <li>
-      <a onClick={() => pdfMake.createPdf(microcreditInsurance).open()}>
-        2. {t('consent-to-microcredit-insurance')}
-      </a>
-    </li>
+    <a onClick={() => pdfMake.createPdf(microcreditInsurance).open()}>
+      2. {t('consent-to-microcredit-insurance')}
+    </a>
   )
 }
 
