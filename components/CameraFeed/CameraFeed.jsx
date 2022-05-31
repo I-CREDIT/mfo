@@ -5,11 +5,11 @@ export class CameraFeed extends Component {
         super(props)
         this.state = {
             isCameraVisible: false,
-            isCameraLoading: true,
             isVerificationCompleted: false,
             isScanning: false,
             isVerificationSecond: false,
             isVerificationThird: false,
+            isPreload: true,
         }
     }
 
@@ -44,11 +44,37 @@ export class CameraFeed extends Component {
     async componentDidMount() {
         const cameras = await navigator.mediaDevices.enumerateDevices();
         this.processDevices(cameras);
+    }
 
+    /**
+     * Handles taking a still image from the video feed on the camera
+     * @memberof CameraFeed
+     * @instance
+     */
+    takePhoto = () => {
+        this.setState({
+            isCameraVisible: false
+        })
+
+        const context = this.canvas.getContext('2d');
+
+        this.canvas.width = this.videoPlayer.videoWidth
+        this.canvas.height = this.videoPlayer.videoHeight
+
+        context.drawImage(this.videoPlayer, 0, 0, this.canvas.width, this.canvas.height);
+    };
+
+    takePhotoAgain = () => {
+        this.setState({
+            isCameraVisible: true,
+        })
+    }
+
+    startVerification = () => {
         setTimeout(() => {
             this.setState({
-                isCameraLoading: false,
                 isCameraVisible: true,
+                isPreload: false,
             })
 
             setTimeout(() => {
@@ -100,43 +126,22 @@ export class CameraFeed extends Component {
         }, 1000)
     }
 
-    /**
-     * Handles taking a still image from the video feed on the camera
-     * @memberof CameraFeed
-     * @instance
-     */
-    takePhoto = () => {
-        this.setState({
-            isCameraVisible: false
-        })
-
-        const context = this.canvas.getContext('2d');
-
-        this.canvas.width = this.videoPlayer.videoWidth
-        this.canvas.height = this.videoPlayer.videoHeight
-
-        context.drawImage(this.videoPlayer, 0, 0, this.canvas.width, this.canvas.height);
-    };
-
-    takePhotoAgain = () => {
-        this.setState({
-            isCameraVisible: true
-        })
-    }
-
     sendPhoto = () => {
         const { sendFile } = this.props;
-        // sendFile(this.canvas.toDataURL())
         this.canvas.toBlob(sendFile)
-        // sendFile(this.canvas)
     }
 
     render() {
         return (
             <div className="c-camera-feed">
-                <div className={`modelLoader ${this.state.isCameraLoading ? '' : 'd-none'}`}/>
+                {/* Перед открытием биометрии */}
+                <div className={`c-camera-feed__preload ${this.state.isPreload ? '' : 'd-none'}`}>
+                    <p>Вам необходимо пройти верификацию</p>
+                    <button onClick={this.startVerification}>Начать верификацию</button>
+                </div>
 
-                <div className={`c-camera-feed--holder ${this.state.isCameraVisible ? '' : 'd-none'}`}>
+                {/* Основной компонент камеры */}
+                <div className={`c-camera-feed--holder ${this.state.isCameraVisible && !this.state.isPreload ? '' : 'd-none'}`}>
                     <div className="c-camera-feed__viewer">
                         <video ref={ref => (this.videoPlayer = ref)} width="100%" height="100%" />
                         <div className={`face-id ${this.state.isVerificationCompleted ? 'd-none' : ''}`}>
@@ -157,7 +162,8 @@ export class CameraFeed extends Component {
                     <button className={`${this.state.isVerificationCompleted ? '' : 'd-none'}`} onClick={this.takePhoto}>Сфотографировать</button>
                 </div>
 
-                <div className={`c-camera-feed--holder ${!this.state.isCameraVisible ? '' : 'd-none'}`}>
+                {/* Фото результат + возможность переснять */}
+                <div className={`c-camera-feed--holder ${!this.state.isCameraVisible && !this.state.isPreload ? '' : 'd-none'}`}>
                     <div className="c-camera-feed__stage">
                         <canvas className="canvas" height="100%" ref={ref => this.canvas = ref} />
                     </div>

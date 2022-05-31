@@ -3700,6 +3700,12 @@ nav[role="navigation"] .users a:before {
   margin-top: 10px;
 }
 
+.c-camera-feed__preload {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .c-camera-feed .c-camera-feed__stage {
   width: 100%;
 }

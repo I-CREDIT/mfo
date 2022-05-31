@@ -219,7 +219,7 @@ class Agreement extends React.Component {
   async uploadImage(file) {
     const formData = new FormData()
 
-    // Test
+    // Для теста, данные Мукана
     // formData.append('iin', '970908350192')
     // formData.append('leadID', '277135')
 
@@ -229,20 +229,45 @@ class Agreement extends React.Component {
     formData.append('fileName', 'image.png')
     formData.append('extension', 'png')
 
+    this.setState ({
+      loading: true
+    })
+
     // Попытка отправления фото по эндпоинту
     await axios.post(`http://178.170.221.75/biometria/public/api/comparePhotos`, formData)
-        .then(() => {
-          Router.push("/")
+        .then(response => {
+          if (response.data.similarity > 82) {
+            swal("Верификация пройдена", "Можете подписать документы", "success")
+                .then(() => {
+                  this.setState ({
+                    isModalOpen: false
+                  })
+                })
+          } else {
+            swal("Верификация не пройдена", "Фото не прошло проверку, попробуйте еще раз", "error")
+                .then(() => {
+                  Router.push('/')
+                })
+          }
         })
         .catch(error => {
           console.log(error)
+          swal("Ошибка при попытке верификации", "Попробуйте еще раз", "error")
+              .then(() => {
+                Router.push('/')
+              })
+        })
+        .finally(() => {
+          this.setState ({
+            loading: false
+          })
         })
   }
 
   componentDidMount(){
     // if(getUrlParameter('token').length === 0) {
     //   Router.push('/')
-    // }else {
+    // } else {
     //   this.setState ({
     //     token: getUrlParameter('token')
     //   })
@@ -253,13 +278,16 @@ class Agreement extends React.Component {
   render() {
     return (
         <div className="container otherPages">
+          <div className={`modelLoader ${this.state.isCameraLoading ? '' : 'd-none'}`}/>
+
           { /* Модалка с получением фотки */ }
           <Modal
               isOpen={ this.state.isModalOpen }
               class="modal modal-calculator"
               size="lg"
           >
-            <ModalHeader toggle={this.toggleModal}>Фотографирование</ModalHeader>
+            {/*<ModalHeader toggle={this.toggleModal}>Верификация</ModalHeader>*/}
+            <ModalHeader>Верификация</ModalHeader>
             <ModalBody>
               <CameraFeed sendFile={this.uploadImage} />
             </ModalBody>
