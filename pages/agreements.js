@@ -218,12 +218,19 @@ class Agreement extends React.Component {
   // Отправка фото на бэк
   async uploadImage(file) {
     const formData = new FormData()
+
+    // Test
+    // formData.append('iin', '970908350192')
+    // formData.append('leadID', '277135')
+
     formData.append('iin', this.props.userReducer.user?.UF_4)
-    formData.append('photo', file)
     formData.append('leadID', this.props.userReducer.user?.UF_1)
+    formData.append('photo', file)
+    formData.append('fileName', 'image.png')
+    formData.append('extension', 'png')
 
     // Попытка отправления фото по эндпоинту
-    await axios.post(`https://178.170.221.75/biometria/public/api/comparePhotos`, formData)
+    await axios.post(`http://178.170.221.75/biometria/public/api/comparePhotos`, formData)
         .then(() => {
           Router.push("/")
         })

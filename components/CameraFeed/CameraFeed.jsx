@@ -126,7 +126,9 @@ export class CameraFeed extends Component {
 
     sendPhoto = () => {
         const { sendFile } = this.props;
-        this.canvas.toBlob(sendFile);
+        // sendFile(this.canvas.toDataURL())
+        this.canvas.toBlob(sendFile)
+        // sendFile(this.canvas)
     }
 
     render() {
