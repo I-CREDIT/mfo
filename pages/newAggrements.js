@@ -18,6 +18,8 @@ function getUrlParameter(name) {
 const userToken = () => {
   if(getUrlParameter('token').length !== 0) {
     return getUrlParameter('token')
+  } else if (getUrlParameter('leadID').length !== 0) {
+    return getUrlParameter('leadID')
   }
   else {
     return null
@@ -70,52 +72,101 @@ class Aggrement extends React.Component {
       loading: true
     })
 
-    await axios.get(`https://api.money-men.kz/api/newGetData?token=${token}`)
-    .then((response) => {
-      console.log(response)
-      if(response.data.success) {
-        this.setState({
-          // docs: response.data.docs,
-          // id: response.data.id,
-          // id_req: response.data.id_req,
-          loading: false,
-          // rest: response.data.rest,
-          leadID: response.data.leadID,
-          phone2: response.data.phone,
-          fio: response.data.fio,
-          dateOfBirth: response.data.birthday,
-          address: response.data.address,
-          email: response.data.email,
-          placeOfWork: response.data.work,
-          position: response.data.position,
-          iin: response.data.iin,
-          cardNumber: response.data.cardNumber,
-          startCard: response.data.cardDate,
-          endCard: response.data.cardExpiration,
-          placeOfBirth: response.data.placeOfBirth,
-          insuranceAmount: response.data.insuranceAmount,
-          givenDate: response.data.givenDate,
-          code: response.data.code,
-          period: response.data.period,
-          contractNumber: response.data.contractNumber,
-          reward: response.data.reward,
-          main: response.data.main,
-          total: response.data.main + response.data.reward,
-          cardGiven: response.data.cardGiven,
-          iban: response.data.iban,
-          endDate: response.data.datePayment
-        })
-      }else {
-        Router.push('/')
-      }
+    if(getUrlParameter('token').length !== 0) {
+      await axios.get(`https://api.money-men.kz/api/newGetData?token=${token}`)
+      .then((response) => {
+        console.log(response)
+        if(response.data.success) {
+          this.setState({
+            // docs: response.data.docs,
+            // id: response.data.id,
+            // id_req: response.data.id_req,
+            loading: false,
+            // rest: response.data.rest,
+            leadID: response.data.leadID,
+            phone2: response.data.phone,
+            fio: response.data.fio,
+            dateOfBirth: response.data.birthday,
+            address: response.data.address,
+            email: response.data.email,
+            placeOfWork: response.data.work,
+            position: response.data.position,
+            iin: response.data.iin,
+            cardNumber: response.data.cardNumber,
+            startCard: response.data.cardDate,
+            endCard: response.data.cardExpiration,
+            placeOfBirth: response.data.placeOfBirth,
+            insuranceAmount: response.data.insuranceAmount,
+            givenDate: response.data.givenDate,
+            code: response.data.code,
+            period: response.data.period,
+            contractNumber: response.data.contractNumber,
+            reward: response.data.reward,
+            main: response.data.main,
+            total: response.data.main + response.data.reward,
+            cardGiven: response.data.cardGiven,
+            iban: response.data.iban,
+            endDate: response.data.datePayment
+          })
+        }else {
+          Router.push('/')
+        }
 
-    })
-    .catch(error => {
-      this.setState({
-        loading: false
       })
-      Router.push('/')
-    })
+      .catch(error => {
+        this.setState({
+          loading: false
+        })
+        Router.push('/')
+      })
+    } else if (getUrlParameter('leadID').length !== 0) {
+      await axios.get(`https://api.money-men.kz/api/newGetData?leadID=${token}`)
+      .then((response) => {
+        console.log(response)
+        if(response.data.success) {
+          this.setState({
+            // docs: response.data.docs,
+            // id: response.data.id,
+            // id_req: response.data.id_req,
+            loading: false,
+            // rest: response.data.rest,
+            leadID: response.data.leadID,
+            phone2: response.data.phone,
+            fio: response.data.fio,
+            dateOfBirth: response.data.birthday,
+            address: response.data.address,
+            email: response.data.email,
+            placeOfWork: response.data.work,
+            position: response.data.position,
+            iin: response.data.iin,
+            cardNumber: response.data.cardNumber,
+            startCard: response.data.cardDate,
+            endCard: response.data.cardExpiration,
+            placeOfBirth: response.data.placeOfBirth,
+            insuranceAmount: response.data.insuranceAmount,
+            givenDate: response.data.givenDate,
+            code: response.data.code,
+            period: response.data.period,
+            contractNumber: response.data.contractNumber,
+            reward: response.data.reward,
+            main: response.data.main,
+            total: response.data.main + response.data.reward,
+            cardGiven: response.data.cardGiven,
+            iban: response.data.iban,
+            endDate: response.data.datePayment
+          })
+        }else {
+          Router.push('/')
+        }
+
+      })
+      .catch(error => {
+        this.setState({
+          loading: false
+        })
+        Router.push('/')
+      })
+    }
   }
 
   async getCode() {
@@ -223,11 +274,12 @@ class Aggrement extends React.Component {
 }
 
   componentDidMount(){
-    if(getUrlParameter('token').length === 0) {
+    if(getUrlParameter('token').length === 0 && getUrlParameter('leadID').length === 0) {
       Router.push('/')
     }else {
       this.setState ({
-        token: getUrlParameter('token')
+        token: getUrlParameter('token'),
+        leadID: getUrlParameter('leadID')
       })
     }
     this.getUserDocument(userToken())
