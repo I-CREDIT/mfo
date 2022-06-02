@@ -143,10 +143,10 @@ export class CameraFeed extends Component {
                 {/* Основной компонент камеры */}
                 <div className={`c-camera-feed--holder ${this.state.isCameraVisible && !this.state.isPreload ? '' : 'd-none'}`}>
                     <div className="c-camera-feed__viewer">
-                        <video ref={ref => (this.videoPlayer = ref)} width="100%" height="100%" />
+                        <video ref={ref => (this.videoPlayer = ref)} width="100%" height="100%" autoPlay playsInline/>
                         <div className={`face-id ${this.state.isVerificationCompleted ? 'd-none' : ''}`}>
                             <div className={`face-id__frame ${this.state.isVerificationThird ? 'scale-smaller' : ''}`}>
-                                <div className={`face-id__scanner ${this.state.isScanning ? '' : 'd-none'}`}/>
+                                <div className={`face-id__scanner ${this.state.isScanning ? '' : 'd-none'}`}/p>
                             </div>
                         </div>
                     </div>

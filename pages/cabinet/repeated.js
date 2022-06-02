@@ -1,11 +1,9 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import withAuth from '../../components/hocs/withAuth'
-import usersReducer from '../../store/reducers/userReducer'
 import {helloUser} from '../../defaults/hello'
 import ProgressBar from '../../components/shared/Progressbar'
 import Router from 'next/router'
-import swal from "sweetalert";
 import Head from 'next/head'
 import axios from 'axios'
 

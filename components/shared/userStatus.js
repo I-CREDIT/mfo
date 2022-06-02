@@ -166,7 +166,10 @@ class Status extends React.Component {
     // Достаем функцию-переводчик
     const { t, i18n } = this.props.useTranslationValue
 
-    switch (this.props.userStatus.userStatus.stage) {
+    const num = 1
+
+    // switch (this.props.userStatus.userStatus.stage) {
+    switch (num) {
       case 1:
         return (
           <div className='mt-5'>

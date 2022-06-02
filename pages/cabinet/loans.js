@@ -97,22 +97,6 @@ class Cabinet extends React.Component {
                 }
             })
     }
-      // this.setState({btnLoading: true})
-      // await axios
-      //   .get(`https://api.money-men.kz/api/repeatUser?iin=${this.props.userReducer.user.UF_4}`)
-      //   .then((response) => {
-      //     if (response.data.success == true) {
-      //       Router.push('/cabinet/repeated')
-      //       this.setState({btnLoading: false})
-      //     }
-      //     if (response.data.success == false) {
-      //       this.setState({btnLoading: false})
-      //       swal("Oops!", `${response.data.message || "Вам пока отказано подавать повторный займ"} `, "error");
-      //     } else {
-      //       console.log(response)
-      //     }
-      //   })
-    // }
   }
 
   render() {
@@ -136,7 +120,6 @@ class Cabinet extends React.Component {
           </div>
       </div>
       )
-      
     }
     else {
     return (
