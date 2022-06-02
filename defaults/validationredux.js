@@ -9,7 +9,7 @@ export const acceptCirrilic = val => {
     return false;
 }
 export const streetValidation = val => {
-var falsy = /^[\d\w]/i.test(val)
+var falsy = /^[\d\wа-яА-Я]/i.test(val)
 if(falsy === true) {
     return true
 }

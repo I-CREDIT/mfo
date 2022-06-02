@@ -117,35 +117,35 @@ const MicrocreditAgreementDocument = (props) => {
   if((+props.period) == 15) {
     GESV = 1875.34
   } else if ((+props.period) == 16) {
-    GESV = 1539.32
+    GESV = 1806.10
   } else if ((+props.period) == 17) {
-    GESV = 1290.63
+    GESV = 1740.87
   } else if ((+props.period) == 18) {
-    GESV = 1101.44
+    GESV = 1679.36
   } else if ((+props.period) == 19) {
-    GESV = 954.08
+    GESV = 1621.29
   } else if ((+props.period) == 20) {
-    GESV = 836.98
+    GESV = 1566.40
   } else if ((+props.period) == 21) {
-    GESV = 742.28
+    GESV = 1514.46
   } else if ((+props.period) == 22) {
-    GESV = 664.52
+    GESV = 1465.27
   } else if ((+props.period) == 23) {
-    GESV = 599.81
+    GESV = 1418.63
   } else if ((+props.period) == 24) {
-    GESV = 545.32
+    GESV = 1374.38
   } else if ((+props.period) == 25) {
-    GESV = 498.94
+    GESV = 1332.34
   } else if ((+props.period) == 26) {
-    GESV = 459.09
+    GESV = 1292.37
   } else if ((+props.period) == 27) {
-    GESV = 424.57
+    GESV = 1254.35
   } else if ((+props.period) == 28) {
-    GESV = 394.42
+    GESV = 1218.13
   } else if ((+props.period) == 29) {
-    GESV = 367.91
+    GESV = 1183.61
   } else if ((+props.period) == 30) {
-    GESV = 344.45
+    GESV = 1150.69
   }
 
   let RewardLimitPercent

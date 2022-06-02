@@ -1008,7 +1008,7 @@ class Status extends React.Component {
             </div> 
           </div>
         )
-        case 8:
+      case 8:
         return (
           <div className='mt-5'>
               <h5 className='text-center'>{t('current-application')}</h5>
@@ -1246,7 +1246,7 @@ class Status extends React.Component {
             </div>
           </div>
         )
-        case 9:
+      case 9:
         return (
           <div className='container'>
             <div className='alert alert-primary'
@@ -1300,6 +1300,35 @@ class Status extends React.Component {
                   >{t('get-offer')}</button>
                 </a>
               </div>
+            </div>
+          </div>
+        )
+      case 10:
+        return (
+          <div className="container">
+            <div className="alert alert-info" role="alert">
+              <h4 className="alert-heading">Ваш контракт продан</h4>
+              <p>Ваш контракт ПРОДАН в <b>ТОО “Коллекторское агентство “АйДи Коллект”</b></p>
+              <p className="m-b-0">
+              контактный номер <b ><a href='tel:+77000037733'>телефона</a>/<a  href="https://api.whatsapp.com/send?phone=+77000037733" target="_blank">Whatsapp</a>: +7 700 003 77 33</b>
+              <br></br>Email: <a href='mailto:info@idcollect.kz'><b>info@idcollect.kz</b></a>
+              </p>
+            </div>
+          </div>
+        )
+      case 11:
+        return (
+          <div className='container'>
+            <div className='alert alert-primary'>
+              <h4 className='alert-heading'>Статус вашей последней заявки</h4>
+              <hr/>
+              <p className='mb-0'>Ваша заявка одобрена! Для подписания документов нажмите на кнопку ниже.</p>
+            </div>
+            <div className="cabinet-btn" style={{padding: 0}}>
+            <img alt='loading' src={require("../../img/svg/loadingCircle.svg")}/>
+            <a href={'/newAggrements?leadID=' + this.props.userStatus.userStatus.leadID}>
+              <button style={{position: 'unset'}}>Перейти на страницу подписи</button>
+            </a>
             </div>
           </div>
         )

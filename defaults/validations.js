@@ -7,7 +7,7 @@ export const requiredd = (val) => {
 }
 
 export const requiredStreet = (val) => {
-    var falsy = /^[\d\w]/i.test(val)
+    var falsy = /^[\d\wа-яА-Я]/i.test(val)
     let error;
     if(!val) {
         error = 'Поле обязательно для заполнения'
