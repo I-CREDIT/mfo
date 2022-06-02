@@ -57,7 +57,7 @@ const RestructuringAgreementDocument = (props) => {
   }
 
   let RewardLimitPercent
-  if(+props.givenDate.split('').slice(0, 2).join('') <= 15 && +props.givenDate.split('').slice(3, 5).join('') <= 3 && +props.givenDate.split('').slice(8).join('') <= 22) {
+  if(+props.givenDate?.split('').slice(0, 2).join('') <= 15 && +props.givenDate?.split('').slice(3, 5).join('') <= 3 && +props.givenDate?.split('').slice(8).join('') <= 22) {
     RewardLimitPercent = '30%'
   } else {
     RewardLimitPercent = '25%'
