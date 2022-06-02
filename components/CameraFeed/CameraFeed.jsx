@@ -146,7 +146,7 @@ export class CameraFeed extends Component {
                         <video ref={ref => (this.videoPlayer = ref)} width="100%" height="100%" autoPlay playsInline/>
                         <div className={`face-id ${this.state.isVerificationCompleted ? 'd-none' : ''}`}>
                             <div className={`face-id__frame ${this.state.isVerificationThird ? 'scale-smaller' : ''}`}>
-                                <div className={`face-id__scanner ${this.state.isScanning ? '' : 'd-none'}`}/p>
+                                <div className={`face-id__scanner ${this.state.isScanning ? '' : 'd-none'}`} />
                             </div>
                         </div>
                     </div>
