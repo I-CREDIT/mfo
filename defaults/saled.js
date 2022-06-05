@@ -5802,9 +5802,8 @@ const replace =(val) => {
 
 export const ifSaled =(name) =>{
   let arr = saledUser.Лист1;
-  const found = arr.some(el => replace(el.ИИН) === name);
-  
-  return found;
+
+  return arr.some(el => replace(el.ИИН) === name);
 }
 
 

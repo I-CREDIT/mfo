@@ -439,6 +439,20 @@ input::-ms-track {
   /* margin: auto; */
 }
 
+.form-group .registration-buttons {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.form-group .registration-buttons .agreement-btn {
+  width: fit-content;
+}
+
+.form-group .registration-buttons .agreement-btn:last-child {
+  margin-left: 10px;
+}
+
 input:focus~div {
   opacity: 1;
 }
@@ -2357,8 +2371,11 @@ a:hover {
 }
 
 .formStepp {
-  padding-top: 150px;
   border: 1px solid rgb(209, 207, 207);
+}
+
+.formStepp .alert-danger {
+  margin-top: 50px;
 }
 
 @media only screen and (max-width: 768px) {

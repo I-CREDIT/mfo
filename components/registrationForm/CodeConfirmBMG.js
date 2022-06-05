@@ -4,35 +4,19 @@ import {
   confirmSMS,
   postRegistration,
   emptyMessage,
-  getSMS,
+  takeDocumentsBiometry,
   getSMSFromBMG,
+  getSMS,
 } from "../../store/actions/ActionCreators";
 import InputMask from "react-input-mask";
-import {
-  Navbar,
-  NavbarBrand,
-  Nav,
-  NavbarToggler,
-  Collapse,
-  NavItem,
-  Jumbotron,
-  Row,
-  Col,
-  Button,
-  Modal,
-  ModalHeader,
-  ModalBody,
-  FormGroup,
-  Input,
-  Label,
-} from "reactstrap";
+import { Row } from "reactstrap";
 import { Control, actions, Errors, Form } from "react-redux-form";
 import Spinner from "react-spinner-material";
 import disableScroll from "disable-scroll";
 
 const codeConfirmation = (val) => {
   var res = String(val).replace(/_/g, "");
-  return res.length === 4;
+  return res.length === 6;
 };
 
 const mapStateToProps = (state) => {
@@ -44,9 +28,11 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = (dispatch) => ({
+  getSMSFromBMG: (registration) => dispatch(getSMSFromBMG(registration)),
   confirmSMS: (registration) => dispatch(confirmSMS(registration)),
+  takeDocumentsBiometry: (registration) =>
+    dispatch(takeDocumentsBiometry(registration)),
   postRegistration: (registration) => dispatch(postRegistration(registration)),
-  getSMS: (registration) => dispatch(getSMS(registration)),
   emptyMessage: () => {
     dispatch(emptyMessage);
   },
@@ -56,12 +42,13 @@ const mapDispatchToProps = (dispatch) => ({
 });
 const CodeMask = (props) => (
   <InputMask
-    mask="9999"
+    mask="999999"
     maskPlaceholder={null}
     className="my-input"
     {...props}
   />
 );
+
 class CodeConfirmBMG extends React.Component {
   componentDidMount() {
     this.props.emptyMessage();
@@ -72,15 +59,16 @@ class CodeConfirmBMG extends React.Component {
   }
 
   sendCode = () => {
-    this.props.getSMS(this.props.registrationValues);
+    this.props.getSMSFromBMG(this.props.registrationValues);
   };
 
   handleSubmit = (vals) => {
-    let object = {};
+    var object = {};
     object.code = vals.code;
     const finalobjects = Object.assign(this.props.registrationValues, object);
-
-    this.props.confirmSMS(finalobjects);
+    this.props.takeDocumentsBiometry(finalobjects).then(() => {
+      this.props.confirmSMS(finalobjects);
+    });
     this.props.resetCode();
   };
 
@@ -119,7 +107,7 @@ class CodeConfirmBMG extends React.Component {
             </label>
             <Control
               className="form-control"
-              placeholder="____"
+              placeholder="______"
               model=".code"
               type="tel"
               component={CodeMask}

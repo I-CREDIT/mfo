@@ -713,15 +713,16 @@ function getAge(dateString) {
 
 
 export const validage = (iin) => {
-    if(iin[6]%2 != 0) {
-        if(getAge(iin)<21 || getAge(iin)>73) {
+    if (iin[6] % 2 !== 0) {
+        if (getAge(iin) < 21 || getAge(iin) > 73) {
             return false
         }
     }
-    if(iin[6]%2 == 0) {
-        if(getAge(iin)<21 || getAge(iin)>67) {
+    else if (iin[6] % 2 === 0) {
+        if (getAge(iin) < 21 || getAge(iin) > 67) {
             return false
         }
     }
+
     return true;
 }

@@ -1069,6 +1069,6 @@ const fords = {
 
 export const isFord = val => {
   let arr = fords.фроды;
-  const found = arr.some(el=>el.ИИН===val)
-  return found;
+
+  return arr.some(el => el.ИИН === val);
 }

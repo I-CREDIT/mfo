@@ -283,7 +283,6 @@ const  valueParse =(val) => {
 export const ifBlckList = (val) => {
   let arr = blcklistPhones.Phones
   let ph = valueParse(val)
-  const found = arr.some(el=> el.phone===ph)
 
-  return found
+  return arr.some(el => el.phone === ph)
 }

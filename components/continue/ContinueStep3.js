@@ -1,10 +1,14 @@
-import { useState } from "react";
-import { gorods, relative_type, speciality } from "../../defaults/defaultRelative";
+import React, { useState } from "react";
+import {
+  gorods,
+  relative_type,
+  speciality,
+} from "../../defaults/defaultRelative";
 import InputMask from "react-input-mask";
-import cookie, { set } from 'js-cookie'
-import Router from 'next/router'
-import axios from 'axios'
-import { Formik, Form,  Field  } from 'formik';
+import cookie, { set } from "js-cookie";
+import Router from "next/router";
+import axios from "axios";
+import { Formik, Form, Field } from "formik";
 import {
   getAge,
   requiredd,
@@ -14,73 +18,97 @@ import {
   onlyEnglish,
   textCheckCardValid,
   ibanContinue,
-  depositeValidation
-} from '../../defaults/validations';
-import { isValidIBANNumber, isValidIBANNumber2 } from "../../defaults/validationredux";
+  depositeValidation,
+} from "../../defaults/validations";
+import {
+  acceptCirrilic,
+  isValidIBANNumber,
+  isValidIBANNumber2,
+  required,
+} from "../../defaults/validationredux";
 import swal from "sweetalert";
 
 // Перевод для функционального компонента
 import { useTranslation } from "react-i18next";
+import { Label } from "reactstrap";
+import { Control, Errors } from "react-redux-form";
 
-const IinMask = ({ field, form, ...props}) => <InputMask 
-  mask="999999999"
-  maskPlaceholder= " "
-  className="my-input"
-  type='tel'
-  {...field}
-  {...props} 
-/>
+const IinMask = ({ field, form, ...props }) => (
+  <InputMask
+    mask="999999999"
+    maskPlaceholder=" "
+    className="my-input"
+    type="tel"
+    {...field}
+    {...props}
+  />
+);
 
-const GivenDate = ({ field, form, ...props}) => <InputMask 
-  mask="99.99.9999"
-  maskPlaceholder= {null}
-  type='tel'
-  className="my-input"
-  {...field}
-  {...props} 
-/>
+const GivenDate = ({ field, form, ...props }) => (
+  <InputMask
+    mask="99.99.9999"
+    maskPlaceholder={null}
+    type="tel"
+    className="my-input"
+    {...field}
+    {...props}
+  />
+);
 
-const IbanN = ({ field, form, ...props}) => <InputMask 
-  mask="KZ******************"
-  placeholder='KZ'
-  onChange={(e) => setIbanValue(e)}
-  className="my-input"
-  {...field}
-  {...props} 
-/>
+const IbanN = ({ field, form, ...props }) => (
+  <InputMask
+    mask="KZ******************"
+    placeholder="KZ"
+    onChange={(e) => setIbanValue(e)}
+    className="my-input"
+    {...field}
+    {...props}
+  />
+);
 
-const CardNumber = ({ field, form, ...props}) => <InputMask 
-  mask="9999-9999-9999-9999"
-  maskPlaceholder= {null}
-  type='tel'
-  className="my-input"
-  {...field}
-  {...props} 
-/>
+const CardNumber = ({ field, form, ...props }) => (
+  <InputMask
+    mask="9999-9999-9999-9999"
+    maskPlaceholder={null}
+    type="tel"
+    className="my-input"
+    {...field}
+    {...props}
+  />
+);
 
-const CardExp = ({ field, form, ...props}) => <InputMask 
-  mask="99/99"
-  maskPlaceholder= {null}
-  type='tel'
-  className="my-input"
-  {...field}
-  {...props} 
-/>
+const CardExp = ({ field, form, ...props }) => (
+  <InputMask
+    mask="99/99"
+    maskPlaceholder={null}
+    type="tel"
+    className="my-input"
+    {...field}
+    {...props}
+  />
+);
 
-const ContinueStep3 = ({step,setStep, stepResult, userDate, srok,summa}) => {
+const ContinueStep3 = ({
+  step,
+  setStep,
+  stepResult,
+  userDate,
+  srok,
+  summa,
+}) => {
   // Translation
-  const { t } = useTranslation()
+  const { t } = useTranslation();
 
-  const [btnLoading, setBtnLoading] = useState(false)
+  const [btnLoading, setBtnLoading] = useState(false);
   const onSubmit = (values) => {
-    if(isValidIBANNumber2(iban.value)!==false) {
-      var continue2=  {}
+    if (isValidIBANNumber2(iban.value) !== false) {
+      var continue2 = {};
       values.UF_35 = iban.value;
       values.UF_47 = iban.text;
       values.UF_2 = summa;
       values.UF_3 = srok;
-      if(cookie.get('continue2')) {
-        continue2 = JSON.parse(cookie.get('continue2'))
+      if (cookie.get("continue2")) {
+        continue2 = JSON.parse(cookie.get("continue2"));
       }
       const finalValues = {
         UF_1: userDate.UF_1,
@@ -96,7 +124,7 @@ const ContinueStep3 = ({step,setStep, stepResult, userDate, srok,summa}) => {
         UF_11: userDate.UF_11,
         UF_12: userDate.UF_12,
         UF_13: userDate.UF_13,
-        UF_16: 'icredit-crm.kz',
+        UF_16: "icredit-crm.kz",
         UF_17: continue2.UF_17 ? continue2.UF_17 : userDate.UF_17,
         UF_18: continue2.UF_18 ? continue2.UF_18 : userDate.UF_18,
         UF_19: continue2.UF_19 ? continue2.UF_19 : userDate.UF_19,
@@ -128,7 +156,7 @@ const ContinueStep3 = ({step,setStep, stepResult, userDate, srok,summa}) => {
         UF_45: values.UF_45,
         UF_46: values.UF_46,
         UF_47: values.UF_47,
-      }
+      };
       // let secondStepValue = {
       //   regionOfCity_id: continue2.UF_18 ? continue2.UF_18 : userDate.UF_18,
       //   street: continue2.UF_19 ? continue2.UF_19 : userDate.UF_19,
@@ -164,7 +192,7 @@ const ContinueStep3 = ({step,setStep, stepResult, userDate, srok,summa}) => {
         place_of_issue: values.UF_45,
         birth_place: values.UF_46,
         bank_name: values.UF_47,
-      }
+      };
       // console.log(secondStepValue)
       // setBtnLoading(true)
       // axios.post(`https://api.money-men.kz/api/registration_step_two`, secondStepValue, {
@@ -201,244 +229,369 @@ const ContinueStep3 = ({step,setStep, stepResult, userDate, srok,summa}) => {
       //     })
       //   })
 
-      console.log(thirdStepValues)
-      setBtnLoading(true)
-      axios.post(`https://api.money-men.kz/api/last_step`, thirdStepValues, {
-        headers: {
-          'Access-Control-Allow-Origin':'*',
-          'Content-Type': 'application/json',
-          'Accept': 'application/json',
-          Authorization: `Bearer ${cookie.get('token')}`,
-        },
-        credentials: 'same-origin'
-      })
-        .then(response=> {
-          setBtnLoading(false)
-          console.log(response, hello)
-          if(response.data.success === true) {
-            swal("Успешно!", `Заявка отправлена`, "success").then(() =>{
-              Router.push('/cabinet/loans')
-              cookie.remove('continue2')
-          });
-          }
-          else {
-            swal("Oops!", `${response.errors || 'У вас анкета заполнена не до конца. Напишите на WhatsApp или звоните на номер +7 727 250 15 00'}`, "error").then(() => {
-              Router.push('/cabinet/loans')
+      console.log(thirdStepValues);
+      setBtnLoading(true);
+      axios
+        .post(`https://api.money-men.kz/api/last_step`, thirdStepValues, {
+          headers: {
+            "Access-Control-Allow-Origin": "*",
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            Authorization: `Bearer ${cookie.get("token")}`,
+          },
+          credentials: "same-origin",
+        })
+        .then((response) => {
+          setBtnLoading(false);
+          console.log(response, hello);
+          if (response.data.success === true) {
+            swal("Успешно!", `Заявка отправлена`, "success").then(() => {
+              Router.push("/cabinet/loans");
+              cookie.remove("continue2");
+            });
+          } else {
+            swal(
+              "Oops!",
+              `${
+                response.errors ||
+                "У вас анкета заполнена не до конца. Напишите на WhatsApp или звоните на номер +7 727 250 15 00"
+              }`,
+              "error"
+            ).then(() => {
+              Router.push("/cabinet/loans");
             });
           }
         })
-        .catch(error => {
-          if(error.response) {
-            console.log(error.response)
+        .catch((error) => {
+          if (error.response) {
+            console.log(error.response);
           }
-          setBtnLoading(false)
+          setBtnLoading(false);
           // swal('Oops', 'Что то пошло не так', 'error').then(() => {
-            Router.push('/cabinet/loans')
-            window.scrollTo(0,0)
+          Router.push("/cabinet/loans");
+          window.scrollTo(0, 0);
           // })
-        })
+        });
     }
-  }
+  };
 
-  const [checked, setChecked] = useState(false)
-  const [iban,setIban] = useState({value: '', text: 'Заполните поле до конца'})
+  const [checked, setChecked] = useState(false);
+  const [iban, setIban] = useState({
+    value: "",
+    text: "Заполните поле до конца",
+  });
 
   const setIbanValue = (e) => {
-    setIban({value : e.target.value, text: isValidIBANNumber(e.target.value)})
-  }
+    setIban({ value: e.target.value, text: isValidIBANNumber(e.target.value) });
+  };
 
-
-
-  return(
+  return (
     <div>
       <Formik
         initialValues={{
-        UF_31: '',
-        UF_33: '',
-        UF_32: '',
-        UF_34: '',
-        UF_35: '',
-        UF_36: '',
-        UF_37: '',
-        UF_38: '',
-        UF_39: `${Math.round(Math.random() * (3000000 - 1500000) + 1500000).toString().split('').slice(0, 4).concat(['0', '0', '0']).join('')}`,
-        UF_40: `${Math.round(Math.random() * (4000000 - 2000000) + 2000000).toString().split('').slice(0, 4).concat(['0', '0', '0']).join('')}`,
-        UF_41: '',
-        UF_42: '',
-        UF_43: '',
-        UF_44: '',
-        UF_45: '',
-        UF_46: '',
-        UF_47: ''
-      }}
-      onSubmit={values=> {
-        onSubmit(values)
-      }}
-    >
-  {({ errors, touched, isValidating, isSubmitting }) => (
-    <Form className='container'>
-      <h2 className="mt-5 mb-5">Информация о месте работы</h2>
-      <div className='row form-group'>
-        <div className='col-md-12 mb-3'>
-          <label htmlFor=''>
-            Место работы *
-          </label>
-          <Field validate={requiredd} name='UF_31' className='form-control' placeholder='Место работы'></Field>
-          {errors.UF_31 && touched.UF_31 && <p className='text-danger'>{t(errors.UF_31)}</p>}
-        </div>
-        <div className='col-md-6 mb-3'>
-          <label htmlFor=''>
-            Должность *
-          </label>
-          <Field as='select' validate={requiredd}  name='UF_33' className='form-control'>
-            <option value="" disabled selected>Должность</option>
-            {speciality.map(spec => (
-              <option key={spec.id} value={spec.id}>{spec.name}</option>
-            ))}
-          </Field>
-          {errors.UF_33 && touched.UF_33 && <p className='text-danger'>{t(errors.UF_33)}</p>}
-        </div>
+          UF_31: "",
+          UF_33: "",
+          UF_32: "",
+          UF_34: "",
+          UF_35: "",
+          UF_36: "",
+          UF_37: "",
+          UF_38: "",
+          UF_39: `${Math.round(Math.random() * (3000000 - 1500000) + 1500000)
+            .toString()
+            .split("")
+            .slice(0, 4)
+            .concat(["0", "0", "0"])
+            .join("")}`,
+          UF_40: `${Math.round(Math.random() * (4000000 - 2000000) + 2000000)
+            .toString()
+            .split("")
+            .slice(0, 4)
+            .concat(["0", "0", "0"])
+            .join("")}`,
+          UF_41: "",
+          UF_42: "",
+          UF_43: "",
+          UF_44: "",
+          UF_45: "",
+          UF_46: "",
+          UF_47: "",
+        }}
+        onSubmit={(values) => {
+          onSubmit(values);
+        }}
+      >
+        {({ errors, touched, isValidating, isSubmitting }) => (
+          <Form className="container">
+            <h2 className="mt-5 mb-5">Информация о месте работы</h2>
+            <div className="row form-group">
+              <div className="col-md-12 mb-3">
+                <label htmlFor="">Место работы *</label>
+                <Field
+                  validate={requiredd}
+                  name="UF_31"
+                  className="form-control"
+                  placeholder="Место работы"
+                ></Field>
+                {errors.UF_31 && touched.UF_31 && (
+                  <p className="text-danger">{t(errors.UF_31)}</p>
+                )}
+              </div>
+              <div className="col-md-6 mb-3">
+                <label htmlFor="">Должность *</label>
+                <Field
+                  as="select"
+                  validate={requiredd}
+                  name="UF_33"
+                  className="form-control"
+                >
+                  <option value="" disabled selected>
+                    Должность
+                  </option>
+                  {speciality.map((spec) => (
+                    <option key={spec.id} value={spec.id}>
+                      {spec.name}
+                    </option>
+                  ))}
+                </Field>
+                {errors.UF_33 && touched.UF_33 && (
+                  <p className="text-danger">{t(errors.UF_33)}</p>
+                )}
+              </div>
 
-        <div className='col-md-6 mb-3'>
-          <label htmlFor=''>
-            Стаж работы на последнем месте работы *
-          </label>
-          <Field validate={requiredd} as='select' name='UF_32' className='form-control'>
-            <option value="" disabled selected>Стаж работы</option>
-            <option value="до 3мес.">до 3мес.</option>
-            <option value="до 4-6мес.">до 4-6мес.</option>
-            <option value="до 7-12мес.">до 7-12мес.</option>
-            <option value="от 1 до 2лет">от 1 до 2лет</option>
-            <option value="от 2 до 5лет">от 2 до 5лет</option>
-          </Field>
-          {errors.UF_32 && touched.UF_32 && <p className='text-danger'>{t(errors.UF_32)}</p>}
-        </div>
-        <h2 className="col-md-12 mt-5 mb-5">Информация о уд. личности</h2>
-        <div className='col-md-6 mb-3'>
-          <label htmlFor=''>
-            Место рождения *
-          </label>
-          <Field validate={requiredd} name='UF_46' className='form-control'></Field>
-          {errors.UF_46 && touched.UF_46 && <p className='text-danger'>{t(errors.UF_46)}</p>}
-        </div>
-        <div className='col-md-6 mb-3'>
-          <label htmlFor=''>
-            Номер удостворения личности *
-          </label>
-          
-          <Field  validate={idNumber} name='UF_42' className='form-control' component={IinMask}>
-       
-          </Field>
-          {errors.UF_42 && touched.UF_42 && <p className='text-danger'>{t(errors.UF_42)}</p>}
-        </div>
-        <div className='col-md-6 mb-3'>
-          <label htmlFor=''>
-            Дата выдачи(дд.мм.гггг) * :
-          </label>
-          <div className='input-group'>
-            <Field name='UF_43' className='form-control' validate={CheckGivedDate} component={GivenDate}></Field>
-          
-          <div className="hint">Дата выдачи (ДД.ММ.ГГГГ)</div>
-          </div>
-          {errors.UF_43 && touched.UF_43 && <p className='text-danger'>{t(errors.UF_43)}</p>}
-        </div>
-        <div className='col-md-6 mb-3'>
-          <label htmlFor=''>
-            Срок действия (дд.мм.гггг) * :
-          </label>
-          <div className='input-group'>
-          <Field name='UF_44' className='form-control' validate={CheckExpDate} component={GivenDate}></Field>
-        
-          <div className="hint">Срок действия  (ДД.ММ.ГГГГ)</div>
-          </div>
-          {errors.UF_44 && touched.UF_44 && <p className='text-danger'>{t(errors.UF_44)}</p>}
-        </div>
-        <div className='col-md-6 mb-3'>
-          <label htmlFor=''>
-            Кем выдано *
-          </label>
-          <Field as='select' name='UF_45' validate={requiredd} className='form-control'>
-            <option value="" disabled selected>Кем выдано</option>
-            <option value="МЮ РК">МЮ РК</option>
-            <option value="МВД РК">МВД РК</option>
-          </Field>
-          {errors.UF_45 && touched.UF_45 && <p className='text-danger'>{t(errors.UF_45)}</p>}
-        </div>  
+              <div className="col-md-6 mb-3">
+                <label htmlFor="">
+                  Стаж работы на последнем месте работы *
+                </label>
+                <Field
+                  validate={requiredd}
+                  as="select"
+                  name="UF_32"
+                  className="form-control"
+                >
+                  <option value="" disabled selected>
+                    Стаж работы
+                  </option>
+                  <option value="до 3мес.">до 3мес.</option>
+                  <option value="до 4-6мес.">до 4-6мес.</option>
+                  <option value="до 7-12мес.">до 7-12мес.</option>
+                  <option value="от 1 до 2лет">от 1 до 2лет</option>
+                  <option value="от 2 до 5лет">от 2 до 5лет</option>
+                </Field>
+                {errors.UF_32 && touched.UF_32 && (
+                  <p className="text-danger">{t(errors.UF_32)}</p>
+                )}
+              </div>
 
-        <div className='col-md-6 mb-3'>
-          <label>Доход *</label>
-          <Field validate={requiredd} autocomplete='off' name='UF_34' className='form-control' type=''></Field >
-          {errors.UF_34 && touched.UF_34 && <p className='text-danger'>{t(errors.UF_34)}</p>}
-        </div>
+              <h2 className="col-md-12 mt-5 mb-5">Информация о уд. личности</h2>
+              <div className="col-md-6 mb-3">
+                <label htmlFor="">Место рождения *</label>
+                <Field
+                  validate={requiredd}
+                  name="UF_46"
+                  className="form-control"
+                ></Field>
+                {errors.UF_46 && touched.UF_46 && (
+                  <p className="text-danger">{t(errors.UF_46)}</p>
+                )}
+              </div>
+              <div className="col-md-6 mb-3">
+                <label htmlFor="">Номер удостворения личности *</label>
 
-        <div className='col-md-6 mb-3'>
-          <label>Остаток на депозите *</label>
-          <div className='input-group'>
-            <Field validate={depositeValidation} name='UF_40' autocomplete='off' className='form-control' type=''></Field>
-            <div className="hint">Чем больше сумма депозита тем больше сумма при одобрении микрокредита</div>
-          </div>
-          {errors.UF_40 && touched.UF_40 && <p className='text-danger'>{t(errors.UF_40)}</p>}
-        </div>
+                <Field
+                  validate={idNumber}
+                  name="UF_42"
+                  className="form-control"
+                  component={IinMask}
+                ></Field>
+                {errors.UF_42 && touched.UF_42 && (
+                  <p className="text-danger">{t(errors.UF_42)}</p>
+                )}
+              </div>
+              <div className="col-md-6 mb-3">
+                <label htmlFor="">Дата выдачи(дд.мм.гггг) * :</label>
+                <div className="input-group">
+                  <Field
+                    name="UF_43"
+                    className="form-control"
+                    validate={CheckGivedDate}
+                    component={GivenDate}
+                  ></Field>
 
-        <div className='col-md-6 mb-3'>
-          <label>Сумма *</label>
-          <Field validate={requiredd} name='UF_41' type='' placeholder='Сумма платежей действующих микрокредитов:' className='form-control' disabled={checked}></Field>
-          {errors.UF_41 && touched.UF_41 && <p className='text-danger'>{t(errors.UF_41)}</p>}
-        </div> 
+                  <div className="hint">Дата выдачи (ДД.ММ.ГГГГ)</div>
+                </div>
+                {errors.UF_43 && touched.UF_43 && (
+                  <p className="text-danger">{t(errors.UF_43)}</p>
+                )}
+              </div>
+              <div className="col-md-6 mb-3">
+                <label htmlFor="">Срок действия (дд.мм.гггг) * :</label>
+                <div className="input-group">
+                  <Field
+                    name="UF_44"
+                    className="form-control"
+                    validate={CheckExpDate}
+                    component={GivenDate}
+                  ></Field>
 
-        <div className='col-md-6 mb-3'>
-          <label>Сумма платежей закрытых микрокредитов последний 6 мес. *</label>
-          <Field validate={depositeValidation} name='UF_39' type='' className='form-control' ></Field>
-          {errors.UF_39 && touched.UF_39 && <p className='text-danger'>{t(errors.UF_39)}</p>}
-        </div>
-      </div>
+                  <div className="hint">Срок действия (ДД.ММ.ГГГГ)</div>
+                </div>
+                {errors.UF_44 && touched.UF_44 && (
+                  <p className="text-danger">{t(errors.UF_44)}</p>
+                )}
+              </div>
+              <div className="col-md-6 mb-3">
+                <label htmlFor="">Кем выдано *</label>
+                <Field
+                  as="select"
+                  name="UF_45"
+                  validate={requiredd}
+                  className="form-control"
+                >
+                  <option value="" disabled selected>
+                    Кем выдано
+                  </option>
+                  <option value="МЮ РК">МЮ РК</option>
+                  <option value="МВД РК">МВД РК</option>
+                </Field>
+                {errors.UF_45 && touched.UF_45 && (
+                  <p className="text-danger">{t(errors.UF_45)}</p>
+                )}
+              </div>
 
-      <h2 className="col-md-12 mt-5 mb-5">Информация о счетах</h2>
-      <div className='row form-group'>
-        <div className='col-md-6 mb-3'>
-          <label>IBAN счет *</label>
-          <div className='input-group'>
-            <Field onChange={e => setIbanValue(e)} value={iban.value.toUpperCase()}  className='form-control' name='UF_35'  component={IbanN} />
-            <div className="hint">Номер банковского счета</div>
-          </div>
-          <p className='mt-2 text-info'>{iban.text}</p>
-          {errors.UF_35 && touched.UF_35 && <p className='text-danger'>{t(errors.UF_35)}</p>}
-        </div>
+              <div className="col-md-6 mb-3">
+                <label>Доход *</label>
+                <Field
+                  validate={requiredd}
+                  autocomplete="off"
+                  name="UF_34"
+                  className="form-control"
+                  type=""
+                ></Field>
+                {errors.UF_34 && touched.UF_34 && (
+                  <p className="text-danger">{t(errors.UF_34)}</p>
+                )}
+              </div>
 
-        <div className='col-md-6 mb-3'>
-          <label>Номер карты *</label>
-          <div className='input-group'>
-          <Field className='form-control' name='UF_36' validate={textCheckCardValid} component={CardNumber} />
-          </div>
-          {errors.UF_36 && touched.UF_36 && <p className='text-danger'>{t(errors.UF_36)}</p>}
-        </div>
+              <div className="col-md-6 mb-3">
+                <label>Остаток на депозите *</label>
+                <div className="input-group">
+                  <Field
+                    validate={depositeValidation}
+                    name="UF_40"
+                    autocomplete="off"
+                    className="form-control"
+                    type=""
+                  ></Field>
+                  <div className="hint">
+                    Чем больше сумма депозита тем больше сумма при одобрении
+                    микрокредита
+                  </div>
+                </div>
+                {errors.UF_40 && touched.UF_40 && (
+                  <p className="text-danger">{t(errors.UF_40)}</p>
+                )}
+              </div>
 
-        <div className='col-md-6 mb-3'>
-        <label>Дата окончания *</label>
-        <Field className='form-control' name='UF_37' component={CardExp} />
-        </div>
+              <div className="col-md-6 mb-3">
+                <label>Сумма *</label>
+                <Field
+                  validate={requiredd}
+                  name="UF_41"
+                  type=""
+                  placeholder="Сумма платежей действующих микрокредитов:"
+                  className="form-control"
+                  disabled={checked}
+                ></Field>
+                {errors.UF_41 && touched.UF_41 && (
+                  <p className="text-danger">{t(errors.UF_41)}</p>
+                )}
+              </div>
 
-        <div className='col-md-6 mb-3'>
-        <label htmlFor='name_of_owner'>Имя владельца карты латинскими буквами * :
-        </label>
-          <div className='input-group'>
-            <Field validate={onlyEnglish} name='UF_38' className='form-control  input-uppercase cardName'></Field>
-            <div className="hint">Только на латинском</div>
-          </div>
-        </div>
-      </div>
-      <div className="button form-group mb-5">
-              <button
-                type="submit "
-                disabled={btnLoading}
-                className=""
-              >{btnLoading ? 'Загрузка...'  : 'Отправить'}</button>
-          </div>
-    </Form>
-  )}
+              <div className="col-md-6 mb-3">
+                <label>
+                  Сумма платежей закрытых микрокредитов последний 6 мес. *
+                </label>
+                <Field
+                  validate={depositeValidation}
+                  name="UF_39"
+                  type=""
+                  className="form-control"
+                ></Field>
+                {errors.UF_39 && touched.UF_39 && (
+                  <p className="text-danger">{t(errors.UF_39)}</p>
+                )}
+              </div>
+            </div>
+
+            <h2 className="col-md-12 mt-5 mb-5">Информация о счетах</h2>
+            <div className="row form-group">
+              <div className="col-md-6 mb-3">
+                <label>IBAN счет *</label>
+                <div className="input-group">
+                  <Field
+                    onChange={(e) => setIbanValue(e)}
+                    value={iban.value.toUpperCase()}
+                    className="form-control"
+                    name="UF_35"
+                    component={IbanN}
+                  />
+                  <div className="hint">Номер банковского счета</div>
+                </div>
+                <p className="mt-2 text-info">{iban.text}</p>
+                {errors.UF_35 && touched.UF_35 && (
+                  <p className="text-danger">{t(errors.UF_35)}</p>
+                )}
+              </div>
+
+              <div className="col-md-6 mb-3">
+                <label>Номер карты *</label>
+                <div className="input-group">
+                  <Field
+                    className="form-control"
+                    name="UF_36"
+                    validate={textCheckCardValid}
+                    component={CardNumber}
+                  />
+                </div>
+                {errors.UF_36 && touched.UF_36 && (
+                  <p className="text-danger">{t(errors.UF_36)}</p>
+                )}
+              </div>
+
+              <div className="col-md-6 mb-3">
+                <label>Дата окончания *</label>
+                <Field
+                  className="form-control"
+                  name="UF_37"
+                  component={CardExp}
+                />
+              </div>
+
+              <div className="col-md-6 mb-3">
+                <label htmlFor="name_of_owner">
+                  Имя владельца карты латинскими буквами * :
+                </label>
+                <div className="input-group">
+                  <Field
+                    validate={onlyEnglish}
+                    name="UF_38"
+                    className="form-control  input-uppercase cardName"
+                  ></Field>
+                  <div className="hint">Только на латинском</div>
+                </div>
+              </div>
+            </div>
+            <div className="button form-group mb-5">
+              <button type="submit " disabled={btnLoading} className="">
+                {btnLoading ? "Загрузка..." : "Отправить"}
+              </button>
+            </div>
+          </Form>
+        )}
       </Formik>
     </div>
-  )
-}
+  );
+};
 
 export default ContinueStep3;
