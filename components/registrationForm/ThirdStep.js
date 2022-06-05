@@ -105,7 +105,6 @@ class FormRegister extends React.Component {
   };
 
   handleSubmit(values) {
-    console.log(values, "VALUUU");
     let other = {};
 
     other.bank_name = isValidIBANNumber(values.iban_account);

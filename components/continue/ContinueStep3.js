@@ -229,7 +229,6 @@ const ContinueStep3 = ({
       //     })
       //   })
 
-      console.log(thirdStepValues);
       setBtnLoading(true);
       axios
         .post(`https://api.money-men.kz/api/last_step`, thirdStepValues, {

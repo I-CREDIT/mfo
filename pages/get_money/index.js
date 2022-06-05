@@ -21,7 +21,6 @@ import { actions } from "react-redux-form";
 import withUseTranslation from "../../public/js/hocs/useTranslation";
 
 const handleSteps = (step) => {
-  const stepp = 2;
   switch (step) {
     case 0:
       return <FirstStep props />;

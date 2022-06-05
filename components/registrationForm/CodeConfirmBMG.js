@@ -66,9 +66,8 @@ class CodeConfirmBMG extends React.Component {
     var object = {};
     object.code = vals.code;
     const finalobjects = Object.assign(this.props.registrationValues, object);
-    this.props.takeDocumentsBiometry(finalobjects).then(() => {
-      this.props.confirmSMS(finalobjects);
-    });
+
+    this.props.takeDocumentsBiometry(finalobjects);
     this.props.resetCode();
   };
 

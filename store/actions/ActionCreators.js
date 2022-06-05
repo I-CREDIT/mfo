@@ -248,7 +248,6 @@ function checkIIN(val) {
 }
 
 export const confirmSMS = (registration) => (dispatch) => {
-  console.log(registration, "REGGGGGGG");
   dispatch(emptyMessage());
   dispatch(isLoading(true));
   registration.source = "i-credit1";
@@ -343,7 +342,6 @@ export const confirmSMS = (registration) => (dispatch) => {
 export const takeDocumentsBiometry = (registration) => (dispatch) => {
   dispatch(emptyMessage());
   dispatch(isLoading(true));
-  console.log(registration, "AYIWEGQI");
 
   const params = {
     iin: registration.iin,
@@ -353,54 +351,52 @@ export const takeDocumentsBiometry = (registration) => (dispatch) => {
     code: registration.code,
   };
 
-  return axios.get("http://178.170.221.75/biometria/public/api/takeDocs", {
-    method: "GET",
-    headers: {
-      "Access-Control-Allow-Origin": "*",
-      "Content-Type": "application/json",
-      Accept: "application/json",
-    },
-    params,
-  });
+  return axios
+    .get("http://178.170.221.75/biometria/public/api/takeDocs", {
+      method: "GET",
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+      params,
+    })
+    .then((response) => {
+      if (response.status === 200) {
+        return response;
+      }
+      throw response;
+    })
+    .then((response) => response.data)
+    .then((response) => {
+      if (response.success) {
+        localStorage.setItem("token", response.token);
 
-  // return fetch(
-  //   `http://178.170.221.75/biometria/public/api/takeDocs?iin=${registration.iin}&name=${registration.name}&middleName=${registration.middlename}&lastName=${registration.last_name}&code=${registration.code}`,
-  //   {
-  //     method: "GET",
-  //     headers: {
-  //       "Access-Control-Allow-Origin": "*",
-  //       "Content-Type": "application/json",
-  //       Accept: "application/json",
-  //     },
-  //     credentials: "same-origin",
-  //   }
-  // )
-  //   .then((response) => {
-  //     if (response.ok) {
-  //       return response;
-  //     }
-  //     throw response;
-  //   })
-  //   .then((response) => response.json())
-  //   .then((response) => {
-  //     if (response.success) {
-  //       localStorage.setItem("token", response.access_token);
-  //       dispatch(addRegistration(""));
-  //       dispatch(stepRegistration(2));
-  //       dispatch(emptyMessage());
-  //       localStorage.setItem("step", "2");
-  //       window.scrollTo(0, 0);
-  //       dispatch(isLoading(false));
-  //     } else {
-  //       dispatch(errorMessage(`Ошибка отправки кода. ${response.message}`));
-  //     }
-  //   })
-  //   .then((response) => dispatch(isLoading(false)))
-  //   .catch((r) => {
-  //     console.log(r);
-  //     dispatch(errorMessage("Отправленный вами код не существует"));
-  //   })
-  //   .then(() => dispatch(isLoading(false)));
+        const payload = {
+          ...registration,
+          doc_number: response.docNumber,
+          doc_issue: response.docGiven,
+          start_given: response.startGiven,
+          end_given: response.endGiven,
+        };
+
+        dispatch(confirmSMS(payload));
+        dispatch(addRegistration(""));
+        dispatch(stepRegistration(2));
+        dispatch(emptyMessage());
+        localStorage.setItem("step", "2");
+        window.scrollTo(0, 0);
+        dispatch(isLoading(false));
+      } else {
+        dispatch(errorMessage(`Ошибка отправки кода. ${response.message}`));
+      }
+    })
+    .then((response) => dispatch(isLoading(false)))
+    .catch((r) => {
+      console.log(r);
+      dispatch(errorMessage("Отправленный вами код не существует"));
+    })
+    .then(() => dispatch(isLoading(false)));
 };
 
 export const postRegistrationSecond = (registration) => (dispatch) => {
@@ -470,7 +466,6 @@ export const regionsSucces = (region) => ({
 
 export const postRegistrationThird = (registration) => (dispatch) => {
   dispatch(isLoading(true));
-  console.log(registration, "ADOJNADB");
 
   const payload = {
     token: localStorage.getItem("token"),

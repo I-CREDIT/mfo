@@ -36,7 +36,6 @@ const ResetPasword = () => {
       values.password !== values.passwordConfirm
     ) {
       setErrorMessage("Пароли не совпадают");
-      console.log(values);
     } else {
       setErrorMessage(null);
       axios

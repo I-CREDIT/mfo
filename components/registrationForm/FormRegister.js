@@ -107,7 +107,7 @@ class FormRegister extends React.Component {
     this.state = {
       isModalOpen: false,
       checked: false,
-      isOnBMG: false,
+      isOnBMG: true,
       phoneError: "",
       firstreg: [
         {
@@ -223,7 +223,6 @@ class FormRegister extends React.Component {
 
     if (this.state.isOnBMG) {
       this.props.getSMSFromBMG(user).then((response) => {
-        console.log(response, "RESPOrr");
         if (!response.success) {
           this.setState({
             isOnBMG: false,
