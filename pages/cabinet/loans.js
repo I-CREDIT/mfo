@@ -14,6 +14,7 @@ import { ifSaled } from '../../defaults/saled'
 // Перевод для классового компонента
 import withUseTranslation from "../../public/js/hocs/useTranslation";
 
+import cookie from 'js-cookie';
 const mapStateToProps = state => {
   return {userReducer: state.userReducer, userStatus: state.userStatus, userHistory: state.userHistory}
 }
@@ -36,7 +37,9 @@ class Cabinet extends React.Component {
 
   canSendRepeat() {
     axios
-        .get(`https://api.money-men.kz/api/repeatUser?iin=${this.props.userReducer.user.UF_4}`)
+        .post(`https://api.i-credit.kz/api/repeatUser`, {
+          token: cookie.get('token')
+        })
         .then((response) => {
           if (response.data.success == true) {
             // Router.push('/cabinet/repeated')
@@ -53,9 +56,11 @@ class Cabinet extends React.Component {
   }
 
   getCurrentStep() {
-    axios.get(`https://api.money-men.kz/api/notFull?iin=${this.props.userReducer.user.UF_4}`, {headers: {
+    axios.post(`https://api.i-credit.kz/api/notFull`, {headers: {
       "Access-Control-Allow-Origin": "*",
-    }})
+    },
+    token: cookie.get('token')
+  })
       .then(res => {
         console.log(res) // нужно отсюда взять step!
         if(res.data.success) {
@@ -85,7 +90,9 @@ class Cabinet extends React.Component {
     else {
         this.setState({btnLoading: true})
         await axios
-            .get(`https://api.money-men.kz/api/repeatUser?iin=${this.props.userReducer.user.UF_4}`)
+            .post(`https://api.i-credit.kz/api/repeatUser`, {
+        token: cookie.get('token')
+      })
             .then((response) => {
                 if (response.data.success) {
                     Router.push('/cabinet/repeated')

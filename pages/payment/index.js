@@ -53,7 +53,7 @@ class Payment extends React.Component {
           this.setState({
             btnLoading: true,
           });
-           axios.post(`https://api.money-men.kz/api/make_payment123`, values)
+           axios.post(`https://api.i-credit.kz/api/make_payment123`, values)
             .then((response) => {
               this.setState({
                 btnLoading: false

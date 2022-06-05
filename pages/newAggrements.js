@@ -73,7 +73,7 @@ class Aggrement extends React.Component {
     })
 
     if(getUrlParameter('token').length !== 0) {
-      await axios.get(`https://api.money-men.kz/api/newGetData?token=${token}`)
+      await axios.get(`https://api.i-credit.kz/api/newGetData?token=${token}`)
       .then((response) => {
         console.log(response)
         if(response.data.success) {
@@ -120,7 +120,7 @@ class Aggrement extends React.Component {
         Router.push('/')
       })
     } else if (getUrlParameter('leadID').length !== 0) {
-      await axios.get(`https://api.money-men.kz/api/newGetData?leadID=${token}`)
+      await axios.get(`https://api.i-credit.kz/api/newGetData?leadID=${token}`)
       .then((response) => {
         console.log(response)
         if(response.data.success) {
@@ -247,7 +247,7 @@ class Aggrement extends React.Component {
       loading: true
     })
     try{
-       axios.get('https://api.money-men.kz/api/agreementNew',{ params:{
+       axios.get('https://api.i-credit.kz/api/agreementNew',{ params:{
         leadID: this.state.leadID,
         sign: 'y'
       }})

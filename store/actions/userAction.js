@@ -33,7 +33,7 @@ export const logoutUser = () => ({
 
 export const loginUser = (values) => dispatch => {
   dispatch({ type: 'AUTHENTICATING_USER' });
-  fetch("https://api.money-men.kz/api/login", {
+  fetch("https://api.i-credit.kz/api/login", {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -42,19 +42,28 @@ export const loginUser = (values) => dispatch => {
     body: JSON.stringify(values),
   })
     .then(response => {
-      if (response.ok) return response;
-
-      const error = new Error(`Error ${response.status}: ${response.statusText}`);
-      error.response = response;
-      throw error;
+      if (response.ok) {
+        return response;
+      }
     })
     .then(response => response.json())
     .then(data => {
-      cookie.set('token', data.access_token, {expires: data.expires_in})
-      let users = dispatch(fetchCurrentUser())
-      console.log('USERS:', users)
+      if(data.success) {
+        return data
+      }
+      const error = new Error(`Error ${response.status}: ${response.statusText}`);
+      error.response = data.message;
+      throw error;
+    }).then(data => {
+      cookie.set('token', data.token, {expires: 2})
+      var users = dispatch(fetchCurrentUser())
+      console.log(users)
       dispatch({ type: 'SET_CURRENT_USER', payload: 'user' })
       Router.push('/cabinet/loans')
+    },
+    error => {
+      const errmess = new Error(error.message);
+      throw errmess;
     })
 
     .catch((error) => {
@@ -62,18 +71,20 @@ export const loginUser = (values) => dispatch => {
         dispatch({type: 'FAILED_LOGIN', payload: 'Неправильный ИИН или пароль'})
       }
       else {
-        dispatch({type: 'FAILED_LOGIN', payload: error.message})
+        dispatch({type: 'FAILED_LOGIN', payload: 'Неправильный ИИН или пароль'})
       }
     })
 };
 
 export const fetchCurrentUser = () => dispatch => {
   dispatch(authenticatingUser());
-  fetch("https://api.money-men.kz/api/getUserProfileFromBitrix", {
-    method: 'GET',
+  fetch("https://api.i-credit.kz/api/getUserProfileFromBitrix", {
+    method: 'POST',
     headers: {
-      Authorization: `Bearer ${cookie.get('token')}`,
+      'Content-Type': 'application/json',
+      Accept: 'application/json',
     },
+    body: JSON.stringify({token: cookie.get('token')}),
   })
   .then(response => {
     if (response.ok) {
@@ -96,11 +107,13 @@ export const fetchCurrentUser = () => dispatch => {
 
 export const fetchUserStatus = () => dispatch => {
   dispatch(dateLoading(true));
-  fetch("https://api.money-men.kz/api/getUserInfo", {
-    method: 'GET',
+  fetch("https://api.i-credit.kz/api/getUserInfo", {
+    method: 'POST',
     headers: {
-      Authorization: `Bearer ${cookie.get('token')}`,
+      'Content-Type': 'application/json',
+      Accept: 'application/json',
     },
+    body: JSON.stringify({token: cookie.get('token')}),
   })
   .then(response => {
     if (response.ok) {
@@ -123,11 +136,13 @@ export const fetchUserStatus = () => dispatch => {
 
 export const fetchUserHistory = () => dispatch => {
   dispatch(dateLoading(true));
-  fetch("https://api.money-men.kz/api/history", {
-    method: 'GET',
+  fetch("https://api.i-credit.kz/api/history", {
+    method: 'POST',
     headers: {
-      Authorization: `Bearer ${cookie.get('token')}`,
+      'Content-Type': 'application/json',
+      Accept: 'application/json',
     },
+    body: JSON.stringify({token: cookie.get('token')}),
   })
   .then(response => {
     if (response.ok) {

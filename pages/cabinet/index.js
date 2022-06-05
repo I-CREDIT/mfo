@@ -11,6 +11,7 @@ import axios from 'axios'
 // Перевод для классового компонента
 import withUseTranslation from "../../public/js/hocs/useTranslation";
 
+import cookie from 'js-cookie';
 const mapStateToProps = state => {
   return {
     userReducer: state.userReducer
@@ -29,7 +30,10 @@ class Cabinet extends React.Component {
     this.setState ({
       btnLoading: true
     })
-    await axios.get(`https://api.money-men.kz/api/repeatUser?iin=${this.props.userReducer.user.UF_4}`)
+    await axios
+    .post(`https://api.i-credit.kz/api/repeatUser`, {
+      token: cookie.get('token')
+    })
       .then((response) => {
         if(response.data.success == true) {
           Router.push('/cabinet/repeated')

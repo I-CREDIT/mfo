@@ -8,6 +8,8 @@ import ContinueStep2 from "../../components/continue/ContinueStep2"
 import ContinueStep3 from "../../components/continue/ContinueStep3"
 import withAuth from "../../components/hocs/withAuth"
 import { Modal, ModalHeader, ModalBody } from 'reactstrap';
+import Progressbar from "../../components/shared/Progressbar"
+import cookie from 'js-cookie';
 
 const mapStateToProps = state => {
   return {userReducer: state.userReducer, userStatus: state.userStatus, userHistory: state.userHistory}
@@ -36,9 +38,11 @@ const Continue = ({userReducer}) => {
     })
   }
   const getCurrentStep =() => {
-    axios.get(`https://api.money-men.kz/api/notFull?iin=${userReducer.user.UF_4}`, {headers: {
+    axios.post(`https://api.i-credit.kz/api/notFull`, {headers: {
       "Access-Control-Allow-Origin": "*",
-    }})
+    },
+    token: cookie.get('token')
+  })
       .then(res => {
         if(res.data.success) {
           if(res.data.step===3) {
