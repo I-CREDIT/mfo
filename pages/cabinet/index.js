@@ -7,6 +7,7 @@ import Spinner from 'react-spinner-material';
 import Router from 'next/router'
 import swal from "sweetalert";
 import axios from 'axios'
+import cookie from 'js-cookie';
 const mapStateToProps = state => {
   return {
     userReducer: state.userReducer
@@ -25,7 +26,10 @@ class Cabinet extends React.Component {
     this.setState ({
       btnLoading: true
     })
-    await axios.get(`https://api.money-men.kz/api/repeatUser?iin=${this.props.userReducer.user.UF_4}`)
+    await axios
+    .post(`https://api.i-credit.kz/api/repeatUser`, {
+      token: cookie.get('token')
+    })
       .then((response) => {
         if(response.data.success == true) {
           Router.push('/cabinet/repeated')

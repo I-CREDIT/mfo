@@ -11,6 +11,7 @@ import InsuranceApplicationDocument from '../document_1/insuranceApplication'
 import InsuranceContractDocument from '../document_1/insuranceContract'
 import ApplicationRestructuringDocument from '../document_1/applicationRestructuring'
 import RestructuringAgreementDocument from '../document_1/restructuringAgreement'
+import cookie from 'js-cookie';
 
 // export const clientData = {
 //   name: props.userReducer.user.UF_5,
@@ -43,9 +44,11 @@ class Status extends React.Component {
   }  
   
   getCurrentStep() {
-    axios.get(`https://api.money-men.kz/api/notFull?iin=${this.props.userReducer.user.UF_4}`, {headers: {
+    axios.post(`https://api.i-credit.kz/api/notFull`, {headers: {
       "Access-Control-Allow-Origin": "*",
-    }})
+    },
+    token: cookie.get('token')
+  })
       .then(res => {
         console.log(res) // нужно отсюда взять step!
         if(res.data.success) {
@@ -98,7 +101,7 @@ class Status extends React.Component {
           this.setState({
             btnLoading: true,
           });
-           axios.post(`https://api.money-men.kz/api/make_payment123`, values)
+           axios.post(`https://api.i-credit.kz/api/make_payment123`, values)
             .then((response) => {
               this.setState({
                 btnLoading: false
@@ -145,7 +148,7 @@ class Status extends React.Component {
           this.setState({
             btnLoading: true,
           });
-           axios.post(`https://api.money-men.kz/api/make_payment123`, values)
+           axios.post(`https://api.i-credit.kz/api/make_payment123`, values)
             .then((response) => {
               this.setState({
                 btnLoading: false

@@ -64,7 +64,7 @@ class Login extends React.Component {
   handleSubmit(values) {
   //  e.preventDefault();
 
-   if(!required(values.username) || !required(values.password)) {
+   if(!required(values.iin) || !required(values.password)) {
      this.setState({
        errorMessage: "Введите данные"
      })
@@ -92,7 +92,7 @@ class Login extends React.Component {
               <div className=" oplate--form feedbackForm">
                 <Formik
                   initialValues={{
-                    username: '',
+                    iin: '',
                     password: "",
                   }}
                   onSubmit={values=> {
@@ -114,7 +114,7 @@ class Login extends React.Component {
                       <h2>ИИН:</h2>
                     </label>
                     <Field
-                      name="username"
+                      name="iin"
                       placeholder='ИИН'
 
                       // validate={iinValidation}
