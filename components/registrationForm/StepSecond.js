@@ -206,7 +206,7 @@ class SecondStep extends React.Component {
               >
                 <option value=""></option>
                 {speciality.map((spec) => (
-                  <option key={spec.id} value={spec.id}>
+                  <option key={spec.id} value={spec.name}>
                     {spec.name}
                   </option>
                 ))}
@@ -641,7 +641,7 @@ class SecondStep extends React.Component {
               >
                 <option value=""></option>
                 {relative_type.map((relative) => (
-                  <option key={relative.id} value={relative.id}>
+                  <option key={relative.id} value={t(relative.name)}>
                     {t(relative.name)}
                   </option>
                 ))}
