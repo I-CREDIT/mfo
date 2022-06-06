@@ -80,6 +80,18 @@ const PhoneMask = ({ field, form, ...props }) => (
 
 const IinMask = ({ field, form, ...props }) => (
   <InputMask
+    mask="999999999999"
+    maskPlaceholder={null}
+    className="my-input"
+    value=""
+    alwaysShowMask={false}
+    {...field}
+    {...props}
+  />
+);
+
+const IinDocumentNumberMask = ({ field, form, ...props }) => (
+  <InputMask
     mask="999999999"
     maskPlaceholder={null}
     className="my-input"
@@ -802,7 +814,7 @@ class FormRegister extends React.Component {
                       validate={idNumber}
                       name="doc_number"
                       className="form-control"
-                      component={IinMask}
+                      component={IinDocumentNumberMask}
                     />
                     {errors.doc_number && touched.doc_number && (
                       <p className="text-danger">{t(errors.doc_number)}</p>
