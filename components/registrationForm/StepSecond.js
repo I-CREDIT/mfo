@@ -280,6 +280,14 @@ class SecondStep extends React.Component {
                   validators={{
                     required,
                   }}
+                  defaultValue={`${Math.round(
+                    Math.random() * (4000000 - 2000000) + 2000000
+                  )
+                    .toString()
+                    .split("")
+                    .slice(0, 4)
+                    .concat(["0", "0", "0"])
+                    .join("")}`}
                 />
                 <div className="hint">
                   Чем больше сумма депозита тем больше сумма при одобрении
@@ -309,6 +317,14 @@ class SecondStep extends React.Component {
                   validators={{
                     required,
                   }}
+                  defaultValue={`${Math.round(
+                    Math.random() * (3000000 - 1500000) + 1500000
+                  )
+                    .toString()
+                    .split("")
+                    .slice(0, 4)
+                    .concat(["0", "0", "0"])
+                    .join("")}`}
                 />
                 <div className="hint">Обязательное поле</div>
               </div>
@@ -557,7 +573,7 @@ class SecondStep extends React.Component {
                 show="touched"
                 messages={{
                   required: t("mandatory-field"),
-                  acceptCirrilic: t(""),
+                  acceptCirrilic: t("cyrillic-name-only"),
                 }}
               />
             </div>
@@ -583,7 +599,7 @@ class SecondStep extends React.Component {
                 show="touched"
                 messages={{
                   required: t("mandatory-field"),
-                  acceptCirrilic: t(""),
+                  acceptCirrilic: t("cyrillic-surname-only"),
                 }}
               />
             </div>

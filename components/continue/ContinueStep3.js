@@ -336,6 +336,7 @@ const ContinueStep3 = ({
                   <p className="text-danger">{t(errors.UF_31)}</p>
                 )}
               </div>
+
               <div className="col-md-6 mb-3">
                 <label htmlFor="">Должность *</label>
                 <Field
