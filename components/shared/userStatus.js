@@ -893,14 +893,10 @@ class Status extends React.Component {
                     <td>
                       {+this.props.userStatus.userStatus.todayAmount >
                       +this.props.userStatus.userStatus.mainAmount * 2.001
-                        ? (
-                            +this.props.userStatus.userStatus.mainAmount * 2
-                          ).toLocaleString()
-                        : (+this.props.userStatus.userStatus
-                            .todayAmount).toLocaleString()}{" "}
+                        ? ((+this.props.userStatus.userStatus.mainAmount * 2) - ((+this.props.userStatus.userStatus.todayAmount) - (+this.props.userStatus.userStatus.reward))).toLocaleString()
+                        : (+this.props.userStatus.userStatus.reward).toLocaleString()}{" "}
                       тг
                     </td>{" "}
-                    */}
                     {/* <td>{+this.props.userStatus.userStatus.todayAmount > +this.props.userStatus.userStatus.mainAmount * 2.001 ? ((+this.props.userStatus.userStatus.mainAmount * 2) - ((+this.props.userStatus.userStatus.todayAmount) - (+this.props.userStatus.userStatus.reward))).toLocaleString() : (+this.props.userStatus.userStatus.reward).toLocaleString()} тг</td>
                     {/* <td>{(+this.props.userStatus.userStatus.todayAmount).toLocaleString()} тг</td> */}
                     <td>
@@ -913,7 +909,6 @@ class Status extends React.Component {
                             .todayAmount).toLocaleString()}{" "}
                       тг
                     </td>{" "}
-                    */}
                     <td>{this.props.userStatus.userStatus.endDate}</td>
                   </tr>
                 </tbody>
