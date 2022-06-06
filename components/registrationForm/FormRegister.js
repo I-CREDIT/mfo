@@ -107,7 +107,7 @@ class FormRegister extends React.Component {
     this.state = {
       isModalOpen: false,
       checked: false,
-      isOnBMG: true,
+      isOnBMG: false,
       phoneError: "",
       firstreg: [
         {
@@ -954,12 +954,12 @@ class FormRegister extends React.Component {
                     </div>
                   ) : (
                     <div className="registration-buttons">
-                      <button
-                        onClick={() => this.toggleHideBMG()}
-                        className="agreement-btn"
-                      >
-                        Регистрация egov
-                      </button>
+                      {/*<button*/}
+                      {/*  onClick={() => this.toggleHideBMG()}*/}
+                      {/*  className="agreement-btn"*/}
+                      {/*>*/}
+                      {/*  Регистрация egov*/}
+                      {/*</button>*/}
                       <button
                         disabled={!this.state.checked}
                         type="submit"

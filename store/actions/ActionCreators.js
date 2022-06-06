@@ -352,7 +352,7 @@ export const takeDocumentsBiometry = (registration) => (dispatch) => {
   };
 
   return axios
-    .get("http://178.170.221.75/biometria/public/api/takeDocs", {
+    .get("https://24money.kz/biometria/public/api/takeDocs", {
       method: "GET",
       headers: {
         "Access-Control-Allow-Origin": "*",
@@ -388,7 +388,21 @@ export const takeDocumentsBiometry = (registration) => (dispatch) => {
         window.scrollTo(0, 0);
         dispatch(isLoading(false));
       } else {
-        dispatch(errorMessage(`Ошибка отправки кода. ${response.message}`));
+        dispatch(
+          errorMessage(
+            `${response.message}. Вы будете перенаправлены на главную страницу.`
+          )
+        );
+        setTimeout(() => {
+          dispatch(stepRegistration(0));
+        }, 6000);
+        dispatch(isLoading(false));
+        setTimeout(() => {
+          localStorage.clear();
+        }, 5000);
+        setTimeout(() => {
+          Router.push("/");
+        }, 5000);
       }
     })
     .then((response) => dispatch(isLoading(false)))
