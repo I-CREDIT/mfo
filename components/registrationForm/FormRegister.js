@@ -80,7 +80,7 @@ const PhoneMask = ({ field, form, ...props }) => (
 
 const IinMask = ({ field, form, ...props }) => (
   <InputMask
-    mask="999999999999"
+    mask="999999999"
     maskPlaceholder={null}
     className="my-input"
     value=""
