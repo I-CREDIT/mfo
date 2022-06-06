@@ -322,7 +322,7 @@ export const confirmSMS = (registration) => (dispatch) => {
       console.log(r);
       dispatch(
         errorMessage(
-          "Отправленный вами код не существует. Вы будете перенаправлены на главную страницу."
+          "Ошибка отправки кода. Вы будете перенаправлены на главную страницу."
         )
       );
       setTimeout(() => {
@@ -395,6 +395,16 @@ export const takeDocumentsBiometry = (registration) => (dispatch) => {
     .catch((r) => {
       console.log(r);
       dispatch(errorMessage("Ошибка получения документов."));
+      setTimeout(() => {
+        dispatch(stepRegistration(0));
+      }, 6000);
+      dispatch(isLoading(false));
+      setTimeout(() => {
+        localStorage.clear();
+      }, 5000);
+      setTimeout(() => {
+        Router.push("/");
+      }, 5000);
     })
     .then(() => dispatch(isLoading(false)));
 };
@@ -502,7 +512,8 @@ export const postRegistrationThird = (registration) => (dispatch) => {
         dispatch(isLoading(false));
         newCookie();
         setTimeout(() => {
-          Router.push(`/newAggrements`);
+          Router.push(`/thanks`);
+          // Router.push(`/newAggrements`);
         }, 3000);
       } else {
         dispatch(isLoading(false));
