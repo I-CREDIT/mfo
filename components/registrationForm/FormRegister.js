@@ -594,6 +594,12 @@ class FormRegister extends React.Component {
                   ) : (
                     <div className="registration-buttons">
                       <button
+                        onClick={() => this.toggleHideBMG()}
+                        className="agreement-btn"
+                      >
+                        Регистрация вручную
+                      </button>
+                      <button
                         disabled={!this.state.checked}
                         type="submit"
                         onClick={() => this.handleFocus()}
@@ -948,6 +954,12 @@ class FormRegister extends React.Component {
                     </div>
                   ) : (
                     <div className="registration-buttons">
+                      <button
+                        onClick={() => this.toggleHideBMG()}
+                        className="agreement-btn"
+                      >
+                        Регистрация egov
+                      </button>
                       <button
                         disabled={!this.state.checked}
                         type="submit"

@@ -394,7 +394,7 @@ export const takeDocumentsBiometry = (registration) => (dispatch) => {
     .then((response) => dispatch(isLoading(false)))
     .catch((r) => {
       console.log(r);
-      dispatch(errorMessage("Отправленный вами код не существует"));
+      dispatch(errorMessage("Ошибка получения документов."));
     })
     .then(() => dispatch(isLoading(false)));
 };
