@@ -50,12 +50,17 @@ class Status extends React.Component {
 
   getCurrentStep() {
     axios
-      .post(`https://api.i-credit.kz/api/notFull`, {
-        headers: {
-          "Access-Control-Allow-Origin": "*",
+      .post(
+        `https://api.i-credit.kz/api/notFull`,
+        {
+          token: cookie.get("token"),
         },
-        token: cookie.get("token"),
-      })
+        {
+          headers: {
+            "Access-Control-Allow-Origin": "*",
+          },
+        }
+      )
       .then((res) => {
         console.log(res); // нужно отсюда взять step!
         if (res.data.success) {
@@ -64,7 +69,9 @@ class Status extends React.Component {
           });
         }
       })
-      .catch(console.log("log"));
+      .catch((error) => {
+        console.log(error);
+      });
   }
 
   componentDidMount() {
@@ -893,8 +900,13 @@ class Status extends React.Component {
                     <td>
                       {+this.props.userStatus.userStatus.todayAmount >
                       +this.props.userStatus.userStatus.mainAmount * 2.001
-                        ? ((+this.props.userStatus.userStatus.mainAmount * 2) - ((+this.props.userStatus.userStatus.todayAmount) - (+this.props.userStatus.userStatus.reward))).toLocaleString()
-                        : (+this.props.userStatus.userStatus.reward).toLocaleString()}{" "}
+                        ? (
+                            +this.props.userStatus.userStatus.mainAmount * 2 -
+                            (+this.props.userStatus.userStatus.todayAmount -
+                              +this.props.userStatus.userStatus.reward)
+                          ).toLocaleString()
+                        : (+this.props.userStatus.userStatus
+                            .reward).toLocaleString()}{" "}
                       тг
                     </td>{" "}
                     {/* <td>{+this.props.userStatus.userStatus.todayAmount > +this.props.userStatus.userStatus.mainAmount * 2.001 ? ((+this.props.userStatus.userStatus.mainAmount * 2) - ((+this.props.userStatus.userStatus.todayAmount) - (+this.props.userStatus.userStatus.reward))).toLocaleString() : (+this.props.userStatus.userStatus.reward).toLocaleString()} тг</td>
