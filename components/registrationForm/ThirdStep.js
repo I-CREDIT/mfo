@@ -353,11 +353,13 @@ class FormRegister extends React.Component {
           ></div>
           <p className="counter">Вероятность одобрения</p>
         </div>
+
         {this.props.loading === true ? (
           <div className="modelLoader">{disableScroll.on()}</div>
         ) : (
           <div className="modelLoader loaded">{disableScroll.off()}</div>
         )}
+
         <Form
           className="container formsStep"
           model="registration3"

@@ -11,6 +11,7 @@ export const changingMoney = (money) => ({
 function replaceDate(val) {
   return String(val).replace(/[^A-Z0-9]/g, "");
 }
+
 export const changingDay = (day) => ({
   type: ActionTypes.DAY_CHANGE,
   payload: day,

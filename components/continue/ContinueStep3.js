@@ -22,6 +22,8 @@ import {
 } from "../../defaults/validations";
 import {
   acceptCirrilic,
+  checkStringName,
+  isExpDateOfCardValid,
   isValidIBANNumber,
   isValidIBANNumber2,
   required,
@@ -30,8 +32,6 @@ import swal from "sweetalert";
 
 // Перевод для функционального компонента
 import { useTranslation } from "react-i18next";
-import { Label } from "reactstrap";
-import { Control, Errors } from "react-redux-form";
 
 const IinMask = ({ field, form, ...props }) => (
   <InputMask
@@ -59,7 +59,6 @@ const IbanN = ({ field, form, ...props }) => (
   <InputMask
     mask="KZ******************"
     placeholder="KZ"
-    onChange={(e) => setIbanValue(e)}
     className="my-input"
     {...field}
     {...props}
@@ -88,6 +87,10 @@ const CardExp = ({ field, form, ...props }) => (
   />
 );
 
+function replaceDate(val) {
+  return String(val).replace(/[^A-Z0-9]/g, "");
+}
+
 const ContinueStep3 = ({
   step,
   setStep,
@@ -100,150 +103,178 @@ const ContinueStep3 = ({
   const { t } = useTranslation();
 
   const [btnLoading, setBtnLoading] = useState(false);
+
   const onSubmit = (values) => {
-    if (isValidIBANNumber2(iban.value) !== false) {
-      var continue2 = {};
-      values.UF_35 = iban.value;
-      values.UF_47 = iban.text;
-      values.UF_2 = summa;
-      values.UF_3 = srok;
-      if (cookie.get("continue2")) {
-        continue2 = JSON.parse(cookie.get("continue2"));
+    if (isValidIBANNumber(iban.value)) {
+      let other = {};
+      other.bank_name = isValidIBANNumber(values.iban_account);
+      other.source = "i-credit.kz";
+
+      if (cookie.get("utm_source") !== undefined) {
+        if (cookie.get("utm_source").includes("sms")) {
+          other.source = cookie.get("utm_source");
+        }
+        if (cookie.get("utm_source").includes("loangate")) {
+          other.source = cookie.get("utm_source");
+          other.cpa_source = cookie.get("utm_source");
+          other.cpa_clickid = cookie.get("afclick");
+        }
+        if (
+          cookie.get("utm_source") === "upsala" ||
+          cookie.get("utm_source") === "doaff" ||
+          cookie.get("utm_source") === "goodaff" ||
+          cookie.get("utm_source") === "finpublic_cpa" ||
+          cookie.get("utm_source") === "pdl-profit"
+        ) {
+          other.source = cookie.get("utm_source");
+          other.cpa_source = cookie.get("utm_source");
+          other.cpa_clickid = cookie.get("clickid");
+        }
+        if (cookie.get("utm_source") === "marketing") {
+          other.source = cookie.get("utm_source");
+          other.cpa_source = cookie.get("utm_source");
+          other.cpa_clickid = cookie.get("clickid");
+        }
+        if (cookie.get("utm_source") === "leadgid") {
+          other.source = cookie.get("utm_source");
+          other.cpa_source = cookie.get("utm_source");
+          other.webID = cookie.get("wmid");
+          other.cpa_clickid = cookie.get("clickid");
+        }
+        if (cookie.get("utm_source") === "sales_doubler") {
+          other.source = cookie.get("utm_source");
+          other.cpa_source = cookie.get("utm_source");
+          other.webID = cookie.get("utm_term");
+          other.cpa_clickid = cookie.get("clickid");
+        }
+        if (cookie.get("utm_source") === "leadssu") {
+          other.source = cookie.get("utm_source");
+          other.cpa_source = cookie.get("utm_source");
+          other.cpa_clickid = cookie.get("clickid");
+        }
+        if (cookie.get("utm_source").includes("smartzaim")) {
+          other.source = cookie.get("utm_source");
+          other.cpa_source = cookie.get("utm_source");
+          other.utm_campaign = cookie.get("utm_campaign");
+          other.utm_term = "smartzaim";
+        }
+        if (cookie.get("utm_source").includes("qaz")) {
+          other.source = "qazlead";
+          other.cpa_source = cookie.get("utm_campaign");
+          other.cpa_clickid = cookie.get("clickid");
+        }
+        if (cookie.get("utm_source").includes("click2money")) {
+          other.source = cookie.get("utm_source");
+          other.cpa_source = cookie.get("utm_source");
+          other.cpa_clickid = cookie.get("clickid");
+        }
+        if (cookie.get("utm_source") === "guruleads") {
+          other.source = cookie.get("utm_source");
+          other.cpa_source = cookie.get("utm_source");
+          other.cpa_clickid = cookie.get("clickid");
+          other.webID = cookie.get("wmid");
+        }
+        if (cookie.get("utm_source") === "rafinad") {
+          other.source = cookie.get("utm_source");
+          other.cpa_source = cookie.get("utm_source");
+          other.cpa_clickid = cookie.get("clickid");
+        }
+        if (cookie.get("utm_source") === "crezu") {
+          other.source = cookie.get("utm_source");
+          other.cpa_source = cookie.get("utm_source");
+          other.cpa_clickid = cookie.get("clickid");
+        }
+        if (cookie.get("utm_source") === "admitad") {
+          other.source = cookie.get("utm_source");
+          other.cpa_source = cookie.get("utm_source");
+          other.cpa_clickid = cookie.get("clickid");
+        }
+        if (cookie.get("utm_source") === "sales_doubler") {
+          other.source = cookie.get("utm_source");
+          other.cpa_source = cookie.get("utm_source");
+          other.cpa_clickid = cookie.get("clickid");
+        }
+        if (cookie.get("utm_source") === "sales_doubler") {
+          other.source = cookie.get("utm_source");
+          other.cpa_source = cookie.get("utm_source");
+          other.cpa_clickid = cookie.get("clickid");
+        }
+        if (cookie.get("utm_source") === "altel_2365") {
+          other.source = cookie.get("utm_source");
+          other.cpa_source = cookie.get("utm_source");
+          other.cpa_clickid = cookie.get("clickid");
+        }
+        if (cookie.get("utm_source") === "altel_4291") {
+          other.source = cookie.get("utm_source");
+          other.cpa_source = cookie.get("utm_source");
+          other.cpa_clickid = cookie.get("clickid");
+        }
+        if (cookie.get("utm_source") === "altel_7846") {
+          other.source = cookie.get("utm_source");
+          other.cpa_source = cookie.get("utm_source");
+          other.cpa_clickid = cookie.get("clickid");
+        }
+        if (cookie.get("utm_source") === "altel_3954") {
+          other.source = cookie.get("utm_source");
+          other.cpa_source = cookie.get("utm_source");
+          other.cpa_clickid = cookie.get("clickid");
+        }
+        if (cookie.get("utm_source") === "altel_8132") {
+          other.source = cookie.get("utm_source");
+          other.cpa_source = cookie.get("utm_source");
+          other.cpa_clickid = cookie.get("clickid");
+        }
+        if (cookie.get("utm_source") === "altel_5673") {
+          other.source = cookie.get("utm_source");
+          other.cpa_source = cookie.get("utm_source");
+          other.cpa_clickid = cookie.get("clickid");
+        }
+        if (cookie.get("utm_source") === "altel_6728") {
+          other.source = cookie.get("utm_source");
+          other.cpa_source = cookie.get("utm_source");
+          other.cpa_clickid = cookie.get("clickid");
+        }
+        if (cookie.get("utm_source") === "altel_1589") {
+          other.source = cookie.get("utm_source");
+          other.cpa_source = cookie.get("utm_source");
+          other.cpa_clickid = cookie.get("clickid");
+        }
+        if (cookie.get("utm_source") === "altel_4376") {
+          other.source = cookie.get("utm_source");
+          other.cpa_source = cookie.get("utm_source");
+          other.cpa_clickid = cookie.get("clickid");
+        }
       }
-      const finalValues = {
-        UF_1: userDate.UF_1,
-        UF_2: `${values.UF_2}`,
-        UF_3: `${values.UF_3}`,
-        UF_4: userDate.UF_4,
-        UF_5: userDate.UF_5,
-        UF_6: userDate.UF_6,
-        UF_7: userDate.UF_7,
-        UF_8: userDate.UF_8,
-        UF_9: userDate.UF_9,
-        UF_10: userDate.UF_10,
-        UF_11: userDate.UF_11,
-        UF_12: userDate.UF_12,
-        UF_13: userDate.UF_13,
-        UF_16: "icredit-crm.kz",
-        UF_17: continue2.UF_17 ? continue2.UF_17 : userDate.UF_17,
-        UF_18: continue2.UF_18 ? continue2.UF_18 : userDate.UF_18,
-        UF_19: continue2.UF_19 ? continue2.UF_19 : userDate.UF_19,
-        UF_20: continue2.UF_20 ? continue2.UF_20 : userDate.UF_20,
-        UF_21: continue2.UF_21 ? continue2.UF_21 : userDate.UF_21,
-        UF_22: continue2.UF_22 ? continue2.UF_22 : userDate.UF_22,
-        UF_23: continue2.UF_23 ? continue2.UF_23 : userDate.UF_23,
-        UF_24: continue2.UF_24 ? continue2.UF_24 : userDate.UF_24,
-        UF_25: continue2.UF_25 ? continue2.UF_25 : userDate.UF_25,
-        UF_26: continue2.UF_26 ? continue2.UF_26 : userDate.UF_26,
-        UF_28: continue2.UF_28 ? continue2.UF_28 : userDate.UF_28,
-        UF_27: continue2.UF_27 ? continue2.UF_27 : userDate.UF_27,
-        UF_29: continue2.UF_29 ? continue2.UF_29 : userDate.UF_29,
-        UF_30: continue2.UF_30 ? continue2.UF_30 : userDate.UF_30,
-        UF_31: values.UF_31,
-        UF_32: values.UF_32,
-        UF_33: values.UF_33,
-        UF_34: values.UF_34,
-        UF_35: values.UF_35,
-        UF_36: values.UF_36,
-        UF_37: values.UF_37,
-        UF_38: values.UF_38,
-        UF_39: values.UF_39,
-        UF_40: values.UF_40,
-        UF_41: values.UF_41,
-        UF_42: values.UF_42,
-        UF_43: values.UF_43,
-        UF_44: values.UF_44,
-        UF_45: values.UF_45,
-        UF_46: values.UF_46,
-        UF_47: values.UF_47,
-      };
-      // let secondStepValue = {
-      //   regionOfCity_id: continue2.UF_18 ? continue2.UF_18 : userDate.UF_18,
-      //   street: continue2.UF_19 ? continue2.UF_19 : userDate.UF_19,
-      //   home: continue2.UF_20 ? continue2.UF_20 : userDate.UF_20,
-      //   apartment: continue2.UF_21 ? continue2.UF_21 : userDate.UF_21,
-      //   marital_status: continue2.UF_22 ? continue2.UF_22 : userDate.UF_22,
-      //   child_amount: continue2.UF_23 ? continue2.UF_23 : userDate.UF_23,
-      //   education: continue2.UF_24 ? continue2.UF_24 : userDate.UF_24,
-      //   relative_name: continue2.UF_25 ? continue2.UF_25 : userDate.UF_25,
-      //   relative_type_id: continue2.UF_26 ? continue2.UF_26 : userDate.UF_26,
-      //   additional_contact_name: continue2.UF_28 ? continue2.UF_28 : userDate.UF_28,
-      //   relative_phone_number: continue2.UF_27 ? continue2.UF_27 : userDate.UF_27,
-      //   additional_contact_type_id: continue2.UF_29 ? continue2.UF_29 : userDate.UF_29,
-      //   additional_contact_phone: continue2.UF_30 ? continue2.UF_30 : userDate.UF_30,
-      //   additional_contact_last_name: '-',
-      //   relative_last_name: '-',
-      // }
+
       let thirdStepValues = {
-        name_of_workplace: values.UF_31,
-        work_experience: values.UF_32,
-        type_id: values.UF_33,
-        income: values.UF_34,
-        iban_account: values.UF_35,
-        card_number: values.UF_36,
-        expiration_date_of_bcard: values.UF_37,
-        name_of_owner: values.UF_38,
-        amount_of_paid_loans_in_last_six_month: values.UF_39,
-        balance_on_deposit: values.UF_40,
-        amount_of_payments_for_current_loans: values.UF_41,
-        id_card_number: values.UF_42,
-        date_of_issue: values.UF_43,
-        expiration_date_of_icard: values.UF_44,
-        place_of_issue: values.UF_45,
-        birth_place: values.UF_46,
-        bank_name: values.UF_47,
+        token: cookie.get("token"),
+        iban: iban.value,
+        cardNumber: replaceDate(values.card_number),
+        cardIssue: values.expiration_date_of_bcard,
+        cardName: values.name_of_owner,
+        source: other.source,
+        clickID: other.cpa_clickid,
+        // bank_name: other.bank_name,
       };
-      // console.log(secondStepValue)
-      // setBtnLoading(true)
-      // axios.post(`https://api.money-men.kz/api/registration_step_two`, secondStepValue, {
-      //   headers: {
-      //     'Access-Control-Allow-Origin':'*',
-      //     'Content-Type': 'application/json',
-      //     'Accept': 'application/json',
-      //     Authorization: `Bearer ${cookie.get('token')}`,
-      //   },
-      //   credentials: 'same-origin'
-      // })
-      //   .then(response=> {
-      //     setBtnLoading(false)
-      //     console.log(response, hello)
-      //     if(response.data.success === true) {
-      //       swal("Успешно!", `Заявка отправлена`, "success").then(() =>{
-      //         Router.push('/cabinet/loans')
-      //         cookie.remove('continue2')
-      //     });
-      //     }
-      //     else {
-      //       swal("Oops!", `${response.errors || 'У вас анкета заполнена не до конца. Напишите на WhatsApp или звоните на номер +7 727 250 15 00'}`, "error").then(() => {
-      //         Router.push('/cabinet/loans')
-      //       });
-      //     }
-      //   })
-      //   .catch(error => {
-      //     if(error.response) {
-      //       console.log(error.response)
-      //     }
-      //     setBtnLoading(false)
-      //     swal('Oops', 'Что то пошло не так', 'error').then(() => {
-      //       Router.push('/cabinet/loans')
-      //     })
-      //   })
 
       setBtnLoading(true);
+
       axios
-        .post(`https://api.money-men.kz/api/last_step`, thirdStepValues, {
-          headers: {
-            "Access-Control-Allow-Origin": "*",
-            "Content-Type": "application/json",
-            Accept: "application/json",
-            Authorization: `Bearer ${cookie.get("token")}`,
-          },
-          credentials: "same-origin",
-        })
+        .post(
+          `https://api.i-credit.kz/api/thirdStep`,
+          { ...other, ...thirdStepValues },
+          {
+            headers: {
+              "Access-Control-Allow-Origin": "*",
+              "Content-Type": "application/json",
+              Accept: "application/json",
+              Authorization: `Bearer ${cookie.get("token")}`,
+            },
+          }
+        )
         .then((response) => {
           setBtnLoading(false);
-          console.log(response, hello);
-          if (response.data.success === true) {
+          if (response.data.success) {
             swal("Успешно!", `Заявка отправлена`, "success").then(() => {
               Router.push("/cabinet/loans");
               cookie.remove("continue2");
@@ -256,9 +287,7 @@ const ContinueStep3 = ({
                 "У вас анкета заполнена не до конца. Напишите на WhatsApp или звоните на номер +7 727 250 15 00"
               }`,
               "error"
-            ).then(() => {
-              Router.push("/cabinet/loans");
-            });
+            ).then(() => {});
           }
         })
         .catch((error) => {
@@ -266,10 +295,10 @@ const ContinueStep3 = ({
             console.log(error.response);
           }
           setBtnLoading(false);
-          // swal('Oops', 'Что то пошло не так', 'error').then(() => {
-          Router.push("/cabinet/loans");
           window.scrollTo(0, 0);
-          // })
+          swal("Oops", "Что то пошло не так", "error").then(() => {
+            Router.push("/cabinet/loans");
+          });
         });
     }
   };
@@ -288,243 +317,17 @@ const ContinueStep3 = ({
     <div>
       <Formik
         initialValues={{
-          UF_31: "",
-          UF_33: "",
-          UF_32: "",
-          UF_34: "",
-          UF_35: "",
-          UF_36: "",
-          UF_37: "",
-          UF_38: "",
-          UF_39: `${Math.round(Math.random() * (3000000 - 1500000) + 1500000)
-            .toString()
-            .split("")
-            .slice(0, 4)
-            .concat(["0", "0", "0"])
-            .join("")}`,
-          UF_40: `${Math.round(Math.random() * (4000000 - 2000000) + 2000000)
-            .toString()
-            .split("")
-            .slice(0, 4)
-            .concat(["0", "0", "0"])
-            .join("")}`,
-          UF_41: "",
-          UF_42: "",
-          UF_43: "",
-          UF_44: "",
-          UF_45: "",
-          UF_46: "",
-          UF_47: "",
+          iban: "",
+          card_number: "",
+          expiration_date_of_bcard: "",
+          name_of_owner: "",
         }}
-        onSubmit={(values) => {
-          onSubmit(values);
-        }}
+        onSubmit={(values) => onSubmit(values)}
       >
         {({ errors, touched, isValidating, isSubmitting }) => (
           <Form className="container">
-            <h2 className="mt-5 mb-5">Информация о месте работы</h2>
-            <div className="row form-group">
-              <div className="col-md-12 mb-3">
-                <label htmlFor="">Место работы *</label>
-                <Field
-                  validate={requiredd}
-                  name="UF_31"
-                  className="form-control"
-                  placeholder="Место работы"
-                ></Field>
-                {errors.UF_31 && touched.UF_31 && (
-                  <p className="text-danger">{t(errors.UF_31)}</p>
-                )}
-              </div>
-
-              <div className="col-md-6 mb-3">
-                <label htmlFor="">Должность *</label>
-                <Field
-                  as="select"
-                  validate={requiredd}
-                  name="UF_33"
-                  className="form-control"
-                >
-                  <option value="" disabled selected>
-                    Должность
-                  </option>
-                  {speciality.map((spec) => (
-                    <option key={spec.id} value={spec.id}>
-                      {spec.name}
-                    </option>
-                  ))}
-                </Field>
-                {errors.UF_33 && touched.UF_33 && (
-                  <p className="text-danger">{t(errors.UF_33)}</p>
-                )}
-              </div>
-
-              <div className="col-md-6 mb-3">
-                <label htmlFor="">
-                  Стаж работы на последнем месте работы *
-                </label>
-                <Field
-                  validate={requiredd}
-                  as="select"
-                  name="UF_32"
-                  className="form-control"
-                >
-                  <option value="" disabled selected>
-                    Стаж работы
-                  </option>
-                  <option value="до 3мес.">до 3мес.</option>
-                  <option value="до 4-6мес.">до 4-6мес.</option>
-                  <option value="до 7-12мес.">до 7-12мес.</option>
-                  <option value="от 1 до 2лет">от 1 до 2лет</option>
-                  <option value="от 2 до 5лет">от 2 до 5лет</option>
-                </Field>
-                {errors.UF_32 && touched.UF_32 && (
-                  <p className="text-danger">{t(errors.UF_32)}</p>
-                )}
-              </div>
-
-              <h2 className="col-md-12 mt-5 mb-5">Информация о уд. личности</h2>
-              <div className="col-md-6 mb-3">
-                <label htmlFor="">Место рождения *</label>
-                <Field
-                  validate={requiredd}
-                  name="UF_46"
-                  className="form-control"
-                ></Field>
-                {errors.UF_46 && touched.UF_46 && (
-                  <p className="text-danger">{t(errors.UF_46)}</p>
-                )}
-              </div>
-              <div className="col-md-6 mb-3">
-                <label htmlFor="">Номер удостворения личности *</label>
-
-                <Field
-                  validate={idNumber}
-                  name="UF_42"
-                  className="form-control"
-                  component={IinMask}
-                ></Field>
-                {errors.UF_42 && touched.UF_42 && (
-                  <p className="text-danger">{t(errors.UF_42)}</p>
-                )}
-              </div>
-              <div className="col-md-6 mb-3">
-                <label htmlFor="">Дата выдачи(дд.мм.гггг) * :</label>
-                <div className="input-group">
-                  <Field
-                    name="UF_43"
-                    className="form-control"
-                    validate={CheckGivedDate}
-                    component={GivenDate}
-                  ></Field>
-
-                  <div className="hint">Дата выдачи (ДД.ММ.ГГГГ)</div>
-                </div>
-                {errors.UF_43 && touched.UF_43 && (
-                  <p className="text-danger">{t(errors.UF_43)}</p>
-                )}
-              </div>
-              <div className="col-md-6 mb-3">
-                <label htmlFor="">Срок действия (дд.мм.гггг) * :</label>
-                <div className="input-group">
-                  <Field
-                    name="UF_44"
-                    className="form-control"
-                    validate={CheckExpDate}
-                    component={GivenDate}
-                  ></Field>
-
-                  <div className="hint">Срок действия (ДД.ММ.ГГГГ)</div>
-                </div>
-                {errors.UF_44 && touched.UF_44 && (
-                  <p className="text-danger">{t(errors.UF_44)}</p>
-                )}
-              </div>
-              <div className="col-md-6 mb-3">
-                <label htmlFor="">Кем выдано *</label>
-                <Field
-                  as="select"
-                  name="UF_45"
-                  validate={requiredd}
-                  className="form-control"
-                >
-                  <option value="" disabled selected>
-                    Кем выдано
-                  </option>
-                  <option value="МЮ РК">МЮ РК</option>
-                  <option value="МВД РК">МВД РК</option>
-                </Field>
-                {errors.UF_45 && touched.UF_45 && (
-                  <p className="text-danger">{t(errors.UF_45)}</p>
-                )}
-              </div>
-
-              <div className="col-md-6 mb-3">
-                <label>Доход *</label>
-                <Field
-                  validate={requiredd}
-                  autocomplete="off"
-                  name="UF_34"
-                  className="form-control"
-                  type=""
-                ></Field>
-                {errors.UF_34 && touched.UF_34 && (
-                  <p className="text-danger">{t(errors.UF_34)}</p>
-                )}
-              </div>
-
-              <div className="col-md-6 mb-3">
-                <label>Остаток на депозите *</label>
-                <div className="input-group">
-                  <Field
-                    validate={depositeValidation}
-                    name="UF_40"
-                    autocomplete="off"
-                    className="form-control"
-                    type=""
-                  ></Field>
-                  <div className="hint">
-                    Чем больше сумма депозита тем больше сумма при одобрении
-                    микрокредита
-                  </div>
-                </div>
-                {errors.UF_40 && touched.UF_40 && (
-                  <p className="text-danger">{t(errors.UF_40)}</p>
-                )}
-              </div>
-
-              <div className="col-md-6 mb-3">
-                <label>Сумма *</label>
-                <Field
-                  validate={requiredd}
-                  name="UF_41"
-                  type=""
-                  placeholder="Сумма платежей действующих микрокредитов:"
-                  className="form-control"
-                  disabled={checked}
-                ></Field>
-                {errors.UF_41 && touched.UF_41 && (
-                  <p className="text-danger">{t(errors.UF_41)}</p>
-                )}
-              </div>
-
-              <div className="col-md-6 mb-3">
-                <label>
-                  Сумма платежей закрытых микрокредитов последний 6 мес. *
-                </label>
-                <Field
-                  validate={depositeValidation}
-                  name="UF_39"
-                  type=""
-                  className="form-control"
-                ></Field>
-                {errors.UF_39 && touched.UF_39 && (
-                  <p className="text-danger">{t(errors.UF_39)}</p>
-                )}
-              </div>
-            </div>
-
             <h2 className="col-md-12 mt-5 mb-5">Информация о счетах</h2>
+
             <div className="row form-group">
               <div className="col-md-6 mb-3">
                 <label>IBAN счет *</label>
@@ -533,15 +336,12 @@ const ContinueStep3 = ({
                     onChange={(e) => setIbanValue(e)}
                     value={iban.value.toUpperCase()}
                     className="form-control"
-                    name="UF_35"
+                    name="iban"
                     component={IbanN}
                   />
                   <div className="hint">Номер банковского счета</div>
                 </div>
                 <p className="mt-2 text-info">{iban.text}</p>
-                {errors.UF_35 && touched.UF_35 && (
-                  <p className="text-danger">{t(errors.UF_35)}</p>
-                )}
               </div>
 
               <div className="col-md-6 mb-3">
@@ -549,13 +349,13 @@ const ContinueStep3 = ({
                 <div className="input-group">
                   <Field
                     className="form-control"
-                    name="UF_36"
-                    validate={textCheckCardValid}
+                    name="card_number"
+                    validate={requiredd}
                     component={CardNumber}
                   />
                 </div>
-                {errors.UF_36 && touched.UF_36 && (
-                  <p className="text-danger">{t(errors.UF_36)}</p>
+                {errors.card_number && touched.card_number && (
+                  <p className="text-danger">{t(errors.card_number)}</p>
                 )}
               </div>
 
@@ -563,9 +363,17 @@ const ContinueStep3 = ({
                 <label>Дата окончания *</label>
                 <Field
                   className="form-control"
-                  name="UF_37"
+                  name="expiration_date_of_bcard"
+                  placeholder="__/__"
+                  validate={requiredd}
                   component={CardExp}
                 />
+                {errors.expiration_date_of_bcard &&
+                  touched.expiration_date_of_bcard && (
+                    <p className="text-danger">
+                      {t(errors.expiration_date_of_bcard)}
+                    </p>
+                  )}
               </div>
 
               <div className="col-md-6 mb-3">
@@ -574,16 +382,20 @@ const ContinueStep3 = ({
                 </label>
                 <div className="input-group">
                   <Field
-                    validate={onlyEnglish}
-                    name="UF_38"
+                    validate={requiredd}
+                    name="name_of_owner"
                     className="form-control  input-uppercase cardName"
-                  ></Field>
+                  />
+                  {errors.name_of_owner && touched.name_of_owner && (
+                    <p className="text-danger">{t(errors.name_of_owner)}</p>
+                  )}
                   <div className="hint">Только на латинском</div>
                 </div>
               </div>
             </div>
+
             <div className="button form-group mb-5">
-              <button type="submit " disabled={btnLoading} className="">
+              <button type="submit" disabled={btnLoading} className="">
                 {btnLoading ? "Загрузка..." : "Отправить"}
               </button>
             </div>

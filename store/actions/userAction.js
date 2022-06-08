@@ -112,7 +112,7 @@ export const fetchCurrentUser = () => (dispatch) => {
       dispatch(setCurrentUser(data));
     })
     .catch((error) => {
-      cookie.remove("token");
+      // cookie.remove("token");
       console.log(error.message || "Error");
     });
 };
@@ -142,7 +142,7 @@ export const fetchUserStatus = () => (dispatch) => {
       dispatch(statusSuccess(data));
     })
     .catch((error) => {
-      cookie.remove("token");
+      // cookie.remove("token");
       dispatch(dateFailed(error.message || "Данные верны. "));
       console.log(error.message || "Error");
     });
@@ -173,7 +173,7 @@ export const fetchUserHistory = () => (dispatch) => {
       dispatch(historySuccess(data));
     })
     .catch((error) => {
-      cookie.remove("token");
+      // cookie.remove("token");
       dispatch(dateFailed(error.message));
       console.log(error.message || "Error");
     });

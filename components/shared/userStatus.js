@@ -79,7 +79,7 @@ class Status extends React.Component {
   }
 
   myFunc() {
-    if (this.state.step === 1 || this.state.step === 2) {
+    if (this.state.step === 2 || this.state.step === 3) {
       window.scrollTo(0, 0);
       Router.push(`/cabinet/continue`);
     }

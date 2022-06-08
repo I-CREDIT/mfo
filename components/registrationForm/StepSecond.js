@@ -101,14 +101,7 @@ class SecondStep extends React.Component {
   // }
 
   handleSubmit(values) {
-    var object = {};
-
-    // if (this.state.checked) {
-    //   object.apartment = "Частный дом";
-    // } else {
-    //   object.apartment = values.apartmentt;
-    // }
-    // object.finished_step = 2;
+    let object = {};
 
     object.source = "i-credit2";
     if (cookie.get("utm_source") !== undefined) {
@@ -192,7 +185,6 @@ class SecondStep extends React.Component {
           ) : null}
 
           <h2 className="mt-5 mb-5">Информация о месте работы</h2>
-
           <Row className="form-group">
             <div className="col-md-6 mb-3">
               <Label>Должность *</Label>
