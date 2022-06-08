@@ -163,7 +163,7 @@ class Aggrement extends React.Component {
       loading: true
     })
     try{
-       axios.get('https://api.money-men.kz/api/agreement',{ params:{
+       axios.get('https://api.i-credit.kz/api/agreement',{ params:{
         id:this.state.id,
         phone:this.state.phone,
         token:this.state.token,
