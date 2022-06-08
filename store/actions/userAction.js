@@ -60,9 +60,9 @@ export const loginUser = (values) => (dispatch) => {
     .then(
       (data) => {
         cookie.set("token", data.token);
-        const users = dispatch(fetchCurrentUser());
-        console.log(users, "USERS");
+        dispatch(fetchCurrentUser());
         dispatch({ type: "SET_CURRENT_USER", payload: "user" });
+        dispatch({ type: "AUTHENTICATED_USER" });
         Router.push("/cabinet/loans");
       },
       (error) => {
@@ -88,24 +88,26 @@ export const fetchCurrentUser = () => (dispatch) => {
   dispatch(authenticatingUser());
   fetch("https://api.i-credit.kz/api/getUserProfileFromBitrix", {
     method: "POST",
+    body: JSON.stringify({ token: cookie.get("token") }),
     headers: {
+      "Access-Control-Allow-Origin": "*",
       "Content-Type": "application/json",
       Accept: "application/json",
     },
-    body: JSON.stringify({ token: cookie.get("token") }),
   })
     .then((response) => {
       if (response.ok) {
         return response;
       }
-
       const error = new Error(
         `Error ${response.status}: ${response.statusText}`
       );
       error.response = response;
       throw error;
     })
-    .then((response) => response.json())
+    .then((response) => {
+      return response.json();
+    })
     .then((data) => {
       dispatch(setCurrentUser(data));
     })
