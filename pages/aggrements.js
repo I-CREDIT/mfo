@@ -61,7 +61,7 @@ class Aggrement extends React.Component {
       loading: true
     })
 
-    await axios.get(`https://api.money-men.kz/api/getData?token=${token}`)
+    await axios.get(`https://api.i-credit.kz/api/getData?token=${token}`)
     .then((response) => {
       if(response.data.success) {
         this.setState({
@@ -138,7 +138,7 @@ class Aggrement extends React.Component {
     this.setState({
       loading:true
     })
-    axios.get(`https://api.money-men.kz/api/prolongationAgreement?sign=y&request_id=${this.state.id}`)
+    axios.get(`https://api.i-credit.kz/api/prolongationAgreement?sign=y&request_id=${this.state.id}`)
       .then(res=> {
         this.setState({
           loading: false
