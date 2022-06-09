@@ -210,7 +210,7 @@ export const controlUtm = () => {
       newCookie()
       localStorage.clear();
       cookie.set('utm_source', getUrlParameter('utm_source'), {expires: 30})
-      cookie.set('clickid', getUrlParameter('aff_sub'), {expires: 30})
+      cookie.set('clickid', getUrlParameter('aff_id'), {expires: 30})
     }
   }
 
