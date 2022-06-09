@@ -40,7 +40,7 @@ const ResetPasword = () => {
       setErrorMessage(null);
       axios
         .get(
-          `https://api.money-men.kz/api/resetPassword?phone=${phone}&iin=${iin}&password=${values.password}`
+          `https://api.i-credit.kz/api/resetPassword?phone=${phone}&iin=${iin}&password=${values.password}`
         )
         .then((res) => {
           console.log(res);
