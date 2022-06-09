@@ -87,7 +87,7 @@ const ContinueStep2 = ({ next, setNext }) => {
       .then((response) => {
         if (response.data.success) {
           swal("Успешно!", `Данные отправлены`, "success").then(() => {
-            Router.push("/cabinet/continue");
+            window.location.reload();
           });
         } else {
           swal(
