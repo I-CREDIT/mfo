@@ -85,9 +85,9 @@ const ContinueStep2 = ({ next, setNext }) => {
         }
       )
       .then((response) => {
-        if (response.data.success === true) {
+        if (response.data.success) {
           swal("Успешно!", `Данные отправлены`, "success").then(() => {
-            Router.push("/cabinet/loans");
+            Router.push("/cabinet/continue");
           });
         } else {
           swal(

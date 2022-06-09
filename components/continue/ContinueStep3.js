@@ -254,7 +254,6 @@ const ContinueStep3 = ({
         cardName: values.name_of_owner,
         source: other.source,
         clickID: other.cpa_clickid,
-        // bank_name: other.bank_name,
       };
 
       setBtnLoading(true);
@@ -262,7 +261,7 @@ const ContinueStep3 = ({
       axios
         .post(
           `https://api.i-credit.kz/api/thirdStep`,
-          { ...other, ...thirdStepValues },
+          { ...thirdStepValues },
           {
             headers: {
               "Access-Control-Allow-Origin": "*",
