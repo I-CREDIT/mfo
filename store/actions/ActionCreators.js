@@ -500,7 +500,9 @@ export const postRegistrationThird = (registration) => (dispatch) => {
     cardName: registration.name_of_owner,
     source: registration.source,
     clickID: registration.cpa_clickid,
+    web_id: registration.webID
   };
+  console.log('hello', payload)
 
   return fetch(`https://api.i-credit.kz/api/thirdStep`, {
     method: "POST",

@@ -76,7 +76,6 @@ class Login extends React.Component {
       btnLoading:true
     })
     axios.get(`https://api.i-credit.kz/api/checkPerson?phone=${replaceDate(values.phone)}&iin=${values.iin}`)
-
     .then((response) => {
       console.log(response)
       
