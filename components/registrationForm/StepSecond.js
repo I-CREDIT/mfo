@@ -225,7 +225,9 @@ class SecondStep extends React.Component {
                     required,
                   }}
                 />
-                <div className="hint">Обязательное поле</div>
+                <div className="hint">
+                  Обязательное поле, только на киррилице
+                </div>
               </div>
               <Errors
                 className="text-danger "
@@ -244,12 +246,14 @@ class SecondStep extends React.Component {
                   model=".sphere"
                   autocomplete="off"
                   name="sphere"
-                  className="form-control"
+                  className="form-control registerCyrril"
                   validators={{
                     required,
                   }}
                 />
-                <div className="hint">Обязательное поле</div>
+                <div className="hint">
+                  Обязательное поле, только на киррилице
+                </div>
               </div>
               <Errors
                 className="text-danger "

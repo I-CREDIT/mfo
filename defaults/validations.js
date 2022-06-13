@@ -685,13 +685,14 @@ function year(dateString) {
   }
   return "19" + dateString.substring(0, 2);
 }
-function getAge(dateString) {
-  var now = new Date();
-  var yearNow = now.getYear();
-  var monthNow = now.getMonth();
-  var dateNow = now.getDate();
 
-  var dob = new Date(
+function getAge(dateString) {
+  const now = new Date();
+  const yearNow = now.getYear();
+  const monthNow = now.getMonth();
+  const dateNow = now.getDate();
+
+  const dob = new Date(
     year(dateString),
     dateString.substring(2, 4) - 1,
     dateString.substring(4, 6)
@@ -731,6 +732,7 @@ function getAge(dateString) {
 }
 
 export const validage = (iin) => {
+  // Проверка на пол
   if (iin[6] % 2 !== 0) {
     if (getAge(iin) < 21 || getAge(iin) > 73) {
       return false;

@@ -76,10 +76,15 @@ class CodeConfirmBMG extends React.Component {
     const phone = this.props.registrationValues.phone || null;
     return (
       <div>
-        <div class="progressBar">
-          <div class="progress-done" id="progress-done" data-done="55"></div>
+        <div className="progressBar">
+          <div
+            className="progress-done"
+            id="progress-done"
+            data-done="55"
+          ></div>
           <p className="counter">Вероятность одобрения</p>
         </div>
+
         {this.props.loading === true ? (
           <div className="modelLoader">{disableScroll.on()}</div>
         ) : (

@@ -265,12 +265,12 @@ class FormRegister extends React.Component {
     $("input").on("focus", function () {
       var prev = $(this).offset().top;
       var inputHeight = prev - 210;
-      // var inputHeight=prev.offset().top
       if (window.innerWidth <= 768) {
         $("html, body").animate({ scrollTop: inputHeight }, 300);
         return false;
       }
     });
+
     $(".cardName").on("keypress", function (event) {
       var englishAlphabetDigitsAndWhiteSpace = /[A-Za-z ]/g;
 
@@ -287,17 +287,14 @@ class FormRegister extends React.Component {
 
       return false;
     });
-
     $(".cardName").on("paste", function (e) {
       e.preventDefault();
     });
 
     const progress = document.querySelector(".progress-done");
-
     progress.style.width = progress.getAttribute("data-done") + "%";
     progress.append(progress.getAttribute("data-done") + "%");
     progress.style.opacity = 1;
-
     $(document).ready(function () {
       $("input").on("change", function () {
         var cntreq = 0;
@@ -326,6 +323,7 @@ class FormRegister extends React.Component {
       e.target.value = e.target.value.toUpperCase();
       e.target.setSelectionRange(start, end);
     }
+
     document
       .getElementById("name_of_owner")
       .addEventListener("keyup", forceInputUppercase, false);

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   gorods,
   relative_type,
@@ -10,6 +10,7 @@ import Router from "next/router";
 import axios from "axios";
 import { Formik, Form, Field } from "formik";
 import {
+  acceptCirrilic,
   getAge,
   requiredd,
   idNumber,
@@ -19,9 +20,9 @@ import {
   textCheckCardValid,
   ibanContinue,
   depositeValidation,
+  acceptCirrilicOnly,
 } from "../../defaults/validations";
 import {
-  acceptCirrilic,
   checkStringName,
   isExpDateOfCardValid,
   isValidIBANNumber,
@@ -32,6 +33,7 @@ import swal from "sweetalert";
 
 // Перевод для функционального компонента
 import { useTranslation } from "react-i18next";
+import $ from "jquery";
 
 const IinMask = ({ field, form, ...props }) => (
   <InputMask
@@ -302,6 +304,39 @@ const ContinueStep3 = ({
     }
   };
 
+  useEffect(() => {
+    $(".cardName").on("keypress", function (event) {
+      var englishAlphabetDigitsAndWhiteSpace = /[A-Za-z ]/g;
+
+      var key = String.fromCharCode(event.which);
+
+      if (
+        event.keyCode == 8 ||
+        event.keyCode == 37 ||
+        event.keyCode == 39 ||
+        englishAlphabetDigitsAndWhiteSpace.test(key)
+      ) {
+        return true;
+      }
+
+      return false;
+    });
+    $(".cardName").on("paste", function (e) {
+      e.preventDefault();
+    });
+
+    function forceInputUppercase(e) {
+      const start = e.target.selectionStart;
+      const end = e.target.selectionEnd;
+      e.target.value = e.target.value.toUpperCase();
+      e.target.setSelectionRange(start, end);
+    }
+
+    document
+      .getElementById("name_of_owner")
+      .addEventListener("keyup", forceInputUppercase, false);
+  });
+
   const [checked, setChecked] = useState(false);
   const [iban, setIban] = useState({
     value: "",
@@ -381,15 +416,17 @@ const ContinueStep3 = ({
                 </label>
                 <div className="input-group">
                   <Field
-                    validate={requiredd}
+                    id="name_of_owner"
                     name="name_of_owner"
-                    className="form-control  input-uppercase cardName"
+                    autocomplete="off"
+                    className="form-control input-uppercase registerCyrril cardName"
+                    validate={requiredd}
                   />
-                  {errors.name_of_owner && touched.name_of_owner && (
-                    <p className="text-danger">{t(errors.name_of_owner)}</p>
-                  )}
                   <div className="hint">Только на латинском</div>
                 </div>
+                {errors.name_of_owner && touched.name_of_owner && (
+                  <p className="text-danger">{t(errors.name_of_owner)}</p>
+                )}
               </div>
             </div>
 

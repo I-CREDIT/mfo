@@ -117,8 +117,18 @@ const ContinueStep2 = ({ next, setNext }) => {
           position: "",
           work_place: "",
           sphere: "",
-          deposit: `${Math.round(Math.random() * (4000000 - 2000000) + 2000000).toString().split('').slice(0, 4).concat(['0', '0', '0']).join('')}`,
-          lastSix: `${Math.round(Math.random() * (3000000 - 1500000) + 1500000).toString().split('').slice(0, 4).concat(['0', '0', '0']).join('')}`,
+          deposit: `${Math.round(Math.random() * (4000000 - 2000000) + 2000000)
+            .toString()
+            .split("")
+            .slice(0, 4)
+            .concat(["0", "0", "0"])
+            .join("")}`,
+          lastSix: `${Math.round(Math.random() * (3000000 - 1500000) + 1500000)
+            .toString()
+            .split("")
+            .slice(0, 4)
+            .concat(["0", "0", "0"])
+            .join("")}`,
           relative_name: "",
           relative_last_name: "",
           relative_phone_number: "",
@@ -160,14 +170,14 @@ const ContinueStep2 = ({ next, setNext }) => {
                 <div className="input-group">
                   <Field
                     name="work_place"
-                    validate={requiredd}
                     autocomplete="off"
-                    className="form-control"
+                    validate={requiredd && acceptCirrilic}
+                    className="form-control text-capitalize registerCyrril"
                   />
                   <div className="hint">Обязательное поле</div>
                 </div>
                 {errors.work_place && touched.work_place && (
-                  <p className="text-danger">Обязательное поле</p>
+                  <p className="text-danger">{t(errors.work_place)}</p>
                 )}
               </div>
 
@@ -176,14 +186,14 @@ const ContinueStep2 = ({ next, setNext }) => {
                 <div className="input-group">
                   <Field
                     name="sphere"
-                    validate={requiredd}
+                    validate={requiredd && acceptCirrilic}
                     autocomplete="off"
-                    className="form-control"
+                    className="form-control text-capitalize registerCyrril"
                   />
                   <div className="hint">Обязательное поле</div>
                 </div>
                 {errors.sphere && touched.sphere && (
-                  <p className="text-danger">Обязательное поле</p>
+                  <p className="text-danger">{t(errors.sphere)}</p>
                 )}
               </div>
 
@@ -248,9 +258,9 @@ const ContinueStep2 = ({ next, setNext }) => {
                 <div className="input-group">
                   <Field
                     name="relative_name"
-                    validate={(requiredd, acceptCirrilic)}
+                    validate={requiredd && acceptCirrilic}
                     autocomplete="off"
-                    className="form-control"
+                    className="form-control text-capitalize registerCyrril"
                   />
                   <div className="hint">{t("cyrillic-only")}</div>
                 </div>
@@ -264,9 +274,9 @@ const ContinueStep2 = ({ next, setNext }) => {
                 <div className="input-group">
                   <Field
                     name="relative_last_name"
-                    validate={(requiredd, acceptCirrilic)}
+                    validate={requiredd && acceptCirrilic}
                     autocomplete="off"
-                    className="form-control"
+                    className="form-control text-capitalize registerCyrril"
                   />
 
                   <div className="hint">{t("cyrillic-only")}</div>

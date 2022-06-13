@@ -373,20 +373,45 @@ export const takeDocumentsBiometry = (registration) => (dispatch) => {
       if (response.success) {
         localStorage.setItem("token", response.token);
 
+        let start_given_date = new Date(response.startGiven);
+        let start_given_formatted = `${start_given_date.getDate()}.${start_given_date.getMonth()}.${start_given_date.getFullYear()}`;
+
+        let end_given_date = new Date(response.endGiven);
+        let end_given_formatted = `${end_given_date.getDate()}.${end_given_date.getMonth()}.${end_given_date.getFullYear()}`;
+
         const payload = {
           ...registration,
           doc_number: response.docNumber,
           doc_issue: response.docGiven,
-          start_given: response.startGiven,
-          end_given: response.endGiven,
+          start_given: start_given_formatted,
+          end_given: end_given_formatted,
         };
 
-        dispatch(confirmSMS(payload));
-        dispatch(addRegistration(""));
-        dispatch(stepRegistration(2));
-        dispatch(emptyMessage());
-        localStorage.setItem("step", "2");
-        window.scrollTo(0, 0);
+        dispatch(confirmSMS(payload)).then((response) => {
+          if (response.payload) {
+            dispatch(addRegistration(""));
+            dispatch(stepRegistration(2));
+            dispatch(emptyMessage());
+            localStorage.setItem("step", "2");
+            window.scrollTo(0, 0);
+          } else {
+            dispatch(
+              errorMessage(
+                `${response.message}. Вы будете перенаправлены на главную страницу.`
+              )
+            );
+            setTimeout(() => {
+              dispatch(stepRegistration(0));
+            }, 6000);
+            dispatch(isLoading(false));
+            setTimeout(() => {
+              localStorage.clear();
+            }, 5000);
+            setTimeout(() => {
+              Router.push("/");
+            }, 5000);
+          }
+        });
         dispatch(isLoading(false));
       } else {
         dispatch(

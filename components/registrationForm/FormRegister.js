@@ -44,7 +44,7 @@ const mapStateToProps = (state) => {
   return {
     moneyVal: state.moneyVal,
     dayVal: state.dayVal,
-    checked: false,
+    checked: true,
     somemessage: state.message,
     registration: state.registration,
     loading: state.loading,
@@ -119,7 +119,7 @@ class FormRegister extends React.Component {
     this.state = {
       isModalOpen: false,
       checked: false,
-      isOnBMG: false,
+      isOnBMG: true,
       phoneError: "",
       firstreg: [
         {
@@ -184,9 +184,6 @@ class FormRegister extends React.Component {
         "error"
       );
       return;
-      // setTimeout(() => {
-      //   Router.push("/");
-      // }, 5000);
     }
 
     if (ifBlckList(values.phone)) {
@@ -439,7 +436,7 @@ class FormRegister extends React.Component {
                         name="name"
                         autocomplete="off"
                         placeholder={t("name")}
-                        className="form-control  text-capitalize registerCyrril"
+                        className="form-control text-capitalize registerCyrril"
                         validate={acceptCirrilic}
                       />
                       <div className="hint">{t("cyrillic-name-only")}</div>
@@ -513,6 +510,21 @@ class FormRegister extends React.Component {
                     </div>
                     {errors.phone && touched.phone && (
                       <div className="text-danger">{t(errors.phone)}</div>
+                    )}
+                  </div>
+
+                  <div className="col-12 mb-2">
+                    <Label htmlFor="email">{t("mail")}</Label>
+                    <div className="input-group">
+                      <Field
+                        name="email"
+                        className="form-control"
+                        validate={validEmail}
+                        placeholder={t("mail")}
+                      />
+                    </div>
+                    {errors.email && touched.email && (
+                      <div className="text-danger">{t(errors.email)}</div>
                     )}
                   </div>
 
