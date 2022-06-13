@@ -118,8 +118,8 @@ class FormRegister extends React.Component {
     super(props);
     this.state = {
       isModalOpen: false,
-      checked: false,
-      isOnBMG: true,
+      checked: true,
+      isOnBMG: `${localStorage.getItem("isOnBMG") || true}`,
       phoneError: "",
       firstreg: [
         {
@@ -180,7 +180,7 @@ class FormRegister extends React.Component {
       // Проверка возвраста по иин
       swal(
         "Oops!",
-        `По внутренним нормативным документам  ТОО "МФО i-redit.kz"  выдача микрокредита осуществляется  лицам достигшим 21-го года и не старше 67-х лет.`,
+        `По внутренним нормативным документам  ТОО "МФО i-redit.kz"  выдача микрокредита осуществляется лицам достигшим 21-го года и не старше 67-х лет.`,
         "error"
       );
       return;

@@ -134,29 +134,40 @@ export const validateConfirmPassword = (pass, value) => {
 
 export const iinValidation = (val) => {
   let error;
+
+  // Если ИИН не 12 символов
   if (val && val.length !== 12) error = "Заполните все поля";
-  var b1 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
-  var b2 = [3, 4, 5, 6, 7, 8, 9, 10, 11, 1, 2];
-  var a = [];
-  var controll = 0;
+
+  // Младше 21 / старше 67
+  if (!validage(val)) error = "Ошибка по возрасту";
+
+  // Валидность ИИН, 12 символов
   if (val) {
-    for (var i = 0; i < 12; i++) {
+    const b1 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
+    const b2 = [3, 4, 5, 6, 7, 8, 9, 10, 11, 1, 2];
+    let a = [];
+    let control = 0;
+
+    for (let i = 0; i < 12; i++) {
       a[i] = parseInt(val.substring(i, i + 1));
-      if (i < 11) controll += a[i] * b1[i];
+      if (i < 11) control += a[i] * b1[i];
     }
-    controll = controll % 11;
-    if (controll == 10) {
-      controll = 0;
-      for (var i = 0; i < 11; i++) controll += a[i] * b2[i];
-      controll = controll % 11;
+
+    control = control % 11;
+
+    if (control === 10) {
+      control = 0;
+      for (let i = 0; i < 11; i++) control += a[i] * b2[i];
+      control = control % 11;
     }
-    if (controll != a[11] || a[6] == 0) error = "error-iin";
+
+    if (control !== a[11] || a[6] === 0) error = "error-iin";
     return error;
   }
 };
 
 export const phoneCheck = (val) => {
-  var PHONE_OPERATORS = [
+  const PHONE_OPERATORS = [
     { id: "7700" },
     { id: "7701" },
     { id: "7702" },
@@ -171,22 +182,18 @@ export const phoneCheck = (val) => {
     { id: "7777" },
     { id: "7778" },
   ];
-  var phone = String(val).replace(/[^A-Z0-9]/g, ""),
+  const phone = String(val).replace(/[^A-Z\d]/g, ""),
     code = phone.match(/^(\d{4})(\d{3})(\d{4})$/);
   if (!code || phone.length !== 11) {
     return false;
   }
 
-  var phone_number = code[1];
-  var phone_operator = PHONE_OPERATORS.filter(function (item) {
+  const phone_number = code[1];
+  const phone_operator = PHONE_OPERATORS.filter(function (item) {
     return item.id == phone_number;
   });
 
-  if (phone_operator.length > 0) {
-    return true;
-  } else {
-    return false;
-  }
+  return phone_operator.length > 0;
 };
 
 export const phoneValidation = (val) => {
@@ -734,10 +741,12 @@ function getAge(dateString) {
 export const validage = (iin) => {
   // Проверка на пол
   if (iin[6] % 2 !== 0) {
+    // Проверка на возраст
     if (getAge(iin) < 21 || getAge(iin) > 73) {
       return false;
     }
   } else if (iin[6] % 2 === 0) {
+    // Проверка на возраст
     if (getAge(iin) < 21 || getAge(iin) > 67) {
       return false;
     }

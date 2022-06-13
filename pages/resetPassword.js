@@ -20,17 +20,22 @@ const ResetPasword = () => {
   const router = useRouter();
   const { iin } = router.query;
   const { phone } = router.query;
-  const [btnLoading, setBtnLoading] = useState(false);
-  const [message, setMessage] = useState(null);
+  const [btnLoading] = useState(false);
+  const [message] = useState(null);
   const [errorMessage, setErrorMessage] = useState(null);
 
   const handleSubmit = (values) => {
+    // Пароль - пустое поле
     if (values.password === "") {
       setErrorMessage("Введите пароль");
     }
+
+    // Пароль - короче 5 символов
     if (values.password.length > 0 && values.password.length < 6) {
       setErrorMessage("Пароль должен быть не меньше 5 символов");
     }
+
+    // Пароли не совпадают
     if (
       values.password.length > 4 &&
       values.password !== values.passwordConfirm
@@ -38,10 +43,13 @@ const ResetPasword = () => {
       setErrorMessage("Пароли не совпадают");
     } else {
       setErrorMessage(null);
+      const params = {
+        phone,
+        iin,
+        password: values.password,
+      };
       axios
-        .get(
-          `https://api.i-credit.kz/api/resetPassword?phone=${phone}&iin=${iin}&password=${values.password}`
-        )
+        .get(`https://api.i-credit.kz/api/resetPassword`, { params })
         .then((res) => {
           console.log(res);
           if (res.data.success) {

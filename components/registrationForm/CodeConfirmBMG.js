@@ -63,7 +63,7 @@ class CodeConfirmBMG extends React.Component {
   };
 
   handleSubmit = (vals) => {
-    var object = {};
+    let object = {};
     object.code = vals.code;
     const finalobjects = Object.assign(this.props.registrationValues, object);
 

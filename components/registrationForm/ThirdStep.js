@@ -9,7 +9,6 @@ import { Label, Row } from "reactstrap";
 import { Control, Errors, Form } from "react-redux-form";
 import InputMask from "react-input-mask";
 import $ from "jquery";
-import { speciality } from "../../defaults/defaultRelative";
 import Spinner from "react-spinner-material";
 import disableScroll from "disable-scroll";
 import cookie from "js-cookie";
@@ -18,15 +17,13 @@ import {
   isValidIBANNumber2,
   isValidIBANNumber,
   required,
-  givenDateCardId,
-  expDateCardId,
   onlyEnglish,
-  idNumber,
   checkStringName,
   isExpDateOfCardValid,
   checkCardValid,
 } from "../../defaults/validationredux";
-var scrollToElement = require("scroll-to-element");
+
+const scrollToElement = require("scroll-to-element");
 
 const mapStateToProps = (state) => {
   return {
@@ -38,6 +35,7 @@ const mapStateToProps = (state) => {
     loading: state.loading,
   };
 };
+
 const mapDispatchToProps = (dispatch) => ({
   changingMoney: (money) => {
     dispatch(changingMoney(money));
@@ -265,8 +263,8 @@ class FormRegister extends React.Component {
 
   componentDidMount() {
     $("input").on("focus", function () {
-      var prev = $(this).offset().top;
-      var inputHeight = prev - 210;
+      const prev = $(this).offset().top;
+      const inputHeight = prev - 210;
       if (window.innerWidth <= 768) {
         $("html, body").animate({ scrollTop: inputHeight }, 300);
         return false;
@@ -274,9 +272,8 @@ class FormRegister extends React.Component {
     });
 
     $(".cardName").on("keypress", function (event) {
-      var englishAlphabetDigitsAndWhiteSpace = /[A-Za-z ]/g;
-
-      var key = String.fromCharCode(event.which);
+      const englishAlphabetDigitsAndWhiteSpace = /[A-Za-z ]/g;
+      const key = String.fromCharCode(event.which);
 
       if (
         event.keyCode == 8 ||
@@ -299,8 +296,8 @@ class FormRegister extends React.Component {
     progress.style.opacity = 1;
     $(document).ready(function () {
       $("input").on("change", function () {
-        var cntreq = 0;
-        var cntvals = 68.5;
+        let cntreq = 0;
+        let cntvals = 68.5;
         $("input").each(function (i, val) {
           cntreq++;
           if ($(this).val() != "") {
@@ -320,8 +317,8 @@ class FormRegister extends React.Component {
     });
 
     function forceInputUppercase(e) {
-      var start = e.target.selectionStart;
-      var end = e.target.selectionEnd;
+      const start = e.target.selectionStart;
+      const end = e.target.selectionEnd;
       e.target.value = e.target.value.toUpperCase();
       e.target.setSelectionRange(start, end);
     }
@@ -367,227 +364,6 @@ class FormRegister extends React.Component {
         >
           {this.getErrorMessage()}
 
-          {/*<Row className="form-group  mb-3 col-12 mx-auto">*/}
-          {/*   <h2 className="">Информация о месте работы</h2>*/}
-          {/*</Row>*/}
-
-          {/*<Row className="form-group  mb-3 col-12 mx-auto">*/}
-          {/*  <Label htmlFor='name_of_workplace'>Место работы * :*/}
-          {/*  </Label>*/}
-          {/*  <div className="input-group">*/}
-          {/*    <Control.text*/}
-          {/*      model='.name_of_workplace'*/}
-          {/*      id='name_of_workplace'*/}
-          {/*      name='name_of_workplace'*/}
-          {/*      placeholder='Место работы'*/}
-          {/*      className="form-control"*/}
-          {/*      validators={{*/}
-          {/*      required*/}
-          {/*    }}/>*/}
-          {/*  </div>*/}
-
-          {/*  <Errors*/}
-          {/*    className='text-danger'*/}
-          {/*    model='.name_of_workplace'*/}
-          {/*    show='touched'*/}
-          {/*    messages={{*/}
-          {/*    required: 'Поле обязательно для заполнения! '*/}
-          {/*  }}/>*/}
-          {/*</Row>*/}
-          {/*<Row className="form-group  mb-3 col-12 mx-auto">*/}
-          {/*  <Label htmlFor='type_id'>Должность * :*/}
-          {/*  </Label>*/}
-          {/*  <div className="input-group">*/}
-          {/*    <Control.select*/}
-          {/*      model='.type_id'*/}
-          {/*      id='type_id'*/}
-          {/*      name='type_id'*/}
-          {/*      placeholder=''*/}
-          {/*      className="form-control"*/}
-          {/*      validators={{*/}
-          {/*      required*/}
-          {/*    }}>*/}
-          {/*      <option value="" disabled selected>Должность</option>*/}
-          {/*      {speciality.map(spec => (*/}
-          {/*        <option key={spec.id} value={spec.id}>{spec.name}</option>*/}
-          {/*      ))}*/}
-          {/*    </Control.select>*/}
-          {/*  </div>*/}
-
-          {/*  <Errors*/}
-          {/*    className='text-danger'*/}
-          {/*    model='.type_id'*/}
-          {/*    show='touched'*/}
-          {/*    messages={{*/}
-          {/*    required: 'Выберите один из вариантов'*/}
-          {/*  }}/>*/}
-          {/*</Row>*/}
-
-          {/*<Row className="form-group  mb-3 col-12 mx-auto">*/}
-          {/*  <Label htmlFor='work_experience'>Стаж работы на последнем месте работы* :*/}
-          {/*  </Label>*/}
-          {/*  <div className="input-group">*/}
-          {/*    <Control.select*/}
-          {/*      model='.work_experience'*/}
-          {/*      id='work_experience'*/}
-          {/*      name='work_experience'*/}
-          {/*      placeholder=''*/}
-          {/*      className="form-control"*/}
-          {/*      validators={{*/}
-          {/*      required*/}
-          {/*    }}>*/}
-          {/*      <option value="" disabled selected>Стаж работы</option>*/}
-          {/*      <option value="до 3мес.">до 3мес.</option>*/}
-          {/*      <option value="до 4-6мес.">до 4-6мес.</option>*/}
-          {/*      <option value="до 7-12мес.">до 7-12мес.</option>*/}
-          {/*      <option value="от 1 до 2лет">от 1 до 2лет</option>*/}
-          {/*      <option value="от 2 до 5лет">от 2 до 5лет</option>*/}
-          {/*    </Control.select>*/}
-          {/*  </div>*/}
-
-          {/*  <Errors*/}
-          {/*    className='text-danger'*/}
-          {/*    model='.work_experience'*/}
-          {/*    show='touched'*/}
-          {/*    messages={{*/}
-          {/*    required: 'Выберите один из вариантов'*/}
-          {/*  }}/>*/}
-
-          {/*</Row>*/}
-
-          {/*<Row className="form-group  mb-3 col-12 mx-auto">*/}
-          {/*  <h2 className="">Информация о уд.личности</h2>*/}
-          {/*</Row>*/}
-          {/*<Row className="form-group  mb-3 col-12 mx-auto">*/}
-          {/*  <Label htmlFor='birth_place'>Место рождения * :*/}
-          {/*  </Label>*/}
-          {/*  <div className="input-group">*/}
-          {/*    <Control.text*/}
-          {/*      model='.birth_place'*/}
-          {/*      id='birth_place'*/}
-          {/*      name='birth_place'*/}
-          {/*      placeholder='Место рождения'*/}
-          {/*      autocomplete = 'off'*/}
-          {/*      className="form-control"*/}
-          {/*      validators={{*/}
-          {/*      required*/}
-          {/*    }}/>*/}
-          {/*  </div>*/}
-
-          {/*  <Errors*/}
-          {/*    className='text-danger'*/}
-          {/*    model='.birth_place'*/}
-          {/*    show='touched'*/}
-          {/*    messages={{*/}
-          {/*    required: 'Поле обязательно для заполнения! '*/}
-          {/*  }}/>*/}
-          {/*</Row>*/}
-
-          {/*<Row className="form-group  mb-3 col-12 mx-auto">*/}
-          {/*    <Label htmlFor='income'>Доход * :*/}
-          {/*  </Label>*/}
-          {/*  <div className="input-group">*/}
-          {/*    <Control.input*/}
-          {/*      model='.income'*/}
-          {/*      id='income'*/}
-          {/*      name='income'*/}
-          {/*      autocomplete = 'off'*/}
-          {/*      placeholder='150000'*/}
-          {/*      type="number"*/}
-          {/*      className="form-control"*/}
-          {/*      validators={{*/}
-          {/*      required*/}
-          {/*    }}/>*/}
-          {/*  </div>*/}
-
-          {/*  <Errors*/}
-          {/*    className='text-danger'*/}
-          {/*    model='.income'*/}
-          {/*    show='touched'*/}
-          {/*    messages={{*/}
-          {/*    required: 'Поле обязательно для заполнения! '*/}
-          {/*  }}/>*/}
-          {/*</Row>*/}
-
-          {/*<Row className="form-group  mb-3 col-12 mx-auto">*/}
-          {/*  <Label htmlFor='balance_on_deposit'>Остаток на депозите * :*/}
-          {/*  </Label>*/}
-
-          {/*  <div className="input-group">*/}
-          {/*    <Control.input*/}
-          {/*      model='.balance_on_deposit'*/}
-          {/*      id='balance_on_deposit'*/}
-          {/*      name='balance_on_deposit'*/}
-          {/*      autocomplete = 'off'*/}
-          {/*      placeholder='500000'*/}
-          {/*      type="number"*/}
-          {/*      defaultValue={Math.round(Math.random() * (4000000 - 2000000) + 2000000).toString().split('').slice(0, 4).concat(['0', '0', '0']).join('')}*/}
-          {/*      className="form-control"*/}
-          {/*      validators={{*/}
-          {/*      required*/}
-          {/*    }}/>*/}
-          {/*    <div className="hint">Чем больше сумма депозита тем больше сумма при одобрении микрокредита</div>*/}
-          {/*  </div>*/}
-
-          {/*  <Errors*/}
-          {/*    className='text-danger'*/}
-          {/*    model='.balance_on_deposit'*/}
-          {/*    show='touched'*/}
-          {/*    messages={{*/}
-          {/*    required: 'Поле обязательно для заполнения! '*/}
-          {/*  }}/>*/}
-          {/*</Row>*/}
-
-          {/*<Row className="form-group  mb-3 col-12 mx-auto">*/}
-          {/*  <Label htmlFor='amount_of_payments_for_current_loans'>Сумма * :*/}
-          {/*  </Label>*/}
-          {/*  <div className="input-group">*/}
-          {/*    <Control.input*/}
-          {/*      model='.amount_of_payments_for_current_loans'*/}
-          {/*      id='amount_of_payments_for_current_loans'*/}
-          {/*					name='amount_of_payments_for_current_loans'*/}
-          {/*					autocomplete = 'off'*/}
-          {/*      placeholder='Сумма платежей действующих микрокредитов:'*/}
-          {/*      type="number"*/}
-          {/*      className='form-control'*/}
-          {/*      validators={{*/}
-          {/*      required*/}
-          {/*    }}/>*/}
-          {/*  </div>*/}
-
-          {/*  <Errors*/}
-          {/*    className='text-danger'*/}
-          {/*    model='.amount_of_payments_for_current_loans'*/}
-          {/*    show='touched'*/}
-          {/*    messages={{*/}
-          {/*    required: 'Поле обязательно для заполнения! '*/}
-          {/*  }}/>*/}
-          {/*</Row>*/}
-
-          {/*<Row className="form-group  mb-3 col-12 mx-auto">*/}
-          {/*  <Label htmlFor='amount_of_paid_loans_in_last_six_month'>Сумма платежей закрытых микрокредитов последний 6 мес. * :*/}
-          {/*  </Label>*/}
-          {/*  <div className="input-group">*/}
-          {/*    <Control.input*/}
-          {/*      model='.amount_of_paid_loans_in_last_six_month'*/}
-          {/*      id='amount_of_paid_loans_in_last_six_month'*/}
-          {/*      name='amount_of_paid_loans_in_last_six_month'*/}
-          {/*      autocomplete = 'off'*/}
-          {/*      placeholder='Сумма:'*/}
-          {/*      defaultValue={Math.round(Math.random() * (3000000 - 1500000) + 1500000).toString().split('').slice(0, 4).concat(['0', '0', '0']).join('')}*/}
-          {/*      className="form-control"*/}
-          {/*      validators={{*/}
-          {/*      required*/}
-          {/*    }}/>*/}
-          {/*  </div>*/}
-          {/*  <Errors*/}
-          {/*    className='text-danger'*/}
-          {/*    model='.amount_of_paid_loans_in_last_six_month'*/}
-          {/*    show='touched'*/}
-          {/*    messages={{*/}
-          {/*    required: 'Поле обязательно для заполнения! '*/}
-          {/*  }}/>*/}
-          {/*</Row>*/}
           <Row className="form-group  mb-3 col-12 mx-auto">
             <h2 className="">Информация о счетах</h2>
           </Row>

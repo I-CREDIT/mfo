@@ -7,8 +7,6 @@ import Router from "next/router";
 import ContinueStep2 from "../../components/continue/ContinueStep2";
 import ContinueStep3 from "../../components/continue/ContinueStep3";
 import withAuth from "../../components/hocs/withAuth";
-import { Modal, ModalHeader, ModalBody } from "reactstrap";
-import Progressbar from "../../components/shared/Progressbar";
 import cookie from "js-cookie";
 
 const mapStateToProps = (state) => {
@@ -21,27 +19,9 @@ const mapStateToProps = (state) => {
 
 const Continue = ({ userReducer }) => {
   const [stepResult, setStepResult] = useState(1);
-  const [summa, setSumma] = useState(55000);
-  const [srok, setSrok] = useState(20);
+  const [summa] = useState(55000);
+  const [srok] = useState(20);
   const [step, setStep] = useState(stepResult);
-  const [sendRepeat, setSendRepeat] = useState(true);
-
-  // const canSendRepeat = () => {
-  //   axios
-  //     .post(`https://api.i-credit.kz/api/repeatUser`, {
-  //       token: cookie.get("token"),
-  //     })
-  //     .then((response) => {
-  //       if (response.data.success) {
-  //         // Router.push('/cabinet/repeated')
-  //         this.setState({ sendRepeat: true });
-  //         // this.setState({btnLoading: false})
-  //       } else {
-  //         this.setState({ sendRepeat: false });
-  //         this.setState({ repeatMessage: response.data.message });
-  //       }
-  //     });
-  // };
 
   const getCurrentStep = () => {
     axios
