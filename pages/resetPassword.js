@@ -19,7 +19,6 @@ const mapDispatchToProps = (dispatch) => ({
 const ResetPasword = () => {
   const router = useRouter();
   const { iin, phone, id } = router.query;
-  console.log(iin, "qweqweqweq");
 
   const [btnLoading] = useState(false);
   const [message] = useState(null);
