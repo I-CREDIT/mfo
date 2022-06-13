@@ -18,8 +18,9 @@ const mapDispatchToProps = (dispatch) => ({
 
 const ResetPasword = () => {
   const router = useRouter();
-  const { iin } = router.query;
-  const { phone } = router.query;
+  const { iin, phone, id } = router.query;
+  console.log(iin, "qweqweqweq");
+
   const [btnLoading] = useState(false);
   const [message] = useState(null);
   const [errorMessage, setErrorMessage] = useState(null);
@@ -46,6 +47,7 @@ const ResetPasword = () => {
       const params = {
         phone,
         iin,
+        id,
         password: values.password,
       };
       axios
