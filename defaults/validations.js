@@ -6,6 +6,14 @@ export const requiredd = (val) => {
   return error;
 };
 
+export const requiredd1 = (val) => {
+  let error;
+  if (!val || !(val.replace(/\s+$/, '').split(/\W+/).length === 2)) {
+    error = "mandatory-field";
+  }
+  return error;
+};
+
 export const requiredStreet = (val) => {
   var falsy = /^[\d\wа-яА-Я]/i.test(val);
   let error;

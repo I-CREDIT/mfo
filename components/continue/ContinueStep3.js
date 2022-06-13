@@ -21,6 +21,7 @@ import {
   ibanContinue,
   depositeValidation,
   acceptCirrilicOnly,
+  requiredd1,
 } from "../../defaults/validations";
 import {
   checkStringName,
@@ -423,7 +424,7 @@ const ContinueStep3 = ({
                     name="name_of_owner"
                     autocomplete="off"
                     className="form-control input-uppercase registerCyrril cardName"
-                    validate={requiredd}
+                    validate={requiredd1}
                   />
                   <div className="hint">Только на латинском</div>
                 </div>
