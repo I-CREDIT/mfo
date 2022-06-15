@@ -1715,7 +1715,7 @@ class Status extends React.Component {
                   padding: "0",
                 }}
               >
-                <a href="https://kaz-zaem.online/" target="_blank">
+                <a href="https://top-credit.su/" target="_blank">
                   <button
                     style={{
                       position: "unset",

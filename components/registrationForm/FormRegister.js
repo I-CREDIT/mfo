@@ -119,7 +119,8 @@ class FormRegister extends React.Component {
     this.state = {
       isModalOpen: false,
       checked: true,
-      isOnBMG: `${localStorage.getItem("isOnBMG") || true}`,
+      // isOnBMG: `${localStorage.getItem("isOnBMG") || true}`,
+      isOnBMG: false,
       phoneError: "",
       firstreg: [
         {
