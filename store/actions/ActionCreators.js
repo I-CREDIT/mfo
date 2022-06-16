@@ -516,7 +516,6 @@ export const postRegistrationThird = (registration) => (dispatch) => {
     clickID: registration.cpa_clickid,
     web_id: registration.webID,
   };
-  console.log("hello", payload);
 
   return fetch(`https://api.i-credit.kz/api/thirdStep`, {
     method: "POST",
@@ -539,10 +538,10 @@ export const postRegistrationThird = (registration) => (dispatch) => {
     .then((response) => {
       if (response.success) {
         dispatch(successMessage("Успешно"));
-        dispatch(stepRegistration(0));
         dispatch(isLoading(false));
         newCookie();
         setTimeout(() => {
+          dispatch(stepRegistration(0));
           Router.push(`/thanks`);
           // Router.push(`/newAggrements`);
         }, 3000);
