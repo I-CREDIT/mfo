@@ -119,20 +119,29 @@ export const getSMSFromBMG = (user) => (dispatch) => {
         localStorage.setItem("step", "1");
       } else {
         dispatch(isLoading(false));
+        localStorage.setItem("BMGAttempts", "3");
+        localStorage.setItem("isOnBMG", "false");
         dispatch(
-          errorMessage("Вас нет в БМГ! Пожалуйста, заполните данные вручную.")
+          errorMessage(
+            "Такой ИИН не зарегистрирован в БМГ! Пожалуйста, заполните данные вручную."
+          )
         );
+        setTimeout(() => {
+          Router.push("/");
+        }, 5000);
       }
     })
     .catch((e) => {
+      localStorage.setItem("BMGAttempts", "3");
+      localStorage.setItem("isOnBMG", "false");
       dispatch(
         errorMessage(
           "Ошибка получения кода с egov. Пожалуйста, заполните данные вручную."
         )
       );
       setTimeout(() => {
-        checkIIN(e.errors);
-      }, 3000);
+        Router.push("/");
+      }, 5000);
     })
     .then(() => dispatch(isLoading(false)));
 };
@@ -274,7 +283,7 @@ export const confirmSMS = (registration) => (dispatch) => {
     endGiven: registration.end_given,
   };
 
-  return fetch(`https://api.i-credit.kz/api/confirmSMS`, {
+  return fetch(`https://api.i-credit.kz/api/confirmSMSTest`, {
     method: "POST",
     body: JSON.stringify(payload),
     headers: {
@@ -311,7 +320,8 @@ export const confirmSMS = (registration) => (dispatch) => {
         }, 6000);
         dispatch(isLoading(false));
         setTimeout(() => {
-          localStorage.clear();
+          localStorage.removeItem("step");
+          localStorage.removeItem("token");
         }, 5000);
         setTimeout(() => {
           Router.push("/");
@@ -331,7 +341,8 @@ export const confirmSMS = (registration) => (dispatch) => {
       }, 6000);
       dispatch(isLoading(false));
       setTimeout(() => {
-        localStorage.clear();
+        localStorage.removeItem("step");
+        localStorage.removeItem("token");
       }, 5000);
       setTimeout(() => {
         Router.push("/");
@@ -387,31 +398,7 @@ export const takeDocumentsBiometry = (registration) => (dispatch) => {
           end_given: end_given_formatted,
         };
 
-        dispatch(confirmSMS(payload)).then((response) => {
-          if (response.payload) {
-            dispatch(addRegistration(""));
-            dispatch(stepRegistration(2));
-            dispatch(emptyMessage());
-            localStorage.setItem("step", "2");
-            window.scrollTo(0, 0);
-          } else {
-            dispatch(
-              errorMessage(
-                `${response.message}. Вы будете перенаправлены на главную страницу.`
-              )
-            );
-            setTimeout(() => {
-              dispatch(stepRegistration(0));
-            }, 6000);
-            dispatch(isLoading(false));
-            setTimeout(() => {
-              localStorage.clear();
-            }, 5000);
-            setTimeout(() => {
-              Router.push("/");
-            }, 5000);
-          }
-        });
+        dispatch(confirmSMS(payload));
         dispatch(isLoading(false));
       } else {
         dispatch(
@@ -424,7 +411,8 @@ export const takeDocumentsBiometry = (registration) => (dispatch) => {
         }, 6000);
         dispatch(isLoading(false));
         setTimeout(() => {
-          localStorage.clear();
+          localStorage.removeItem("step");
+          localStorage.removeItem("token");
         }, 5000);
         setTimeout(() => {
           Router.push("/");
@@ -440,7 +428,8 @@ export const takeDocumentsBiometry = (registration) => (dispatch) => {
       }, 6000);
       dispatch(isLoading(false));
       setTimeout(() => {
-        localStorage.clear();
+        localStorage.removeItem("step");
+        localStorage.removeItem("token");
       }, 5000);
       setTimeout(() => {
         Router.push("/");
@@ -525,9 +514,9 @@ export const postRegistrationThird = (registration) => (dispatch) => {
     cardName: registration.name_of_owner,
     source: registration.source,
     clickID: registration.cpa_clickid,
-    web_id: registration.webID
+    web_id: registration.webID,
   };
-  console.log('hello', payload)
+  console.log("hello", payload);
 
   return fetch(`https://api.i-credit.kz/api/thirdStep`, {
     method: "POST",

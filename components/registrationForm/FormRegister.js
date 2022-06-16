@@ -7,6 +7,7 @@ import {
   getSMSFromBMG,
   getInfoFromBMG,
   getSMS,
+  errorMessage,
 } from "../../store/actions/ActionCreators";
 import { Modal, ModalHeader, ModalBody, Label, Row } from "reactstrap";
 import { Formik, Form, Field } from "formik";
@@ -119,7 +120,7 @@ class FormRegister extends React.Component {
     this.state = {
       isModalOpen: false,
       checked: true,
-      isOnBMG: `${localStorage.getItem("isOnBMG") || true}`,
+      isOnBMG: true,
       phoneError: "",
       firstreg: [
         {
@@ -206,9 +207,6 @@ class FormRegister extends React.Component {
         "error"
       );
       return;
-      // setTimeout(() => {
-      //   Router.push('/')
-      // }, 5000);
     }
 
     if (isFord(values.iin)) {
@@ -218,9 +216,6 @@ class FormRegister extends React.Component {
         "error"
       );
       return;
-      // setTimeout(() => {
-      //   Router.push('/')
-      // }, 5000);
     }
 
     values.loan_amount = this.props.moneyVal;
@@ -230,99 +225,40 @@ class FormRegister extends React.Component {
       ...values,
     };
 
+    // Ветка БМГ или Ручная регистрация?
     if (this.state.isOnBMG) {
-      this.props.getSMSFromBMG(user).then((response) => {
-        if (!response.success) {
-          this.setState({
-            isOnBMG: false,
-          });
-        }
-      });
+      // Были попытки БМГ до этого?
+      let count_of_attempts = 1;
+      if (localStorage.getItem("BMGAttempts")) {
+        count_of_attempts = +localStorage.getItem("BMGAttempts") + 1;
+      }
+
+      if (count_of_attempts > 3) {
+        swal(
+          "Oops!",
+          "Вы исчерпали лимит попыток! Пожалуйста, заполните данные вручную.",
+          "error"
+        );
+        localStorage.setItem("isOnBMG", "false");
+        this.setState({
+          isOnBMG: false,
+        });
+
+        return;
+      }
+
+      localStorage.setItem("BMGAttempts", count_of_attempts.toString());
+      console.log(
+        localStorage.getItem("BMGAttempts"),
+        count_of_attempts,
+        "count_of_attempts"
+      );
+
+      // Получение СМС с БМГ
+      this.props.getSMSFromBMG(user);
     } else {
-      // let moneyval = this.props.moneyVal;
-      // let dayval = this.props.dayVal;
-      // let other = {};
-      // values.loan_amount = this.props.moneyVal;
-      // values.period_in_days = this.props.dayVal;
-      //
-      // const finalObjects = {
-      //   // ...other,
-      //   ...values,
-      // };
-      // values.major_loan_amount = Math.floor(parseInt(moneyval) * 1.15);
-      // values.grace_period_amount = Math.floor(parseInt(moneyval) * 1.15);
-      // values.loan_amount_for_max_days = Math.floor(
-      //   (Math.round(parseInt(moneyval) * (1 + (parseInt(dayval) / 100) * 2)) /
-      //     100) *
-      //     100
-      // );
-      // values.insurance_amount =
-      //   Math.floor(parseInt(moneyval) * 1.15) - parseInt(moneyval);
-      // values.award_amount =
-      //   Math.floor(parseInt(moneyval) * 1.15) - parseInt(moneyval);
-      // other.finished_step = 1;
-
-      // const finalObjects = {
-      //   // ...other,
-      //   ...values,
-      // };
-
-      // if (!validage(values.iin)) {
-      //   // Проверка возвраста по иин
-      //   swal(
-      //     "Oops!",
-      //     `По внутренним нормативным документам  ТОО "МФО i-redit.kz"  выдача микрокредита осуществляется  лицам достигшим 21-го года и не старше 67-х лет.`,
-      //     "error"
-      //   );
-      //   setTimeout(() => {
-      //     Router.push("/");
-      //   }, 5000);
-      // }
-      //
-      // if (ifBlckList(values.phone)) {
-      //   // Черный список телефонов которые не может подавать
-      //   swal(
-      //     "Важно",
-      //     "Вы не можете подавать заявку в нашу организацию! (Черный список)",
-      //     "error"
-      //   );
-      //   setTimeout(() => {
-      //     // Router.push('/')
-      //   }, 5000);
-      // }
-      //
-      // if (ifSaled(values.iin)) {
-      //   swal(
-      //     "Важно",
-      //     "Вы не можете подавать заявку в нашу организацию! (Проданный лид)",
-      //     "error"
-      //   );
-      //   setTimeout(() => {
-      //     // Router.push('/')
-      //   }, 5000);
-      // }
-      //
-      // if (isFord(values.iin)) {
-      //   swal(
-      //     "Важно",
-      //     "Вы не можете подавать заявку в нашу организацию! (Фрод)",
-      //     "error"
-      //   );
-      //   setTimeout(() => {
-      //     // Router.push('/')
-      //   }, 5000);
-      // }
-
+      // Получение СМС у нас
       this.props.getSMS(user);
-
-      // if (
-      //   validage(values.iin) &&
-      //   !ifBlckList(values.phone) &&
-      //   !ifSaled(values.iin) &&
-      //   !isFord(values.iin)
-      // ) {
-      //   this.props.postRegistration(finalObjects);
-      // }
     }
   }
 
@@ -352,6 +288,12 @@ class FormRegister extends React.Component {
   }
 
   componentDidMount() {
+    if (localStorage.getItem("isOnBMG")) {
+      this.setState({
+        isOnBMG: false,
+      });
+    }
+
     const progress = document.querySelector(".progress-done");
     progress.style.width = progress.getAttribute("data-done") + "%";
     progress.append(progress.getAttribute("data-done") + "%");
@@ -426,7 +368,9 @@ class FormRegister extends React.Component {
               <Form className="container formsStep">
                 {this.getErrorMessage()}
 
-                <h2 className="text-center">{t("registration")}</h2>
+                <h2 className="text-center">
+                  {this.state.isOnBMG ? "Регистрация egov" : t("registration")}
+                </h2>
 
                 <div className="row form-group  mx-auto">
                   <div className="col-12 mb-2">
@@ -617,12 +561,12 @@ class FormRegister extends React.Component {
                     </div>
                   ) : (
                     <div className="registration-buttons">
-                      <button
-                        onClick={() => this.toggleHideBMG()}
-                        className="agreement-btn"
-                      >
-                        Регистрация вручную
-                      </button>
+                      {/*<button*/}
+                      {/*  onClick={() => this.toggleHideBMG()}*/}
+                      {/*  className="agreement-btn"*/}
+                      {/*>*/}
+                      {/*  Регистрация вручную*/}
+                      {/*</button>*/}
                       <button
                         disabled={!this.state.checked}
                         type="submit"

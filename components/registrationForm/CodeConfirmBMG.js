@@ -140,11 +140,11 @@ class CodeConfirmBMG extends React.Component {
             )}
           </div>
         </Form>
-        <div className="button form-group  codeConfirm mb-5">
-          <button className="newCode" onClick={this.sendCode}>
-            Получить новый код
-          </button>
-        </div>
+        {/*<div className="button form-group  codeConfirm mb-5">*/}
+        {/*  <button className="newCode" onClick={this.sendCode}>*/}
+        {/*    Получить новый код*/}
+        {/*  </button>*/}
+        {/*</div>*/}
       </div>
     );
   }

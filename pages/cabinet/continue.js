@@ -89,7 +89,7 @@ const Continue = ({ userReducer }) => {
       {stepResult === 2 ? (
         <StepReg />
       ) : (
-        <ContinueStep3 userDate={userReducer.user} summa={summa} srok={srok} />
+        <ContinueStep2 userDate={userReducer.user} summa={summa} srok={srok} />
       )}
     </div>
   );
