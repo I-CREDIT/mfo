@@ -46,6 +46,9 @@ class Status extends React.Component {
     this.state = {
       repeatMessage: "",
     };
+    this.state = {
+      timeChSI: true
+    }
   }
 
   getCurrentStep() {
@@ -76,6 +79,68 @@ class Status extends React.Component {
 
   componentDidMount() {
     this.getCurrentStep();
+
+    let time
+
+    if(this.props.userStatus.userStatus.stage === 12) {
+      const getTimeRemaining = (endtime) => { // создаем функцию котороая показывает сколько времени осталось
+        const t = Date.parse(endtime) - Date.parse(new Date) // переменная сколько милисекунд осталось
+        let days = Math.floor(t / (1000 * 60 * 60 * 24)), // переменная сколько дней осталось
+            hours = Math.floor((t / (1000 * 60 * 60)) % 24), // переменная сколько часов осталось
+            minutes = Math.floor((t / (1000 * 60)) % 60), // переменная сколько минут осталось
+            seconds = Math.floor((t / 1000) % 60) // переменная сколько секунд осталось
+
+        time = t
+
+        if(time <= 0) {
+          this.setState({
+            timeChSI: false
+          })
+        }
+
+            return { // и возвращаем все эти данные в объекте, чтобы удобнее их было использовать
+                'total': t,
+                'days': days,
+                'hours': hours,
+                'minutes': minutes,
+                'seconds': seconds
+            }
+      }
+
+      function getZero(num) { // это функция которая добавляет нолик перед числом, если число становится однозначным, чтобы выглядело красиво
+        if (num >= 0 && num < 10) {
+            return `0${num}`
+        }else {
+            return num
+        }
+      }
+
+      function setClock (selector, endtime) { // это функция которая будет отображать нам непосредственно в HTML нажи часы обновляя время
+        let timer = document.querySelector(selector), // создаем переменную которая будет являтся родительским кодом для наших элементов (дни, часы, минуты, секунды)
+            days = timer.querySelector('#days'), // тут берем уже дни
+            hours = timer.querySelector('#hours'), // тут берем уже часы
+            minutes = timer.querySelector('#minutes'), // тут берем уже минуты
+            seconds = timer.querySelector('#seconds'), // тут берем уже секунды
+            timerInterval = setInterval(updateClock, 1000) // тут вызываем функцию updateClock каждую секунду чтобы на странице по сендно обновляло время
+
+        updateClock() // тут мы отдельно вызываем функцию, чтобы с первых мгновений показывало правильное время
+        
+        function updateClock() { // эта функция добавляет в HTML код наши данные
+            const t = getTimeRemaining(endtime) // тут переменная уже берет данные с объекта функции вначале
+
+            console.log(t.total)
+
+            days.innerHTML = getZero(t.days) // и тут вкладываем наше время куда надо в HTML код
+            hours.innerHTML = getZero(t.hours) // и тут вкладываем наше время куда надо в HTML код
+            minutes.innerHTML = getZero(t.minutes) // и тут вкладываем наше время куда надо в HTML код
+            seconds.innerHTML = getZero(t.seconds) // и тут вкладываем наше время куда надо в HTML код
+            if (t.total <= 0) {
+                clearInterval(timerInterval)
+            }
+        }
+      }
+      setClock('.timer', '2022-07-01')
+    }
   }
 
   myFunc() {
@@ -187,6 +252,54 @@ class Status extends React.Component {
     //     });
     //     break
     // }
+    // })
+  }
+
+  handleSubmitChSI() {
+    let values = {
+      iin: this.props.userReducer.user.UF_4,
+      amount: +this.props.userStatus.userStatus.mainAmount
+    };
+    this.setState({
+      btnLoading: true,
+    });
+    // swal("Проверьте ваши данные", {
+    //   text: `Проверьте ваши данные
+
+    //   Ваш ИИН: ${values.iin}    Сумма оплаты: ${(+values.amount).toLocaleString("ru-RU")} тг`,
+    //   buttons: {
+    //     catch: {
+    //       text: "Подтвердить",
+    //       value: "catch",
+    //     },
+    //     cancel: "Отмена"
+    //   }
+    // }).then(value=>{
+    //   switch (value) {
+    //     case "catch":
+    this.setState({
+      btnLoading: true,
+    });
+    axios
+      .post(`https://api.i-credit.kz/api/make_payment123`, values)
+      .then((response) => {
+        this.setState({
+          btnLoading: false,
+        });
+        location.replace(response.data[0] + "?" + response.data[1]);
+      })
+      .catch((error) => {
+        console.log(error);
+        this.setState({
+          btnLoading: false,
+        });
+      });
+    //     case "cancel":
+    //       this.setState({
+    //         btnLoading: false,
+    //       });
+    //       break
+    //   }
     // })
   }
 
@@ -1788,6 +1901,81 @@ class Status extends React.Component {
             </div>
           </div>
         );
+      case 12:
+        return (
+          <div className='container'>
+            <div className='alert alert-primary' 
+              style={{
+                borderRadius: '40px',
+                display: 'flex',
+                flexDirection: 'column'
+              }}
+            >
+              {this.state.timeChSI ? (
+              <>
+                <h3 className='alert-heading'
+                  style={{
+                    textAlign: 'center'
+                  }}
+                >Акция специально для Вас!</h3>
+                <p className='mb-0'
+                  style={{
+                    textAlign: 'center'
+                  }}
+                >Действует только 15 дней!</p>
+                <hr/>
+                <h3
+                  style={{
+                    textAlign: 'center',
+                    margin: '20px 0'
+                  }}
+                >
+                  Оплатите только сумму основного долга!
+                </h3>
+                <h4 style={{alignSelf: 'center'}}>
+                  После этого мы:
+                </h4>
+                <p style={{alignSelf: 'center', fontWeight: 'bold'}}>
+                  1) Улучшим Вашу кредитную историю;<br/>
+                  2) Снимем аресты с Ваших счетов;<br/>
+                  3) Уберем ограничение на выезд зарубеж.
+                </p>
+                <div className="buttonForm">
+                {this.state.btnLoading === true ?
+                        <Spinner className="loading" size={200} spinnerColor={"#ef2221"} spinnerWidth={2} visible={true} /> :
+                        <button style={{margin: 0}} onClick={() => this.handleSubmitChSI()} className=" oplataform--button" type="submit">Погасить {(+this.props.userStatus.userStatus.mainAmount).toLocaleString("ru-RU")} тенге</button>}
+                </div>
+                <div class="promotion__timer">
+                  <div class="title">Акция закончится через:</div>
+                  <div class="timer">
+                    <div class="timer__block">
+                        <span id="days">12</span>
+                        дней
+                    </div>
+                    <div class="timer__block">
+                        <span id="hours">20</span>
+                        часов
+                    </div>
+                    <div class="timer__block">
+                        <span id="minutes">56</span>
+                        минут
+                    </div>
+                    <div class="timer__block">
+                        <span id="seconds">20</span>
+                        секунд
+                    </div>
+                  </div>
+                </div>
+              </>)
+              :
+              <h3 className='alert-heading'
+                  style={{
+                    textAlign: 'center'
+                  }}
+                >Акция закончилась:(</h3>}
+            </div>
+          </div>
+        )
       default:
         return <div></div>;
     }
