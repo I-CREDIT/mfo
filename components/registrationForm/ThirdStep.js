@@ -331,7 +331,7 @@ class FormRegister extends React.Component {
   render() {
     const { history } = this.props;
     const ibanMessage = isValidIBANNumber(
-      null || this.props.registration3.iban_account
+      this.props.registration3.iban_account
     );
 
     const IbanToUppercase = (e) => {
