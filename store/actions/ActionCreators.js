@@ -544,7 +544,7 @@ export const postRegistrationThird = (registration) => (dispatch) => {
           dispatch(stepRegistration(0));
           Router.push(`/thanks`);
           // Router.push(`/newAggrements`);
-        }, 3000);
+        }, 2000);
       } else {
         dispatch(isLoading(false));
         dispatch(errorMessage(`Ошибка отправки заявки. ${response.message}`));
