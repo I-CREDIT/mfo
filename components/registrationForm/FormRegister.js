@@ -248,11 +248,6 @@ class FormRegister extends React.Component {
       }
 
       localStorage.setItem("BMGAttempts", count_of_attempts.toString());
-      console.log(
-        localStorage.getItem("BMGAttempts"),
-        count_of_attempts,
-        "count_of_attempts"
-      );
 
       // Получение СМС с БМГ
       this.props.getSMSFromBMG(user);
