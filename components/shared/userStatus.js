@@ -139,7 +139,7 @@ class Status extends React.Component {
             }
         }
       }
-      setClock('.timer', '2022-07-01')
+      setClock('.timer', '2022-06-30')
     }
   }
 
@@ -1922,7 +1922,7 @@ class Status extends React.Component {
                   style={{
                     textAlign: 'center'
                   }}
-                >Действует только 15 дней!</p>
+                >Действует только до 30.06.2022г!</p>
                 <hr/>
                 <h3
                   style={{
