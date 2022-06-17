@@ -94,7 +94,7 @@ export const getSMSFromBMG = (user) => (dispatch) => {
     iin: user.iin,
   };
 
-  return fetch(`https://api.i-credit.kz/api/takeCode`, {
+  return fetch(`https://api.i-credit.kz/api/test/takeCode`, {
     method: "POST",
     body: JSON.stringify(payload),
     headers: {
@@ -156,7 +156,7 @@ export const getSMS = (user) => (dispatch) => {
     phone: user.phone,
   };
 
-  return fetch(`https://api.i-credit.kz/api/sendSMS`, {
+  return fetch(`https://api.i-credit.kz/api/test/sendSMS`, {
     method: "POST",
     body: JSON.stringify(payload),
     headers: {
@@ -283,7 +283,7 @@ export const confirmSMS = (registration) => (dispatch) => {
     endGiven: registration.end_given,
   };
 
-  return fetch(`https://api.i-credit.kz/api/confirmSMSTest`, {
+  return fetch(`https://api.i-credit.kz/api/test/confirmSMS`, {
     method: "POST",
     body: JSON.stringify(payload),
     headers: {
@@ -454,7 +454,7 @@ export const postRegistrationSecond = (registration) => (dispatch) => {
     source: registration.source,
   };
 
-  return fetch(`https://api.i-credit.kz/api/secondStep`, {
+  return fetch(`https://api.i-credit.kz/api/test/secondStep`, {
     method: "POST",
     body: JSON.stringify(payload),
     headers: {
@@ -517,7 +517,7 @@ export const postRegistrationThird = (registration) => (dispatch) => {
     web_id: registration.webID,
   };
 
-  return fetch(`https://api.i-credit.kz/api/thirdStep`, {
+  return fetch(`https://api.i-credit.kz/api/test/thirdStep`, {
     method: "POST",
     body: JSON.stringify(payload),
     headers: {
