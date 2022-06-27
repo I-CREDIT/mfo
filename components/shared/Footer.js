@@ -57,7 +57,7 @@ const Footer = () => {
                   <AppLink href="/complaint">{t('footerCol-2-3')}</AppLink>
                 <AppLink href="/moneystep">{t('footerCol-2-4')}</AppLink>
                 <AppLink href="/payment_methods">{t('footerCol-2-5')}</AppLink>
-                <AppLink href="/difficulty_repayment">Не могу закрыть займ</AppLink>
+                <AppLink href="/difficulty_repayment">Порядок урегулирования задолженности</AppLink>
                 <AppLink href="/guide">{t('footerCol-2-6')}</AppLink>
                 <AppLink href="/contacts">{t('footerCol-2-7')}</AppLink>
               </div>

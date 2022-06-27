@@ -53,9 +53,7 @@ class Questionans extends React.Component {
             <Collapse isOpen={this.state.collapse === 'voprosi1'} id="voprosi1">
               <div className="voprosi--otvet">
                 <p className="otvet mb-5">
-                  * Отправить заявку вы можете в любое удобное для вас время, но рассмотрение и ответ по
-                  заявке
-                  будут осуществлены в рабочее время компании.
+                  Гражданин РК от 21+ лет, прошедший регистрацию на сайте.
                 </p>
                 <div className="polezen">
                   <h3 className="mb-3">Был ли полезен вам ответ?</h3>
@@ -221,7 +219,7 @@ class Questionans extends React.Component {
           </div>
           <div className="voprosi voprosi8">
             <div className="voprosi--top" data-toggle="collapse" data-target="#voprosi" onClick={this.toggleCollapse("voprosi8")}>
-              <h2> Что если я не правильно указал банковские реквизиты?</h2>
+              <h2> Что если я неправильно указал банковские реквизиты?</h2>
               <a className="more" type="button" />
             </div>
             <Collapse isOpen={this.state.collapse === 'voprosi8'} id="voprosi8">
@@ -281,8 +279,7 @@ class Questionans extends React.Component {
             <Collapse isOpen={this.state.collapse === 'voprosi10'} id="voprosi10">
               <div className="voprosi--otvet">
                 <p className="otvet mb-5">
-                Отменить заявку вы сможете в случае если деньги не отправлены на ваш счет,
-                по дополнительной информации позвонить по указанному номеру: 8 727 2501-500.
+                  Отменить заявку вы сможете в случае, если деньги не отправлены на ваш счет, по дополнительной информации позвонить по указанному номеру: 8 727 2501-500 (перед союзом «если» ставится запятая).
                 </p>
                 <div className="polezen">
                   <h3 className="mb-3">Был ли полезен вам ответ?</h3>
@@ -298,6 +295,7 @@ class Questionans extends React.Component {
               </div>
             </Collapse>
           </div>
+
           <div className="voprosi voprosi11">
             <div className="voprosi--top" data-toggle="collapse" data-target="#voprosi" onClick={this.toggleCollapse("voprosi11")}>
               <h2>Как я могу погасить микрокредит?</h2>
@@ -350,21 +348,15 @@ class Questionans extends React.Component {
 
           <div className="voprosi voprosi13">
             <div className="voprosi--top" data-toggle="collapse" data-target="#voprosi" onClick={this.toggleCollapse("voprosi13")}>
-              <h2>Не могу закрыть займ</h2>
+              <h2>Не могу закрыть заем/ Если я не успеваю погасить заем в назначенный срок?</h2>
               <a className="more" type="button" />
             </div>
             <Collapse isOpen={this.state.collapse === 'voprosi13'} id="voprosi13">
               <div className="voprosi--otvet">
                 <p className="otvet mb-5">
-                  ТОО «МФО «I-CREDIT.KZ» (далее – МФО) идя навстречу заемщикам, которые испытывают сложности с погашением микрокредитов в результате ухудшения финансового состояния, сообщает о предоставлении возможности урегулирования просроченной задолженности по договору о предоставлении микрокредита.
-                  Для урегулирования задолженности необходимо подать заявление, составленное в произвольной форме, содержащее сведения о причинах возникновения просрочки исполнения обязательства по договору с приложением документов, подтверждающих ухудшение финансового состояния.
+                  *В этом случае будут применены штрафные санкции. За каждый день просрочки будет начисляться пеня в размере 0, 5% в день. 
                   <br/>
-                  Документы необходимо отсканировать и отправить на электронный адрес: info@i-credit.kz
-                  <br/>
-                  Каждое заявление будет рассмотрено в индивидуальном порядке  в течение 15 дней.
-                  По результатам рассмотрения заявки на е-mail заемщикa будет выслано уведомление с решением МФО. 
-                  <br/>
-                  Дополнительную информацию можно получить по телефонам: 8 (727) 2501-500, 7 700 750 15 00 либо в отделе взыскания 7 778 870 10 29.
+                  Во избежание штрафных санкций, рекомендуем воспользоваться услугой продления займа. Используя отсрочку займа, Вы сохраняете репутацию добросовестного заемщика, не портя свою кредитную историю.
                 </p>
                 <div className="polezen">
                   <h3 className="mb-3">Был ли полезен вам ответ?</h3>
@@ -380,6 +372,134 @@ class Questionans extends React.Component {
               </div>
             </Collapse>
           </div>
+
+          <div className="voprosi voprosi14">
+            <div className="voprosi--top" data-toggle="collapse" data-target="#voprosi" onClick={this.toggleCollapse("voprosi14")}>
+              <h2>Что такое IBAN?</h2>
+              <a className="more" type="button" />
+            </div>
+            <Collapse isOpen={this.state.collapse === 'voprosi14'} id="voprosi14">
+              <div className="voprosi--otvet">
+                <p className="otvet mb-5">
+                  *IBAN – это 20-тизначный буквенно-цифровой код, обозначающий номер банковского счета.
+                  <br/>
+                  Узнать его Вы можете, обратившись в Ваш банк.
+                </p>
+                <div className="polezen">
+                  <h3 className="mb-3">Был ли полезен вам ответ?</h3>
+                  <div className="polezen--buttons">
+                    <a type="button">
+                      <h5>Да</h5>
+                    </a>
+                    <a type="button">
+                      <h5>Нет</h5>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </Collapse>
+          </div>
+
+          <div className="voprosi voprosi15">
+            <div className="voprosi--top" data-toggle="collapse" data-target="#voprosi" onClick={this.toggleCollapse("voprosi15")}>
+              <h2>Как я могу изменить данные в личном кабинете?</h2>
+              <a className="more" type="button" />
+            </div>
+            <Collapse isOpen={this.state.collapse === 'voprosi15'} id="voprosi15">
+              <div className="voprosi--otvet">
+                <p className="otvet mb-5">
+                  * Чтобы изменить данные в Вашем личном кабинете, Вам необходимо отправить корректные данные на нашу электронную почту info@i-credit.kz и прикрепить скан  уд.личности или фото версию с двух сторон. После того, как мы получим Ваш запрос, технический отдел изменит Ваши данные.
+                </p>
+                <div className="polezen">
+                  <h3 className="mb-3">Был ли полезен вам ответ?</h3>
+                  <div className="polezen--buttons">
+                    <a type="button">
+                      <h5>Да</h5>
+                    </a>
+                    <a type="button">
+                      <h5>Нет</h5>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </Collapse>
+          </div>
+
+          <div className="voprosi voprosi16">
+            <div className="voprosi--top" data-toggle="collapse" data-target="#voprosi" onClick={this.toggleCollapse("voprosi16")}>
+              <h2>Почему на мой счет не поступили деньги?</h2>
+              <a className="more" type="button" />
+            </div>
+            <Collapse isOpen={this.state.collapse === 'voprosi16'} id="voprosi16">
+              <div className="voprosi--otvet">
+                <p className="otvet mb-5">
+                  * Перевод денежных средств осуществляется в течении 10 минут, но в зависимости от работы Вашего банка время поступления денег может занять до 5 банковских дней.
+                </p>
+                <div className="polezen">
+                  <h3 className="mb-3">Был ли полезен вам ответ?</h3>
+                  <div className="polezen--buttons">
+                    <a type="button">
+                      <h5>Да</h5>
+                    </a>
+                    <a type="button">
+                      <h5>Нет</h5>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </Collapse>
+          </div>
+
+          <div className="voprosi voprosi17">
+            <div className="voprosi--top" data-toggle="collapse" data-target="#voprosi" onClick={this.toggleCollapse("voprosi17")}>
+              <h2>Могу ли я получить отсрочку по оплате микрокредита?</h2>
+              <a className="more" type="button" />
+            </div>
+            <Collapse isOpen={this.state.collapse === 'voprosi17'} id="voprosi17">
+              <div className="voprosi--otvet">
+                <p className="otvet mb-5">
+                  * Да, у Вас есть возможность продления микрокредита на тот же срок.
+                </p>
+                <div className="polezen">
+                  <h3 className="mb-3">Был ли полезен вам ответ?</h3>
+                  <div className="polezen--buttons">
+                    <a type="button">
+                      <h5>Да</h5>
+                    </a>
+                    <a type="button">
+                      <h5>Нет</h5>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </Collapse>
+          </div>
+
+          <div className="voprosi voprosi18">
+            <div className="voprosi--top" data-toggle="collapse" data-target="#voprosi" onClick={this.toggleCollapse("voprosi18")}>
+              <h2>Что будет за несвоевременную оплату микрокредита?</h2>
+              <a className="more" type="button" />
+            </div>
+            <Collapse isOpen={this.state.collapse === 'voprosi18'} id="voprosi18">
+              <div className="voprosi--otvet">
+                <p className="otvet mb-5">
+                  * За несвоевременную оплату микрокредита (просрочку оплаты) предусмотрено ежедневное начисление пени.
+                </p>
+                <div className="polezen">
+                  <h3 className="mb-3">Был ли полезен вам ответ?</h3>
+                  <div className="polezen--buttons">
+                    <a type="button">
+                      <h5>Да</h5>
+                    </a>
+                    <a type="button">
+                      <h5>Нет</h5>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </Collapse>
+          </div>
+
         </div></section>
         </div>
     );}

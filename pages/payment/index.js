@@ -141,6 +141,15 @@ class Payment extends React.Component {
           </section>
         </div>
       </section>
+      {/* <?xml version="1.0" encoding="utf-8"?> */}
+      <request>
+          <pg_status>ok</pg_status>
+          <pg_payment_id>4567788</pg_payment_id>
+          <pg_redirect_url>https://api.paybox.money/pay.html?customer=498333170d6a895148c57c53ffb18287</pg_redirect_url>
+          <pg_redirect_url_type>need data</pg_redirect_url_type>
+          <pg_salt>bdwLavL9lg6It91b</pg_salt>
+          <pg_sig>709633e91387c56ac6fb7cb33d1e07d8</pg_sig>
+      </request>
         </div>
     );}
 }

@@ -206,7 +206,9 @@ class Aggrement extends React.Component {
 
     return (
       <div className="container otherPages">
-        <Head><title>Соглашение</title></Head>
+        <Head>
+          <title>Соглашение</title>
+        </Head>
         {this.state.loading ? (<div className='modelLoader'></div>) : (<div className='modelLoader loaded'> </div>)}
     <div className="row justify-content-center">
         <div className="col-md-12">
