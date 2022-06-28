@@ -2,7 +2,6 @@ import React from "react";
 import { connect } from "react-redux";
 import {
   confirmSMS,
-  postRegistration,
   emptyMessage,
   takeDocumentsBiometry,
   getSMSFromBMG,
@@ -32,7 +31,6 @@ const mapDispatchToProps = (dispatch) => ({
   confirmSMS: (registration) => dispatch(confirmSMS(registration)),
   takeDocumentsBiometry: (registration) =>
     dispatch(takeDocumentsBiometry(registration)),
-  postRegistration: (registration) => dispatch(postRegistration(registration)),
   emptyMessage: () => {
     dispatch(emptyMessage);
   },

@@ -60,7 +60,7 @@ export const getInfoFromBMG = (code) => (dispatch) => {
   dispatch(emptyMessage());
   dispatch(isLoading(true));
 
-  return fetch(`http://185.233.3.138/api/takeCode?code=${code}`, {
+  return fetch(`http://185.233.3.138/api/test/takeCode?code=${code}`, {
     method: "GET",
     headers: {
       "Access-Control-Allow-Origin": "*",
@@ -95,7 +95,7 @@ export const getSMSFromBMG = (user) => (dispatch) => {
     iin: user.iin,
   };
 
-  return fetch(`https://api.i-credit.kz/api/takeCode`, {
+  return fetch(`https://api.i-credit.kz/api/test/takeCode`, {
     method: "POST",
     body: JSON.stringify(payload),
     headers: {
@@ -157,7 +157,7 @@ export const getSMS = (user) => (dispatch) => {
     phone: user.phone,
   };
 
-  return fetch(`https://api.i-credit.kz/api/sendSMS`, {
+  return fetch(`https://api.i-credit.kz/api/test/sendSMS`, {
     method: "POST",
     body: JSON.stringify(payload),
     headers: {
@@ -191,56 +191,6 @@ export const getSMS = (user) => (dispatch) => {
       dispatch(
         errorMessage(
           "Ошибка получения кода с egov. Пожалуйста, заполните данные вручную."
-        )
-      );
-      setTimeout(() => {
-        checkIIN(e.errors);
-      }, 3000);
-    })
-    .then(() => dispatch(isLoading(false)));
-};
-
-export const postRegistration = (registration) => (dispatch) => {
-  dispatch(emptyMessage());
-  dispatch(isLoading(true));
-  registration.phone = replaceDate(registration.phone);
-  registration.last_name = registration.last_name || "Нет";
-
-  return fetch(`https://api.money-men.kz/api/registration_step_one`, {
-    method: "POST",
-    body: JSON.stringify(registration),
-    headers: {
-      "Access-Control-Allow-Origin": "*",
-      "Content-Type": "application/json",
-      Accept: "application/json",
-    },
-    credentials: "same-origin",
-  })
-    .then((response) => {
-      if (response.ok) {
-        return response;
-      }
-      throw response;
-    })
-    .then((response) => response.json())
-    .then((response) => dispatch(addRegistration(registration)))
-    .then((response) => dispatch(isLoading(false)))
-    .then((response) => dispatch(stepRegistration(1)))
-    .then((response) => {
-      localStorage.setItem("step", "1");
-    })
-    .then((response) => window.scrollTo(0, 0))
-    .then((response) => dispatch(successMessage("")))
-    .catch((e) => {
-      dispatch(
-        errorMessage(
-          e.errors.iin
-            ? "ИИН уже зарегистрирован. Вы будете перенаправлены на страницу авторизация! "
-            : "" || e.errors.password
-            ? "Пароли не совпадают"
-            : "" || e.errors.phone
-            ? "Польвозатель с таким телефон номером уже зарегистрирован"
-            : e.errors.email || "" || e.errors
         )
       );
       setTimeout(() => {
@@ -284,7 +234,7 @@ export const confirmSMS = (registration) => (dispatch) => {
     endGiven: registration.end_given,
   };
 
-  return fetch(`https://api.i-credit.kz/api/confirmSMS`, {
+  return fetch(`https://api.i-credit.kz/api/test/confirmSMS`, {
     method: "POST",
     body: JSON.stringify(payload),
     headers: {
@@ -449,8 +399,8 @@ export const postRegistrationSecond = (registration) => (dispatch) => {
     token: localStorage.getItem("token"),
     workPlace: registration.work_place,
     sphere: registration.sphere,
-    lastSix: registration.lastSix === '0' ? '1000' : registration.lastSix,
-    deposit: registration.deposit === '0' ? '1000' : registration.deposit,
+    lastSix: registration.lastSix === "0" ? "1000" : registration.lastSix,
+    deposit: registration.deposit === "0" ? "1000" : registration.deposit,
     position: registration.position,
     fioContact: `${registration.relative_name} ${registration.relative_last_name}`,
     phoneContact: registration.relative_phone_number,
@@ -458,7 +408,7 @@ export const postRegistrationSecond = (registration) => (dispatch) => {
     source: registration.source,
   };
 
-  return fetch(`https://api.i-credit.kz/api/secondStep`, {
+  return fetch(`https://api.i-credit.kz/api/test/secondStep`, {
     method: "POST",
     body: JSON.stringify(payload),
     headers: {
@@ -521,7 +471,7 @@ export const postRegistrationThird = (registration) => (dispatch) => {
     web_id: registration.webID,
   };
 
-  return fetch(`https://api.i-credit.kz/api/thirdStep`, {
+  return fetch(`https://api.i-credit.kz/api/test/thirdStep`, {
     method: "POST",
     body: JSON.stringify(payload),
     headers: {

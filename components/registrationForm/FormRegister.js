@@ -3,7 +3,6 @@ import { connect } from "react-redux";
 import {
   changingMoney,
   changingDay,
-  postRegistration,
   getSMSFromBMG,
   getInfoFromBMG,
   getSMS,
@@ -60,7 +59,6 @@ const mapDispatchToProps = (dispatch) => ({
   changingDay: (day) => {
     dispatch(changingDay(day));
   },
-  postRegistration: (registration) => dispatch(postRegistration(registration)),
   getSMSFromBMG: (registration) => dispatch(getSMSFromBMG(registration)),
   getSMS: (registration) => dispatch(getSMS(registration)),
   resetRegistration: () => {

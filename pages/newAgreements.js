@@ -268,8 +268,8 @@ class Aggrement extends React.Component {
   async uploadImage(file) {
     const formData = new FormData();
 
-    formData.append("iin", this.state.leadID);
-    formData.append("leadID", this.state.iin);
+    formData.append("iin", this.state.iin);
+    formData.append("leadID", this.state.leadID);
     formData.append("photo", file);
     formData.append("fileName", "image.png");
     formData.append("extension", "png");
