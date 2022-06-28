@@ -40,7 +40,6 @@ class Aggrement extends React.Component {
     this.state = {
       token: null,
       isBMG: false,
-      isVerified: false,
       leadID: null,
       loading: false,
       docs: [],
@@ -189,18 +188,16 @@ class Aggrement extends React.Component {
       .then((response) => {
         if (response.data?.similarity > 82) {
           swal(
-            "Верификация пройдена",
-            "Можете подписать документы",
+            "Документы подписаны.",
+            "Вы будете перенаправлены на главную страницу.",
             "success"
           ).then(() => {
-            this.setState({
-              isVerified: true,
-            });
+            Router.push("/");
           });
         } else {
           swal(
-            "Верификация не пройдена",
-            "Фото не прошло проверку, попробуйте еще раз",
+            "Верификация не пройдена.",
+            "Фото не прошло проверку, Вы будете перенаправлены на главную страницу.",
             "error"
           ).then(() => {
             Router.push("/");
@@ -284,13 +281,11 @@ class Aggrement extends React.Component {
       .then((response) => {
         if (response.data?.similarity > 82) {
           swal(
-            "Верификация пройдена",
-            "Можете подписать документы",
+            "Документы подписаны",
+            "Вы будете перенаправлены на главную страницу",
             "success"
           ).then(() => {
-            this.setState({
-              isVerified: true,
-            });
+            Router.push("/");
           });
         } else {
           swal(
@@ -374,20 +369,11 @@ class Aggrement extends React.Component {
           {/*<ModalHeader toggle={this.toggleModal}>Верификация</ModalHeader>*/}
           <ModalHeader>Верификация</ModalHeader>
           <ModalBody>
-            {this.state.isVerified ? (
-              <div className="verification-success">
-                <p>Вы прошли верификацию. Можете подписать документы.</p>
-                <button onClick={this.signDocuments}>
-                  Подписать документы
-                </button>
-              </div>
-            ) : (
-              <CameraFeed
-                sendFile={this.uploadImage}
-                sendFileManually={this.uploadImageManually}
-                isBMG={this.state.isBMG}
-              />
-            )}
+            <CameraFeed
+              sendFile={this.uploadImage}
+              sendFileManually={this.uploadImageManually}
+              isBMG={this.state.isBMG}
+            />
           </ModalBody>
         </Modal>
 
