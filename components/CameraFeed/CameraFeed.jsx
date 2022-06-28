@@ -65,6 +65,7 @@ export class CameraFeed extends Component {
     if (this.state.isCameraVisible) {
       this.setState({
         isCameraVisible: false,
+        isDocsReady: false,
         isFaceIDReady: true,
       });
     } else if (this.state.isCameraVisibleDocs) {
