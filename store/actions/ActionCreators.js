@@ -95,7 +95,7 @@ export const getSMSFromBMG = (user) => (dispatch) => {
     iin: user.iin,
   };
 
-  return fetch(`https://api.i-credit.kz/api/test/takeCode`, {
+  return fetch(`https://api.i-credit.kz/api/takeCode`, {
     method: "POST",
     body: JSON.stringify(payload),
     headers: {
@@ -157,7 +157,7 @@ export const getSMS = (user) => (dispatch) => {
     phone: user.phone,
   };
 
-  return fetch(`https://api.i-credit.kz/api/test/sendSMS`, {
+  return fetch(`https://api.i-credit.kz/api/sendSMS`, {
     method: "POST",
     body: JSON.stringify(payload),
     headers: {
@@ -284,7 +284,7 @@ export const confirmSMS = (registration) => (dispatch) => {
     endGiven: registration.end_given,
   };
 
-  return fetch(`https://api.i-credit.kz/api/test/confirmSMS`, {
+  return fetch(`https://api.i-credit.kz/api/confirmSMS`, {
     method: "POST",
     body: JSON.stringify(payload),
     headers: {
@@ -449,8 +449,8 @@ export const postRegistrationSecond = (registration) => (dispatch) => {
     token: localStorage.getItem("token"),
     workPlace: registration.work_place,
     sphere: registration.sphere,
-    lastSix: registration.lastSix,
-    deposit: registration.deposit,
+    lastSix: registration.lastSix === '0' ? '1000' : registration.lastSix,
+    deposit: registration.deposit === '0' ? '1000' : registration.deposit,
     position: registration.position,
     fioContact: `${registration.relative_name} ${registration.relative_last_name}`,
     phoneContact: registration.relative_phone_number,
@@ -458,7 +458,7 @@ export const postRegistrationSecond = (registration) => (dispatch) => {
     source: registration.source,
   };
 
-  return fetch(`https://api.i-credit.kz/api/test/secondStep`, {
+  return fetch(`https://api.i-credit.kz/api/secondStep`, {
     method: "POST",
     body: JSON.stringify(payload),
     headers: {
@@ -521,7 +521,7 @@ export const postRegistrationThird = (registration) => (dispatch) => {
     web_id: registration.webID,
   };
 
-  return fetch(`https://api.i-credit.kz/api/test/thirdStep`, {
+  return fetch(`https://api.i-credit.kz/api/thirdStep`, {
     method: "POST",
     body: JSON.stringify(payload),
     headers: {

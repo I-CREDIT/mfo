@@ -120,7 +120,7 @@ class FormRegister extends React.Component {
     this.state = {
       isModalOpen: false,
       checked: true,
-      isOnBMG: true,
+      isOnBMG: false,
       phoneError: "",
       firstreg: [
         {
