@@ -3,6 +3,7 @@ import Router from "next/router";
 import cookie from "js-cookie";
 import { newCookie } from "../../defaults/utmSource";
 import axios from "axios";
+import swal from "sweetalert";
 export const changingMoney = (money) => ({
   type: ActionTypes.MONEY_CHANGE,
   payload: money,
@@ -392,6 +393,9 @@ export const takeDocumentsBiometry = (registration) => (dispatch) => {
 
         const payload = {
           ...registration,
+          name: response.name || registration.name,
+          surname: response.surname || registration.middlename,
+          fatherName: response.fatherName || registration.last_name,
           doc_number: response.docNumber,
           doc_issue: response.docGiven,
           start_given: start_given_formatted,
@@ -540,11 +544,36 @@ export const postRegistrationThird = (registration) => (dispatch) => {
         dispatch(successMessage("Успешно"));
         dispatch(isLoading(false));
         newCookie();
-        setTimeout(() => {
-          dispatch(stepRegistration(0));
-          Router.push(`/thanks`);
-          // Router.push(`/newAggrements`);
-        }, 2000);
+
+        axios
+          .get(`https://api.i-credit.kz/api/getScore`, {
+            params: {
+              token: localStorage.getItem("token"),
+            },
+            headers: {
+              "Access-Control-Allow-Origin": "*",
+              "Content-Type": "application/json",
+              Accept: "application/json",
+              Authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
+          })
+          .then((response) => {
+            if (response.data?.success && response.data?.decision) {
+              swal("Успешно!", `Заявка отправлена`, "success").then(() => {
+                Router.push(
+                  `/newAgreements?token=${localStorage.getItem("token")}&bmg=${
+                    response.data?.bmg ? 1 : 0
+                  }`
+                );
+                cookie.remove("continue2");
+              });
+            } else {
+              setTimeout(() => {
+                dispatch(stepRegistration(0));
+                Router.push(`/thanks`);
+              }, 2000);
+            }
+          });
       } else {
         dispatch(isLoading(false));
         dispatch(errorMessage(`Ошибка отправки заявки. ${response.message}`));

@@ -259,7 +259,7 @@ const ContinueStep3 = ({
         cardName: values.name_of_owner,
         source: other.source,
         clickID: other.cpa_clickid,
-        web_id: other.webID
+        web_id: other.webID,
       };
 
       setBtnLoading(true);
@@ -280,10 +280,31 @@ const ContinueStep3 = ({
         .then((response) => {
           setBtnLoading(false);
           if (response.data.success) {
-            swal("Успешно!", `Заявка отправлена`, "success").then(() => {
-              Router.push("/cabinet/loans");
-              cookie.remove("continue2");
-            });
+            axios
+              .get(`https://api.i-credit.kz/api/getScore`, {
+                params: {
+                  token: cookie.get("token"),
+                },
+                headers: {
+                  "Access-Control-Allow-Origin": "*",
+                  "Content-Type": "application/json",
+                  Accept: "application/json",
+                  Authorization: `Bearer ${cookie.get("token")}`,
+                },
+              })
+              .then((response) => {
+                console.log(response);
+                if (response.success) {
+                  swal("Успешно!", `Заявка отправлена`, "success").then(() => {
+                    // Router.push("/cabinet/loans");
+                    // cookie.remove("continue2");
+                  });
+                }
+                swal("Успешно!", `Заявка отправлена`, "success").then(() => {
+                  // Router.push("/cabinet/loans");
+                  // cookie.remove("continue2");
+                });
+              });
           } else {
             swal(
               "Oops!",

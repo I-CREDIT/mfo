@@ -3702,6 +3702,24 @@ nav[role="navigation"] .users a:before {
   height: 100%;
 }
 
+.iin {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+
+.iin-frame {
+  width: 95%;
+  height: 70%;
+  border: 5px solid red;
+  border-radius: 10px;
+}
+
 .face-id .face-id__frame {
   position: relative;
   display: flex;
@@ -3757,6 +3775,23 @@ nav[role="navigation"] .users a:before {
 @keyframes moving-up-down {
   0%, 100% { top: 0; }
   50% { top: 100%; }
+}
+
+.verification-success {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.verification-success button {
+  width: fit-content;
+  border: none;
+  background-color: #ef2221;
+  color: white;
+  text-align: center;
+  padding: 15px;
+  border-radius: 15px;
+  margin-top: 10px;
 }
 
 .c-camera-feed button {
