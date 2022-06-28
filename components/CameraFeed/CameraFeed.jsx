@@ -11,6 +11,7 @@ export class CameraFeed extends Component {
       isVerificationSecond: false,
       isVerificationThird: false,
       isPreload: true,
+      isAfterload: false,
       isDocsReady: false,
       isFaceIDReady: false,
       isDocAccepted: false,
@@ -174,6 +175,10 @@ export class CameraFeed extends Component {
   sendPhoto = () => {
     // Егов регистрация
     if (+this.props.isBMG) {
+      this.setState({
+        isAfterload: true,
+      });
+
       const { sendFile } = this.props;
       this.canvas.toBlob(sendFile);
     }
@@ -188,6 +193,9 @@ export class CameraFeed extends Component {
         });
 
         setTimeout(() => {
+          this.setState({
+            isAfterload: true,
+          });
           sendFileManually(this.state.doc, this.state.selfie);
         }, 1000);
       }
@@ -209,6 +217,11 @@ export class CameraFeed extends Component {
   render() {
     return (
       <div className="c-camera-feed">
+        {/*Loader*/}
+        <div
+          className={`${this.state.isAfterload ? "modelLoader" : "d-none"}`}
+        />
+
         {/* Перед открытием биометрии */}
         <div
           className={`c-camera-feed__preload ${

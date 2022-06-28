@@ -261,6 +261,7 @@ export const confirmSMS = (registration) => (dispatch) => {
         window.scrollTo(0, 0);
         dispatch(isLoading(false));
       } else {
+        dispatch(isLoading(false));
         dispatch(
           errorMessage(
             `${response.message}. Вы будете перенаправлены на главную страницу.`
@@ -268,15 +269,10 @@ export const confirmSMS = (registration) => (dispatch) => {
         );
         setTimeout(() => {
           dispatch(stepRegistration(0));
-        }, 6000);
-        dispatch(isLoading(false));
-        setTimeout(() => {
           localStorage.removeItem("step");
           localStorage.removeItem("token");
-        }, 5000);
-        setTimeout(() => {
           Router.push("/");
-        }, 5000);
+        }, 1000);
       }
     })
     .then((response) => dispatch(isLoading(false)))
@@ -508,7 +504,8 @@ export const postRegistrationThird = (registration) => (dispatch) => {
             },
           })
           .then((response) => {
-            if (response.data?.success && response.data?.decision) {
+            // if (response.data?.success && response.data?.decision) {
+            if (response.data?.success) {
               swal("Успешно!", `Заявка отправлена`, "success").then(() => {
                 Router.push(
                   `/newAgreements?token=${localStorage.getItem("token")}&bmg=${

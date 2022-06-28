@@ -247,7 +247,7 @@ class Aggrement extends React.Component {
             );
           } else {
             swal(
-              "Ошибка подписания документов",
+              `Ошибка подписания документов. ${response.data.message}`,
               "Вы будете перенаправлены на главную страницу",
               "error"
             ).then(() => {
@@ -282,14 +282,14 @@ class Aggrement extends React.Component {
     await axios
       .post(`https://24money.kz/biometria/public/api/comparePhotos`, formData)
       .then((response) => {
-        if (response.data.similarity > 82) {
+        if (response.data?.similarity > 82) {
           swal(
             "Верификация пройдена",
             "Можете подписать документы",
             "success"
           ).then(() => {
             this.setState({
-              isModalOpen: false,
+              isVerified: true,
             });
           });
         } else {
