@@ -56,35 +56,6 @@ export const isLoading = (loader) => ({
   payload: loader,
 });
 
-export const getInfoFromBMG = (code) => (dispatch) => {
-  dispatch(emptyMessage());
-  dispatch(isLoading(true));
-
-  return fetch(`http://185.233.3.138/api/test/takeCode?code=${code}`, {
-    method: "GET",
-    headers: {
-      "Access-Control-Allow-Origin": "*",
-      "Content-Type": "application/json",
-      Accept: "application/json",
-    },
-    credentials: "same-origin",
-  })
-    .then((response) => {
-      if (response.ok) {
-        return response;
-      }
-      throw errorMessage("777");
-    })
-    .catch((error) =>
-      error.json().then((e) => {
-        dispatch(errorMessage(e.message));
-      })
-    )
-    .finally(() => {
-      dispatch(isLoading(false));
-    });
-};
-
 export const getSMSFromBMG = (user) => (dispatch) => {
   dispatch(emptyMessage());
   dispatch(isLoading(true));
@@ -128,8 +99,8 @@ export const getSMSFromBMG = (user) => (dispatch) => {
           )
         );
         setTimeout(() => {
-          Router.push("/");
-        }, 5000);
+          window.location.reload();
+        }, 1000);
       }
     })
     .catch((e) => {

@@ -4,7 +4,6 @@ import {
   changingMoney,
   changingDay,
   getSMSFromBMG,
-  getInfoFromBMG,
   getSMS,
   errorMessage,
 } from "../../store/actions/ActionCreators";
