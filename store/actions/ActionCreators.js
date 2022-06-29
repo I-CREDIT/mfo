@@ -95,12 +95,12 @@ export const getSMSFromBMG = (user) => (dispatch) => {
         localStorage.setItem("isOnBMG", "false");
         dispatch(
           errorMessage(
-            "Такой ИИН не зарегистрирован в БМГ! Пожалуйста, заполните данные вручную."
+            `${response.message}. Вы будете перенаправлены на страницу авторизации.`
           )
         );
         setTimeout(() => {
-          window.location.reload();
-        }, 1000);
+          Router.push("/login");
+        }, 5000);
       }
     })
     .catch((e) => {
@@ -112,8 +112,8 @@ export const getSMSFromBMG = (user) => (dispatch) => {
         )
       );
       setTimeout(() => {
-        Router.push("/");
-      }, 5000);
+        window.location.reload();
+      }, 1000);
     })
     .then(() => dispatch(isLoading(false)));
 };
