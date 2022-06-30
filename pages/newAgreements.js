@@ -168,12 +168,12 @@ class Aggrement extends React.Component {
     formData.append("leadID", this.state.leadID);
 
     formData.append("photo", doc);
-    formData.append("fileName", "image.png");
+    formData.append("fileName", "doc.png");
     formData.append("extension", "png");
 
     formData.append("photo2", selfie);
-    formData.append("fileName", "image.png");
-    formData.append("extension", "png");
+    formData.append("fileName2", "selfie.png");
+    formData.append("extension2", "png");
 
     this.setState({
       loading: true,
