@@ -303,10 +303,26 @@ export const takeDocumentsBiometry = (registration) => (dispatch) => {
         localStorage.setItem("token", response.token);
 
         let start_given_date = new Date(response.startGiven);
-        let start_given_formatted = `${start_given_date.getDate()}.${start_given_date.getMonth()}.${start_given_date.getFullYear()}`;
+        const day_start =
+          start_given_date.getDate().toString().length === 1
+            ? "0" + start_given_date.getDate().toString()
+            : start_given_date.getDate();
+        const month_start =
+          start_given_date.getMonth().toString().length === 1
+            ? "0" + start_given_date.getMonth().toString()
+            : start_given_date.getMonth();
+        let start_given_formatted = `${day_start}.${month_start}.${start_given_date.getFullYear()}`;
 
         let end_given_date = new Date(response.endGiven);
-        let end_given_formatted = `${end_given_date.getDate()}.${end_given_date.getMonth()}.${end_given_date.getFullYear()}`;
+        const day_end =
+          end_given_date.getDate().toString().length === 1
+            ? "0" + start_given_date.getDate().toString()
+            : start_given_date.getDate();
+        const month_end =
+          end_given_date.getMonth().toString().length === 1
+            ? "0" + start_given_date.getMonth().toString()
+            : start_given_date.getMonth();
+        let end_given_formatted = `${day_end}.${month_end}.${end_given_date.getFullYear()}`;
 
         const payload = {
           ...registration,
