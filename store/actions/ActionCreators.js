@@ -327,8 +327,8 @@ export const takeDocumentsBiometry = (registration) => (dispatch) => {
         const payload = {
           ...registration,
           name: response.name || registration.name,
-          surname: response.surname || registration.middlename,
-          fatherName: response.fatherName || registration.last_name,
+          surname: response.middleName || registration.middlename,
+          fatherName: response.lastName || registration.last_name,
           doc_number: response.docNumber,
           doc_issue: response.docGiven,
           start_given: start_given_formatted,
