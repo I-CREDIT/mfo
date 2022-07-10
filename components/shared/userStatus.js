@@ -15,6 +15,7 @@ import cookie from "js-cookie";
 
 // Перевод для классового компонента
 import withUseTranslation from "../../public/js/hocs/useTranslation";
+import { stepRegistration } from "../../store/actions/ActionCreators";
 
 // export const clientData = {
 //   name: props.userReducer.user.UF_5,
@@ -207,6 +208,36 @@ class Status extends React.Component {
     // })
   }
 
+  handleVerify() {
+    axios
+      .get(`https://api.i-credit.kz/api/getScore`, {
+        params: {
+          token: cookie.get("token"),
+        },
+        headers: {
+          "Access-Control-Allow-Origin": "*",
+          "Content-Type": "application/json",
+          Accept: "application/json",
+          Authorization: `Bearer ${cookie.get("token")}`,
+        },
+      })
+      .then((response) => {
+        if (response.data?.success && response.data?.decision) {
+          Router.push(
+            `/newAgreements?token=${cookie.get("token")}&bmg=${
+              response.data?.bmg ? 1 : 0
+            }`
+          );
+        } else {
+          swal(
+            "Ошибка!",
+            response.data?.message || "Что-то пошло не так.",
+            "error"
+          );
+        }
+      });
+  }
+
   handleSubmitProlongation() {
     let values = {
       iin: this.props.userReducer.user.UF_4,
@@ -311,8 +342,9 @@ class Status extends React.Component {
   render() {
     // Достаем функцию-переводчик
     const { t, i18n } = this.props.useTranslationValue;
-
-    switch (this.props.userStatus.userStatus.stage) {
+    const stageeee = 13;
+    // switch (this.props.userStatus.userStatus.stage) {
+    switch (stageeee) {
       case 1:
         return (
           <div className="mt-5">
@@ -1044,12 +1076,6 @@ class Status extends React.Component {
                 </tbody>
               </table>
               <div className="buttonForm">
-                {/* {this.state.btnLoading === true ?
-                  <Spinner className="loading" size={200} spinnerColor={"#ef2221"} spinnerWidth={2} visible={true} /> :
-                  <button onClick={() => this.handleSubmitProlongation()} className=" oplataform--button" type="submit">Продлить {(+this.props.userStatus.userStatus.prolongation).toLocaleString("ru-RU")} тенге</button>}
-                {this.state.btnLoading === true ?
-                  <Spinner className="loading" size={200} spinnerColor={"#ef2221"} spinnerWidth={2} visible={true} /> :
-                  <button onClick={() => this.handleSubmit()} className=" oplataform--button" type="submit">Погасить {(+this.props.userStatus.userStatus.todayAmount).toLocaleString("ru-RU")} тенге</button>} */}
                 {+this.props.userStatus.userStatus.todayAmount >
                 +this.props.userStatus.userStatus.mainAmount * 2.001 ? (
                   this.state.btnLoading === true ? (
@@ -1094,6 +1120,7 @@ class Status extends React.Component {
                     тенге
                   </button>
                 )}
+
                 {+this.props.userStatus.userStatus.todayAmount >
                 +this.props.userStatus.userStatus.mainAmount * 2.001 ? (
                   this.state.btnLoading === true ? (
@@ -2008,6 +2035,28 @@ class Status extends React.Component {
                 </h3>
               )}
             </div>
+          </div>
+        );
+      case 13:
+        return (
+          <div className="buttonForm">
+            {this.state.btnLoading === true ? (
+              <Spinner
+                className="loading"
+                size={200}
+                spinnerColor={"#ef2221"}
+                spinnerWidth={2}
+                visible={true}
+              />
+            ) : (
+              <button
+                onClick={() => this.handleVerify()}
+                type="submit"
+                className=" oplataform--button"
+              >
+                Подписать документы
+              </button>
+            )}
           </div>
         );
       default:

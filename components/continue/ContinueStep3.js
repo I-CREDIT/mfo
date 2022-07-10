@@ -296,13 +296,13 @@ const ContinueStep3 = ({
                 console.log(response);
                 if (response.success) {
                   swal("Успешно!", `Заявка отправлена`, "success").then(() => {
-                    // Router.push("/cabinet/loans");
-                    // cookie.remove("continue2");
+                    Router.push("/cabinet/loans");
+                    cookie.remove("continue2");
                   });
                 }
                 swal("Успешно!", `Заявка отправлена`, "success").then(() => {
-                  // Router.push("/cabinet/loans");
-                  // cookie.remove("continue2");
+                  Router.push("/cabinet/loans");
+                  cookie.remove("continue2");
                 });
               });
           } else {

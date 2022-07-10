@@ -491,8 +491,7 @@ export const postRegistrationThird = (registration) => (dispatch) => {
             },
           })
           .then((response) => {
-            // if (response.data?.success && response.data?.decision) {
-            if (response.data?.success) {
+            if (response.data?.success && response.data?.decision) {
               swal("Успешно!", `Заявка отправлена`, "success").then(() => {
                 Router.push(
                   `/newAgreements?token=${localStorage.getItem("token")}&bmg=${
