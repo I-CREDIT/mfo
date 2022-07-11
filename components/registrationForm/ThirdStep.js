@@ -92,6 +92,7 @@ class FormRegister extends React.Component {
         duration: 600,
       });
     }, 100);
+    localStorage.removeItem('step')
   }
   handlePhone = (e) => {
     this.setState({ phone: e.target.value });

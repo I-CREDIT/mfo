@@ -229,8 +229,8 @@ export class CameraFeed extends Component {
             this.state.isPreload ? "" : "d-none"
           }`}
         >
-          <p>Вам необходимо пройти верификацию. Подготовьте камеру.</p>
-          <button onClick={this.startVerification}>Начать верификацию</button>
+          <p>Подтверждение личности. Вам необходимо подтвердить личность с помощью фото. Подготовьте камеру.</p>
+          <button onClick={this.startVerification}>Начать подтверждение</button>
         </div>
 
         {/* Основной компонент камеры */}
