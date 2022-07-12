@@ -198,6 +198,8 @@ export const confirmSMS = (registration) => (dispatch) => {
     password: registration.password,
     email: registration.email,
     source: registration.source,
+    utm_content: registration.cpa_clickid,
+    utm_campaign: registration.webID,
     iin: registration.iin,
     docNumber: registration.doc_number,
     docIssue: registration.doc_issue,

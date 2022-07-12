@@ -339,6 +339,8 @@ class FormRegister extends React.Component {
               insurance_amount: "",
               award_amount: "",
               source: "i-credit.kz",
+              cpa_clickid: "",
+              webID: "",
               name: "",
               middlename: "",
               last_name: "",

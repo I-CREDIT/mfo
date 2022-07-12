@@ -84,6 +84,61 @@ export const loginUser = (values) => (dispatch) => {
     });
 };
 
+export const loginAdmin = (values) => (dispatch) => {
+  values.login = values.iin
+  delete values['iin']
+  dispatch({ type: "AUTHENTICATING_USER" });
+  fetch("https://api.i-credit.kz/api/authAdmin", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Accept: "application/json",
+    },
+    body: JSON.stringify(values),
+  })
+    .then((response) => {
+      if (response.ok) {
+        return response;
+      }
+    })
+    .then((response) => response.json())
+    .then((data) => {
+      if (data.success) {
+        return data;
+      }
+      const error = new Error(
+        `Error ${response.status}: ${response.statusText}`
+      );
+      error.response = data.message;
+      throw error;
+    })
+    .then(
+      (data) => {
+        cookie.set("token", data.token);
+        dispatch(fetchCurrentUser());
+        dispatch({ type: "SET_CURRENT_USER", payload: "user" });
+        dispatch({ type: "AUTHENTICATED_USER" });
+        Router.push("/cabinet/loans");
+      },
+      (error) => {
+        throw new Error(error.message);
+      }
+    )
+    .catch((error) => {
+      if (error.message.includes("400")) {
+        dispatch({
+          type: "FAILED_LOGIN",
+          payload: "Неправильный ИИН или пароль",
+        });
+      } else {
+        dispatch({
+          type: "FAILED_LOGIN",
+          payload: "Неправильный ИИН или пароль",
+        });
+      }
+    });
+};
+
 export const fetchCurrentUser = () => (dispatch) => {
   dispatch(authenticatingUser());
   fetch("https://api.i-credit.kz/api/getUserProfileFromBitrix", {
