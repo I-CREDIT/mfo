@@ -238,12 +238,14 @@ export const confirmSMS = (registration) => (dispatch) => {
             `${response.message}. Вы будете перенаправлены на главную страницу.`
           )
         );
+        dispatch(stepRegistration(0));
+        localStorage.removeItem("step");
+        localStorage.removeItem("token");
+        localStorage.setItem("BMGAttempts", "3");
+        localStorage.setItem("isOnBMG", "false");
         setTimeout(() => {
-          dispatch(stepRegistration(0));
-          localStorage.removeItem("step");
-          localStorage.removeItem("token");
           Router.push("/");
-        }, 1000);
+        }, 2000);
       }
     })
     .then((response) => dispatch(isLoading(false)))
