@@ -4,6 +4,7 @@ import {
   changingMoney,
   changingDay,
   postRegistrationThird,
+  errorMessage,
 } from "../../store/actions/ActionCreators";
 import { Label, Row } from "reactstrap";
 import { Control, Errors, Form } from "react-redux-form";
@@ -14,7 +15,6 @@ import disableScroll from "disable-scroll";
 import cookie from "js-cookie";
 
 import {
-  isValidIBANNumber2,
   isValidIBANNumber,
   required,
   onlyEnglish,
@@ -45,6 +45,9 @@ const mapDispatchToProps = (dispatch) => ({
   },
   postRegistrationThird: (registration) =>
     dispatch(postRegistrationThird(registration)),
+  errorMessage: (message) => {
+    dispatch(errorMessage(message));
+  },
 });
 
 const IbanInput = (props) => (
@@ -92,7 +95,7 @@ class FormRegister extends React.Component {
         duration: 600,
       });
     }, 100);
-    localStorage.removeItem('step')
+    localStorage.removeItem("step");
   }
   handlePhone = (e) => {
     this.setState({ phone: e.target.value });
@@ -104,6 +107,11 @@ class FormRegister extends React.Component {
   };
 
   handleSubmit(values) {
+    if (!isValidIBANNumber(values.iban_account)) {
+      this.props.errorMessage("Введите другой IBAN.");
+      return;
+    }
+
     let other = {};
 
     other.bank_name = isValidIBANNumber(values.iban_account);
@@ -338,9 +346,9 @@ class FormRegister extends React.Component {
 
   render() {
     const { history } = this.props;
-    const ibanMessage = isValidIBANNumber(
-      this.props.registration3.iban_account
-    );
+    const ibanMessage =
+      isValidIBANNumber(this.props.registration3.iban_account) ||
+      `Временно не принимаем карты данного банка. Попробуйте ввести другой IBAN.`;
 
     const IbanToUppercase = (e) => {
       this.setState({
@@ -387,9 +395,6 @@ class FormRegister extends React.Component {
                 id="iban_account"
                 placeholder="KZ__________________"
                 className="form-control text-uppercase"
-                validators={{
-                  isValidIBANNumber2,
-                }}
               />
             </div>
             <div className="text-info">

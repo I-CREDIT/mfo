@@ -1,9 +1,5 @@
 import React, { useEffect, useState } from "react";
-import {
-  gorods,
-  relative_type,
-  speciality,
-} from "../../defaults/defaultRelative";
+import { connect } from "react-redux";
 import InputMask from "react-input-mask";
 import cookie, { set } from "js-cookie";
 import Router from "next/router";
@@ -27,7 +23,6 @@ import {
   checkStringName,
   isExpDateOfCardValid,
   isValidIBANNumber,
-  isValidIBANNumber2,
   required,
 } from "../../defaults/validationredux";
 import swal from "sweetalert";
@@ -326,6 +321,12 @@ const ContinueStep3 = ({
             Router.push("/cabinet/loans");
           });
         });
+    } else {
+      swal(
+        "Введите другой IBAN",
+        "Временно не принимаем карты данного банка.",
+        "error"
+      );
     }
   };
 
