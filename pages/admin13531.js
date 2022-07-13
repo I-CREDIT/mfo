@@ -4,7 +4,7 @@ import MaskedInput from "react-text-mask";
 import { Formik, Form, Field } from "formik";
 import Link from "next/link";
 import { connect } from "react-redux";
-import { loginUser, fetchCurrentUser } from "../store/actions/userAction";
+import { loginUser, fetchCurrentUser, loginAdmin } from "../store/actions/userAction";
 import { emptyMessage } from "../store/actions/ActionCreators";
 import Router from "next/router";
 import { required } from "../defaults/validationredux";
@@ -23,18 +23,11 @@ const AppLink = ({ children, className, href }) => (
 );
 
 const maskIin = [
-  /\d/,
-  /\d/,
-  /\d/,
-  /\d/,
-  /\d/,
-  /\d/,
-  /\d/,
-  /\d/,
-  /\d/,
-  /\d/,
-  /\d/,
-  /\d/,
+  /\w/,
+  /\w/,
+  /\w/,
+  /\w/,
+  /\w/,
 ];
 
 class Login extends React.Component {
@@ -71,7 +64,7 @@ class Login extends React.Component {
         errorMessage: "Введите данные",
       });
     } else {
-      this.props.loginUser(values);
+      this.props.loginAdmin(values);
       this.setState({
         errorMessage: null,
       });
@@ -204,7 +197,7 @@ const mapStateToProps = ({
 });
 
 export default connect(mapStateToProps, {
-  loginUser,
   fetchCurrentUser,
   emptyMessage,
+  loginAdmin
 })(withUseTranslation(Login));

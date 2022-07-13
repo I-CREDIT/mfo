@@ -11,7 +11,7 @@ import { useTranslation } from "react-i18next";
 const isLogged = () => {
   var bollean = false
   if(cookie.get('token')) {
-     bollean = true
+      bollean = true
   }
   return bollean
 }

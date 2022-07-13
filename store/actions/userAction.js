@@ -118,7 +118,7 @@ export const loginAdmin = (values) => (dispatch) => {
         dispatch(fetchCurrentUser());
         dispatch({ type: "SET_CURRENT_USER", payload: "user" });
         dispatch({ type: "AUTHENTICATED_USER" });
-        Router.push("/cabinet/loans");
+        Router.push("/cabinet/admin13531");
       },
       (error) => {
         throw new Error(error.message);
