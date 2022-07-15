@@ -26,9 +26,15 @@ export class CameraFeed extends Component {
    * @instance
    */
   processDevices(devices) {
-    devices.forEach((device) => {
-      this.setDevice(device);
-    });
+    const video_devices = devices.filter(
+      (device) => device.kind === "videoinput"
+    );
+    console.log(video_devices.length, "aishdbiqwbdi");
+
+    this.setDevice(video_devices[0]);
+    // devices.forEach((device) => {
+    //   this.setDevice(device);
+    // });
   }
 
   /**
@@ -53,6 +59,8 @@ export class CameraFeed extends Component {
    */
   async componentDidMount() {
     const cameras = await navigator.mediaDevices.enumerateDevices();
+
+    console.log(cameras, "adiua");
     this.processDevices(cameras);
   }
 
@@ -229,7 +237,10 @@ export class CameraFeed extends Component {
             this.state.isPreload ? "" : "d-none"
           }`}
         >
-          <p>Подтверждение личности. Вам необходимо подтвердить личность с помощью фото. Подготовьте камеру.</p>
+          <p>
+            Подтверждение личности. Вам необходимо подтвердить личность с
+            помощью фото. Подготовьте камеру.
+          </p>
           <button onClick={this.startVerification}>Начать подтверждение</button>
         </div>
 

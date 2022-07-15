@@ -222,7 +222,9 @@ class Status extends React.Component {
         },
       })
       .then((response) => {
-        if (response.data?.success && response.data?.decision) {
+        // ПОМЕНЯТЬ !!!!!!!!!!
+        // if (response.data?.success && response.data?.decision) {
+        if (response.data?.success) {
           Router.push(
             `/newAgreements?token=${cookie.get("token")}&bmg=${
               response.data?.bmg ? 1 : 0
