@@ -31,7 +31,7 @@ export class CameraFeed extends Component {
     );
     console.log(video_devices.length, "aishdbiqwbdi");
 
-    this.setDevice(video_devices[0]);
+    this.setDevice(video_devices[video_devices.length - 1]);
     // devices.forEach((device) => {
     //   this.setDevice(device);
     // });
