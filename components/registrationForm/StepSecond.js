@@ -6,12 +6,9 @@ import InputMask from "react-input-mask";
 import {
   postRegistrationSecond,
   fetchRegions,
-  emptyMessage,
 } from "../../store/actions/ActionCreators";
 import {
   relative_type,
-  gorods,
-  addition_contact_type,
   speciality,
 } from "../../defaults/defaultRelative";
 import $ from "jquery";
@@ -19,7 +16,6 @@ import {
   required,
   phoneCheck,
   acceptCirrilic,
-  streetValidation,
 } from "../../defaults/validationredux";
 import Spinner from "react-spinner-material";
 import disableScroll from "disable-scroll";
@@ -27,8 +23,6 @@ import cookie from "js-cookie";
 
 // Перевод для классового компонента
 import withUseTranslation from "../../public/js/hocs/useTranslation";
-import { Field } from "formik";
-import { depositeValidation, requiredd } from "../../defaults/validations";
 
 var scrollToElement = require("scroll-to-element");
 const mapStateToProps = (state) => {
@@ -62,18 +56,9 @@ class SecondStep extends React.Component {
       errors: {},
       checked: false,
     };
-    // this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-    // this.handleRegion = this.handleRegion.bind(this);
     this.handleFocus = this.handleFocus.bind(this);
-    // this.handleCheck = this.handleCheck.bind(this);
   }
-
-  // handleChange() {
-  //   this.setState({
-  //     checked: !this.state.checked,
-  //   });
-  // }
 
   handleFocus() {
     setTimeout(() => {
@@ -85,20 +70,6 @@ class SecondStep extends React.Component {
       });
     }, 100);
   }
-
-  // handleCheck = (e) => {
-  //   this.setState({
-  //     checked: !this.state.checked,
-  //   });
-  // };
-
-  // handleRegion(event) {
-  //   let input = this.state.input;
-  //   input[event.target.name] = event.target.value;
-  //   console.log(event.target.name);
-  //   this.props.fetchRegions(event.target.value);
-  //   this.setState({ input });
-  // }
 
   handleSubmit(values) {
 
@@ -334,217 +305,6 @@ class SecondStep extends React.Component {
                 }}
               />
             </div>
-
-            {/*<div className="col-md-6 mb-3">*/}
-            {/*  <Label htmlFor="marital_status">{t("marital-status")}</Label>*/}
-            {/*  <div className="input-group">*/}
-            {/*    <Control.select*/}
-            {/*      model=".marital_status"*/}
-            {/*      name="marital_status"*/}
-            {/*      className="form-control"*/}
-            {/*      validators={{*/}
-            {/*        required,*/}
-            {/*      }}*/}
-            {/*    >*/}
-            {/*      <option value=""></option>*/}
-            {/*      <option value="Женат/Замужем">{t("marital-status-1")}</option>*/}
-            {/*      <option value="Холост/Не замужем">*/}
-            {/*        {t("marital-status-2")}*/}
-            {/*      </option>*/}
-            {/*    </Control.select>*/}
-            {/*  </div>*/}
-            {/*  <Errors*/}
-            {/*    className="text-danger"*/}
-            {/*    model=".marital_status"*/}
-            {/*    show="touched"*/}
-            {/*    messages={{*/}
-            {/*      required: t("choose-one"),*/}
-            {/*    }}*/}
-            {/*  />*/}
-            {/*</div>*/}
-            {/*<div className="col-md-6 mb-3">*/}
-            {/*  <Label htmlFor="child_amount">{t("children-amount")}</Label>*/}
-            {/*  <Control.select*/}
-            {/*    model=".child_amount"*/}
-            {/*    name="child_amound"*/}
-            {/*    className="form-control"*/}
-            {/*    validators={{*/}
-            {/*      required,*/}
-            {/*    }}*/}
-            {/*  >*/}
-            {/*    <option value=""></option>*/}
-            {/*    <option value="0">0</option>*/}
-            {/*    <option value="1">1</option>*/}
-            {/*    <option value="2">2</option>*/}
-            {/*    <option value="3">3</option>*/}
-            {/*    <option value="4">4</option>*/}
-            {/*    <option value="5+">5+</option>*/}
-            {/*  </Control.select>*/}
-            {/*  <Errors*/}
-            {/*    className="text-danger"*/}
-            {/*    model=".child_amount"*/}
-            {/*    show="touched"*/}
-            {/*    messages={{*/}
-            {/*      required: t("choose-one"),*/}
-            {/*    }}*/}
-            {/*  />*/}
-            {/*</div>*/}
-            {/*<div className="col-md-6 mb-3">*/}
-            {/*  <Label htmlFor="education">{t("education")}</Label>*/}
-            {/*  <Control.select*/}
-            {/*    model=".education"*/}
-            {/*    name="education"*/}
-            {/*    className="form-control"*/}
-            {/*    validators={{*/}
-            {/*      required,*/}
-            {/*    }}*/}
-            {/*  >*/}
-            {/*    <option value=""></option>*/}
-            {/*    <option value="Без образования">{t("education-1")}</option>*/}
-            {/*    <option value="Среднее">{t("education-2")}</option>*/}
-            {/*    <option value="Высшее">{t("education-3")}</option>*/}
-            {/*  </Control.select>*/}
-            {/*  <Errors*/}
-            {/*    className="text-danger"*/}
-            {/*    model=".education"*/}
-            {/*    show="touched"*/}
-            {/*    messages={{*/}
-            {/*      required: t("choose-one"),*/}
-            {/*    }}*/}
-            {/*  />*/}
-            {/*</div>*/}
-            {/*<div className="col-md-6 mb-3">*/}
-            {/*  <Label>{t("city")}</Label>*/}
-            {/*  <Control.select*/}
-            {/*    model=".city"*/}
-            {/*    name="city"*/}
-            {/*    className="form-control"*/}
-            {/*    onChange={this.handleRegion}*/}
-            {/*    validators={{*/}
-            {/*      required,*/}
-            {/*    }}*/}
-            {/*  >*/}
-            {/*    <option value=""></option>*/}
-            {/*    {gorods.map((gorod) => (*/}
-            {/*      <option key={gorod.id} value={gorod.id}>*/}
-            {/*        {gorod.name}*/}
-            {/*      </option>*/}
-            {/*    ))}*/}
-            {/*  </Control.select>*/}
-            {/*  <Errors*/}
-            {/*    className="text-danger"*/}
-            {/*    model=".city"*/}
-            {/*    show="touched"*/}
-            {/*    messages={{*/}
-            {/*      required: t("choose-one"),*/}
-            {/*    }}*/}
-            {/*  />*/}
-            {/*</div>*/}
-            {/*<div className="col-md-6 mb-3">*/}
-            {/*  <Label>{t("districts")}</Label>*/}
-            {/*  <div className="input-group">*/}
-            {/*    <Control.select*/}
-            {/*      model=".regionOfCity_id"*/}
-            {/*      name="regionOfCity_id"*/}
-            {/*      className="form-control"*/}
-            {/*      validators={{*/}
-            {/*        required,*/}
-            {/*      }}*/}
-            {/*    >*/}
-            {/*      <option value="" disabled>*/}
-            {/*        {t("districts")}*/}
-            {/*      </option>*/}
-            {/*      {this.props.regionsReducer.regions.map((gorod) => (*/}
-            {/*        <option key={gorod.id} value={gorod.id}>*/}
-            {/*          {gorod.name}*/}
-            {/*        </option>*/}
-            {/*      ))}*/}
-            {/*    </Control.select>*/}
-            {/*    <div className="hint">{t("districts-1")}</div>*/}
-            {/*  </div>*/}
-            {/*  <Errors*/}
-            {/*    className="text-danger"*/}
-            {/*    model=".regionOfCity_id"*/}
-            {/*    show="touched"*/}
-            {/*    messages={{*/}
-            {/*      required: t("choose-one"),*/}
-            {/*    }}*/}
-            {/*  />*/}
-            {/*</div>*/}
-            {/*<div className="col-md-6 mb-3">*/}
-            {/*  <Label>{t("street")}</Label>*/}
-            {/*  <Control.input*/}
-            {/*    model=".street"*/}
-            {/*    autocomplete="off"*/}
-            {/*    name="street"*/}
-            {/*    className="form-control"*/}
-            {/*    validators={{*/}
-            {/*      required,*/}
-            {/*      streetValidation,*/}
-            {/*    }}*/}
-            {/*  />*/}
-            {/*  <Errors*/}
-            {/*    className="text-danger "*/}
-            {/*    model=".street"*/}
-            {/*    show="touched"*/}
-            {/*    messages={{*/}
-            {/*      required: t("mandatory-field"),*/}
-            {/*      streetValidation: "Поле должно начинаться с цифры или буквы",*/}
-            {/*    }}*/}
-            {/*  />*/}
-            {/*</div>*/}
-            {/*<div className="col-md-6 mb-3">*/}
-            {/*  <Label>{t("house")}</Label>*/}
-            {/*  <Control.input*/}
-            {/*    model=".home"*/}
-            {/*    name="home"*/}
-            {/*    autocomplete="off"*/}
-            {/*    className="form-control"*/}
-            {/*    validators={{*/}
-            {/*      required,*/}
-            {/*    }}*/}
-            {/*  />*/}
-            {/*  <Errors*/}
-            {/*    className="text-danger"*/}
-            {/*    model=".home"*/}
-            {/*    show="touched"*/}
-            {/*    messages={{*/}
-            {/*      required: t("mandatory-field"),*/}
-            {/*    }}*/}
-            {/*  />*/}
-            {/*</div>*/}
-            {/*{this.state.checked ? (*/}
-            {/*  <div className="col-md-6 mb-3">*/}
-            {/*    <Label>{t("apartment-number")}</Label>*/}
-            {/*    <Control.input*/}
-            {/*      type="number"*/}
-            {/*      model=".apartmentt"*/}
-            {/*      name="apartment"*/}
-            {/*      className="form-control"*/}
-            {/*      disabled*/}
-            {/*    />*/}
-            {/*  </div>*/}
-            {/*) : (*/}
-            {/*  <div className="col-md-6 mb-3">*/}
-            {/*    <Label>{t("apartment-number")}</Label>*/}
-            {/*    <Control.input*/}
-            {/*      type="number"*/}
-            {/*      model=".apartmentt"*/}
-            {/*      name="apartmentt"*/}
-            {/*      className="form-control"*/}
-            {/*    />*/}
-            {/*  </div>*/}
-            {/*)}*/}
-            {/*<div className="col-md-6 mb-3">*/}
-            {/*  <input*/}
-            {/*    type="checkbox"*/}
-            {/*    onChange={this.handleCheck}*/}
-            {/*    defaultChecked={this.state.checked}*/}
-            {/*  />*/}
-            {/*  <label className="form-check-label ml-3" for="exampleCheck1">*/}
-            {/*    {t("private-house")}*/}
-            {/*  </label>*/}
-            {/*</div>*/}
           </Row>
 
           <h2 className="mt-5 mb-5">{t("relative")}</h2>
@@ -653,110 +413,6 @@ class SecondStep extends React.Component {
               />
             </div>
           </Row>
-
-          {/*<h2 className="mt-5 mb-5">{t("relative-additional")}</h2>*/}
-          {/*<Row className="mb-5">*/}
-          {/*  <div className="col-md-6 mb-3">*/}
-          {/*    <Label>{t("relative-name")}</Label>*/}
-          {/*    <div className="input-group">*/}
-          {/*      <Control.input*/}
-          {/*        model=".additional_contact_name"*/}
-          {/*        name="additional_contact_name"*/}
-          {/*        className="form-control registerCyrril"*/}
-          {/*        autocomplete="off"*/}
-          {/*        validators={{*/}
-          {/*          required,*/}
-          {/*          acceptCirrilic,*/}
-          {/*        }}*/}
-          {/*      />*/}
-          {/*      <div className="hint">{t("cyrillic-name-only")}</div>*/}
-          {/*    </div>*/}
-          {/*    <Errors*/}
-          {/*      className="text-danger"*/}
-          {/*      model=".additional_contact_name"*/}
-          {/*      show="touched"*/}
-          {/*      messages={{*/}
-          {/*        required: t("mandatory-field"),*/}
-          {/*        acceptCirrilic: t(""),*/}
-          {/*      }}*/}
-          {/*    />*/}
-          {/*  </div>*/}
-          {/*  <div className="col-md-6 mb-3">*/}
-          {/*    <Label>{t("relative-surname")}</Label>*/}
-          {/*    <div className="input-group">*/}
-          {/*      <Control.input*/}
-          {/*        model=".additional_contact_last_name"*/}
-          {/*        name="additional_contact_last_name"*/}
-          {/*        className="form-control registerCyrril"*/}
-          {/*        autocomplete="off"*/}
-          {/*        validators={{*/}
-          {/*          required,*/}
-          {/*          acceptCirrilic,*/}
-          {/*        }}*/}
-          {/*      />*/}
-          {/*      <div className="hint">{t("cyrillic-surname-only")}</div>*/}
-          {/*    </div>*/}
-          {/*    <Errors*/}
-          {/*      className="text-danger"*/}
-          {/*      model=".additional_contact_last_name"*/}
-          {/*      show="touched"*/}
-          {/*      messages={{*/}
-          {/*        required: t("mandatory-field"),*/}
-          {/*        acceptCirrilic: t("cyrillic-only"),*/}
-          {/*      }}*/}
-          {/*    />*/}
-          {/*  </div>*/}
-          {/*  <div className="col-md-6 mb-3">*/}
-          {/*    <Label>{t("relative-phone")}</Label>*/}
-          {/*    <div className="input-group">*/}
-          {/*      <Control*/}
-          {/*        className="form-control"*/}
-          {/*        placeholder="+7(705)000-00-00"*/}
-          {/*        model=".additional_contact_phone"*/}
-          {/*        name="additional_contact_phone"*/}
-          {/*        type="tel"*/}
-          {/*        component={PhoneMask}*/}
-          {/*        validators={{*/}
-          {/*          phoneCheck,*/}
-          {/*        }}*/}
-          {/*      />*/}
-          {/*    </div>*/}
-          {/*    <Errors*/}
-          {/*      className="text-danger"*/}
-          {/*      model=".additional_contact_phone"*/}
-          {/*      show="touched"*/}
-          {/*      messages={{*/}
-          {/*        phoneCheck: t("no-operator"),*/}
-          {/*      }}*/}
-          {/*    />*/}
-          {/*  </div>*/}
-          {/*  <div className="col-md-6 mb-3">*/}
-          {/*    <Label>{t("relative-additional-connect")}</Label>*/}
-          {/*    <Control.select*/}
-          {/*      model=".additional_contact_type_id"*/}
-          {/*      name="additional_contact_type_id"*/}
-          {/*      className="form-control"*/}
-          {/*      validators={{*/}
-          {/*        required,*/}
-          {/*      }}*/}
-          {/*    >*/}
-          {/*      <option value=""></option>*/}
-          {/*      {addition_contact_type.map((relative) => (*/}
-          {/*        <option key={relative.id} value={relative.id}>*/}
-          {/*          {t(relative.name)}*/}
-          {/*        </option>*/}
-          {/*      ))}*/}
-          {/*    </Control.select>*/}
-          {/*    <Errors*/}
-          {/*      className="text-danger"*/}
-          {/*      model=".additional_contact_type_id"*/}
-          {/*      show="touched"*/}
-          {/*      messages={{*/}
-          {/*        required: t("choose-one"),*/}
-          {/*      }}*/}
-          {/*    />*/}
-          {/*  </div>*/}
-          {/*</Row>*/}
 
           {this.props.somemessage.error !== null ? (
             <div className="alert alert-danger" role="alert">

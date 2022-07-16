@@ -124,7 +124,7 @@ const TestCheck = () => {
         }
     }, [step])
     return (
-        <div>
+        <div style={{padding: '100px 0 0'}}>
             {/* {step === 1 && <VeriLive setLivePhoto={setLivePhoto}/>}
       {step === 2 && <VeriDoc setLiveDoc={setLiveDoc}/>} */}
             {/* <VeriDoc setLiveDoc={setLiveDoc}/> */}

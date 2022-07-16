@@ -275,7 +275,6 @@ export const isValidIBANNumber = (input) => {
     digits;
   if (!code || iban.length !== CODE_LENGTHS) {
     return "Заполните поле до конца";
-    return false;
   }
   var bank_code = code[3];
 
@@ -287,20 +286,6 @@ export const isValidIBANNumber = (input) => {
     return bank[0].name;
   } else {
     return "Некорректный счет";
-    return false;
-  }
-
-  digits = (code[3] + code[4] + code[1] + code[2]).replace(
-    /[A-Z]/g,
-    function (letter) {
-      return letter.charCodeAt(0) - 55;
-    }
-  );
-
-  if (this.mod97(digits) === 1) {
-    return true;
-  } else {
-    return "Неправильно";
   }
 };
 
@@ -376,19 +361,6 @@ export const isValidIBANNumber2 = (input) => {
   } else {
     return false;
   }
-
-  digits = (code[3] + code[4] + code[1] + code[2]).replace(
-    /[A-Z]/g,
-    function (letter) {
-      return letter.charCodeAt(0) - 55;
-    }
-  );
-
-  if (this.mod97(digits) === 1) {
-    return true;
-  } else {
-    return false;
-  }
 };
 
 export const isValidIBANNumberContinue = (input) => {
@@ -456,19 +428,6 @@ export const isValidIBANNumberContinue = (input) => {
     return bank[0].name;
   } else {
     return false;
-  }
-
-  digits = (code[3] + code[4] + code[1] + code[2]).replace(
-    /[A-Z]/g,
-    function (letter) {
-      return letter.charCodeAt(0) - 55;
-    }
-  );
-
-  if (this.mod97(digits) === 1) {
-    return true;
-  } else {
-    return "Неправильно";
   }
 };
 
@@ -573,52 +532,6 @@ export const expDateCardId = (val) => {
   }
   return true;
 };
-// export const givenDateCardId = (val) => {
-//     var res = String(val).replace(/_/g, "");
-//     if(res.length !== 10) {
-//         return false
-//     }
-//     // 02.05.1999
-// 	// const myDate = new Date(val);
-// 	const today = new Date()
-// 	var todayM = today.getMonth() + 1;
-// 	var todayD = today.getDay();
-// 	var todayY = today.getFullYear();
-// 	var myM = () => {
-//         if(val[3] == 0) {
-//             return val[4]
-//         }
-//         else {
-//             return val.substring(3,5);
-//         }
-//     };
-//     var myD = () => {
-//         if(val[0] == 0) {
-//             return val[1]
-//         }
-//         else {
-//             return val.substring(0,2);
-//         }
-//     };
-// 	var myY = val.substring(6,9)
-
-// 	if(myY>todayY) {
-// 		return false;
-// 	}
-// 	if(myY < todayY-11) {
-// 		return false;
-// 	}
-// 	if(myY === todayY) {
-// 		if(myM === todayM && myD > todayD) {
-// 			return false
-// 		}
-// 		if(myM > todayM) {
-// 			return false
-// 		}
-// 		return true
-// 	}
-// 	return true
-// }
 
 export const onlyEnglish = (val) => /^[a-zA-Z\s]*$/.test(val);
 

@@ -49,9 +49,7 @@ class Cabinet extends React.Component {
       })
       .then((response) => {
         if (response.data.success) {
-          // Router.push('/cabinet/repeated')
           this.setState({ sendRepeat: true });
-          // this.setState({btnLoading: false})
         } else {
           this.setState({ sendRepeat: false });
           this.setState({ repeatMessage: response.data.message });
@@ -228,9 +226,6 @@ class Cabinet extends React.Component {
     }
   }
 }
-
-// const mapStateToProps = ({ usersReducer: { user: { UF9} } }) => ({
-// username: UF9 })
 
 export default withAuth(
   connect(mapStateToProps, mapDispatchToProps)(withUseTranslation(Cabinet))

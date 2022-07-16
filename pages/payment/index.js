@@ -1,6 +1,5 @@
 import React from 'react';
 import {iinValidation, requiredd} from '../../defaults/validations';
-import InputMask from "react-input-mask";
 import Spinner from 'react-spinner-material';
 import swal from "sweetalert";
 import MaskedInput from 'react-text-mask';
@@ -11,20 +10,6 @@ import Head from 'next/head';
 
 // Перевод для классового компонента
 import withUseTranslation from "../../public/js/hocs/useTranslation";
-
-const mapStateToProps = state => {
-  return {
-    oplata: state.oplata,
-    loading: state.loading
-  }
-}
-
-const mapDispatchToProps = (dispatch) => ({
-  oplata: dannie => { dispatch(oplata(dannie)); },
-  resetOplata: () => { dispatch(actions.reset('oplata'))},
-})
-
-const IinMask = (props) => <InputMask mask="999999999999" maskPlaceholder={null} className="my-input" {...props} />;
 
 class Payment extends React.Component {
   constructor(props) {
@@ -99,7 +84,7 @@ class Payment extends React.Component {
                 this.handleSubmit(values)
               }}
             >
-                 {({ errors, touched, isValidating, isSubmitting }) => (
+                 {({ errors, touched }) => (
               <Form className="oplataform">
                 <div className='input-group'>
                   <label htmlFor='iin'>
@@ -141,15 +126,6 @@ class Payment extends React.Component {
           </section>
         </div>
       </section>
-      {/* <?xml version="1.0" encoding="utf-8"?> */}
-      <request>
-          <pg_status>ok</pg_status>
-          <pg_payment_id>4567788</pg_payment_id>
-          <pg_redirect_url>https://api.paybox.money/pay.html?customer=498333170d6a895148c57c53ffb18287</pg_redirect_url>
-          <pg_redirect_url_type>need data</pg_redirect_url_type>
-          <pg_salt>bdwLavL9lg6It91b</pg_salt>
-          <pg_sig>709633e91387c56ac6fb7cb33d1e07d8</pg_sig>
-      </request>
         </div>
     );}
 }

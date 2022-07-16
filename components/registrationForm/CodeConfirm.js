@@ -4,26 +4,10 @@ import {
   confirmSMS,
   emptyMessage,
   getSMS,
-  getSMSFromBMG,
 } from "../../store/actions/ActionCreators";
 import InputMask from "react-input-mask";
 import {
-  Navbar,
-  NavbarBrand,
-  Nav,
-  NavbarToggler,
-  Collapse,
-  NavItem,
-  Jumbotron,
   Row,
-  Col,
-  Button,
-  Modal,
-  ModalHeader,
-  ModalBody,
-  FormGroup,
-  Input,
-  Label,
 } from "reactstrap";
 import { Control, actions, Errors, Form } from "react-redux-form";
 import Spinner from "react-spinner-material";
@@ -68,10 +52,6 @@ class CodeConfirmBMG extends React.Component {
     progress.append(progress.getAttribute("data-done") + "%");
     progress.style.opacity = 1;
   }
-
-  sendCode = () => {
-    this.props.getSMS(this.props.registrationValues);
-  };
 
   handleSubmit = (vals) => {
     let object = {};
@@ -146,11 +126,6 @@ class CodeConfirmBMG extends React.Component {
             )}
           </div>
         </Form>
-        {/*<div className="button form-group  codeConfirm mb-5">*/}
-        {/*  <button className="newCode" onClick={this.sendCode}>*/}
-        {/*    Получить новый код*/}
-        {/*  </button>*/}
-        {/*</div>*/}
       </div>
     );
   }

@@ -1,62 +1,21 @@
 import React, { useEffect, useState } from "react";
-import {
-  gorods,
-  relative_type,
-  speciality,
-} from "../../defaults/defaultRelative";
 import InputMask from "react-input-mask";
-import cookie, { set } from "js-cookie";
+import cookie from "js-cookie";
 import Router from "next/router";
 import axios from "axios";
 import { Formik, Form, Field } from "formik";
 import {
-  acceptCirrilic,
-  getAge,
   requiredd,
-  idNumber,
-  CheckGivedDate,
-  CheckExpDate,
-  onlyEnglish,
-  textCheckCardValid,
-  ibanContinue,
-  depositeValidation,
-  acceptCirrilicOnly,
   requiredd1,
 } from "../../defaults/validations";
 import {
-  checkStringName,
-  isExpDateOfCardValid,
   isValidIBANNumber,
-  isValidIBANNumber2,
-  required,
 } from "../../defaults/validationredux";
 import swal from "sweetalert";
 
 // Перевод для функционального компонента
 import { useTranslation } from "react-i18next";
 import $ from "jquery";
-
-const IinMask = ({ field, form, ...props }) => (
-  <InputMask
-    mask="999999999"
-    maskPlaceholder=" "
-    className="my-input"
-    type="tel"
-    {...field}
-    {...props}
-  />
-);
-
-const GivenDate = ({ field, form, ...props }) => (
-  <InputMask
-    mask="99.99.9999"
-    maskPlaceholder={null}
-    type="tel"
-    className="my-input"
-    {...field}
-    {...props}
-  />
-);
 
 const IbanN = ({ field, form, ...props }) => (
   <InputMask
@@ -94,14 +53,7 @@ function replaceDate(val) {
   return String(val).replace(/[^A-Z0-9]/g, "");
 }
 
-const ContinueStep3 = ({
-  step,
-  setStep,
-  stepResult,
-  userDate,
-  srok,
-  summa,
-}) => {
+const ContinueStep3 = () => {
   // Translation
   const { t } = useTranslation();
 
@@ -127,13 +79,23 @@ const ContinueStep3 = ({
           cookie.get("utm_source") === "doaff" ||
           cookie.get("utm_source") === "goodaff" ||
           cookie.get("utm_source") === "finpublic_cpa" ||
-          cookie.get("utm_source") === "pdl-profit"
+          cookie.get("utm_source") === "pdl-profit" ||
+          cookie.get("utm_source") === "marketing" ||
+          cookie.get("utm_source") === "leadssu" || 
+          cookie.get("utm_source").includes("click2money") ||
+          cookie.get("utm_source") === "rafinad" ||
+          cookie.get("utm_source") === "crezu" ||
+          cookie.get("utm_source") === "admitad" ||
+          cookie.get("utm_source") === "altel_2365" ||
+          cookie.get("utm_source") === "altel_4291" ||
+          cookie.get("utm_source") === "altel_7846" ||
+          cookie.get("utm_source") === "altel_3954" ||
+          cookie.get("utm_source") === "altel_8132" ||
+          cookie.get("utm_source") === "altel_5673" ||
+          cookie.get("utm_source") === "altel_6728" ||
+          cookie.get("utm_source") === "altel_1589" ||
+          cookie.get("utm_source") === "altel_4376"
         ) {
-          other.source = cookie.get("utm_source");
-          other.cpa_source = cookie.get("utm_source");
-          other.cpa_clickid = cookie.get("clickid");
-        }
-        if (cookie.get("utm_source") === "marketing") {
           other.source = cookie.get("utm_source");
           other.cpa_source = cookie.get("utm_source");
           other.cpa_clickid = cookie.get("clickid");
@@ -150,11 +112,6 @@ const ContinueStep3 = ({
           other.webID = cookie.get("utm_term");
           other.cpa_clickid = cookie.get("clickid");
         }
-        if (cookie.get("utm_source") === "leadssu") {
-          other.source = cookie.get("utm_source");
-          other.cpa_source = cookie.get("utm_source");
-          other.cpa_clickid = cookie.get("clickid");
-        }
         if (cookie.get("utm_source").includes("smartzaim")) {
           other.source = cookie.get("utm_source");
           other.cpa_source = cookie.get("utm_source");
@@ -166,88 +123,17 @@ const ContinueStep3 = ({
           other.cpa_source = cookie.get("utm_campaign");
           other.cpa_clickid = cookie.get("clickid");
         }
-        if (cookie.get("utm_source").includes("click2money")) {
-          other.source = cookie.get("utm_source");
-          other.cpa_source = cookie.get("utm_source");
-          other.cpa_clickid = cookie.get("clickid");
-        }
         if (cookie.get("utm_source") === "guruleads") {
           other.source = cookie.get("utm_source");
           other.cpa_source = cookie.get("utm_source");
           other.cpa_clickid = cookie.get("clickid");
           other.webID = cookie.get("wmid");
         }
-        if (cookie.get("utm_source") === "rafinad") {
-          other.source = cookie.get("utm_source");
-          other.cpa_source = cookie.get("utm_source");
-          other.cpa_clickid = cookie.get("clickid");
-        }
-        if (cookie.get("utm_source") === "crezu") {
-          other.source = cookie.get("utm_source");
-          other.cpa_source = cookie.get("utm_source");
-          other.cpa_clickid = cookie.get("clickid");
-        }
-        if (cookie.get("utm_source") === "admitad") {
-          other.source = cookie.get("utm_source");
-          other.cpa_source = cookie.get("utm_source");
-          other.cpa_clickid = cookie.get("clickid");
-        }
         if (cookie.get("utm_source") === "sales_doubler") {
           other.source = cookie.get("utm_source");
           other.cpa_source = cookie.get("utm_source");
           other.cpa_clickid = cookie.get("clickid");
           other.webID = cookie.get("utm_term");
-        }
-        if (cookie.get("utm_source") === "sales_doubler") {
-          other.source = cookie.get("utm_source");
-          other.cpa_source = cookie.get("utm_source");
-          other.cpa_clickid = cookie.get("clickid");
-          other.webID = cookie.get("utm_term");
-        }
-        if (cookie.get("utm_source") === "altel_2365") {
-          other.source = cookie.get("utm_source");
-          other.cpa_source = cookie.get("utm_source");
-          other.cpa_clickid = cookie.get("clickid");
-        }
-        if (cookie.get("utm_source") === "altel_4291") {
-          other.source = cookie.get("utm_source");
-          other.cpa_source = cookie.get("utm_source");
-          other.cpa_clickid = cookie.get("clickid");
-        }
-        if (cookie.get("utm_source") === "altel_7846") {
-          other.source = cookie.get("utm_source");
-          other.cpa_source = cookie.get("utm_source");
-          other.cpa_clickid = cookie.get("clickid");
-        }
-        if (cookie.get("utm_source") === "altel_3954") {
-          other.source = cookie.get("utm_source");
-          other.cpa_source = cookie.get("utm_source");
-          other.cpa_clickid = cookie.get("clickid");
-        }
-        if (cookie.get("utm_source") === "altel_8132") {
-          other.source = cookie.get("utm_source");
-          other.cpa_source = cookie.get("utm_source");
-          other.cpa_clickid = cookie.get("clickid");
-        }
-        if (cookie.get("utm_source") === "altel_5673") {
-          other.source = cookie.get("utm_source");
-          other.cpa_source = cookie.get("utm_source");
-          other.cpa_clickid = cookie.get("clickid");
-        }
-        if (cookie.get("utm_source") === "altel_6728") {
-          other.source = cookie.get("utm_source");
-          other.cpa_source = cookie.get("utm_source");
-          other.cpa_clickid = cookie.get("clickid");
-        }
-        if (cookie.get("utm_source") === "altel_1589") {
-          other.source = cookie.get("utm_source");
-          other.cpa_source = cookie.get("utm_source");
-          other.cpa_clickid = cookie.get("clickid");
-        }
-        if (cookie.get("utm_source") === "altel_4376") {
-          other.source = cookie.get("utm_source");
-          other.cpa_source = cookie.get("utm_source");
-          other.cpa_clickid = cookie.get("clickid");
         }
       }
 
@@ -362,7 +248,6 @@ const ContinueStep3 = ({
       .addEventListener("keyup", forceInputUppercase, false);
   });
 
-  const [checked, setChecked] = useState(false);
   const [iban, setIban] = useState({
     value: "",
     text: "Заполните поле до конца",
@@ -383,7 +268,7 @@ const ContinueStep3 = ({
         }}
         onSubmit={(values) => onSubmit(values)}
       >
-        {({ errors, touched, isValidating, isSubmitting }) => (
+        {({ errors, touched }) => (
           <Form className="container">
             <h2 className="col-md-12 mt-5 mb-5">Информация о счетах</h2>
 

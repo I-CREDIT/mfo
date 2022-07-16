@@ -2,7 +2,6 @@ import React from "react";
 import { connect } from "react-redux";
 import axios from "axios";
 import Router from "next/router";
-import usersReducer from "../../store/reducers/userReducer";
 import Spinner from "react-spinner-material";
 import swal from "sweetalert";
 import MicrocreditAgreementDocument from "../document_1/microcreditAgreement";
@@ -15,13 +14,6 @@ import cookie from "js-cookie";
 
 // Перевод для классового компонента
 import withUseTranslation from "../../public/js/hocs/useTranslation";
-import { stepRegistration } from "../../store/actions/ActionCreators";
-
-// export const clientData = {
-//   name: props.userReducer.user.UF_5,
-//   secondName: props.userReducer.user.UF_6
-// }
-// console.log(clientData)
 
 const mapStateToProps = (state) => {
   return {
@@ -49,6 +41,10 @@ class Status extends React.Component {
     };
     this.state = {
       timeChSI: true,
+      days: '00',
+      hours: '00',
+      minutes: '00',
+      seconds: '00'
     };
   }
 
@@ -80,73 +76,6 @@ class Status extends React.Component {
 
   componentDidMount() {
     this.getCurrentStep();
-
-    let time;
-
-    if (this.props.userStatus.userStatus.stage === 12) {
-      const getTimeRemaining = (endtime) => {
-        // создаем функцию котороая показывает сколько времени осталось
-        const t = Date.parse(endtime) - Date.parse(new Date()); // переменная сколько милисекунд осталось
-        let days = Math.floor(t / (1000 * 60 * 60 * 24)), // переменная сколько дней осталось
-          hours = Math.floor((t / (1000 * 60 * 60)) % 24), // переменная сколько часов осталось
-          minutes = Math.floor((t / (1000 * 60)) % 60), // переменная сколько минут осталось
-          seconds = Math.floor((t / 1000) % 60); // переменная сколько секунд осталось
-
-        time = t;
-
-        if (time <= 0) {
-          this.setState({
-            timeChSI: false,
-          });
-        }
-
-        return {
-          // и возвращаем все эти данные в объекте, чтобы удобнее их было использовать
-          total: t,
-          days: days,
-          hours: hours,
-          minutes: minutes,
-          seconds: seconds,
-        };
-      };
-
-      function getZero(num) {
-        // это функция которая добавляет нолик перед числом, если число становится однозначным, чтобы выглядело красиво
-        if (num >= 0 && num < 10) {
-          return `0${num}`;
-        } else {
-          return num;
-        }
-      }
-
-      function setClock(selector, endtime) {
-        // это функция которая будет отображать нам непосредственно в HTML нажи часы обновляя время
-        let timer = document.querySelector(selector), // создаем переменную которая будет являтся родительским кодом для наших элементов (дни, часы, минуты, секунды)
-          days = timer.querySelector("#days"), // тут берем уже дни
-          hours = timer.querySelector("#hours"), // тут берем уже часы
-          minutes = timer.querySelector("#minutes"), // тут берем уже минуты
-          seconds = timer.querySelector("#seconds"), // тут берем уже секунды
-          timerInterval = setInterval(updateClock, 1000); // тут вызываем функцию updateClock каждую секунду чтобы на странице по сендно обновляло время
-
-        updateClock(); // тут мы отдельно вызываем функцию, чтобы с первых мгновений показывало правильное время
-
-        function updateClock() {
-          // эта функция добавляет в HTML код наши данные
-          const t = getTimeRemaining(endtime); // тут переменная уже берет данные с объекта функции вначале
-
-          console.log(t.total);
-
-          days.innerHTML = getZero(t.days); // и тут вкладываем наше время куда надо в HTML код
-          hours.innerHTML = getZero(t.hours); // и тут вкладываем наше время куда надо в HTML код
-          minutes.innerHTML = getZero(t.minutes); // и тут вкладываем наше время куда надо в HTML код
-          seconds.innerHTML = getZero(t.seconds); // и тут вкладываем наше время куда надо в HTML код
-          if (t.total <= 0) {
-            clearInterval(timerInterval);
-          }
-        }
-      }
-      setClock(".timer", "2022-06-30");
-    }
   }
 
   myFunc() {
@@ -168,23 +97,6 @@ class Status extends React.Component {
     this.setState({
       btnLoading: true,
     });
-    // swal("Проверьте ваши данные", {
-    //   text: `Проверьте ваши данные
-
-    //   Ваш ИИН: ${values.iin}    Сумма оплаты: ${(+values.amount).toLocaleString("ru-RU")} тг`,
-    //   buttons: {
-    //     catch: {
-    //       text: "Подтвердить",
-    //       value: "catch",
-    //     },
-    //     cancel: "Отмена"
-    //   }
-    // }).then(value=>{
-    //   switch (value) {
-    //     case "catch":
-    this.setState({
-      btnLoading: true,
-    });
     axios
       .post(`https://api.i-credit.kz/api/make_payment123`, values)
       .then((response) => {
@@ -199,13 +111,6 @@ class Status extends React.Component {
           btnLoading: false,
         });
       });
-    //     case "cancel":
-    //       this.setState({
-    //         btnLoading: false,
-    //       });
-    //       break
-    //   }
-    // })
   }
 
   handleVerify() {
@@ -251,23 +156,6 @@ class Status extends React.Component {
     this.setState({
       btnLoading: true,
     });
-    // swal("Проверьте ваши данные", {
-    //   text: `Проверьте ваши данные
-
-    //   Ваш ИИН: ${values.iin}    Сумма оплаты: ${(+values.amount).toLocaleString("ru-RU")} тг`,
-    //   buttons: {
-    //     catch: {
-    //       text: "Подтвердить",
-    //       value: "catch",
-    //     },
-    //     cancel: "Отмена"
-    //   }
-    // }).then(value=>{
-    //   switch (value) {
-    //     case "catch":
-    this.setState({
-      btnLoading: true,
-    });
     axios
       .post(`https://api.i-credit.kz/api/make_payment123`, values)
       .then((response) => {
@@ -282,13 +170,6 @@ class Status extends React.Component {
           btnLoading: false,
         });
       });
-    //   case "cancel":
-    //     this.setState({
-    //       btnLoading: false,
-    //     });
-    //     break
-    // }
-    // })
   }
 
   handleSubmitChSI() {
@@ -299,23 +180,6 @@ class Status extends React.Component {
     this.setState({
       btnLoading: true,
     });
-    // swal("Проверьте ваши данные", {
-    //   text: `Проверьте ваши данные
-
-    //   Ваш ИИН: ${values.iin}    Сумма оплаты: ${(+values.amount).toLocaleString("ru-RU")} тг`,
-    //   buttons: {
-    //     catch: {
-    //       text: "Подтвердить",
-    //       value: "catch",
-    //     },
-    //     cancel: "Отмена"
-    //   }
-    // }).then(value=>{
-    //   switch (value) {
-    //     case "catch":
-    this.setState({
-      btnLoading: true,
-    });
     axios
       .post(`https://api.i-credit.kz/api/make_payment123`, values)
       .then((response) => {
@@ -330,13 +194,6 @@ class Status extends React.Component {
           btnLoading: false,
         });
       });
-    //     case "cancel":
-    //       this.setState({
-    //         btnLoading: false,
-    //       });
-    //       break
-    //   }
-    // })
   }
 
   render() {
@@ -421,7 +278,6 @@ class Status extends React.Component {
                   </button>
                 )}
               </div>
-              {this.props.userStatus.userStatus.doctype === 1 ? (
                 <div className="documents">
                   {i18n.language === "ru" ? (
                     <h4>
@@ -529,139 +385,6 @@ class Status extends React.Component {
                     </li>
                   </ul>
                 </div>
-              ) : (
-                <div className="documents">
-                  {i18n.language === "ru" ? (
-                    <h4>
-                      Документы по договору{" "}
-                      <span>
-                        №{this.props.userStatus.userStatus.contractNumber} от{" "}
-                        {this.props.userStatus.userStatus.givenDate}
-                      </span>
-                    </h4>
-                  ) : (
-                    <h4>
-                      <span>
-                        №{this.props.userStatus.userStatus.contractNumber}{" "}
-                        {this.props.userStatus.userStatus.givenDate}
-                      </span>{" "}
-                      келісім-шарт бойынша құжаттар
-                    </h4>
-                  )}
-                  <ul className="documentsContainer">
-                    <li>
-                      <InsuranceApplicationDocument
-                        fio={this.props.userStatus.userStatus.fio}
-                        dateOfBirth={this.props.userReducer.user.UF_10}
-                        address={this.props.userStatus.userStatus.address}
-                        phone={this.props.userStatus.userStatus.phone}
-                        email={this.props.userStatus.userStatus.email}
-                        placeOfWork={this.props.userReducer.user.UF_31}
-                        position={this.props.userReducer.user.UF_33}
-                        iin={this.props.userStatus.userStatus.iin}
-                        cardNumber={this.props.userStatus.userStatus.cardNumber}
-                        startCard={this.props.userStatus.userStatus.startCard}
-                        endCard={this.props.userStatus.userStatus.endCard}
-                        placeOfBirth={this.props.userReducer.user.UF_46}
-                        insuranceAmount={
-                          this.props.userStatus.userStatus.insuranceAmount
-                        }
-                        givenDate={this.props.userStatus.userStatus.givenDate}
-                        code={this.props.userStatus.userStatus.code}
-                        period={this.props.userStatus.userStatus.period}
-                      />
-                    </li>
-                    <li>
-                      <MicrocreditInsuranceDocument
-                        fio={this.props.userStatus.userStatus.fio}
-                        dateOfBirth={this.props.userReducer.user.UF_10}
-                        address={this.props.userStatus.userStatus.address}
-                        iin={this.props.userStatus.userStatus.iin}
-                        cardNumber={this.props.userStatus.userStatus.cardNumber}
-                        contractNumber={
-                          this.props.userStatus.userStatus.contractNumber
-                        }
-                        insuranceAmount={
-                          this.props.userStatus.userStatus.insuranceAmount
-                        }
-                        code={this.props.userStatus.userStatus.code}
-                        period={this.props.userStatus.userStatus.period}
-                        reward={this.props.userStatus.userStatus.reward}
-                      />
-                    </li>
-                    <li>
-                      <InsuranceContractDocument
-                        contractNumber={
-                          this.props.userStatus.userStatus.contractNumber
-                        }
-                        givenDate={this.props.userStatus.userStatus.givenDate}
-                        endDate={this.props.userStatus.userStatus.endDate}
-                        fio={this.props.userStatus.userStatus.fio}
-                        address={this.props.userStatus.userStatus.address}
-                        phone={this.props.userStatus.userStatus.phone}
-                        iin={this.props.userStatus.userStatus.iin}
-                        insuranceAmount={
-                          this.props.userStatus.userStatus.insuranceAmount
-                        }
-                        reward={this.props.userStatus.userStatus.reward}
-                        cardNumber={this.props.userStatus.userStatus.cardNumber}
-                        cardGiven={this.props.userStatus.userStatus.cardGiven}
-                        startCard={this.props.userStatus.userStatus.startCard}
-                        email={this.props.userStatus.userStatus.email}
-                        period={this.props.userStatus.userStatus.period}
-                      />
-                    </li>
-                    <li>
-                      <ApplicationRestructuringDocument
-                        fio={this.props.userStatus.userStatus.fio}
-                        iin={this.props.userStatus.userStatus.iin}
-                        cardNumber={this.props.userStatus.userStatus.cardNumber}
-                        phone={this.props.userStatus.userStatus.phone}
-                        period={this.props.userStatus.userStatus.period}
-                        moneyForRestructuring={
-                          +this.props.userStatus.userStatus.reward * 2
-                        }
-                        reward={this.props.userStatus.userStatus.reward}
-                        penalty={
-                          this.props.userStatus.userStatus.penalty
-                            ? this.props.userStatus.userStatus.penalty
-                            : 0
-                        }
-                      />
-                    </li>
-                    <li>
-                      <RestructuringAgreementDocument
-                        contractNumber={
-                          this.props.userStatus.userStatus.contractNumber
-                        }
-                        iin={this.props.userStatus.userStatus.iin}
-                        givenDate={this.props.userStatus.userStatus.givenDate}
-                        fio={this.props.userStatus.userStatus.fio}
-                        penalty={
-                          this.props.userStatus.userStatus.penalty
-                            ? this.props.userStatus.userStatus.penalty
-                            : 0
-                        }
-                        moneyForRestructuring={
-                          +this.props.userStatus.userStatus.reward * 2
-                        }
-                        period={this.props.userStatus.userStatus.period}
-                        cardNumber={this.props.userStatus.userStatus.cardNumber}
-                        startCard={this.props.userStatus.userStatus.startCard}
-                        endCard={this.props.userStatus.userStatus.endCard}
-                        cardGiven={this.props.userStatus.userStatus.cardGiven}
-                        address={this.props.userStatus.userStatus.address}
-                        phone={this.props.userStatus.userStatus.phone}
-                        email={this.props.userStatus.userStatus.email}
-                        main={this.props.userStatus.userStatus.main}
-                        total={this.props.userStatus.userStatus.total}
-                        reward={this.props.userStatus.userStatus.reward}
-                        endDate={this.props.userStatus.userStatus.endDate}
-                      />
-                    </li>
-                  </ul>
-                </div>
-              )}
             </div>
           </div>
         );
@@ -1166,7 +889,6 @@ class Status extends React.Component {
                   </button>
                 )}
               </div>
-              {this.props.userStatus.userStatus.doctype === 1 ? (
                 <div className="documents">
                   {i18n.language === "ru" ? (
                     <h4>
@@ -1274,139 +996,6 @@ class Status extends React.Component {
                     </li>
                   </ul>
                 </div>
-              ) : (
-                <div className="documents">
-                  {i18n.language === "ru" ? (
-                    <h4>
-                      Документы по договору{" "}
-                      <span>
-                        №{this.props.userStatus.userStatus.contractNumber} от{" "}
-                        {this.props.userStatus.userStatus.givenDate}
-                      </span>
-                    </h4>
-                  ) : (
-                    <h4>
-                      <span>
-                        №{this.props.userStatus.userStatus.contractNumber}{" "}
-                        {this.props.userStatus.userStatus.givenDate}
-                      </span>{" "}
-                      келісім-шарт бойынша құжаттар
-                    </h4>
-                  )}
-                  <ul className="documentsContainer">
-                    <li>
-                      <InsuranceApplicationDocument
-                        fio={this.props.userStatus.userStatus.fio}
-                        dateOfBirth={this.props.userReducer.user.UF_10}
-                        address={this.props.userStatus.userStatus.address}
-                        phone={this.props.userStatus.userStatus.phone}
-                        email={this.props.userStatus.userStatus.email}
-                        placeOfWork={this.props.userReducer.user.UF_31}
-                        position={this.props.userReducer.user.UF_33}
-                        iin={this.props.userStatus.userStatus.iin}
-                        cardNumber={this.props.userStatus.userStatus.cardNumber}
-                        startCard={this.props.userStatus.userStatus.startCard}
-                        endCard={this.props.userStatus.userStatus.endCard}
-                        placeOfBirth={this.props.userReducer.user.UF_46}
-                        insuranceAmount={
-                          this.props.userStatus.userStatus.insuranceAmount
-                        }
-                        givenDate={this.props.userStatus.userStatus.givenDate}
-                        code={this.props.userStatus.userStatus.code}
-                        period={this.props.userStatus.userStatus.period}
-                      />
-                    </li>
-                    <li>
-                      <MicrocreditInsuranceDocument
-                        fio={this.props.userStatus.userStatus.fio}
-                        dateOfBirth={this.props.userReducer.user.UF_10}
-                        address={this.props.userStatus.userStatus.address}
-                        iin={this.props.userStatus.userStatus.iin}
-                        cardNumber={this.props.userStatus.userStatus.cardNumber}
-                        contractNumber={
-                          this.props.userStatus.userStatus.contractNumber
-                        }
-                        insuranceAmount={
-                          this.props.userStatus.userStatus.insuranceAmount
-                        }
-                        code={this.props.userStatus.userStatus.code}
-                        period={this.props.userStatus.userStatus.period}
-                        reward={this.props.userStatus.userStatus.reward}
-                      />
-                    </li>
-                    <li>
-                      <InsuranceContractDocument
-                        contractNumber={
-                          this.props.userStatus.userStatus.contractNumber
-                        }
-                        givenDate={this.props.userStatus.userStatus.givenDate}
-                        endDate={this.props.userStatus.userStatus.endDate}
-                        fio={this.props.userStatus.userStatus.fio}
-                        address={this.props.userStatus.userStatus.address}
-                        phone={this.props.userStatus.userStatus.phone}
-                        iin={this.props.userStatus.userStatus.iin}
-                        insuranceAmount={
-                          this.props.userStatus.userStatus.insuranceAmount
-                        }
-                        reward={this.props.userStatus.userStatus.reward}
-                        cardNumber={this.props.userStatus.userStatus.cardNumber}
-                        cardGiven={this.props.userStatus.userStatus.cardGiven}
-                        startCard={this.props.userStatus.userStatus.startCard}
-                        email={this.props.userStatus.userStatus.email}
-                        period={this.props.userStatus.userStatus.period}
-                      />
-                    </li>
-                    <li>
-                      <ApplicationRestructuringDocument
-                        fio={this.props.userStatus.userStatus.fio}
-                        iin={this.props.userStatus.userStatus.iin}
-                        cardNumber={this.props.userStatus.userStatus.cardNumber}
-                        phone={this.props.userStatus.userStatus.phone}
-                        period={this.props.userStatus.userStatus.period}
-                        moneyForRestructuring={
-                          +this.props.userStatus.userStatus.reward * 2
-                        }
-                        reward={this.props.userStatus.userStatus.reward}
-                        penalty={
-                          this.props.userStatus.userStatus.penalty
-                            ? this.props.userStatus.userStatus.penalty
-                            : 0
-                        }
-                      />
-                    </li>
-                    <li>
-                      <RestructuringAgreementDocument
-                        contractNumber={
-                          this.props.userStatus.userStatus.contractNumber
-                        }
-                        iin={this.props.userStatus.userStatus.iin}
-                        givenDate={this.props.userStatus.userStatus.givenDate}
-                        fio={this.props.userStatus.userStatus.fio}
-                        penalty={
-                          this.props.userStatus.userStatus.penalty
-                            ? this.props.userStatus.userStatus.penalty
-                            : 0
-                        }
-                        moneyForRestructuring={
-                          +this.props.userStatus.userStatus.reward * 2
-                        }
-                        period={this.props.userStatus.userStatus.period}
-                        cardNumber={this.props.userStatus.userStatus.cardNumber}
-                        startCard={this.props.userStatus.userStatus.startCard}
-                        endCard={this.props.userStatus.userStatus.endCard}
-                        cardGiven={this.props.userStatus.userStatus.cardGiven}
-                        address={this.props.userStatus.userStatus.address}
-                        phone={this.props.userStatus.userStatus.phone}
-                        email={this.props.userStatus.userStatus.email}
-                        main={this.props.userStatus.userStatus.main}
-                        total={this.props.userStatus.userStatus.total}
-                        reward={this.props.userStatus.userStatus.reward}
-                        endDate={this.props.userStatus.userStatus.endDate}
-                      />
-                    </li>
-                  </ul>
-                </div>
-              )}
             </div>
           </div>
         );
@@ -1561,7 +1150,6 @@ class Status extends React.Component {
                 )}
               </div>
 
-              {this.props.userStatus.userStatus.doctype === 1 ? (
                 <div className="documents">
                   {i18n.language === "ru" ? (
                     <h4>
@@ -1669,139 +1257,6 @@ class Status extends React.Component {
                     </li>
                   </ul>
                 </div>
-              ) : (
-                <div className="documents">
-                  {i18n.language === "ru" ? (
-                    <h4>
-                      Документы по договору{" "}
-                      <span>
-                        №{this.props.userStatus.userStatus.contractNumber} от{" "}
-                        {this.props.userStatus.userStatus.givenDate}
-                      </span>
-                    </h4>
-                  ) : (
-                    <h4>
-                      <span>
-                        №{this.props.userStatus.userStatus.contractNumber}{" "}
-                        {this.props.userStatus.userStatus.givenDate}
-                      </span>{" "}
-                      келісім-шарт бойынша құжаттар
-                    </h4>
-                  )}
-                  <ul className="documentsContainer">
-                    <li>
-                      <InsuranceApplicationDocument
-                        fio={this.props.userStatus.userStatus.fio}
-                        dateOfBirth={this.props.userReducer.user.UF_10}
-                        address={this.props.userStatus.userStatus.address}
-                        phone={this.props.userStatus.userStatus.phone}
-                        email={this.props.userStatus.userStatus.email}
-                        placeOfWork={this.props.userReducer.user.UF_31}
-                        position={this.props.userReducer.user.UF_33}
-                        iin={this.props.userStatus.userStatus.iin}
-                        cardNumber={this.props.userStatus.userStatus.cardNumber}
-                        startCard={this.props.userStatus.userStatus.startCard}
-                        endCard={this.props.userStatus.userStatus.endCard}
-                        placeOfBirth={this.props.userReducer.user.UF_46}
-                        insuranceAmount={
-                          this.props.userStatus.userStatus.insuranceAmount
-                        }
-                        givenDate={this.props.userStatus.userStatus.givenDate}
-                        code={this.props.userStatus.userStatus.code}
-                        period={this.props.userStatus.userStatus.period}
-                      />
-                    </li>
-                    <li>
-                      <MicrocreditInsuranceDocument
-                        fio={this.props.userStatus.userStatus.fio}
-                        dateOfBirth={this.props.userReducer.user.UF_10}
-                        address={this.props.userStatus.userStatus.address}
-                        iin={this.props.userStatus.userStatus.iin}
-                        cardNumber={this.props.userStatus.userStatus.cardNumber}
-                        contractNumber={
-                          this.props.userStatus.userStatus.contractNumber
-                        }
-                        insuranceAmount={
-                          this.props.userStatus.userStatus.insuranceAmount
-                        }
-                        code={this.props.userStatus.userStatus.code}
-                        period={this.props.userStatus.userStatus.period}
-                        reward={this.props.userStatus.userStatus.reward}
-                      />
-                    </li>
-                    <li>
-                      <InsuranceContractDocument
-                        contractNumber={
-                          this.props.userStatus.userStatus.contractNumber
-                        }
-                        givenDate={this.props.userStatus.userStatus.givenDate}
-                        endDate={this.props.userStatus.userStatus.endDate}
-                        fio={this.props.userStatus.userStatus.fio}
-                        address={this.props.userStatus.userStatus.address}
-                        phone={this.props.userStatus.userStatus.phone}
-                        iin={this.props.userStatus.userStatus.iin}
-                        insuranceAmount={
-                          this.props.userStatus.userStatus.insuranceAmount
-                        }
-                        reward={this.props.userStatus.userStatus.reward}
-                        cardNumber={this.props.userStatus.userStatus.cardNumber}
-                        cardGiven={this.props.userStatus.userStatus.cardGiven}
-                        startCard={this.props.userStatus.userStatus.startCard}
-                        email={this.props.userStatus.userStatus.email}
-                        period={this.props.userStatus.userStatus.period}
-                      />
-                    </li>
-                    <li>
-                      <ApplicationRestructuringDocument
-                        fio={this.props.userStatus.userStatus.fio}
-                        iin={this.props.userStatus.userStatus.iin}
-                        cardNumber={this.props.userStatus.userStatus.cardNumber}
-                        phone={this.props.userStatus.userStatus.phone}
-                        period={this.props.userStatus.userStatus.period}
-                        moneyForRestructuring={
-                          +this.props.userStatus.userStatus.reward * 2
-                        }
-                        reward={this.props.userStatus.userStatus.reward}
-                        penalty={
-                          this.props.userStatus.userStatus.penalty
-                            ? this.props.userStatus.userStatus.penalty
-                            : 0
-                        }
-                      />
-                    </li>
-                    <li>
-                      <RestructuringAgreementDocument
-                        contractNumber={
-                          this.props.userStatus.userStatus.contractNumber
-                        }
-                        iin={this.props.userStatus.userStatus.iin}
-                        givenDate={this.props.userStatus.userStatus.givenDate}
-                        fio={this.props.userStatus.userStatus.fio}
-                        penalty={
-                          this.props.userStatus.userStatus.penalty
-                            ? this.props.userStatus.userStatus.penalty
-                            : 0
-                        }
-                        moneyForRestructuring={
-                          +this.props.userStatus.userStatus.reward * 2
-                        }
-                        period={this.props.userStatus.userStatus.period}
-                        cardNumber={this.props.userStatus.userStatus.cardNumber}
-                        startCard={this.props.userStatus.userStatus.startCard}
-                        endCard={this.props.userStatus.userStatus.endCard}
-                        cardGiven={this.props.userStatus.userStatus.cardGiven}
-                        address={this.props.userStatus.userStatus.address}
-                        phone={this.props.userStatus.userStatus.phone}
-                        email={this.props.userStatus.userStatus.email}
-                        main={this.props.userStatus.userStatus.main}
-                        total={this.props.userStatus.userStatus.total}
-                        reward={this.props.userStatus.userStatus.reward}
-                        endDate={this.props.userStatus.userStatus.endDate}
-                      />
-                    </li>
-                  </ul>
-                </div>
-              )}
             </div>
           </div>
         );
@@ -1932,6 +1387,38 @@ class Status extends React.Component {
           </div>
         );
       case 12:
+
+        const getTimeRemaining = (endTime) => {
+          const t = Date.parse(endTime) - Date.parse(new Date);
+          let days = Math.floor(t / (1000 * 60 * 60 * 24));
+          let hours = Math.floor((t / (1000 * 60 * 60)) % 24) - 6;
+          let minutes = Math.floor((t / (1000 * 60)) % 60);
+          let seconds = Math.floor((t / 1000) % 60);
+
+          if(t <= 0) {
+            this.setState({
+              timeChSI: false
+            });
+          };
+
+          const getZero = (num) => {
+            if(num >= 0 && num < 10) {
+              return `0${num}`;
+            } else {
+              return num;
+            };
+          };
+
+          this.setState({
+            days: getZero(days),
+            hours: getZero(hours),
+            minutes: getZero(minutes),
+            seconds: getZero(seconds)
+          })
+        };
+
+        setInterval(() => getTimeRemaining('2022-07-30'), 1000)
+
         return (
           <div className="container">
             <div
@@ -1958,7 +1445,7 @@ class Status extends React.Component {
                       textAlign: "center",
                     }}
                   >
-                    Действует только до 30.06.2022г!
+                    Действует только до 30.07.2022г.!
                   </p>
                   <hr />
                   <h3
@@ -2004,19 +1491,19 @@ class Status extends React.Component {
                     <div className="title">Акция закончится через:</div>
                     <div className="timer">
                       <div className="timer__block">
-                        <span id="days">12</span>
+                        <span id="days">{this.state.days}</span>
                         дней
                       </div>
                       <div className="timer__block">
-                        <span id="hours">20</span>
+                        <span id="hours">{this.state.hours}</span>
                         часов
                       </div>
                       <div className="timer__block">
-                        <span id="minutes">56</span>
+                        <span id="minutes">{this.state.minutes}</span>
                         минут
                       </div>
                       <div className="timer__block">
-                        <span id="seconds">20</span>
+                        <span id="seconds">{this.state.seconds}</span>
                         секунд
                       </div>
                     </div>

@@ -47,19 +47,6 @@ function Conditions() {
               </div>
             </div>
           </section>
-          {/* <section className="conditions">
-            <div className="condition row">
-              <div className="condition--head col-md-7">
-                <img src={require("../../img/svg/icon 5.svg")} className="mb-5" />
-                <p>Методы взыскания <br />задолженности</p>
-              </div>
-              <div className="condition--info col-md-5">
-                <p>В случае просрочки, будет применены все законные средства взыскания задолженности. А также
-                  все данные по микрокредиту будут переданы в кредитные бюро, что может повлиять на кредитную историю
-                  заемщика.</p>
-              </div>
-            </div>
-          </section> */}
         </div>
       </section>
         </div>

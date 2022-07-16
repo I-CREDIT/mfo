@@ -1,8 +1,5 @@
 import React from 'react';
-import InputMask from "react-input-mask";
 import Spinner from 'react-spinner-material';
-import MaskedInput from 'react-text-mask';
-import {validEmail, requiredd, iinValidation} from '../../defaults/validations';
 import axios from 'axios'
 import {Formik, Form, ErrorMessage, FieldArray, Field} from 'formik';
 import Head from 'next/head'
@@ -21,41 +18,41 @@ class Feedback extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
- async handleSubmit(values,resetForm) {
+  async handleSubmit(values,resetForm) {
 
-  if(!values.name || !values.feedback ) {
-    this.setState({
-      errorMessage: "Введите все данные",
-      message: null
-    })
-  }
-  else {
-   this.setState({
-     btnLoading:true,
-     errorMessage: null,
-   })
-   resetForm({})
-  await axios.post(`https://api.money-men.kz/api/send_feedback`, values)
-    .then((response) => {
+    if(!values.name || !values.feedback ) {
       this.setState({
-        btnLoading: false,
-        message: "Успешно отправлено! Спасибо за отзыв"
+        errorMessage: "Введите все данные",
+        message: null
       })
-      scrollToElement('.alert-success', {
-        offset: 0,
-        align: 'middle',
-        ease: 'outExpo',
-        duration: 600
-      });
-    })
-    .catch((error) => {
-      console.log(error)
+    }
+    else {
       this.setState({
-        btnLoading: false
+        btnLoading:true,
+        errorMessage: null,
       })
-    });
+      resetForm({})
+      await axios.post(`https://api.money-men.kz/api/send_feedback`, values)
+        .then(() => {
+          this.setState({
+            btnLoading: false,
+            message: "Успешно отправлено! Спасибо за отзыв"
+          })
+          scrollToElement('.alert-success', {
+            offset: 0,
+            align: 'middle',
+            ease: 'outExpo',
+            duration: 600
+          });
+        })
+        .catch((error) => {
+          console.log(error)
+          this.setState({
+            btnLoading: false
+          })
+        });
+    }
   }
-}
   render() {
     return (
       <div>
@@ -74,7 +71,7 @@ class Feedback extends React.Component {
                     this.handleSubmit(values,resetForm)
                   }}
                 >
-                {({ errors, touched, isValidating, isSubmitting }) =>(
+                {() =>(
                   <Form className="oplataform">
                     {this.state.message !== null ?
                       <div className="alert alert-success" role="alert">

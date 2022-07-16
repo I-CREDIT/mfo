@@ -223,9 +223,6 @@ class AdminCabinet extends React.Component {
   }
 }
 
-// const mapStateToProps = ({ usersReducer: { user: { UF9} } }) => ({
-// username: UF9 })
-
 export default withAuth(
   connect(mapStateToProps, mapDispatchToProps)(withUseTranslation(AdminCabinet))
 );

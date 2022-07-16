@@ -61,7 +61,6 @@ const Navbar = () => {
   }
 
   const headerBackgroundOnClick = () => {
-    const navigationBar = document.querySelector('#navigationBar')
     if(window.pageYOffset == 0) {
       document.querySelector('.navbar').classList.toggle('fade-color')
     }

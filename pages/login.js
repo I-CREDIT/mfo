@@ -14,8 +14,6 @@ import cookie from "js-cookie";
 // Перевод для классового компонента
 import withUseTranslation from "../public/js/hocs/useTranslation";
 
-var scrollToElement = require("scroll-to-element");
-
 const AppLink = ({ children, className, href }) => (
   <Link href={href}>
     <a className={className}>{children}</a>
@@ -56,15 +54,9 @@ class Login extends React.Component {
       errorMessage: null,
     };
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.redirectFunc = this.redirectFunc.bind(this);
-  }
-
-  redirectFunc() {
-    Router.push("/");
   }
 
   handleSubmit(values) {
-    //  e.preventDefault();
 
     if (!required(values.iin) || !required(values.password)) {
       this.setState({
@@ -101,7 +93,7 @@ class Login extends React.Component {
                     this.handleSubmit(values);
                   }}
                 >
-                  {({ errors, touched, isValidating, isSubmitting }) => (
+                  {({ errors, touched }) => (
                     <Form className="oplataform">
                       <h2 className="text-center mb-5">{t("login-title-1")}</h2>
                       {this.props.successMessage !== null ? (
