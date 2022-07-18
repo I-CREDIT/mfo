@@ -56,10 +56,6 @@ class CodeConfirmBMG extends React.Component {
     progress.style.opacity = 1;
   }
 
-  sendCode = () => {
-    this.props.getSMSFromBMG(this.props.registrationValues);
-  };
-
   handleSubmit = (vals) => {
     let object = {};
     object.code = vals.code;
@@ -138,11 +134,6 @@ class CodeConfirmBMG extends React.Component {
             )}
           </div>
         </Form>
-        {/*<div className="button form-group  codeConfirm mb-5">*/}
-        {/*  <button className="newCode" onClick={this.sendCode}>*/}
-        {/*    Получить новый код*/}
-        {/*  </button>*/}
-        {/*</div>*/}
       </div>
     );
   }

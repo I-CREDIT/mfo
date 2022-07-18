@@ -136,7 +136,6 @@ class FormRegister extends React.Component {
 
     this.toggleModal = this.toggleModal.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleSubmitFail = this.handleSubmitFail.bind(this);
     this.handleCheck = this.handleCheck.bind(this);
     this.handleFocus = this.handleFocus.bind(this);
     this.onChange = this.onChange.bind(this);
@@ -163,16 +162,6 @@ class FormRegister extends React.Component {
     value = value.replace(/[^A-Za-z]/gi, "");
   };
 
-  handleSubmitFail = (errors) => {
-    let key = Object.keys(errors).reduce((k, l) => {
-      return document.getElementsByName(k)[0].offsetTop <
-        document.getElementsByName(l)[0].offsetTop
-        ? k
-        : l;
-    });
-    window.scrollTo(0, document.getElementsByName(key)[0].offsetTop - 100);
-  };
-
   handleSubmit(values) {
     if (!validage(values.iin)) {
       // Проверка возвраста по иин
@@ -192,9 +181,6 @@ class FormRegister extends React.Component {
         "error"
       );
       return;
-      // setTimeout(() => {
-      //   Router.push('/')
-      // }, 5000);
     }
 
     if (ifSaled(values.iin)) {
@@ -481,25 +467,6 @@ class FormRegister extends React.Component {
                       <div className="text-danger">{t(errors.password)}</div>
                     )}
                   </div>
-
-                  {/*<div className="col-12 mb-2">*/}
-                  {/*  <Label htmlFor="phone">{t("password-repeat")}</Label>*/}
-                  {/*  <div className="input-group">*/}
-                  {/*    <Field*/}
-                  {/*      name="password_confirmation"*/}
-                  {/*      className="form-control"*/}
-                  {/*      type="password"*/}
-                  {/*      validate={requiredd}*/}
-                  {/*      placeholder={t("password-repeat")}*/}
-                  {/*    />*/}
-                  {/*  </div>*/}
-                  {/*  {errors.password_confirmation &&*/}
-                  {/*    touched.password_confirmation && (*/}
-                  {/*      <div className="text-danger">*/}
-                  {/*        {t(errors.password_confirmation)}*/}
-                  {/*      </div>*/}
-                  {/*    )}*/}
-                  {/*</div>*/}
                 </div>
 
                 <div className="col-12 mb-2 form-group d-flex align-items-center col-12 mx-auto">
@@ -555,12 +522,6 @@ class FormRegister extends React.Component {
                     </div>
                   ) : (
                     <div className="registration-buttons">
-                      {/*<button*/}
-                      {/*  onClick={() => this.toggleHideBMG()}*/}
-                      {/*  className="agreement-btn"*/}
-                      {/*>*/}
-                      {/*  Регистрация вручную*/}
-                      {/*</button>*/}
                       <button
                         disabled={!this.state.checked}
                         type="submit"
@@ -843,25 +804,7 @@ class FormRegister extends React.Component {
                       <div className="text-danger">{t(errors.password)}</div>
                     )}
                   </div>
-
-                  {/*<div className="col-12 mb-2">*/}
-                  {/*  <Label htmlFor="phone">{t("password-repeat")}</Label>*/}
-                  {/*  <div className="input-group">*/}
-                  {/*    <Field*/}
-                  {/*      name="password_confirmation"*/}
-                  {/*      className="form-control"*/}
-                  {/*      type="password"*/}
-                  {/*      validate={requiredd}*/}
-                  {/*      placeholder={t("password-repeat")}*/}
-                  {/*    />*/}
-                  {/*  </div>*/}
-                  {/*  {errors.password_confirmation &&*/}
-                  {/*    touched.password_confirmation && (*/}
-                  {/*      <div className="text-danger">*/}
-                  {/*        {t(errors.password_confirmation)}*/}
-                  {/*      </div>*/}
-                  {/*    )}*/}
-                  {/*</div>*/}
+                  
                 </div>
                 <div className="col-12 mb-2 form-group d-flex align-items-center col-12 mx-auto">
                   <input
@@ -916,12 +859,6 @@ class FormRegister extends React.Component {
                     </div>
                   ) : (
                     <div className="registration-buttons">
-                      {/*<button*/}
-                      {/*  onClick={() => this.toggleHideBMG()}*/}
-                      {/*  className="agreement-btn"*/}
-                      {/*>*/}
-                      {/*  Регистрация egov*/}
-                      {/*</button>*/}
                       <button
                         disabled={!this.state.checked}
                         type="submit"

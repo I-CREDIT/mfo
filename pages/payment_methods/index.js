@@ -7,6 +7,7 @@ import Head from 'next/head'
 import withUseTranslation from "../../public/js/hocs/useTranslation";
 
 var scrollToElement = require('scroll-to-element');
+
 const AppLink = ({children, className, href}) =>
   <Link href={href}>
     <a className={className}>{children}</a>
@@ -76,27 +77,15 @@ class Instruction extends React.Component {
                         <p className="instTop">
                         1. {t('voprosi--top-1-1')}
                         </p>
-                        {/* <div className="instruction--img mb-5">
-                          <img src={require("../../img/qiwi/qw.png")} />
-                        </div> */}
                         <p className="instTop">
                           2. {t('voprosi--top-1-2')}
                         </p>
-                        {/* <div className="instruction--img mb-5">
-                          <img src={require("../../img/qiwi/qw2.png")} />
-                        </div> */}
                         <p className="instTop">
                           3. {t('voprosi--top-1-3')}
                         </p>
-                        {/* <div className="instruction--img mb-5">
-                          <img src={require("../../img/qiwi/qw3.png")} />
-                        </div> */}
                         <p className="instTop">
                           4. {t('voprosi--top-1-4')}
                         </p>
-                        {/* <div className="instruction--img mb-5">
-                          <img src={require("../../img/qiwi/qw4.png")} />
-                        </div> */}
 
                       </div>
                     </div>

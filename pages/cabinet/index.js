@@ -1,10 +1,8 @@
-import React from "react";
-import { connect } from "react-redux";
-import withAuth from "../../components/hocs/withAuth";
-import usersReducer from "../../store/reducers/userReducer";
-import { helloUser } from "../../defaults/hello";
-import Spinner from "react-spinner-material";
-import Router from "next/router";
+import React from 'react'
+import {connect} from 'react-redux'
+import withAuth from '../../components/hocs/withAuth'
+import {helloUser} from '../../defaults/hello'
+import Router from 'next/router'
 import swal from "sweetalert";
 import axios from "axios";
 

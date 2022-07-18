@@ -59,12 +59,6 @@ const CardInput = (props) => (
 const ExpireDateInput = (props) => (
   <InputMask mask="99/99" className="my-input" {...props} />
 );
-const idCardNumber = (props) => (
-  <InputMask mask="999999999" className="my-input" {...props} />
-);
-const dateofIdCard = (props) => (
-  <InputMask mask="99.99.9999" className="my-input" {...props} />
-);
 class FormRegister extends React.Component {
   constructor(props) {
     super(props);
@@ -76,7 +70,6 @@ class FormRegister extends React.Component {
     };
     this.toggleModal = this.toggleModal.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleCheck = this.handleCheck.bind(this);
     this.handleFocus = this.handleFocus.bind(this);
   }
 
@@ -97,14 +90,6 @@ class FormRegister extends React.Component {
     }, 100);
     localStorage.removeItem("step");
   }
-  handlePhone = (e) => {
-    this.setState({ phone: e.target.value });
-  };
-  handleCheck = (e) => {
-    this.setState({
-      checked: !this.state.checked,
-    });
-  };
 
   handleSubmit(values) {
     if (!isValidIBANNumber(values.iban_account)) {
@@ -345,7 +330,6 @@ class FormRegister extends React.Component {
   }
 
   render() {
-    const { history } = this.props;
     const ibanMessage =
       isValidIBANNumber(this.props.registration3.iban_account) ||
       `Временно не принимаем карты данного банка. Попробуйте ввести другой IBAN.`;

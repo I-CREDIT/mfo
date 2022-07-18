@@ -5,7 +5,6 @@ import { Modal, ModalHeader, ModalBody } from 'reactstrap';
 import {connect} from 'react-redux'
 import MessageDetail from '../components/shared/messageDetailed'
 import {helloUser} from '../defaults/hello'
-import disableScroll from 'disable-scroll';
 import cookie from 'js-cookie'
 const mapStateToProps = state => {
   return {nonanswered: state.nonanswered, answered: state.answered}
@@ -143,15 +142,6 @@ ${this.state.answer.split('%0A')}%0A%0A
                 </div>
             )
         }
-        // if (this.props.nonanswered.nonanswered.length === 0 && this.props.nonanswered.isLoading=== false) {
-        //     return (<div className='mb-5 container otherPages'>
-        //          {this.state.answers ?  <button active className='btn btn-dark mb-3' onClick={() => this.handleAnswered()}>Получить неотвеченные</button> 
-                
-        //         :   <button active className='btn btn-dark mb-3 mr-3' onClick={() => this.handleAnswered()}>Получить отвеченные</button>}
-        //         <h4 className='mb-3 text-center'>Неотвеченные вопросы</h4>
-        //         <p className='text-center'>Нет вопросов</p>
-        //     </div>)
-        // }
         if(this.props.nonanswered.isLoading) {
             return (
                 <div className='container  otherPages text-center'>

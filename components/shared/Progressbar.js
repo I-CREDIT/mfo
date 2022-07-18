@@ -48,7 +48,7 @@ class ProgressBar extends Component {
 
     this.handleChangeMoney = this.handleChangeMoney.bind(this);
     this.handleChangeDay = this.handleChangeDay.bind(this);
-    this.handleFocus = this.handleFocus.bind(this);
+
     this.close = this.close.bind(this);
     this.open = this.open.bind(this);
     this.handleRepeatedZaim = this.handleRepeatedZaim.bind(this);
@@ -58,7 +58,7 @@ class ProgressBar extends Component {
     this.setState({ showMessage: false });
   }
 
-  handleFocus() {}
+
   async handleRepeatedZaim(values) {
     values.UF_2 = this.props.moneyVal;
     values.UF_3 = this.props.dayVal;
@@ -132,15 +132,10 @@ class ProgressBar extends Component {
     // this.props.changingDay(event.target.value);
   }
 
-  render() {
-    const spaceNum = (val) => {
-      var splitIndex = ((val.length + 2) % 3) + 1;
-      val =
-        val.valubstr(0, splitIndex) +
-        val.substr(splitIndex).replace(/\d\d\d/g, " $&");
-    };
-    // Достаем функцию-переводчик
-    const { t } = this.props.useTranslationValue;
+
+    render()  {
+        // Достаем функцию-переводчик
+        const { t } = this.props.useTranslationValue
 
     const vozvrat = Math.round(
       Math.floor(
@@ -155,7 +150,7 @@ class ProgressBar extends Component {
     const strahovanie = osnovnoiDolg - this.props.moneyVal;
     const voznograzhdenie = osnovnoiDolg - this.props.moneyVal;
     return (
-      <div className="calculator-band row " onClick={this.handleFocus}>
+      <div className="calculator-band row ">
         <div className="progress-bars col-md-4">
           <div id="money" className="money">
             <input

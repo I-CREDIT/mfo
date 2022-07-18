@@ -1,12 +1,10 @@
 import React from 'react';
-import InputMask from "react-input-mask";
 import Spinner from 'react-spinner-material';
 import MaskedInput from 'react-text-mask';
 import {validEmail, iin} from '../../defaults/validationredux';
-import {iinValidation, requiredd} from '../../defaults/validations'
 import axios from 'axios'
 import Head from 'next/head'
-import {Formik, Form, ErrorMessage, FieldArray, Field} from 'formik';
+import {Formik, Form, Field} from 'formik';
 var scrollToElement = require('scroll-to-element');
 
 const maskIin = [

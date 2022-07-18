@@ -78,11 +78,7 @@ class Aggrement extends React.Component {
         console.log(response)
         if(response.data.success) {
           this.setState({
-            // docs: response.data.docs,
-            // id: response.data.id,
-            // id_req: response.data.id_req,
             loading: false,
-            // rest: response.data.rest,
             leadID: response.data.leadID,
             phone2: response.data.phone,
             fio: response.data.fio,
@@ -113,7 +109,7 @@ class Aggrement extends React.Component {
         }
 
       })
-      .catch(error => {
+      .catch(() => {
         this.setState({
           loading: false
         })
@@ -125,11 +121,7 @@ class Aggrement extends React.Component {
         console.log(response)
         if(response.data.success) {
           this.setState({
-            // docs: response.data.docs,
-            // id: response.data.id,
-            // id_req: response.data.id_req,
             loading: false,
-            // rest: response.data.rest,
             leadID: response.data.leadID,
             phone2: response.data.phone,
             fio: response.data.fio,
@@ -160,7 +152,7 @@ class Aggrement extends React.Component {
         }
 
       })
-      .catch(error => {
+      .catch(() => {
         this.setState({
           loading: false
         })
@@ -297,9 +289,6 @@ class Aggrement extends React.Component {
                 <h4 align="center">Соглашение пользователя</h4>
 
                 <ul className='complete'>
-                {/* {this.state.docs.map(doc=> (
-                    <li className={doc.link===null? 'd-none' : ''}><img className='checkedComplete' src={require("../img/checked.png")} /><a href={doc.link} target="_blank">{doc.name}</a></li>
-                ))} */}
                   <li>
                     <img className='checkedComplete' src={require("../img/checked.png")} />
                     <InsuranceApplicationDocument 

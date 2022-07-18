@@ -4,11 +4,7 @@ import MaskedInput from "react-text-mask";
 import { Formik, Form, Field } from "formik";
 import Link from "next/link";
 import { connect } from "react-redux";
-import {
-  loginUser,
-  fetchCurrentUser,
-  loginAdmin,
-} from "../store/actions/userAction";
+import { loginUser, fetchCurrentUser } from "../store/actions/userAction";
 import { emptyMessage } from "../store/actions/ActionCreators";
 import Router from "next/router";
 import { required } from "../defaults/validationredux";
@@ -17,8 +13,6 @@ import cookie from "js-cookie";
 
 // Перевод для классового компонента
 import withUseTranslation from "../public/js/hocs/useTranslation";
-
-var scrollToElement = require("scroll-to-element");
 
 const AppLink = ({ children, className, href }) => (
   <Link href={href}>
@@ -60,15 +54,9 @@ class Login extends React.Component {
       errorMessage: null,
     };
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.redirectFunc = this.redirectFunc.bind(this);
-  }
-
-  redirectFunc() {
-    Router.push("/");
   }
 
   handleSubmit(values) {
-    //  e.preventDefault();
 
     if (!required(values.iin) || !required(values.password)) {
       this.setState({
@@ -76,7 +64,6 @@ class Login extends React.Component {
       });
     } else {
       this.props.loginUser(values);
-      this.props.loginAdmin(values);
       this.setState({
         errorMessage: null,
       });
@@ -106,7 +93,7 @@ class Login extends React.Component {
                     this.handleSubmit(values);
                   }}
                 >
-                  {({ errors, touched, isValidating, isSubmitting }) => (
+                  {({ errors, touched }) => (
                     <Form className="oplataform">
                       <h2 className="text-center mb-5">{t("login-title-1")}</h2>
                       {this.props.successMessage !== null ? (
@@ -212,5 +199,4 @@ export default connect(mapStateToProps, {
   loginUser,
   fetchCurrentUser,
   emptyMessage,
-  loginAdmin,
 })(withUseTranslation(Login));

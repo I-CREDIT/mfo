@@ -1,19 +1,15 @@
 import React from "react";
 import InputMask from "react-input-mask";
 import Spinner from "react-spinner-material";
-// import {validEmail, requiredd, iinValidation} from '../../defaults/validations';
 import axios from "axios";
-import { Formik, Form, ErrorMessage, FieldArray, Field } from "formik";
+import { Formik, Form, Field } from "formik";
 import { connect } from "react-redux";
 import Link from "next/link";
 import {
-  validEmail,
-  required,
   iin,
   phoneCheck,
 } from "../defaults/validationredux";
 import { successMessage, emptyMessage } from "../store/actions/ActionCreators";
-import Router from "next/router";
 
 const PhoneMask = ({ field, form, ...props }) => (
   <InputMask
@@ -157,7 +153,7 @@ class Login extends React.Component {
                     this.handleSubmit(values);
                   }}
                 >
-                  {({ errors, touched, isValidating, isSubmitting }) => (
+                  {() => (
                     <Form className="oplataform">
                       <h2 className="text-center mb-5">Сброс пароля</h2>
                       {this.state.message !== null ? (

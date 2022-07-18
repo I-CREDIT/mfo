@@ -3,13 +3,6 @@ import Router from 'next/router'
 import axios from 'axios'
 import swal from 'sweetalert'
 import Head from 'next/head'
-import pdfMake from "pdfmake/build/pdfmake";
-import pdfFonts from "pdfmake/build/vfs_fonts";
-import insuranceApplication from '../components/document_1/insuranceApplication'
-import microcreditInsurance from '../components/document_1/microcreditInsurance'
-import insuranceContract from '../components/document_1/insuranceContract'
-import microcreditAgreement from '../components/document_1/microcreditAgreement'
-import usersReducer from "../store/reducers/userReducer";
 
 // camera (catch photo)
 import { CameraFeed } from "../components/CameraFeed/CameraFeed";
@@ -21,34 +14,21 @@ const mapStateToProps = state => {
   return {userReducer: state.userReducer}
 }
 
-pdfMake.vfs = pdfFonts.pdfMake.vfs;
-pdfMake.fonts = {
-  TimesNewRoman: {
-    normal: 'TimesNewRoman.ttf',
-    bold: 'TimesNewRomanBold.ttf',
-    italics: 'TimesNewRomanItalics.ttf',
-    bolditalics: 'TimesNewRomanBoldItalics.ttf'
-  },
-  emptyCheckbox: {
-    normal: 'emptyCheckbox.ttf'
-  }
-}
+// function getUrlParameter(name) {
+//   name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+//   var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+//   var results = regex.exec(location.search);
+//   return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+// }
 
-function getUrlParameter(name) {
-  name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
-  var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
-  var results = regex.exec(location.search);
-  return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
-}
-
-const userToken = () => {
-  if(getUrlParameter('token').length !== 0) {
-    return getUrlParameter('token')
-  }
-  else {
-    return null
-  }
-}
+// const userToken = () => {
+//   if(getUrlParameter('token').length !== 0) {
+//     return getUrlParameter('token')
+//   }
+//   else {
+//     return null
+//   }
+// }
 
 class Agreement extends React.Component {
   constructor(props) {
@@ -304,10 +284,6 @@ class Agreement extends React.Component {
                   {this.state.docs.map(doc=> (
                       <li className={doc.link===null? 'd-none' : ''}><img className='checkedComplete' src={require("../img/checked.png")} /><a href={doc.link} target="_blank">{doc.name}</a></li>
                   ))}
-                  {/* <li><img className='checkedComplete' src={require("../img/checked.png")} /><a onClick={() => pdfMake.createPdf(insuranceApplication).open()}>Заявление на страхование</a></li>
-                  <li><img className='checkedComplete' src={require("../img/checked.png")} /><a onClick={() => pdfMake.createPdf(microcreditInsurance).open()}>Согласие на страхование микрокредита</a></li>
-                  <li><img className='checkedComplete' src={require("../img/checked.png")} /><a onClick={() => pdfMake.createPdf(insuranceContract).open()}>Договор добровольного срочного страхования жизни</a></li>
-                  <li><img className='checkedComplete' src={require("../img/checked.png")} /><a onClick={() => pdfMake.createPdf(microcreditAgreement).open()}>Договор о предоставлении микрокредита</a></li> */}
                 </ul>
                 <div className="repeatBtn form-group" >
                   {this.state.rest === true ?   <button onClick={() => this.sendAgreementStatusWithRest()} className='mt-5' >Соглашаюсь</button> :

@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { relative_type, speciality } from "../../defaults/defaultRelative";
 import {
   required,
   phoneValidation,
   acceptCirrilic,
-  getAge,
   requiredd,
 } from "../../defaults/validations";
 import cookie from "js-cookie";
@@ -26,17 +25,10 @@ const PhoneMask = ({ field, form, ...props }) => (
   />
 );
 
-const ContinueStep2 = ({ next, setNext }) => {
+const ContinueStep2 = () => {
   // Translation
   const { t } = useTranslation();
-
-  const [regions, setRegions] = useState({});
-  const [checked, setChecked] = useState(
-    cookie.get("continueChecked") ? cookie.get("continueChecked") : false
-  );
-  const [city, setCity] = useState(
-    cookie.get("continue2") ? JSON.parse(cookie.get("continue2")).UF_17 : ""
-  );
+  
   let scrollToElement = require("scroll-to-element");
 
   const handleFocus = () => {

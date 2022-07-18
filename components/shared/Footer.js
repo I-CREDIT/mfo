@@ -30,7 +30,6 @@ const Footer = () => {
   // Translation
   const { t } = useTranslation()
 
-  const classes = useStyles();
   return (
     <footer className={router.pathname.includes('admin') ? 'd-none footer mt-5 mb-5' :  'footer mt-5 mb-5'}>
 
@@ -103,30 +102,6 @@ const Footer = () => {
                 </div>
               </AccordionDetails>
             </Accordion>
-            {/*<div className="col-md-4  footerCol">*/}
-            {/*  <div className="extra-info">*/}
-            {/*    <img src={require("../../img/svg/Оферта.svg")} />*/}
-            {/*    <a href="https://i-credit.kz/docs/rules.pdf" target="_blank">*/}
-            {/*      <h5>*/}
-            {/*        {t('extra-info-1-1')}*/}
-            {/*        <br/>*/}
-            {/*        {t('extra-info-1-2')}*/}
-            {/*      </h5>*/}
-            {/*    </a>*/}
-            {/*  </div>*/}
-            {/*</div>*/}
-            {/*<div className="col-md-4 footerCol">*/}
-            {/*  <div className="extra-info">*/}
-            {/*    <img src={require("../../img/svg/Оферта.svg")} />*/}
-            {/*    <a href="https://i-credit.kz/docs/licence.pdf" target="_blank">*/}
-            {/*      <h5>*/}
-            {/*        {t('extra-info-2-1')}*/}
-            {/*        <br/>*/}
-            {/*        {t('extra-info-2-2')}*/}
-            {/*      </h5>*/}
-            {/*    </a>*/}
-            {/*  </div>*/}
-            {/*</div>*/}
           </div>
         </div>
       </footer>

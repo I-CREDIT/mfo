@@ -13,7 +13,6 @@ import axios from "axios";
 import Status from "../../components/shared/userStatus";
 import History from "../../components/shared/userHistory";
 import { ifSaled } from "../../defaults/saled";
-import { Formik, Form, Field } from 'formik';
 
 // Перевод для классового компонента
 import withUseTranslation from "../../public/js/hocs/useTranslation";
@@ -40,9 +39,7 @@ class Cabinet extends React.Component {
       sendRepeat: true,
       step: "",
       repeatMessage: "",
-      searched: false
     };
-    this.handleSubmit = this.handleSubmit.bind(this)
   }
 
   canSendRepeat() {
@@ -52,9 +49,7 @@ class Cabinet extends React.Component {
       })
       .then((response) => {
         if (response.data.success) {
-          // Router.push('/cabinet/repeated')
           this.setState({ sendRepeat: true });
-          // this.setState({btnLoading: false})
         } else {
           this.setState({ sendRepeat: false });
           this.setState({ repeatMessage: response.data.message });
@@ -83,24 +78,6 @@ class Cabinet extends React.Component {
         }
       })
       .catch((error) => console.log(error));
-  }
-
-  handleSubmit(values) {
-    let newObj = {}
-    let token = cookie.get("token")
-    newObj = {...values, token}
-    fetch("https://api.i-credit.kz/api/searchUser", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-      },
-      body: JSON.stringify(newObj),
-    })
-    .then((response) => {
-      console.log(response)
-      this.setState({searched: true})
-    })
   }
 
   componentDidMount() {
@@ -210,7 +187,7 @@ class Cabinet extends React.Component {
             {" " + this.props.userReducer.user.UF_6}!
           </p>
           {!this.props.userStatus.userStatus.success &&
-          !this.props.userStatus.isLoading && this.state.repeatMessage !== "Не найден пользователь" ? (
+          !this.props.userStatus.isLoading ? (
             <div>
               <div className="repeatBtn form-group">
                 <button onClick={() => this.handleRepeated()}>
@@ -219,27 +196,7 @@ class Cabinet extends React.Component {
               </div>
             </div>
           ) : (
-            <div>
-              <Formik
-                initialValues={{
-                  iin: '',
-                }}
-                onSubmit={(values) => {
-                  this.handleSubmit(values);
-                }} >
-                  <Form>
-                    <h2 className="text-center mb-5">
-                      Введите ИИН:
-                    </h2>
-                    <Field
-                      name="iin"
-                      placeholder="ИИН" />
-                      <button type="submit">
-                        Искать
-                      </button>
-                  </Form>
-              </Formik>
-            </div>
+            <div />
           )}
 
           {this.props.userStatus.isLoading ? (
@@ -269,9 +226,6 @@ class Cabinet extends React.Component {
     }
   }
 }
-
-// const mapStateToProps = ({ usersReducer: { user: { UF9} } }) => ({
-// username: UF9 })
 
 export default withAuth(
   connect(mapStateToProps, mapDispatchToProps)(withUseTranslation(Cabinet))
