@@ -115,7 +115,7 @@ class Aggrement extends React.Component {
             total: response.data.main + Number(response.data.reward),
             cardGiven: response.data.cardGiven,
             iban: response.data.iban,
-            endDate: response.data.repaymentDate.split('-').reverse().join('.')
+            endDate: response.data.repaymentDate.split("-").reverse().join("."),
           });
         } else {
           swal("Oops", "Что-то пошло не так", "error").then(() => {
@@ -143,17 +143,19 @@ class Aggrement extends React.Component {
   }
 
   async sendAgreementStatus() {
-    this.toggleModal();
-    this.setState({
-      isModalOpen: true,
-    });
-
+    console.log("qkwejqbwie");
     // Проверяем разрешение на камеру
     navigator.permissions
       .query({ name: "camera" })
       .then((permissionObj) => {
-        if (permissionObj.state !== "granted")
+        if (permissionObj.state !== "granted") {
           swal("Oops", "Нужно дать доступ к камере!", "error");
+        } else {
+          this.toggleModal();
+          this.setState({
+            isModalOpen: true,
+          });
+        }
       })
       .catch((error) => {
         console.log("Got error :", error);
@@ -393,32 +395,32 @@ class Aggrement extends React.Component {
             <div className="agreements-block">
               <h4 align="center">Соглашение пользователя</h4>
 
-              
-
               <div>
-                  <table className="lperiod" style={{margin: "25px 0"}}>
-                <thead>
-                  <tr>
-                    <th>Сумма на руки:</th>
-                    <th>Сумма страховки:</th>
-                    <th>Сумма вознаграждения</th>
-                    <th>Сумма погашения в льготный период:</th>
-                    <th>Срок и дата возврата:</th>
-                    <th>Основной долг:</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>{((+main) - (+reward)).toLocaleString()}</td>
-                    <td>{(+reward).toLocaleString()}</td>
-                    <td>{(+reward).toLocaleString()} тг</td>
-                    <td>{(+main).toLocaleString()} тг</td>
-                    <td>{period} дней до {endDate}г.</td>
-                    <td>{total} тг</td>
-                  </tr>
-                </tbody>
-              </table>
-                </div>
+                <table className="lperiod" style={{ margin: "25px 0" }}>
+                  <thead>
+                    <tr>
+                      <th>Сумма на руки:</th>
+                      <th>Сумма страховки:</th>
+                      <th>Сумма вознаграждения</th>
+                      <th>Сумма погашения в льготный период:</th>
+                      <th>Срок и дата возврата:</th>
+                      <th>Основной долг:</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>{(+main - +reward).toLocaleString()}</td>
+                      <td>{(+reward).toLocaleString()}</td>
+                      <td>{(+reward).toLocaleString()} тг</td>
+                      <td>{(+main).toLocaleString()} тг</td>
+                      <td>
+                        {period} дней до {endDate}г.
+                      </td>
+                      <td>{total} тг</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
 
               {/*Список документов*/}
               <ul className="complete">
@@ -517,7 +519,7 @@ class Aggrement extends React.Component {
                 </li>
               </ul>
 
-              <div className="repeatBtn form-group" style={{padding: 0}}>
+              <div className="repeatBtn form-group" style={{ padding: 0 }}>
                 <button
                   onClick={() => this.sendAgreementStatus()}
                   className="mt-5"

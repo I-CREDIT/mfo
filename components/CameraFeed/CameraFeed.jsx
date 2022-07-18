@@ -26,15 +26,18 @@ export class CameraFeed extends Component {
    * @instance
    */
   processDevices(devices) {
-    const video_devices = devices.filter(
-      (device) => device.kind === "videoinput"
-    );
-    console.log(video_devices.length, "aishdbiqwbdi");
+    // const video_devices = devices.filter(
+    //   (device) => device.kind === "videoinput"
+    // );
 
-    this.setDevice(video_devices[video_devices.length - 1]);
-    // devices.forEach((device) => {
-    //   this.setDevice(device);
-    // });
+    // if (+this.props.isBMG) {
+    //   // включает заднюю камеру
+    //   this.setDevice(video_devices[video_devices.length - 1]);
+    // }
+
+    devices.forEach((device) => {
+      this.setDevice(device);
+    });
   }
 
   /**
