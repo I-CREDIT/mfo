@@ -63,7 +63,6 @@ export class CameraFeed extends Component {
   async componentDidMount() {
     const cameras = await navigator.mediaDevices.enumerateDevices();
 
-    console.log(cameras, "adiua");
     this.processDevices(cameras);
   }
 
