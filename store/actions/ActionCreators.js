@@ -111,9 +111,9 @@ export const getSMSFromBMG = (user) => (dispatch) => {
           "Ошибка получения кода с egov. Пожалуйста, заполните данные вручную."
         )
       );
-      setTimeout(() => {
-        window.location.reload();
-      }, 1000);
+      // setTimeout(() => {
+      //   window.location.reload();
+      // }, 1000);
     })
     .then(() => dispatch(isLoading(false)));
 };

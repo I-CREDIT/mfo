@@ -209,7 +209,7 @@ class FormRegister extends React.Component {
     };
 
     // Ветка БМГ или Ручная регистрация?
-    if (this.state.isOnBMG) {
+    if (localStorage.getItem("isOnBMG") === "true") {
       // Были попытки БМГ до этого?
       let count_of_attempts = 1;
       if (localStorage.getItem("BMGAttempts")) {
@@ -259,17 +259,14 @@ class FormRegister extends React.Component {
     ) : null;
   }
 
-  toggleHideBMG() {
-    this.setState({
-      isOnBMG: !this.state.isOnBMG,
-    });
-  }
-
   componentDidMount() {
-    if (localStorage.getItem("isOnBMG")) {
-      this.setState({
-        isOnBMG: false,
-      });
+    // if (localStorage.getItem("isOnBMG")) {
+    //   this.setState({
+    //     isOnBMG: false,
+    //   });
+    // }
+    if (!localStorage.getItem("isOnBMG")) {
+      localStorage.setItem("isOnBMG", "true");
     }
 
     const progress = document.querySelector(".progress-done");
@@ -314,7 +311,7 @@ class FormRegister extends React.Component {
           <div className="modelLoader loaded">{disableScroll.off()}</div>
         )}
 
-        {this.state.isOnBMG ? (
+        {localStorage.getItem("isOnBMG") === "true" ? (
           <Formik
             initialValues={{
               loan_amount: "",
@@ -349,7 +346,9 @@ class FormRegister extends React.Component {
                 {this.getErrorMessage()}
 
                 <h2 className="text-center">
-                  {this.state.isOnBMG ? "Регистрация egov" : t("registration")}
+                  {localStorage.getItem("isOnBMG") === "true"
+                    ? "Регистрация egov"
+                    : t("registration")}
                 </h2>
 
                 <div className="row form-group  mx-auto">
@@ -804,7 +803,6 @@ class FormRegister extends React.Component {
                       <div className="text-danger">{t(errors.password)}</div>
                     )}
                   </div>
-                  
                 </div>
                 <div className="col-12 mb-2 form-group d-flex align-items-center col-12 mx-auto">
                   <input
