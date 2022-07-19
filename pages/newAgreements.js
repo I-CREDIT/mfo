@@ -143,7 +143,26 @@ class Aggrement extends React.Component {
   }
 
   async sendAgreementStatus() {
-    console.log("qkwejqbwie");
+    // Настраиваем кол-во попыток
+    if (localStorage.getItem("VerificationAttempts")) {
+      let attempts = Number(localStorage.getItem("VerificationAttempts")) + 1;
+
+      if (attempts > 3) {
+        swal(
+          "Исчерпано количество попыток (3).",
+          "Вы будете перенаправлены на главную страницу.",
+          "success"
+        ).then(() => {
+          Router.push("/");
+        });
+        return;
+      } else {
+        localStorage.setItem("VerificationAttempts", attempts.toString());
+      }
+    } else {
+      localStorage.setItem("VerificationAttempts", "1");
+    }
+
     // Проверяем разрешение на камеру
     navigator.permissions
       .query({ name: "camera" })
@@ -152,9 +171,6 @@ class Aggrement extends React.Component {
           swal("Oops", "Нужно дать доступ к камере!", "error");
         } else {
           this.toggleModal();
-          this.setState({
-            isModalOpen: true,
-          });
         }
       })
       .catch((error) => {
@@ -198,24 +214,48 @@ class Aggrement extends React.Component {
             Router.push("/");
           });
         } else {
-          swal(
-            "Верификация не пройдена.",
-            "Фото не прошло проверку, Вы будете перенаправлены на главную страницу.",
-            "error"
-          ).then(() => {
-            Router.push("/");
-          });
+          if (localStorage.getItem("VerificationAttempts")) {
+            if (+localStorage.getItem("VerificationAttempts") >= 3) {
+              swal(
+                "Исчерпано количество попыток (3).",
+                "Вы будете перенаправлены на главную страницу.",
+                "error"
+              ).then(() => {
+                Router.push("/");
+              });
+            } else {
+              swal(
+                "Верификация не пройдена.",
+                "Фото не прошло проверку, попробуйте еще раз.",
+                "error"
+              ).then(() => {
+                this.toggleModal();
+              });
+            }
+          }
         }
       })
       .catch((error) => {
         console.log(error);
-        swal(
-          "Ошибка при попытке верификации",
-          "Попробуйте еще раз",
-          "error"
-        ).then(() => {
-          Router.push("/");
-        });
+        if (localStorage.getItem("VerificationAttempts")) {
+          if (+localStorage.getItem("VerificationAttempts") >= 3) {
+            swal(
+              "Исчерпано количество попыток (3).",
+              "Вы будете перенаправлены на главную страницу.",
+              "error"
+            ).then(() => {
+              Router.push("/");
+            });
+          } else {
+            swal(
+              "Верификация не пройдена.",
+              "Фото не прошло проверку, попробуйте еще раз.",
+              "error"
+            ).then(() => {
+              this.toggleModal();
+            });
+          }
+        }
       })
       .finally(() => {
         this.setState({
