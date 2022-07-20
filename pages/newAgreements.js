@@ -365,9 +365,11 @@ class Aggrement extends React.Component {
         Router.push("/");
       });
     } else {
+      let bmg_query = getUrlParameter("bmg");
+
       this.setState({
         token: getUrlParameter("token"),
-        isBMG: getUrlParameter("bmg"),
+        isBMG: bmg_query === "1" || bmg_query === "auto" ? "1" : "0",
       });
 
       this.getUserDocument(token);

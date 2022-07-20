@@ -58,7 +58,6 @@ class ProgressBar extends Component {
     this.setState({ showMessage: false });
   }
 
-
   async handleRepeatedZaim(values) {
     values.UF_2 = this.props.moneyVal;
     values.UF_3 = this.props.dayVal;
@@ -69,7 +68,8 @@ class ProgressBar extends Component {
     await // axios.setHeader('Accept', 'application/json')
     axios
       .post(
-        `https://api.i-credit.kz/api/repeatRequestTest`,
+        // `https://api.i-credit.kz/api/repeatRequestTest`,
+        `https://api.i-credit.kz/api/repeatRequest`,
         {
           token: cookie.get("token"),
           period: values.UF_3,
@@ -89,10 +89,40 @@ class ProgressBar extends Component {
         this.setState({
           repeatedLoading: false,
         });
-        if (response.data.success === true) {
-          swal("Успешно!", `Заявка отправлено`, "success").then(() => {
-            Router.push("/cabinet/loans");
-          });
+        if (response.data.success) {
+          if (response.data.sign === true) {
+            swal(
+              "Успешно!",
+              `Вам необходимо пройти верификацию. Вы будете перенаправлены после подтвердения.`,
+              "success"
+            ).then(() => {
+              if (response.data.bmg !== "no") {
+                Router.push(
+                  `/newAggrements?token=${cookie.get("token")}&leadID=${
+                    response.data?.leadID
+                  }`
+                );
+              } else {
+                Router.push(
+                  `/newAgreements?token=${cookie.get("token")}&bmg=${
+                    response.data?.bmg
+                  }`
+                );
+              }
+            });
+          } else if (response.data.sign === false) {
+            swal("Успешно!", `Заявка отправлена`, "success").then(() => {
+              Router.push(
+                `/newAggrements?token=${cookie.get("token")}&leadID=${
+                  response.data?.leadID
+                }`
+              );
+            });
+          } else {
+            swal("Успешно!", `Заявка отправлена`, "success").then(() => {
+              Router.push("/cabinet/loans");
+            });
+          }
         } else {
           swal(
             "Oops!",
@@ -132,10 +162,9 @@ class ProgressBar extends Component {
     // this.props.changingDay(event.target.value);
   }
 
-
-    render()  {
-        // Достаем функцию-переводчик
-        const { t } = this.props.useTranslationValue
+  render() {
+    // Достаем функцию-переводчик
+    const { t } = this.props.useTranslationValue;
 
     const vozvrat = Math.round(
       Math.floor(
