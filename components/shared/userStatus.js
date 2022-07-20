@@ -41,10 +41,10 @@ class Status extends React.Component {
     };
     this.state = {
       timeChSI: true,
-      days: '00',
-      hours: '00',
-      minutes: '00',
-      seconds: '00'
+      days: "00",
+      hours: "00",
+      minutes: "00",
+      seconds: "00",
     };
   }
 
@@ -127,9 +127,7 @@ class Status extends React.Component {
         },
       })
       .then((response) => {
-        // ПОМЕНЯТЬ !!!!!!!!!!
-        // if (response.data?.success && response.data?.decision) {
-        if (response.data?.success) {
+        if (response.data?.success && response.data?.decision) {
           Router.push(
             `/newAgreements?token=${cookie.get("token")}&bmg=${
               response.data?.bmg ? 1 : 0
@@ -280,113 +278,113 @@ class Status extends React.Component {
                   </button>
                 )}
               </div>
-                <div className="documents">
-                  {i18n.language === "ru" ? (
-                    <h4>
-                      Документы по договору{" "}
-                      <span>
-                        №{this.props.userStatus.userStatus.contractNumber} от{" "}
-                        {this.props.userStatus.userStatus.givenDate}
-                      </span>
-                    </h4>
-                  ) : (
-                    <h4>
-                      <span>
-                        №{this.props.userStatus.userStatus.contractNumber}{" "}
-                        {this.props.userStatus.userStatus.givenDate}
-                      </span>{" "}
-                      келісім-шарт бойынша құжаттар
-                    </h4>
-                  )}
-                  <ul className="documentsContainer">
-                    <li>
-                      <InsuranceApplicationDocument
-                        fio={this.props.userStatus.userStatus.fio}
-                        dateOfBirth={this.props.userReducer.user.UF_10}
-                        address={this.props.userStatus.userStatus.address}
-                        phone={this.props.userStatus.userStatus.phone}
-                        email={this.props.userStatus.userStatus.email}
-                        placeOfWork={this.props.userReducer.user.UF_31}
-                        position={this.props.userReducer.user.UF_33}
-                        iin={this.props.userStatus.userStatus.iin}
-                        cardNumber={this.props.userStatus.userStatus.cardNumber}
-                        startCard={this.props.userStatus.userStatus.startCard}
-                        endCard={this.props.userStatus.userStatus.endCard}
-                        placeOfBirth={this.props.userReducer.user.UF_46}
-                        insuranceAmount={
-                          this.props.userStatus.userStatus.insuranceAmount
-                        }
-                        givenDate={this.props.userStatus.userStatus.givenDate}
-                        code={this.props.userStatus.userStatus.code}
-                        period={this.props.userStatus.userStatus.period}
-                      />
-                    </li>
-                    <li>
-                      <MicrocreditInsuranceDocument
-                        fio={this.props.userStatus.userStatus.fio}
-                        dateOfBirth={this.props.userReducer.user.UF_10}
-                        address={this.props.userStatus.userStatus.address}
-                        iin={this.props.userStatus.userStatus.iin}
-                        cardNumber={this.props.userStatus.userStatus.cardNumber}
-                        contractNumber={
-                          this.props.userStatus.userStatus.contractNumber
-                        }
-                        insuranceAmount={
-                          this.props.userStatus.userStatus.insuranceAmount
-                        }
-                        code={this.props.userStatus.userStatus.code}
-                        period={this.props.userStatus.userStatus.period}
-                        reward={this.props.userStatus.userStatus.reward}
-                      />
-                    </li>
-                    <li>
-                      <InsuranceContractDocument
-                        contractNumber={
-                          this.props.userStatus.userStatus.contractNumber
-                        }
-                        givenDate={this.props.userStatus.userStatus.givenDate}
-                        endDate={this.props.userStatus.userStatus.endDate}
-                        fio={this.props.userStatus.userStatus.fio}
-                        address={this.props.userStatus.userStatus.address}
-                        phone={this.props.userStatus.userStatus.phone}
-                        iin={this.props.userStatus.userStatus.iin}
-                        insuranceAmount={
-                          this.props.userStatus.userStatus.insuranceAmount
-                        }
-                        reward={this.props.userStatus.userStatus.reward}
-                        cardNumber={this.props.userStatus.userStatus.cardNumber}
-                        cardGiven={this.props.userStatus.userStatus.cardGiven}
-                        startCard={this.props.userStatus.userStatus.startCard}
-                        email={this.props.userStatus.userStatus.email}
-                        period={this.props.userStatus.userStatus.period}
-                      />
-                    </li>
-                    <li>
-                      <MicrocreditAgreementDocument
-                        main={this.props.userStatus.userStatus.main}
-                        reward={this.props.userStatus.userStatus.reward}
-                        fio={this.props.userStatus.userStatus.fio}
-                        iin={this.props.userStatus.userStatus.iin}
-                        address={this.props.userStatus.userStatus.address}
-                        cardNumber={this.props.userStatus.userStatus.cardNumber}
-                        cardGiven={this.props.userStatus.userStatus.cardGiven}
-                        startCard={this.props.userStatus.userStatus.startCard}
-                        endCard={this.props.userStatus.userStatus.endCard}
-                        dateOfBirth={this.props.userReducer.user.UF_10}
-                        phone={this.props.userStatus.userStatus.phone}
-                        iban={this.props.userStatus.userStatus.iban}
-                        email={this.props.userStatus.userStatus.email}
-                        contractNumber={
-                          this.props.userStatus.userStatus.contractNumber
-                        }
-                        givenDate={this.props.userStatus.userStatus.givenDate}
-                        endDate={this.props.userStatus.userStatus.endDate}
-                        total={this.props.userStatus.userStatus.total}
-                        period={this.props.userStatus.userStatus.period}
-                      />
-                    </li>
-                  </ul>
-                </div>
+              <div className="documents">
+                {i18n.language === "ru" ? (
+                  <h4>
+                    Документы по договору{" "}
+                    <span>
+                      №{this.props.userStatus.userStatus.contractNumber} от{" "}
+                      {this.props.userStatus.userStatus.givenDate}
+                    </span>
+                  </h4>
+                ) : (
+                  <h4>
+                    <span>
+                      №{this.props.userStatus.userStatus.contractNumber}{" "}
+                      {this.props.userStatus.userStatus.givenDate}
+                    </span>{" "}
+                    келісім-шарт бойынша құжаттар
+                  </h4>
+                )}
+                <ul className="documentsContainer">
+                  <li>
+                    <InsuranceApplicationDocument
+                      fio={this.props.userStatus.userStatus.fio}
+                      dateOfBirth={this.props.userReducer.user.UF_10}
+                      address={this.props.userStatus.userStatus.address}
+                      phone={this.props.userStatus.userStatus.phone}
+                      email={this.props.userStatus.userStatus.email}
+                      placeOfWork={this.props.userReducer.user.UF_31}
+                      position={this.props.userReducer.user.UF_33}
+                      iin={this.props.userStatus.userStatus.iin}
+                      cardNumber={this.props.userStatus.userStatus.cardNumber}
+                      startCard={this.props.userStatus.userStatus.startCard}
+                      endCard={this.props.userStatus.userStatus.endCard}
+                      placeOfBirth={this.props.userReducer.user.UF_46}
+                      insuranceAmount={
+                        this.props.userStatus.userStatus.insuranceAmount
+                      }
+                      givenDate={this.props.userStatus.userStatus.givenDate}
+                      code={this.props.userStatus.userStatus.code}
+                      period={this.props.userStatus.userStatus.period}
+                    />
+                  </li>
+                  <li>
+                    <MicrocreditInsuranceDocument
+                      fio={this.props.userStatus.userStatus.fio}
+                      dateOfBirth={this.props.userReducer.user.UF_10}
+                      address={this.props.userStatus.userStatus.address}
+                      iin={this.props.userStatus.userStatus.iin}
+                      cardNumber={this.props.userStatus.userStatus.cardNumber}
+                      contractNumber={
+                        this.props.userStatus.userStatus.contractNumber
+                      }
+                      insuranceAmount={
+                        this.props.userStatus.userStatus.insuranceAmount
+                      }
+                      code={this.props.userStatus.userStatus.code}
+                      period={this.props.userStatus.userStatus.period}
+                      reward={this.props.userStatus.userStatus.reward}
+                    />
+                  </li>
+                  <li>
+                    <InsuranceContractDocument
+                      contractNumber={
+                        this.props.userStatus.userStatus.contractNumber
+                      }
+                      givenDate={this.props.userStatus.userStatus.givenDate}
+                      endDate={this.props.userStatus.userStatus.endDate}
+                      fio={this.props.userStatus.userStatus.fio}
+                      address={this.props.userStatus.userStatus.address}
+                      phone={this.props.userStatus.userStatus.phone}
+                      iin={this.props.userStatus.userStatus.iin}
+                      insuranceAmount={
+                        this.props.userStatus.userStatus.insuranceAmount
+                      }
+                      reward={this.props.userStatus.userStatus.reward}
+                      cardNumber={this.props.userStatus.userStatus.cardNumber}
+                      cardGiven={this.props.userStatus.userStatus.cardGiven}
+                      startCard={this.props.userStatus.userStatus.startCard}
+                      email={this.props.userStatus.userStatus.email}
+                      period={this.props.userStatus.userStatus.period}
+                    />
+                  </li>
+                  <li>
+                    <MicrocreditAgreementDocument
+                      main={this.props.userStatus.userStatus.main}
+                      reward={this.props.userStatus.userStatus.reward}
+                      fio={this.props.userStatus.userStatus.fio}
+                      iin={this.props.userStatus.userStatus.iin}
+                      address={this.props.userStatus.userStatus.address}
+                      cardNumber={this.props.userStatus.userStatus.cardNumber}
+                      cardGiven={this.props.userStatus.userStatus.cardGiven}
+                      startCard={this.props.userStatus.userStatus.startCard}
+                      endCard={this.props.userStatus.userStatus.endCard}
+                      dateOfBirth={this.props.userReducer.user.UF_10}
+                      phone={this.props.userStatus.userStatus.phone}
+                      iban={this.props.userStatus.userStatus.iban}
+                      email={this.props.userStatus.userStatus.email}
+                      contractNumber={
+                        this.props.userStatus.userStatus.contractNumber
+                      }
+                      givenDate={this.props.userStatus.userStatus.givenDate}
+                      endDate={this.props.userStatus.userStatus.endDate}
+                      total={this.props.userStatus.userStatus.total}
+                      period={this.props.userStatus.userStatus.period}
+                    />
+                  </li>
+                </ul>
+              </div>
             </div>
           </div>
         );
@@ -891,113 +889,113 @@ class Status extends React.Component {
                   </button>
                 )}
               </div>
-                <div className="documents">
-                  {i18n.language === "ru" ? (
-                    <h4>
-                      Документы по договору{" "}
-                      <span>
-                        №{this.props.userStatus.userStatus.contractNumber} от{" "}
-                        {this.props.userStatus.userStatus.givenDate}
-                      </span>
-                    </h4>
-                  ) : (
-                    <h4>
-                      <span>
-                        №{this.props.userStatus.userStatus.contractNumber}{" "}
-                        {this.props.userStatus.userStatus.givenDate}
-                      </span>{" "}
-                      келісім-шарт бойынша құжаттар
-                    </h4>
-                  )}
-                  <ul className="documentsContainer">
-                    <li>
-                      <InsuranceApplicationDocument
-                        fio={this.props.userStatus.userStatus.fio}
-                        dateOfBirth={this.props.userReducer.user.UF_10}
-                        address={this.props.userStatus.userStatus.address}
-                        phone={this.props.userStatus.userStatus.phone}
-                        email={this.props.userStatus.userStatus.email}
-                        placeOfWork={this.props.userReducer.user.UF_31}
-                        position={this.props.userReducer.user.UF_33}
-                        iin={this.props.userStatus.userStatus.iin}
-                        cardNumber={this.props.userStatus.userStatus.cardNumber}
-                        startCard={this.props.userStatus.userStatus.startCard}
-                        endCard={this.props.userStatus.userStatus.endCard}
-                        placeOfBirth={this.props.userReducer.user.UF_46}
-                        insuranceAmount={
-                          this.props.userStatus.userStatus.insuranceAmount
-                        }
-                        givenDate={this.props.userStatus.userStatus.givenDate}
-                        code={this.props.userStatus.userStatus.code}
-                        period={this.props.userStatus.userStatus.period}
-                      />
-                    </li>
-                    <li>
-                      <MicrocreditInsuranceDocument
-                        fio={this.props.userStatus.userStatus.fio}
-                        dateOfBirth={this.props.userReducer.user.UF_10}
-                        address={this.props.userStatus.userStatus.address}
-                        iin={this.props.userStatus.userStatus.iin}
-                        cardNumber={this.props.userStatus.userStatus.cardNumber}
-                        contractNumber={
-                          this.props.userStatus.userStatus.contractNumber
-                        }
-                        insuranceAmount={
-                          this.props.userStatus.userStatus.insuranceAmount
-                        }
-                        code={this.props.userStatus.userStatus.code}
-                        period={this.props.userStatus.userStatus.period}
-                        reward={this.props.userStatus.userStatus.reward}
-                      />
-                    </li>
-                    <li>
-                      <InsuranceContractDocument
-                        contractNumber={
-                          this.props.userStatus.userStatus.contractNumber
-                        }
-                        givenDate={this.props.userStatus.userStatus.givenDate}
-                        endDate={this.props.userStatus.userStatus.endDate}
-                        fio={this.props.userStatus.userStatus.fio}
-                        address={this.props.userStatus.userStatus.address}
-                        phone={this.props.userStatus.userStatus.phone}
-                        iin={this.props.userStatus.userStatus.iin}
-                        insuranceAmount={
-                          this.props.userStatus.userStatus.insuranceAmount
-                        }
-                        reward={this.props.userStatus.userStatus.reward}
-                        cardNumber={this.props.userStatus.userStatus.cardNumber}
-                        cardGiven={this.props.userStatus.userStatus.cardGiven}
-                        startCard={this.props.userStatus.userStatus.startCard}
-                        email={this.props.userStatus.userStatus.email}
-                        period={this.props.userStatus.userStatus.period}
-                      />
-                    </li>
-                    <li>
-                      <MicrocreditAgreementDocument
-                        main={this.props.userStatus.userStatus.main}
-                        reward={this.props.userStatus.userStatus.reward}
-                        fio={this.props.userStatus.userStatus.fio}
-                        iin={this.props.userStatus.userStatus.iin}
-                        address={this.props.userStatus.userStatus.address}
-                        cardNumber={this.props.userStatus.userStatus.cardNumber}
-                        cardGiven={this.props.userStatus.userStatus.cardGiven}
-                        startCard={this.props.userStatus.userStatus.startCard}
-                        endCard={this.props.userStatus.userStatus.endCard}
-                        dateOfBirth={this.props.userReducer.user.UF_10}
-                        phone={this.props.userStatus.userStatus.phone}
-                        iban={this.props.userStatus.userStatus.iban}
-                        email={this.props.userStatus.userStatus.email}
-                        contractNumber={
-                          this.props.userStatus.userStatus.contractNumber
-                        }
-                        givenDate={this.props.userStatus.userStatus.givenDate}
-                        endDate={this.props.userStatus.userStatus.endDate}
-                        total={this.props.userStatus.userStatus.total}
-                        period={this.props.userStatus.userStatus.period}
-                      />
-                    </li>
-                  </ul>
-                </div>
+              <div className="documents">
+                {i18n.language === "ru" ? (
+                  <h4>
+                    Документы по договору{" "}
+                    <span>
+                      №{this.props.userStatus.userStatus.contractNumber} от{" "}
+                      {this.props.userStatus.userStatus.givenDate}
+                    </span>
+                  </h4>
+                ) : (
+                  <h4>
+                    <span>
+                      №{this.props.userStatus.userStatus.contractNumber}{" "}
+                      {this.props.userStatus.userStatus.givenDate}
+                    </span>{" "}
+                    келісім-шарт бойынша құжаттар
+                  </h4>
+                )}
+                <ul className="documentsContainer">
+                  <li>
+                    <InsuranceApplicationDocument
+                      fio={this.props.userStatus.userStatus.fio}
+                      dateOfBirth={this.props.userReducer.user.UF_10}
+                      address={this.props.userStatus.userStatus.address}
+                      phone={this.props.userStatus.userStatus.phone}
+                      email={this.props.userStatus.userStatus.email}
+                      placeOfWork={this.props.userReducer.user.UF_31}
+                      position={this.props.userReducer.user.UF_33}
+                      iin={this.props.userStatus.userStatus.iin}
+                      cardNumber={this.props.userStatus.userStatus.cardNumber}
+                      startCard={this.props.userStatus.userStatus.startCard}
+                      endCard={this.props.userStatus.userStatus.endCard}
+                      placeOfBirth={this.props.userReducer.user.UF_46}
+                      insuranceAmount={
+                        this.props.userStatus.userStatus.insuranceAmount
+                      }
+                      givenDate={this.props.userStatus.userStatus.givenDate}
+                      code={this.props.userStatus.userStatus.code}
+                      period={this.props.userStatus.userStatus.period}
+                    />
+                  </li>
+                  <li>
+                    <MicrocreditInsuranceDocument
+                      fio={this.props.userStatus.userStatus.fio}
+                      dateOfBirth={this.props.userReducer.user.UF_10}
+                      address={this.props.userStatus.userStatus.address}
+                      iin={this.props.userStatus.userStatus.iin}
+                      cardNumber={this.props.userStatus.userStatus.cardNumber}
+                      contractNumber={
+                        this.props.userStatus.userStatus.contractNumber
+                      }
+                      insuranceAmount={
+                        this.props.userStatus.userStatus.insuranceAmount
+                      }
+                      code={this.props.userStatus.userStatus.code}
+                      period={this.props.userStatus.userStatus.period}
+                      reward={this.props.userStatus.userStatus.reward}
+                    />
+                  </li>
+                  <li>
+                    <InsuranceContractDocument
+                      contractNumber={
+                        this.props.userStatus.userStatus.contractNumber
+                      }
+                      givenDate={this.props.userStatus.userStatus.givenDate}
+                      endDate={this.props.userStatus.userStatus.endDate}
+                      fio={this.props.userStatus.userStatus.fio}
+                      address={this.props.userStatus.userStatus.address}
+                      phone={this.props.userStatus.userStatus.phone}
+                      iin={this.props.userStatus.userStatus.iin}
+                      insuranceAmount={
+                        this.props.userStatus.userStatus.insuranceAmount
+                      }
+                      reward={this.props.userStatus.userStatus.reward}
+                      cardNumber={this.props.userStatus.userStatus.cardNumber}
+                      cardGiven={this.props.userStatus.userStatus.cardGiven}
+                      startCard={this.props.userStatus.userStatus.startCard}
+                      email={this.props.userStatus.userStatus.email}
+                      period={this.props.userStatus.userStatus.period}
+                    />
+                  </li>
+                  <li>
+                    <MicrocreditAgreementDocument
+                      main={this.props.userStatus.userStatus.main}
+                      reward={this.props.userStatus.userStatus.reward}
+                      fio={this.props.userStatus.userStatus.fio}
+                      iin={this.props.userStatus.userStatus.iin}
+                      address={this.props.userStatus.userStatus.address}
+                      cardNumber={this.props.userStatus.userStatus.cardNumber}
+                      cardGiven={this.props.userStatus.userStatus.cardGiven}
+                      startCard={this.props.userStatus.userStatus.startCard}
+                      endCard={this.props.userStatus.userStatus.endCard}
+                      dateOfBirth={this.props.userReducer.user.UF_10}
+                      phone={this.props.userStatus.userStatus.phone}
+                      iban={this.props.userStatus.userStatus.iban}
+                      email={this.props.userStatus.userStatus.email}
+                      contractNumber={
+                        this.props.userStatus.userStatus.contractNumber
+                      }
+                      givenDate={this.props.userStatus.userStatus.givenDate}
+                      endDate={this.props.userStatus.userStatus.endDate}
+                      total={this.props.userStatus.userStatus.total}
+                      period={this.props.userStatus.userStatus.period}
+                    />
+                  </li>
+                </ul>
+              </div>
             </div>
           </div>
         );
@@ -1152,113 +1150,113 @@ class Status extends React.Component {
                 )}
               </div>
 
-                <div className="documents">
-                  {i18n.language === "ru" ? (
-                    <h4>
-                      Документы по договору{" "}
-                      <span>
-                        №{this.props.userStatus.userStatus.contractNumber} от{" "}
-                        {this.props.userStatus.userStatus.givenDate}
-                      </span>
-                    </h4>
-                  ) : (
-                    <h4>
-                      <span>
-                        №{this.props.userStatus.userStatus.contractNumber}{" "}
-                        {this.props.userStatus.userStatus.givenDate}
-                      </span>{" "}
-                      келісім-шарт бойынша құжаттар
-                    </h4>
-                  )}
-                  <ul className="documentsContainer">
-                    <li>
-                      <InsuranceApplicationDocument
-                        fio={this.props.userStatus.userStatus.fio}
-                        dateOfBirth={this.props.userReducer.user.UF_10}
-                        address={this.props.userStatus.userStatus.address}
-                        phone={this.props.userStatus.userStatus.phone}
-                        email={this.props.userStatus.userStatus.email}
-                        placeOfWork={this.props.userReducer.user.UF_31}
-                        position={this.props.userReducer.user.UF_33}
-                        iin={this.props.userStatus.userStatus.iin}
-                        cardNumber={this.props.userStatus.userStatus.cardNumber}
-                        startCard={this.props.userStatus.userStatus.startCard}
-                        endCard={this.props.userStatus.userStatus.endCard}
-                        placeOfBirth={this.props.userReducer.user.UF_46}
-                        insuranceAmount={
-                          this.props.userStatus.userStatus.insuranceAmount
-                        }
-                        givenDate={this.props.userStatus.userStatus.givenDate}
-                        code={this.props.userStatus.userStatus.code}
-                        period={this.props.userStatus.userStatus.period}
-                      />
-                    </li>
-                    <li>
-                      <MicrocreditInsuranceDocument
-                        fio={this.props.userStatus.userStatus.fio}
-                        dateOfBirth={this.props.userReducer.user.UF_10}
-                        address={this.props.userStatus.userStatus.address}
-                        iin={this.props.userStatus.userStatus.iin}
-                        cardNumber={this.props.userStatus.userStatus.cardNumber}
-                        contractNumber={
-                          this.props.userStatus.userStatus.contractNumber
-                        }
-                        insuranceAmount={
-                          this.props.userStatus.userStatus.insuranceAmount
-                        }
-                        code={this.props.userStatus.userStatus.code}
-                        period={this.props.userStatus.userStatus.period}
-                        reward={this.props.userStatus.userStatus.reward}
-                      />
-                    </li>
-                    <li>
-                      <InsuranceContractDocument
-                        contractNumber={
-                          this.props.userStatus.userStatus.contractNumber
-                        }
-                        givenDate={this.props.userStatus.userStatus.givenDate}
-                        endDate={this.props.userStatus.userStatus.endDate}
-                        fio={this.props.userStatus.userStatus.fio}
-                        address={this.props.userStatus.userStatus.address}
-                        phone={this.props.userStatus.userStatus.phone}
-                        iin={this.props.userStatus.userStatus.iin}
-                        insuranceAmount={
-                          this.props.userStatus.userStatus.insuranceAmount
-                        }
-                        reward={this.props.userStatus.userStatus.reward}
-                        cardNumber={this.props.userStatus.userStatus.cardNumber}
-                        cardGiven={this.props.userStatus.userStatus.cardGiven}
-                        startCard={this.props.userStatus.userStatus.startCard}
-                        email={this.props.userStatus.userStatus.email}
-                        period={this.props.userStatus.userStatus.period}
-                      />
-                    </li>
-                    <li>
-                      <MicrocreditAgreementDocument
-                        main={this.props.userStatus.userStatus.main}
-                        reward={this.props.userStatus.userStatus.reward}
-                        fio={this.props.userStatus.userStatus.fio}
-                        iin={this.props.userStatus.userStatus.iin}
-                        address={this.props.userStatus.userStatus.address}
-                        cardNumber={this.props.userStatus.userStatus.cardNumber}
-                        cardGiven={this.props.userStatus.userStatus.cardGiven}
-                        startCard={this.props.userStatus.userStatus.startCard}
-                        endCard={this.props.userStatus.userStatus.endCard}
-                        dateOfBirth={this.props.userReducer.user.UF_10}
-                        phone={this.props.userStatus.userStatus.phone}
-                        iban={this.props.userStatus.userStatus.iban}
-                        email={this.props.userStatus.userStatus.email}
-                        contractNumber={
-                          this.props.userStatus.userStatus.contractNumber
-                        }
-                        givenDate={this.props.userStatus.userStatus.givenDate}
-                        endDate={this.props.userStatus.userStatus.endDate}
-                        total={this.props.userStatus.userStatus.total}
-                        period={this.props.userStatus.userStatus.period}
-                      />
-                    </li>
-                  </ul>
-                </div>
+              <div className="documents">
+                {i18n.language === "ru" ? (
+                  <h4>
+                    Документы по договору{" "}
+                    <span>
+                      №{this.props.userStatus.userStatus.contractNumber} от{" "}
+                      {this.props.userStatus.userStatus.givenDate}
+                    </span>
+                  </h4>
+                ) : (
+                  <h4>
+                    <span>
+                      №{this.props.userStatus.userStatus.contractNumber}{" "}
+                      {this.props.userStatus.userStatus.givenDate}
+                    </span>{" "}
+                    келісім-шарт бойынша құжаттар
+                  </h4>
+                )}
+                <ul className="documentsContainer">
+                  <li>
+                    <InsuranceApplicationDocument
+                      fio={this.props.userStatus.userStatus.fio}
+                      dateOfBirth={this.props.userReducer.user.UF_10}
+                      address={this.props.userStatus.userStatus.address}
+                      phone={this.props.userStatus.userStatus.phone}
+                      email={this.props.userStatus.userStatus.email}
+                      placeOfWork={this.props.userReducer.user.UF_31}
+                      position={this.props.userReducer.user.UF_33}
+                      iin={this.props.userStatus.userStatus.iin}
+                      cardNumber={this.props.userStatus.userStatus.cardNumber}
+                      startCard={this.props.userStatus.userStatus.startCard}
+                      endCard={this.props.userStatus.userStatus.endCard}
+                      placeOfBirth={this.props.userReducer.user.UF_46}
+                      insuranceAmount={
+                        this.props.userStatus.userStatus.insuranceAmount
+                      }
+                      givenDate={this.props.userStatus.userStatus.givenDate}
+                      code={this.props.userStatus.userStatus.code}
+                      period={this.props.userStatus.userStatus.period}
+                    />
+                  </li>
+                  <li>
+                    <MicrocreditInsuranceDocument
+                      fio={this.props.userStatus.userStatus.fio}
+                      dateOfBirth={this.props.userReducer.user.UF_10}
+                      address={this.props.userStatus.userStatus.address}
+                      iin={this.props.userStatus.userStatus.iin}
+                      cardNumber={this.props.userStatus.userStatus.cardNumber}
+                      contractNumber={
+                        this.props.userStatus.userStatus.contractNumber
+                      }
+                      insuranceAmount={
+                        this.props.userStatus.userStatus.insuranceAmount
+                      }
+                      code={this.props.userStatus.userStatus.code}
+                      period={this.props.userStatus.userStatus.period}
+                      reward={this.props.userStatus.userStatus.reward}
+                    />
+                  </li>
+                  <li>
+                    <InsuranceContractDocument
+                      contractNumber={
+                        this.props.userStatus.userStatus.contractNumber
+                      }
+                      givenDate={this.props.userStatus.userStatus.givenDate}
+                      endDate={this.props.userStatus.userStatus.endDate}
+                      fio={this.props.userStatus.userStatus.fio}
+                      address={this.props.userStatus.userStatus.address}
+                      phone={this.props.userStatus.userStatus.phone}
+                      iin={this.props.userStatus.userStatus.iin}
+                      insuranceAmount={
+                        this.props.userStatus.userStatus.insuranceAmount
+                      }
+                      reward={this.props.userStatus.userStatus.reward}
+                      cardNumber={this.props.userStatus.userStatus.cardNumber}
+                      cardGiven={this.props.userStatus.userStatus.cardGiven}
+                      startCard={this.props.userStatus.userStatus.startCard}
+                      email={this.props.userStatus.userStatus.email}
+                      period={this.props.userStatus.userStatus.period}
+                    />
+                  </li>
+                  <li>
+                    <MicrocreditAgreementDocument
+                      main={this.props.userStatus.userStatus.main}
+                      reward={this.props.userStatus.userStatus.reward}
+                      fio={this.props.userStatus.userStatus.fio}
+                      iin={this.props.userStatus.userStatus.iin}
+                      address={this.props.userStatus.userStatus.address}
+                      cardNumber={this.props.userStatus.userStatus.cardNumber}
+                      cardGiven={this.props.userStatus.userStatus.cardGiven}
+                      startCard={this.props.userStatus.userStatus.startCard}
+                      endCard={this.props.userStatus.userStatus.endCard}
+                      dateOfBirth={this.props.userReducer.user.UF_10}
+                      phone={this.props.userStatus.userStatus.phone}
+                      iban={this.props.userStatus.userStatus.iban}
+                      email={this.props.userStatus.userStatus.email}
+                      contractNumber={
+                        this.props.userStatus.userStatus.contractNumber
+                      }
+                      givenDate={this.props.userStatus.userStatus.givenDate}
+                      endDate={this.props.userStatus.userStatus.endDate}
+                      total={this.props.userStatus.userStatus.total}
+                      period={this.props.userStatus.userStatus.period}
+                    />
+                  </li>
+                </ul>
+              </div>
             </div>
           </div>
         );
@@ -1389,37 +1387,36 @@ class Status extends React.Component {
           </div>
         );
       case 12:
-
         const getTimeRemaining = (endTime) => {
-          const t = Date.parse(endTime) - Date.parse(new Date);
+          const t = Date.parse(endTime) - Date.parse(new Date());
           let days = Math.floor(t / (1000 * 60 * 60 * 24));
           let hours = Math.floor((t / (1000 * 60 * 60)) % 24) - 6;
           let minutes = Math.floor((t / (1000 * 60)) % 60);
           let seconds = Math.floor((t / 1000) % 60);
 
-          if(t <= 0) {
+          if (t <= 0) {
             this.setState({
-              timeChSI: false
+              timeChSI: false,
             });
-          };
+          }
 
           const getZero = (num) => {
-            if(num >= 0 && num < 10) {
+            if (num >= 0 && num < 10) {
               return `0${num}`;
             } else {
               return num;
-            };
+            }
           };
 
           this.setState({
             days: getZero(days),
             hours: getZero(hours),
             minutes: getZero(minutes),
-            seconds: getZero(seconds)
-          })
+            seconds: getZero(seconds),
+          });
         };
 
-        setInterval(() => getTimeRemaining('2022-07-30'), 1000)
+        setInterval(() => getTimeRemaining("2022-07-30"), 1000);
 
         return (
           <div className="container">

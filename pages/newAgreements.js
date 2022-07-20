@@ -153,6 +153,7 @@ class Aggrement extends React.Component {
           "Вы будете перенаправлены на главную страницу.",
           "success"
         ).then(() => {
+          localStorage.setItem("VerificationAttempts", "0");
           Router.push("/");
         });
         return;
