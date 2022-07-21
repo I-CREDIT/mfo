@@ -23,7 +23,7 @@ class MyDocument extends Document {
             <meta name="yandex-verification" content="a9d4b76bb5e15aa6" />
             <link rel="apple-touch-icon" href="/logo192.png" />
             <link rel="shortcut icon" href="/logo192.png"/>
-            <script src="https://s3.eu-central-1.amazonaws.com/verilive-statics.verigram.ai/verilive-v1.13.x.js"></script>
+            {/* <script src="https://s3.eu-central-1.amazonaws.com/verilive-statics.verigram.ai/verilive-v1.13.x.js"></script> */}
         <body>
 
         {/* <!-- Google Tag Manager (noscript) --> */}

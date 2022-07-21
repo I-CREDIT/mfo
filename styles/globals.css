@@ -1071,6 +1071,11 @@ button {
   .GESV {
     display:none;
   }
+  .cabinet-btn2 {
+    grid-template-columns: unset !important;
+    grid-template-rows: 1fr 1fr;
+    gap: 10px;
+  }
 }
 
 .calculator .texts {

@@ -1308,20 +1308,50 @@ class Status extends React.Component {
                 {t("agreed-partners")}
               </h3>
               <div
-                className="cabinet-btn"
+                className="cabinet-btn cabinet-btn2"
                 style={{
                   padding: "0",
+                  display: 'grid',
+                  gridTemplateColumns: '300px 300px',
+                  gridGap: '20px',
                 }}
               >
-                <a href="https://top-credit.su/" target="_blank">
+                <a 
+                  href="https://showcases.site/96497/" 
+                  target="_blank"
+                  style={{
+                    height: '100%'
+                  }}
+                >
                   <button
                     style={{
                       position: "unset",
                       opacity: "1",
                       borderRadius: "20px",
+                      width: '100%',
+                      height: '100%',
                     }}
                   >
-                    {t("get-offer")}
+                    Выбрать самое выгодное предложение
+                  </button>
+                </a>
+                <a 
+                  href="https://top-credit.su/" 
+                  target="_blank"
+                  style={{
+                    height: '100%'
+                  }}
+                >
+                  <button
+                    style={{
+                      position: "unset",
+                      opacity: "1",
+                      borderRadius: "20px",
+                      width: '100%',
+                      height: '100%',
+                    }}
+                  >
+                    Получить кредит на ту же сумму
                   </button>
                 </a>
               </div>
