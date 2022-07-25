@@ -3798,6 +3798,10 @@ nav[role="navigation"] .users a:before {
   margin-top: 10px;
 }
 
+#id_verilive {
+  padding: 0 !important;
+}
+
 .c-camera-feed button {
   width: fit-content;
   border: none;

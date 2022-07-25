@@ -1,9 +1,138 @@
 import React, { Component } from "react";
+import swal from "sweetalert";
+import Router from "next/router";
+
+// Настройки verilive
+const config_verilive = {
+  recordVideo: false,
+  videoBitrate: 2500000,
+  rotated: false,
+  lang: "custom",
+
+  render: {
+    oval: true,
+    faceContourInsteadOfOval: true,
+    ovalRingColor: {
+      default: "#f5f542",
+      actionSuccess: "#00ba00",
+      actionFailure: "#d00000",
+      sessionSuccess: "#00ba00",
+      sessionFailure: "#d00000",
+    },
+    ovalWidth: 1.0,
+
+    overlay: true,
+    overlayColor: {
+      default: "#2f4f4f",
+    },
+    overlayTransparency: {
+      default: 0.55,
+    },
+
+    arrow: true,
+    arrowColor: {
+      default: "#f0f0f0",
+    },
+    arrowProgressColor: {
+      default: "#404040",
+    },
+
+    hint: true,
+    hintTextColor: {
+      default: "#eee",
+    },
+    hintFontType: "Arial",
+    hintUseProgressiveFontSize: true,
+    hintProgressiveFontSizeMultiplier: 1.0,
+    hintFontSize: 25,
+    hintCloudColor: {
+      default: "#2d312f",
+    },
+
+    videoUploadProgressBar: true,
+    videoUploadProgressBarColor1: "#FFEA82",
+    videoUploadProgressBarColor2: "#eee",
+  },
+
+  hints: {
+    noHint: "",
+    noFace: "Вас Не Видно",
+    badLight: "Выравните Освещение",
+    closer: "Ближе",
+    away: "Отдалитесь",
+    closerToCenter: "Ближе к Центру Экрана",
+
+    targetLeft: "Медленно Поворачивайте Голову Влево",
+    targetRight: "Медленно Поворачивайте Голову Вправо",
+    targetCenter: "Посмотрите Прямо",
+
+    sessionSuccess: "Вы Прошли!",
+    sessionFailure: "Вы Не Прошли!",
+    sessionError: "Произошла какая-то ошибка. Попробуйте перезапустить",
+  },
+};
+
+const config_veridoc = {
+  autoDocType: false,
+  docType: 1,
+  recognitionMode: 1,
+  translitCheck: false,
+  glareCheck: false,
+  photocopyCheck: false,
+  lang: "ru",
+  hints: {},
+  render: {
+    placeholder: true,
+    startButton: true,
+    containerBorderThickness: 1,
+    containerBorderRadius: 3,
+    containerBorderColor: "#000000",
+    frame: true,
+    frameBorderThickness: 3,
+    frameBorderRadius: 20,
+    frameColor: {
+      default: "rgba(255, 255, 255, 1.0)",
+      detected: "rgba(30, 255, 88, 1.0)",
+    },
+    overlay: true,
+    overlayPermanent: true,
+    overlayColor: {
+      default: "#ffffff",
+    },
+    upperBarColor: {
+      default: "rgba(255, 255, 255, 1.0)",
+    },
+    lowerBarColor: {
+      default: "#a2d2ff",
+      error: "#ffccd5",
+    },
+    buttonColor: {
+      default: "#a2d2ff",
+    },
+    buttonTextColor: {
+      default: "#353535",
+    },
+    overlayTransparency: {
+      default: 0.7,
+    },
+    icons: true,
+    hint: true,
+    hintTextColor: {
+      default: "#353535",
+    },
+    hintFontType: "Arial",
+    mirrorPreview: false,
+  },
+};
 
 export class CameraFeed extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      is_loading: true,
+      is_on_verilive: false,
+      is_on_veridoc: false,
+      //
       isCameraVisible: false,
       isCameraVisibleDocs: false,
       isVerificationCompleted: false,
@@ -54,23 +183,96 @@ export class CameraFeed extends Component {
     await this.videoPlayer.play();
   }
 
-  /**
-   * On mount, grab the users connected devices and process them
-   * @memberof CameraFeed
-   * @instance
-   * @override
-   */
-  async componentDidMount() {
-    const cameras = await navigator.mediaDevices.enumerateDevices();
+  // Подключение скрипта
+  async enableScript(url) {
+    const script = document.createElement("script");
 
-    this.processDevices(cameras);
+    script.src = url;
+    script.defer = true;
+    script.async = true;
+
+    document.body.appendChild(script);
   }
 
-  /**
-   * Handles taking a still image from the video feed on the camera
-   * @memberof CameraFeed
-   * @instance
-   */
+  async enableVerilive() {
+    this.setState({
+      is_loading: true,
+    });
+
+    // Создаем глобальную переменную verilive с помощью скрипта
+    await this.enableScript(
+      "https://s3.eu-central-1.amazonaws.com/verilive-statics.verigram.ai/verilive.js"
+    );
+
+    // Запускаем verilive с задержкой, чтобы успеть импортнуть script
+    setTimeout(() => {
+      verilive
+        .init(
+          "https://services.verigram.ai:8443/verilive/verilive",
+          "PeeKMaNIX9dNL2pB2433rs7zwrs28gGZ",
+          config_verilive
+        )
+        .then(() => {
+          this.onStartVerilive();
+        })
+        .catch((error) => {
+          console.log(error, "error_verilive");
+        })
+        .finally(() => {
+          this.setState({
+            is_loading: false,
+            is_on_veridoc: false,
+            is_on_verilive: true,
+          });
+        });
+    }, 2000);
+  }
+
+  async enableVeridoc() {
+    this.setState({
+      is_loading: true,
+    });
+
+    // Создаем глобальную переменную veridoc с помощью скрипта
+    await this.enableScript(
+      "https://s3.eu-central-1.amazonaws.com/veridoc-statics.verigram.ai/veridoc-v1.16.0.js"
+    );
+
+    // Запускаем veridoc с задержкой, чтобы успеть импортнуть script
+    setTimeout(() => {
+      veridoc
+        .init(
+          "https://services.verigram.ai:8443/s/veridoc/ru/veridoc/",
+          "PeeKMaNIX9dNL2pB2433rs7zwrs28gGZ",
+          config_veridoc
+        )
+        .then(() => {
+          this.onStartVeridoc();
+        })
+        .catch((error) => {
+          swal("Ошибка", `${error}`, "error");
+        })
+        .finally(() => {
+          this.setState({
+            is_loading: false,
+            is_on_verilive: false,
+            is_on_veridoc: true,
+          });
+        });
+    }, 2000);
+  }
+
+  async componentDidMount() {
+    // Егов регистрация
+    if (this.props.isBMG === "1") {
+      await this.enableVerilive();
+    }
+    // Ручная регистрация
+    else {
+      await this.enableVeridoc();
+    }
+  }
+
   takePhoto = () => {
     if (this.state.isCameraVisible) {
       this.setState({
@@ -175,23 +377,53 @@ export class CameraFeed extends Component {
     }, 1000);
   };
 
-  startVerification = () => {
-    if (this.props.isBMG === "1") {
-      this.showCamera();
-    } else {
-      this.showCameraDocs();
-    }
+  onStartVerilive = () => {
+    verilive.start();
+
+    verilive.successCallback = async (data) => {
+      console.log("qqqqqq");
+      this.sendPhoto(data.bestFrame);
+    };
+    verilive.failCallback = (data) => {
+      swal(
+        "Ошибка",
+        `${data}. Вы будете перенаправлены на главную страницу1.`,
+        "error"
+      ).then(() => {
+        Router.push("/");
+      });
+    };
   };
 
-  sendPhoto = () => {
+  onStartVeridoc = () => {
+    veridoc.start();
+
+    veridoc.successCallback = async (data) => {
+      // this.sendPhoto(data.bestFrame);
+
+      await this.enableVerilive();
+    };
+
+    veridoc.failCallback = (data) => {
+      swal(
+        "Ошибка",
+        `${data}. Вы будете перенаправлены на главную страницу1-veridoc.`,
+        "error"
+      ).then(() => {
+        Router.push("/");
+      });
+    };
+  };
+
+  sendPhoto = (file) => {
     // Егов регистрация
-    if (+this.props.isBMG) {
+    if (this.props.isBMG === "1") {
       this.setState({
-        isAfterload: true,
+        is_loading: true,
       });
 
       const { sendFile } = this.props;
-      this.canvas.toBlob(sendFile);
+      sendFile(file);
     }
     // Ручная регистрация
     else {
@@ -227,127 +459,147 @@ export class CameraFeed extends Component {
 
   render() {
     return (
-      <div className="c-camera-feed">
-        {/*Loader*/}
+      <div>
+        {/* VERILIVE FRAME */}
         <div
-          className={`${this.state.isAfterload ? "modelLoader" : "d-none"}`}
+          id="id_verilive"
+          className={`${this.state.is_on_verilive ? "" : "d-none"}`}
+        ></div>
+
+        {/* VERIDOC FRAME */}
+        <div
+          id="id_veridoc"
+          className={`${this.state.is_on_veridoc ? "" : "d-none"}`}
+        ></div>
+
+        {/* LOADER */}
+        <div
+          className={`${this.state.is_loading ? "modelLoader" : "d-none"}`}
         />
-
-        {/* Перед открытием биометрии */}
-        <div
-          className={`c-camera-feed__preload ${
-            this.state.isPreload ? "" : "d-none"
-          }`}
-        >
-          <p>
-            Подтверждение личности. Вам необходимо подтвердить личность с
-            помощью фото. Подготовьте камеру.
-          </p>
-          <button onClick={this.startVerification}>Начать подтверждение</button>
-        </div>
-
-        {/* Основной компонент камеры */}
-        <div
-          className={`c-camera-feed--holder ${
-            (this.state.isCameraVisible || this.state.isCameraVisibleDocs) &&
-            !this.state.isPreload
-              ? ""
-              : "d-none"
-          }`}
-        >
-          <div className="c-camera-feed__viewer">
-            <video
-              ref={(ref) => (this.videoPlayer = ref)}
-              width="100%"
-              height="100%"
-              autoPlay
-              playsInline
-              muted
-            />
-            <div
-              className={`iin ${
-                this.state.isCameraVisibleDocs ? "" : "d-none"
-              }`}
-            >
-              <div className="iin-frame" />
-            </div>
-            <div
-              className={`face-id ${
-                this.state.isVerificationCompleted ||
-                this.state.isCameraVisibleDocs
-                  ? "d-none"
-                  : ""
-              }`}
-            >
-              <div
-                className={`face-id__frame ${
-                  this.state.isVerificationThird ? "scale-smaller" : ""
-                }`}
-              >
-                <div
-                  className={`face-id__scanner ${
-                    this.state.isScanning ? "" : "d-none"
-                  }`}
-                />
-              </div>
-            </div>
-          </div>
-          <p
-            className={`face-id__text ${
-              this.state.isCameraVisibleDocs ? "" : "d-none"
-            }`}
-          >
-            Сфотографируйте удостоверение личности
-          </p>
-          <p
-            className={`face-id__text ${
-              !this.state.isVerificationCompleted && this.state.isCameraVisible
-                ? ""
-                : "d-none"
-            }`}
-          >
-            {this.state.isVerificationSecond
-              ? "Улыбнитесь"
-              : this.state.isVerificationThird
-              ? "Отдалитесь"
-              : "Поместите лицо в рамку"}
-          </p>
-          <button
-            className={`${
-              this.state.isVerificationCompleted ||
-              this.state.isCameraVisibleDocs
-                ? ""
-                : "d-none"
-            }`}
-            onClick={this.takePhoto}
-          >
-            Сфотографировать
-          </button>
-        </div>
-
-        {/* Фото результат + возможность переснять */}
-        <div
-          className={`c-camera-feed--holder ${
-            (this.state.isFaceIDReady ||
-              (this.state.isDocsReady && !this.state.isCameraVisible)) &&
-            !this.state.isPreload
-              ? ""
-              : "d-none"
-          }`}
-        >
-          <div className="c-camera-feed__stage">
-            <canvas
-              className="canvas"
-              height="100%"
-              ref={(ref) => (this.canvas = ref)}
-            />
-          </div>
-          <div className="d-flex justify-content-between w-100">
-            <button onClick={this.takePhotoAgain}>Переснять</button>
-            <button onClick={this.sendPhoto}>Отправить фото</button>
-          </div>
-        </div>
+        {/*<button onClick={this.onStartVerilive}>Начать подтверждение</button>*/}
       </div>
+
+      // <div className="c-camera-feed">
+      //   {/*Loader*/}
+      //   <div
+      //     className={`${this.state.isAfterload ? "modelLoader" : "d-none"}`}
+      //   />
+      //
+      //   {/* Перед открытием биометрии */}
+      //   <div
+      //     className={`c-camera-feed__preload ${
+      //       this.state.isPreload ? "" : "d-none"
+      //     }`}
+      //   >
+      //     <p>
+      //       Подтверждение личности. Вам необходимо подтвердить личность с
+      //       помощью фото. Подготовьте камеру.
+      //     </p>
+      //     <button onClick={this.startVerification}>Начать подтверждение</button>
+      //   </div>
+      //
+      //   {/* Основной компонент камеры */}
+      //   <div
+      //     className={`c-camera-feed--holder ${
+      //       (this.state.isCameraVisible || this.state.isCameraVisibleDocs) &&
+      //       !this.state.isPreload
+      //         ? ""
+      //         : "d-none"
+      //     }`}
+      //   >
+      //     <div className="c-camera-feed__viewer">
+      //       <video
+      //         ref={(ref) => (this.videoPlayer = ref)}
+      //         width="100%"
+      //         height="100%"
+      //         autoPlay
+      //         playsInline
+      //         muted
+      //       />
+      //       <div
+      //         className={`iin ${
+      //           this.state.isCameraVisibleDocs ? "" : "d-none"
+      //         }`}
+      //       >
+      //         <div className="iin-frame" />
+      //       </div>
+      //       <div
+      //         className={`face-id ${
+      //           this.state.isVerificationCompleted ||
+      //           this.state.isCameraVisibleDocs
+      //             ? "d-none"
+      //             : ""
+      //         }`}
+      //       >
+      //         <div
+      //           className={`face-id__frame ${
+      //             this.state.isVerificationThird ? "scale-smaller" : ""
+      //           }`}
+      //         >
+      //           <div
+      //             className={`face-id__scanner ${
+      //               this.state.isScanning ? "" : "d-none"
+      //             }`}
+      //           />
+      //         </div>
+      //       </div>
+      //     </div>
+      //     <p
+      //       className={`face-id__text ${
+      //         this.state.isCameraVisibleDocs ? "" : "d-none"
+      //       }`}
+      //     >
+      //       Сфотографируйте удостоверение личности
+      //     </p>
+      //     <p
+      //       className={`face-id__text ${
+      //         !this.state.isVerificationCompleted && this.state.isCameraVisible
+      //           ? ""
+      //           : "d-none"
+      //       }`}
+      //     >
+      //       {this.state.isVerificationSecond
+      //         ? "Улыбнитесь"
+      //         : this.state.isVerificationThird
+      //         ? "Отдалитесь"
+      //         : "Поместите лицо в рамку"}
+      //     </p>
+      //     <button
+      //       className={`${
+      //         this.state.isVerificationCompleted ||
+      //         this.state.isCameraVisibleDocs
+      //           ? ""
+      //           : "d-none"
+      //       }`}
+      //       onClick={this.takePhoto}
+      //     >
+      //       Сфотографировать
+      //     </button>
+      //   </div>
+      //
+      //   {/* Фото результат + возможность переснять */}
+      //   <div
+      //     className={`c-camera-feed--holder ${
+      //       (this.state.isFaceIDReady ||
+      //         (this.state.isDocsReady && !this.state.isCameraVisible)) &&
+      //       !this.state.isPreload
+      //         ? ""
+      //         : "d-none"
+      //     }`}
+      //   >
+      //     <div className="c-camera-feed__stage">
+      //       <canvas
+      //         className="canvas"
+      //         height="100%"
+      //         ref={(ref) => (this.canvas = ref)}
+      //       />
+      //     </div>
+      //     <div className="d-flex justify-content-between w-100">
+      //       <button onClick={this.takePhotoAgain}>Переснять</button>
+      //       <button onClick={this.sendPhoto}>Отправить фото</button>
+      // {/*    </div>*/}
+      // {/*  </div>*/}
+      // {/*</div>*/}
     );
   }
 }
