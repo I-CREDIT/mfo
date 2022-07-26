@@ -72,6 +72,7 @@ const config_verilive = {
   },
 };
 
+// Настройки veridoc
 const config_veridoc = {
   autoDocType: false,
   docType: 1,
@@ -133,54 +134,9 @@ export class CameraFeed extends Component {
       is_on_verilive: false,
       is_on_veridoc: false,
       //
-      isCameraVisible: false,
-      isCameraVisibleDocs: false,
-      isVerificationCompleted: false,
-      isScanning: false,
-      isVerificationSecond: false,
-      isVerificationThird: false,
-      isPreload: true,
-      isAfterload: false,
-      isDocsReady: false,
-      isFaceIDReady: false,
-      isDocAccepted: false,
       doc: null,
-      selfie: null,
+      // selfie: null,
     };
-  }
-
-  /**
-   * Processes available devices and identifies one by the label
-   * @memberof CameraFeed
-   * @instance
-   */
-  processDevices(devices) {
-    // const video_devices = devices.filter(
-    //   (device) => device.kind === "videoinput"
-    // );
-
-    // if (+this.props.isBMG) {
-    //   // включает заднюю камеру
-    //   this.setDevice(video_devices[video_devices.length - 1]);
-    // }
-
-    devices.forEach((device) => {
-      this.setDevice(device);
-    });
-  }
-
-  /**
-   * Sets the active device and starts playing the feed
-   * @memberof CameraFeed
-   * @instance
-   */
-  async setDevice(device) {
-    const { deviceId } = device;
-    this.videoPlayer.srcObject = await navigator.mediaDevices.getUserMedia({
-      audio: false,
-      video: { deviceId },
-    });
-    await this.videoPlayer.play();
   }
 
   // Подключение скрипта
@@ -194,6 +150,7 @@ export class CameraFeed extends Component {
     document.body.appendChild(script);
   }
 
+  // Подключение проверки на живость
   async enableVerilive() {
     this.setState({
       is_loading: true,
@@ -228,6 +185,7 @@ export class CameraFeed extends Component {
     }, 2000);
   }
 
+  // Подключение распознавания УДВ
   async enableVeridoc() {
     this.setState({
       is_loading: true,
@@ -235,7 +193,7 @@ export class CameraFeed extends Component {
 
     // Создаем глобальную переменную veridoc с помощью скрипта
     await this.enableScript(
-      "https://s3.eu-central-1.amazonaws.com/veridoc-statics.verigram.ai/veridoc-v1.16.0.js"
+      "https://s3.eu-central-1.amazonaws.com/veridoc-statics.verigram.ai/veridoc-v1.16.x.js"
     );
 
     // Запускаем veridoc с задержкой, чтобы успеть импортнуть script
@@ -273,120 +231,18 @@ export class CameraFeed extends Component {
     }
   }
 
-  takePhoto = () => {
-    if (this.state.isCameraVisible) {
-      this.setState({
-        isCameraVisible: false,
-        isDocsReady: false,
-        isFaceIDReady: true,
-      });
-    } else if (this.state.isCameraVisibleDocs) {
-      this.setState({
-        isCameraVisibleDocs: false,
-        isDocsReady: true,
-      });
-    }
-
-    const context = this.canvas.getContext("2d");
-    this.canvas.width = this.videoPlayer.videoWidth;
-    this.canvas.height = this.videoPlayer.videoHeight;
-
-    context.drawImage(
-      this.videoPlayer,
-      0,
-      0,
-      this.canvas.width,
-      this.canvas.height
-    );
-  };
-
-  takePhotoAgain = () => {
-    if (this.state.isDocsReady) {
-      this.setState({
-        isCameraVisibleDocs: true,
-        isDocsReady: false,
-      });
-    } else if (this.state.isFaceIDReady) {
-      this.setState({
-        isCameraVisible: true,
-        isFaceIDReady: false,
-      });
-    }
-  };
-
-  showCameraDocs = () => {
-    this.setState({
-      isCameraVisibleDocs: true,
-      isPreload: false,
-    });
-  };
-
-  showCamera = () => {
-    setTimeout(() => {
-      this.setState({
-        isCameraVisible: true,
-        isPreload: false,
-      });
-
-      setTimeout(() => {
-        // 2 секунды - Поместить лицо в рамку, начать сканирование
-        this.setState({
-          isScanning: true,
-        });
-
-        // 1 секунда - Конец сканирования, улыбнуться
-        setTimeout(() => {
-          this.setState({
-            isScanning: false,
-            isVerificationSecond: true,
-          });
-
-          // 2 секунды - Улыбнуться, начать сканирование
-          setTimeout(() => {
-            this.setState({
-              isVerificationSecond: false,
-              isScanning: true,
-            });
-
-            // 1 секунда - Конец сканирования, отдалиться
-            setTimeout(() => {
-              this.setState({
-                isScanning: false,
-                isVerificationThird: true,
-              });
-
-              // 2 секунды - Отдалиться, закончить верификацию
-              setTimeout(() => {
-                this.setState({
-                  isScanning: true,
-                });
-
-                // 1 секунда - Конец сканирования, отдалиться
-                setTimeout(() => {
-                  this.setState({
-                    isScanning: false,
-                    isVerificationThird: false,
-                    isVerificationCompleted: true,
-                  });
-                }, 1000);
-              }, 2000);
-            }, 1000);
-          }, 2000);
-        }, 1000);
-      }, 2000);
-    }, 1000);
-  };
-
+  // Старт проверки на живость
   onStartVerilive = () => {
     verilive.start();
 
     verilive.successCallback = async (data) => {
       this.sendPhoto(data.bestFrame);
     };
+
     verilive.failCallback = (data) => {
       swal(
         "Ошибка",
-        `${data}. Вы будете перенаправлены на главную страницу1.`,
+        `${data}. Вы будете перенаправлены на главную страницу.`,
         "error"
       ).then(() => {
         Router.push("/");
@@ -394,6 +250,7 @@ export class CameraFeed extends Component {
     };
   };
 
+  // Старт сканирования УДВ
   onStartVeridoc = () => {
     veridoc.start();
 
@@ -406,7 +263,7 @@ export class CameraFeed extends Component {
     veridoc.failCallback = (data) => {
       swal(
         "Ошибка",
-        `${data}. Вы будете перенаправлены на главную страницу1-veridoc.`,
+        `${data}. Вы будете перенаправлены на главную страницу.`,
         "error"
       ).then(() => {
         Router.push("/");
@@ -427,31 +284,25 @@ export class CameraFeed extends Component {
     // Ручная регистрация
     else {
       // Если готово УДВ
-      if (this.state.isDocAccepted) {
+      if (this.state.doc) {
         const { sendFileManually } = this.props;
+        sendFileManually(this.state.doc, file);
 
-        this.canvas.toBlob((selfie) => {
-          this.state.selfie = selfie;
+        this.setState({
+          doc: file,
+          is_loading: false,
+          is_on_veridoc: false,
+          is_on_verilive: false,
         });
-
-        setTimeout(() => {
-          this.setState({
-            isAfterload: true,
-          });
-          sendFileManually(this.state.doc, this.state.selfie);
-        }, 1000);
       }
       // Если не готово УДВ
       else {
-        this.canvas.toBlob((doc) => {
-          this.state.doc = doc;
-        });
-
         this.setState({
-          isDocAccepted: true,
-          isCameraVisible: true,
+          doc: file,
+          is_loading: false,
+          is_on_veridoc: false,
+          is_on_verilive: true,
         });
-        this.showCamera();
       }
     }
   };
