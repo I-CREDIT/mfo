@@ -164,20 +164,22 @@ class Aggrement extends React.Component {
       localStorage.setItem("VerificationAttempts", "1");
     }
 
+    this.toggleModal();
+
     // Проверяем разрешение на камеру
-    navigator.permissions
-      .query({ name: "camera" })
-      .then((permissionObj) => {
-        if (permissionObj.state !== "granted") {
-          swal("Oops", "Нужно дать доступ к камере!", "error");
-        } else {
-          this.toggleModal();
-        }
-      })
-      .catch((error) => {
-        console.log("Got error :", error);
-        swal("Oops", "Камера не обнаружена!", "error");
-      });
+    // navigator.permissions
+    //   .query({ name: "camera" })
+    //   .then((permissionObj) => {
+    //     if (permissionObj.state !== "granted") {
+    //       swal("Oops", "Нужно дать доступ к камере!", "error");
+    //     } else {
+    //       this.toggleModal();
+    //     }
+    //   })
+    //   .catch((error) => {
+    //     console.log("Got error :", error);
+    //     swal("Oops", "Камера не обнаружена!", "error");
+    //   });
   }
 
   // Отправка УДВ + селфи на бэк
@@ -412,7 +414,6 @@ class Aggrement extends React.Component {
           class="modal modal-calculator"
           size="lg"
         >
-          {/*<ModalHeader toggle={this.toggleModal}>Верификация</ModalHeader>*/}
           <ModalHeader>Верификация</ModalHeader>
           <ModalBody>
             <CameraFeed

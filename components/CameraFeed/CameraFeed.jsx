@@ -250,7 +250,7 @@ export class CameraFeed extends Component {
           this.onStartVeridoc();
         })
         .catch((error) => {
-          swal("Ошибка", `${error}`, "error");
+          swal("Ошибка", `${error}`, "error").then(() => Router.push("/"));
         })
         .finally(() => {
           this.setState({
@@ -381,7 +381,6 @@ export class CameraFeed extends Component {
     verilive.start();
 
     verilive.successCallback = async (data) => {
-      console.log("qqqqqq");
       this.sendPhoto(data.bestFrame);
     };
     verilive.failCallback = (data) => {
@@ -476,7 +475,7 @@ export class CameraFeed extends Component {
         <div
           className={`${this.state.is_loading ? "modelLoader" : "d-none"}`}
         />
-        {/*<button onClick={this.onStartVerilive}>Начать подтверждение</button>*/}
+        <button onClick={this.onStartVerilive}>Начать подтверждение</button>
       </div>
 
       // <div className="c-camera-feed">
