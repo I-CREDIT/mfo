@@ -76,7 +76,7 @@ const config_verilive = {
 const config_veridoc = {
   autoDocType: false,
   docType: 1,
-  recognitionMode: 1,
+  recognitionMode: 0,
   translitCheck: false,
   glareCheck: false,
   photocopyCheck: false,
