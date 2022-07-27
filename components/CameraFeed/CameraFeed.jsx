@@ -200,7 +200,7 @@ export class CameraFeed extends Component {
     setTimeout(() => {
       veridoc
         .init(
-          "https://services.verigram.ai:8443/s/veridoc/ru/veridoc/",
+          "https://services.verigram.ai:8443/veridoc/ru/veridoc/",
           "PeeKMaNIX9dNL2pB2433rs7zwrs28gGZ",
           config_veridoc
         )
