@@ -256,9 +256,8 @@ export class CameraFeed extends Component {
 
     veridoc.successCallback = async (data) => {
       console.log(data, "veridoc-data");
-      this.sendPhoto(data.original_image).then(() => {
-        veridoc.dispose();
-      });
+      this.sendPhoto(data.original_image);
+      veridoc.dispose();
 
       await this.enableVerilive();
     };
