@@ -188,14 +188,8 @@ class Aggrement extends React.Component {
 
     formData.append("iin", this.state.iin);
     formData.append("leadID", this.state.leadID);
-
-    formData.append("photo", doc);
-    formData.append("fileName", "doc.png");
-    formData.append("extension", "png");
-
-    formData.append("photo2", selfie);
-    formData.append("fileName2", "selfie.png");
-    formData.append("extension2", "png");
+    formData.append("doc", doc);
+    formData.append("photo", selfie);
 
     this.setState({
       loading: true,
@@ -203,10 +197,7 @@ class Aggrement extends React.Component {
 
     // Попытка отправления фото по эндпоинту
     await axios
-      .post(
-        `https://24money.kz/biometria/public/api/comparePhotoManual`,
-        formData
-      )
+      .post(`https://24money.kz/biometria/public/api/veriface`, formData)
       .then((response) => {
         if (response.data?.similarity > 82) {
           swal(
