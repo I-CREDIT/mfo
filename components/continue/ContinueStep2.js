@@ -5,7 +5,9 @@ import {
   phoneValidation,
   acceptCirrilic,
   requiredd,
+  requiredAndMoreThanHundredThousand,
 } from "../../defaults/validations";
+import { moreThanHundredThousand } from "../../defaults/validationredux";
 import cookie from "js-cookie";
 import InputMask from "react-input-mask";
 import { Formik, Form, Field } from "formik";
@@ -28,7 +30,7 @@ const PhoneMask = ({ field, form, ...props }) => (
 const ContinueStep2 = () => {
   // Translation
   const { t } = useTranslation();
-  
+
   let scrollToElement = require("scroll-to-element");
 
   const handleFocus = () => {
@@ -54,8 +56,8 @@ const ContinueStep2 = () => {
       token: cookie.get("token"),
       workPlace: values.work_place,
       sphere: values.sphere,
-      lastSix: values.lastSix === '0' ? '1000' : values.lastSix,
-      deposit: values.deposit === '0' ? '1000' : values.deposit,
+      lastSix: values.lastSix === "0" ? "1000" : values.lastSix,
+      deposit: values.deposit === "0" ? "1000" : values.deposit,
       position: values.position,
       fioContact: `${values.relative_name} ${values.relative_last_name}`,
       phoneContact: values.relative_phone_number,
@@ -194,7 +196,7 @@ const ContinueStep2 = () => {
                 <div className="input-group">
                   <Field
                     name="deposit"
-                    validate={requiredd}
+                    validate={requiredAndMoreThanHundredThousand}
                     autocomplete="off"
                     className="form-control"
                     defaultValue={`${Math.round(
@@ -212,7 +214,7 @@ const ContinueStep2 = () => {
                   </div>
                 </div>
                 {errors.deposit && touched.deposit && (
-                  <p className="text-danger">Обязательное поле</p>
+                  <p className="text-danger">{t(errors.deposit)}</p>
                 )}
               </div>
 

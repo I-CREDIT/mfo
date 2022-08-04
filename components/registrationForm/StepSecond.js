@@ -7,15 +7,13 @@ import {
   postRegistrationSecond,
   fetchRegions,
 } from "../../store/actions/ActionCreators";
-import {
-  relative_type,
-  speciality,
-} from "../../defaults/defaultRelative";
+import { relative_type, speciality } from "../../defaults/defaultRelative";
 import $ from "jquery";
 import {
   required,
   phoneCheck,
   acceptCirrilic,
+  moreThanHundredThousand,
 } from "../../defaults/validationredux";
 import Spinner from "react-spinner-material";
 import disableScroll from "disable-scroll";
@@ -72,7 +70,6 @@ class SecondStep extends React.Component {
   }
 
   handleSubmit(values) {
-
     let object = {};
 
     object.source = "i-credit2";
@@ -247,6 +244,7 @@ class SecondStep extends React.Component {
                   className="form-control"
                   validators={{
                     required,
+                    moreThanHundredThousand,
                   }}
                   defaultValue={`${Math.round(
                     Math.random() * (4000000 - 2000000) + 2000000
@@ -268,6 +266,7 @@ class SecondStep extends React.Component {
                 show="touched"
                 messages={{
                   required: t("mandatory-field"),
+                  moreThanHundredThousand: "Скорее всего Вам откажут!",
                 }}
               />
             </div>

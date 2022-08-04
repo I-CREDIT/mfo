@@ -6,6 +6,16 @@ export const requiredd = (val) => {
   return error;
 };
 
+export const requiredAndMoreThanHundredThousand = (val) => {
+  let error;
+  if (!val) {
+    error = "mandatory-field";
+  } else if (val < 100000) {
+    error = "mandatory-field-decline";
+  }
+  return error;
+};
+
 export const requiredd1 = (val) => {
   let error;
   if (!val || !(val.replace(/\s+$/, "").split(/\W+/).length === 2)) {
