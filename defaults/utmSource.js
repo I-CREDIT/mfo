@@ -83,6 +83,7 @@ export const controlUtm = () => {
       cookie.set('utm_campaign', getUrlParameter('utm_campaign'), {expires: 30})
       cookie.set('utm_term', getUrlParameter('web_id'), {expires: 30})
       cookie.set('clickid', getUrlParameter('v'), {expires: 30})
+      cookie.set('wmid', getUrlParameter('web_id'), {expires: 30})
     }
   }
   if(getUrlParameter('utm_source').length>0 && getUrlParameter('aff_id').length>0 && getUrlParameter('aff_sub').length>0) {

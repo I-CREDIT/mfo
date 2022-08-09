@@ -675,9 +675,6 @@ const InsuranceContractDocument = (props) => {
       font: 'TimesNewRoman',
       fontSize: 11,
     },
-    styles: {
-  
-    }
   }
 
   return (

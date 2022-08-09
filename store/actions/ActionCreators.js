@@ -237,17 +237,17 @@ export const confirmSMS = (registration) => (dispatch) => {
         dispatch(isLoading(false));
         dispatch(
           errorMessage(
-            `${response.message}. Вы будете перенаправлены на главную страницу.`
+            `${response.message}.`
           )
         );
-        dispatch(stepRegistration(0));
-        localStorage.removeItem("step");
-        localStorage.removeItem("token");
-        localStorage.setItem("BMGAttempts", "3");
-        localStorage.setItem("isOnBMG", "false");
-        setTimeout(() => {
-          Router.push("/");
-        }, 2000);
+        // dispatch(stepRegistration(0));
+        // localStorage.removeItem("step");
+        // localStorage.removeItem("token");
+        // localStorage.setItem("BMGAttempts", "3");
+        // localStorage.setItem("isOnBMG", "false");
+        // setTimeout(() => {
+        //   Router.push("/");
+        // }, 2000);
       }
     })
     .then((response) => dispatch(isLoading(false)))
@@ -344,20 +344,20 @@ export const takeDocumentsBiometry = (registration) => (dispatch) => {
       } else {
         dispatch(
           errorMessage(
-            `${response.message}. Вы будете перенаправлены на главную страницу.`
+            `${response.message}.`
           )
         );
         setTimeout(() => {
           dispatch(stepRegistration(0));
-        }, 6000);
+        }, 3000);
         dispatch(isLoading(false));
         setTimeout(() => {
           localStorage.removeItem("step");
           localStorage.removeItem("token");
-        }, 5000);
-        setTimeout(() => {
-          Router.push("/");
-        }, 5000);
+        }, 2000);
+        // setTimeout(() => {
+        //   Router.push("/");
+        // }, 5000);
       }
     })
     .then((response) => dispatch(isLoading(false)))
