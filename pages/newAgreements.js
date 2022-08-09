@@ -215,11 +215,12 @@ class Aggrement extends React.Component {
                 "Вы будете перенаправлены на главную страницу.",
                 "error"
               ).then(() => {
+                localStorage.setItem("VerificationAttempts", "0");
                 Router.push("/");
               });
             } else {
               swal(
-                "Верификация не пройдена.",
+                "Подтверждение личности не пройдено.",
                 "Фото не прошло проверку, попробуйте еще раз.",
                 "error"
               ).then(() => {
@@ -238,11 +239,12 @@ class Aggrement extends React.Component {
               "Вы будете перенаправлены на главную страницу.",
               "error"
             ).then(() => {
+              localStorage.setItem("VerificationAttempts", "0");
               Router.push("/");
             });
           } else {
             swal(
-              "Верификация не пройдена.",
+              "Подтверждение личности не пройдено.",
               "Фото не прошло проверку, попробуйте еще раз.",
               "error"
             ).then(() => {
@@ -325,24 +327,50 @@ class Aggrement extends React.Component {
             Router.push("/");
           });
         } else {
-          swal(
-            "Верификация не пройдена",
-            "Фото не прошло проверку, попробуйте еще раз",
-            "error"
-          ).then(() => {
-            Router.push("/");
-          });
+          if (localStorage.getItem("VerificationAttempts")) {
+            if (+localStorage.getItem("VerificationAttempts") >= 3) {
+              swal(
+                "Исчерпано количество попыток (3).",
+                "Вы будете перенаправлены на главную страницу.",
+                "error"
+              ).then(() => {
+                localStorage.setItem("VerificationAttempts", "0");
+                Router.push("/");
+              });
+            } else {
+              swal(
+                "Подтверждение личности не пройдено.",
+                "Фото не прошло проверку, попробуйте еще раз.",
+                "error"
+              ).then(() => {
+                this.toggleModal();
+              });
+            }
+          }
         }
       })
       .catch((error) => {
         console.log(error);
-        swal(
-          "Ошибка при попытке верификации",
-          "Попробуйте еще раз",
-          "error"
-        ).then(() => {
-          Router.push("/");
-        });
+        if (localStorage.getItem("VerificationAttempts")) {
+          if (+localStorage.getItem("VerificationAttempts") >= 3) {
+            swal(
+              "Исчерпано количество попыток (3).",
+              "Вы будете перенаправлены на главную страницу.",
+              "error"
+            ).then(() => {
+              localStorage.setItem("VerificationAttempts", "0");
+              Router.push("/");
+            });
+          } else {
+            swal(
+              "Подтверждение личности не пройдено.",
+              "Фото не прошло проверку, попробуйте еще раз.",
+              "error"
+            ).then(() => {
+              this.toggleModal();
+            });
+          }
+        }
       })
       .finally(() => {
         this.setState({
@@ -405,7 +433,7 @@ class Aggrement extends React.Component {
           class="modal modal-calculator"
           size="lg"
         >
-          <ModalHeader>Верификация</ModalHeader>
+          <ModalHeader>Подтверждение личности</ModalHeader>
           <ModalBody>
             <CameraFeed
               sendFile={this.uploadImage}

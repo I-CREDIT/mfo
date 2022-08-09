@@ -7,7 +7,7 @@ import swal from "sweetalert";
 import MicrocreditAgreementDocument from "../document_1/microcreditAgreement";
 import MicrocreditInsuranceDocument from "../document_1/microcreditInsurance";
 import InsuranceApplicationDocument from "../document_1/insuranceApplication";
-import InsuranceContractDocument from "../document_1/insuranceContract";
+import InsuranceContractDocument from "../document_1/insuranceContract2";
 import ApplicationRestructuringDocument from "../document_1/applicationRestructuring";
 import RestructuringAgreementDocument from "../document_1/restructuringAgreement";
 import cookie from "js-cookie";
@@ -357,6 +357,7 @@ class Status extends React.Component {
                       startCard={this.props.userStatus.userStatus.startCard}
                       email={this.props.userStatus.userStatus.email}
                       period={this.props.userStatus.userStatus.period}
+                      amount={this.props.userStatus.userStatus.amount}
                     />
                   </li>
                   <li>
@@ -381,6 +382,7 @@ class Status extends React.Component {
                       endDate={this.props.userStatus.userStatus.endDate}
                       total={this.props.userStatus.userStatus.total}
                       period={this.props.userStatus.userStatus.period}
+                      amount={this.props.userStatus.userStatus.amount}
                     />
                   </li>
                 </ul>
@@ -573,6 +575,7 @@ class Status extends React.Component {
                         startCard={this.props.userStatus.userStatus.startCard}
                         email={this.props.userStatus.userStatus.email}
                         period={this.props.userStatus.userStatus.period}
+                        amount={this.props.userStatus.userStatus.amount}
                       />
                     </li>
                     <li>
@@ -681,6 +684,7 @@ class Status extends React.Component {
                         startCard={this.props.userStatus.userStatus.startCard}
                         email={this.props.userStatus.userStatus.email}
                         period={this.props.userStatus.userStatus.period}
+                        amount={this.props.userStatus.userStatus.amount}
                       />
                     </li>
                     <li>
@@ -968,7 +972,8 @@ class Status extends React.Component {
                       startCard={this.props.userStatus.userStatus.startCard}
                       email={this.props.userStatus.userStatus.email}
                       period={this.props.userStatus.userStatus.period}
-                    />
+                      amount={this.props.userStatus.userStatus.amount}
+                      />
                   </li>
                   <li>
                     <MicrocreditAgreementDocument
@@ -1229,7 +1234,8 @@ class Status extends React.Component {
                       startCard={this.props.userStatus.userStatus.startCard}
                       email={this.props.userStatus.userStatus.email}
                       period={this.props.userStatus.userStatus.period}
-                    />
+                      amount={this.props.userStatus.userStatus.amount}
+                      />
                   </li>
                   <li>
                     <MicrocreditAgreementDocument
@@ -1336,7 +1342,7 @@ class Status extends React.Component {
                   </button>
                 </a>
                 <a 
-                  href="https://top-credit.su/" 
+                  href="https://extramoney365.net/zhhp" 
                   target="_blank"
                   style={{
                     height: '100%'

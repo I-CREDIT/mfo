@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import Link from 'next/link'
 import {useRouter} from 'next/router'
 import RulesMicrocreditDocument from '../document_1/rulesMicrocredit';
@@ -36,7 +36,6 @@ const Footer = () => {
         <div className="container">
           <div className="row footerCols">
             <div className="col-md-4 footerCol">
-              <AppLink href="/"><img className='icreditlogo mb-3' src={require("../../img/logo.png")} /> </AppLink>
               <p>
                 {t('footerCol-1-1')}
                 <span className="d-block" />{t('footerCol-1-2')}</p>

@@ -255,9 +255,8 @@ class SecondStep extends React.Component {
                     .concat(["0", "0", "0"])
                     .join("")}`}
                 />
-                <div className="hint">
-                  Чем больше сумма депозита тем больше сумма при одобрении
-                  микрокредита
+                <div className="hint" style={{color: '#dc3545'}}>
+                  Высокая сумма депозита увеличивает Ваши шансы на одобрение кредита
                 </div>
               </div>
               <Errors

@@ -52,6 +52,7 @@ class AdminCabinet extends React.Component {
       token: '',
       message: '',
       searched: false,
+      searching: false,
       deleated: false
     };
     this.handleSubmit = this.handleSubmit.bind(this)
@@ -62,6 +63,11 @@ class AdminCabinet extends React.Component {
     let newObj = {}
     let token = cookie.get("token")
     newObj = {...values, token}
+    this.setState({
+      searching: true,
+      message: '',
+      deleated: false
+    })
     fetch("https://api.i-credit.kz/api/searchUser", {
       method: "POST",
       headers: {
@@ -81,12 +87,14 @@ class AdminCabinet extends React.Component {
         phone: data.phone,
         token: data.message,
         searched: data.success,
+        searching: false,
         message: '',
         deleated: false
       })
       if(!this.state.searched) {
         this.setState({
-          message: data.message
+          message: data.message,
+          searching: false,
         })
       }
     })
@@ -98,6 +106,11 @@ class AdminCabinet extends React.Component {
       token: this.state.token,
       user_id: this.state.id
     }
+    this.setState({
+      searching: true,
+      message: '',
+      deleated: false
+    })
     fetch("https://api.i-credit.kz/api/deleteUser", {
       method: "POST",
       headers: {
@@ -106,10 +119,17 @@ class AdminCabinet extends React.Component {
       },
       body: JSON.stringify(newObj),
     })
-    .then(this.setState({
-      searched: false,
-      deleated: true
-    }))
+      .then(data => console.log(data))
+      .then(this.setState({
+        searched: false,
+        deleated: true,
+        searching: false
+      }))
+      .catch((error) => this.setState({
+        deleated: false,
+        searching: false,
+        message: 'Ошибка удаления'
+      }))
   }
 
   render() {
@@ -185,7 +205,46 @@ class AdminCabinet extends React.Component {
                   </div>
               </Form>
           </Formik>
-          {this.state.searched
+          {
+            this.state.searching ? 'Загрузка...' : null
+          }
+          {
+            this.state.searched 
+            ?
+            <div style={{
+              margin: "20px 0",
+              padding: "10px",
+              borderRadius: "10px",
+              boxShadow: "0px 0px 20px #866b6b",
+            }}>
+              <p>ФИО: {this.state.name}</p>
+              <p>Телефон: {this.state.phone}</p>
+              <p>ИИН: {this.state.iin}</p>
+              <div style={{
+                display: 'flex',
+                justifyContent: 'center',
+              }}>
+                <button 
+                  onClick={this.handleSubmitDeleate} 
+                  style={{
+                      marginTop: '10px',
+                      borderRadius: '5px',
+                      backgroundColor: '#ef2221',
+                      color: '#fff',
+                      border: 'none',
+                      width: '100%',
+                      height: '40px',
+                }}>
+                  Удалить
+                </button>
+              </div>
+            </div>
+            :
+            null
+          }
+          {this.state.message ? <p>{this.state.message}</p> : null}
+          {this.state.deleated ? <p>Клиент удален</p> : null}
+          {/* {this.state.searched 
           ?
           <div style={{
             margin: "20px 0",
@@ -217,7 +276,7 @@ class AdminCabinet extends React.Component {
           </div>
           :
           this.state.message
-          ? <p>{this.state.message}</p> : this.state.deleated ? <p>Клиент удален</p> : null }
+          ? <p>{this.state.message}</p> : this.state.deleated ? <p>Клиент удален</p> : null } */}
         </div>
       );
   }

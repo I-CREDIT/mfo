@@ -63,6 +63,7 @@ class FormRegister extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      btnDisabled: false,
       isModalOpen: false,
       checked: false,
       clicked: false,
@@ -113,10 +114,8 @@ class FormRegister extends React.Component {
       }
       if (
         cookie.get("utm_source") === "upsala" ||
-        cookie.get("utm_source") === "doaff" ||
         cookie.get("utm_source") === "goodaff" ||
-        cookie.get("utm_source") === "finpublic_cpa" ||
-        cookie.get("utm_source") === "pdl-profit"
+        cookie.get("utm_source") === "finpublic_cpa"
       ) {
         other.source = cookie.get("utm_source");
         other.cpa_source = cookie.get("utm_source");
@@ -127,7 +126,11 @@ class FormRegister extends React.Component {
         other.cpa_source = cookie.get("utm_source");
         other.cpa_clickid = cookie.get("clickid");
       }
-      if (cookie.get("utm_source") === "leadgid") {
+      if (
+        cookie.get("utm_source") === "leadgid" ||
+        cookie.get("utm_source") === "pdl-profit" ||
+        cookie.get("utm_source") === "doaff"
+      ) {
         other.source = cookie.get("utm_source");
         other.cpa_source = cookie.get("utm_source");
         other.webID = cookie.get("wmid");
@@ -251,7 +254,76 @@ class FormRegister extends React.Component {
       ...other,
       ...values,
     };
-    this.props.postRegistrationThird(finalObjects);
+
+
+    var BANKS = [
+      { id: "947", name: 'АО "Дочерний Банк "АЛЬФА-БАНК"' },
+      { id: "826", name: 'АО "АТФБанк"' },
+      {
+        id: "949",
+        name: 'АО "Altyn Bank" (ДБ China Citic Bank Corporation Limited)',
+      },
+      { id: "913", name: 'АО ДБ "БАНК КИТАЯ В КАЗАХСТАНЕ"' },
+      { id: "722", name: 'АО "KASPI BANK"' },
+      { id: "766", name: 'АО "Центральный Депозитарий Ценных Бумаг"' },
+      { id: "832", name: 'АО "Ситибанк Казахстан"' },
+      { id: "907", name: 'АО "Банк Развития Казахстана"' },
+      { id: "700", name: "ЕВРАЗИЙСКИЙ БАНК РАЗВИТИЯ" },
+      { id: "948", name: 'АО "Евразийский Банк"' },
+      {
+        id: "009",
+        name: 'НАО Государственная корпорация "Правительство для граждан"',
+      },
+      { id: "972", name: 'АО "Жилстройсбербанк Казахстана"' },
+      { id: "246", name: 'АО "Исламский Банк "Al Hilal"' },
+      { id: "601", name: 'АО "Народный Банк Казахстана"' },
+      { id: "930", name: 'АО "Торгово-промышленный Банк Китая в г. Алматы"' },
+      { id: "550", name: "г.Москва Межгосударственный Банк" },
+      { id: "886", name: 'ДБ АО "Хоум Кредит энд Финанс Банк"' },
+      { id: "965", name: 'АО "ForteBank"' },
+      { id: "927", name: 'АО "Казахстанская фондовая биржа"' },
+      { id: "821", name: 'АО "Банк "Bank RBK"' },
+      {
+        id: "224",
+        name: 'РГП "Казахстанский центр межбанковских расчетов НБРК"',
+      },
+      { id: "070", name: 'РГУ "Комитет казначейства Министерства финансов РК"' },
+      { id: "563", name: 'АО "КАЗПОЧТА"' },
+      { id: "551", name: 'АО "Банк Kassa Nova" (Дочерний банк АО "ForteBank")' },
+      { id: "885", name: 'АО "ДБ "КАЗАХСТАН-ЗИРААТ ИНТЕРНЕШНЛ БАНК"' },
+      { id: "774", name: 'АО "AsiaCredit Bank (АзияКредит Банк)" ' },
+      { id: "553", name: 'АО ДБ "Национальный Банк Пакистана" в Казахстане' },
+      { id: "147", name: '"Банк-кастодиан АО  "ЕНПФ"' },
+      { id: "125", name: "РГУ Национальный Банк Республики Казахстан" },
+      { id: "849", name: 'АО "Нурбанк"' },
+      { id: "914", name: 'ДБ АО "Сбербанк"' },
+      { id: "435", name: 'АО "Шинхан Банк Казахстан"' },
+      { id: "781", name: 'АО "Capital Bank Kazakhstan"' },
+      { id: "620", name: 'АО "Tengri Bank"' },
+      { id: "998", name: 'АО "First Heartland Jysan Bank"' },
+      { id: "432", name: "ДО АО Банк ВТБ (Казахстан)" },
+      { id: "896", name: 'АО "Исламский банк "Заман-Банк"' },
+      { id: "856", name: 'АО "Банк ЦентрКредит"' },
+      "",
+    ];
+
+    let bool = false
+    for(let i = 0; i < BANKS.length; i++) {
+      if(values.iban_account.slice(4, 7) === BANKS[i].id) {
+        bool = true;
+        break
+      }
+      bool = false
+    }
+    let regex = new RegExp('[^A-Z0-9]', 'g')
+    if(values.iban_account.replace(regex, '').length === 20 && bool) {
+      this.props.postRegistrationThird(finalObjects)
+        .then(() => {
+          this.setState({
+            btnDisabled: true
+          })
+        })
+    }
   }
 
   getErrorMessage() {
@@ -476,6 +548,7 @@ class FormRegister extends React.Component {
                 type="submit"
                 className="agreement-btn"
                 to="/newAggrements"
+                disabled={this.state.btnDisabled}
                 onClick={() => this.handleFocus()}
               >
                 Отправить

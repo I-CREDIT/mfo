@@ -217,14 +217,14 @@ class Agreement extends React.Component {
     await axios.post(`http://178.170.221.75/biometria/public/api/comparePhotos`, formData)
         .then(response => {
           if (response.data.similarity > 82) {
-            swal("Верификация пройдена", "Можете подписать документы", "success")
+            swal("Подтверждение личности пройдено", "Можете подписать документы", "success")
                 .then(() => {
                   this.setState ({
                     isModalOpen: false
                   })
                 })
           } else {
-            swal("Верификация не пройдена", "Фото не прошло проверку, попробуйте еще раз", "error")
+            swal("Подтверждение личности не пройдено", "Фото не прошло проверку, попробуйте еще раз", "error")
                 .then(() => {
                   Router.push('/')
                 })
@@ -267,7 +267,7 @@ class Agreement extends React.Component {
               size="lg"
           >
             {/*<ModalHeader toggle={this.toggleModal}>Верификация</ModalHeader>*/}
-            <ModalHeader>Верификация</ModalHeader>
+            <ModalHeader>Подтверждение личности</ModalHeader>
             <ModalBody>
               <CameraFeed sendFile={this.uploadImage} />
             </ModalBody>
