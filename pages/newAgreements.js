@@ -142,8 +142,7 @@ class Aggrement extends React.Component {
     });
   }
 
-  async sendAgreementStatus() {
-    // Настраиваем кол-во попыток
+  setVerificationAttempts() {
     if (localStorage.getItem("VerificationAttempts")) {
       let attempts = Number(localStorage.getItem("VerificationAttempts")) + 1;
 
@@ -156,30 +155,42 @@ class Aggrement extends React.Component {
           localStorage.setItem("VerificationAttempts", "0");
           Router.push("/");
         });
-        return;
       } else {
         localStorage.setItem("VerificationAttempts", attempts.toString());
       }
     } else {
       localStorage.setItem("VerificationAttempts", "1");
     }
+  }
+
+  checkVerificationAttempts() {
+    if (localStorage.getItem("VerificationAttempts")) {
+      if (+localStorage.getItem("VerificationAttempts") >= 3) {
+        swal(
+          "Исчерпано количество попыток (3).",
+          "Вы будете перенаправлены на главную страницу.",
+          "error"
+        ).then(() => {
+          localStorage.setItem("VerificationAttempts", "0");
+          Router.push("/");
+        });
+      } else {
+        swal(
+          "Подтверждение личности не пройдено.",
+          "Фото не прошло проверку, попробуйте еще раз.",
+          "error"
+        ).then(() => {
+          this.toggleModal();
+        });
+      }
+    }
+  }
+
+  async sendAgreementStatus() {
+    // Настраиваем кол-во попыток
+    this.setVerificationAttempts();
 
     this.toggleModal();
-
-    // Проверяем разрешение на камеру
-    // navigator.permissions
-    //   .query({ name: "camera" })
-    //   .then((permissionObj) => {
-    //     if (permissionObj.state !== "granted") {
-    //       swal("Oops", "Нужно дать доступ к камере!", "error");
-    //     } else {
-    //       this.toggleModal();
-    //     }
-    //   })
-    //   .catch((error) => {
-    //     console.log("Got error :", error);
-    //     swal("Oops", "Камера не обнаружена!", "error");
-    //   });
   }
 
   // Отправка УДВ + селфи на бэк
@@ -208,50 +219,12 @@ class Aggrement extends React.Component {
             Router.push("/");
           });
         } else {
-          if (localStorage.getItem("VerificationAttempts")) {
-            if (+localStorage.getItem("VerificationAttempts") >= 3) {
-              swal(
-                "Исчерпано количество попыток (3).",
-                "Вы будете перенаправлены на главную страницу.",
-                "error"
-              ).then(() => {
-                localStorage.setItem("VerificationAttempts", "0");
-                Router.push("/");
-              });
-            } else {
-              swal(
-                "Подтверждение личности не пройдено.",
-                "Фото не прошло проверку, попробуйте еще раз.",
-                "error"
-              ).then(() => {
-                this.toggleModal();
-              });
-            }
-          }
+          this.checkVerificationAttempts();
         }
       })
       .catch((error) => {
         console.log(error);
-        if (localStorage.getItem("VerificationAttempts")) {
-          if (+localStorage.getItem("VerificationAttempts") >= 3) {
-            swal(
-              "Исчерпано количество попыток (3).",
-              "Вы будете перенаправлены на главную страницу.",
-              "error"
-            ).then(() => {
-              localStorage.setItem("VerificationAttempts", "0");
-              Router.push("/");
-            });
-          } else {
-            swal(
-              "Подтверждение личности не пройдено.",
-              "Фото не прошло проверку, попробуйте еще раз.",
-              "error"
-            ).then(() => {
-              this.toggleModal();
-            });
-          }
-        }
+        this.checkVerificationAttempts();
       })
       .finally(() => {
         this.setState({
@@ -270,7 +243,6 @@ class Aggrement extends React.Component {
           },
         })
         .then((response) => {
-          console.log(response);
           this.setState({
             loading: false,
           });
@@ -327,50 +299,12 @@ class Aggrement extends React.Component {
             Router.push("/");
           });
         } else {
-          if (localStorage.getItem("VerificationAttempts")) {
-            if (+localStorage.getItem("VerificationAttempts") >= 3) {
-              swal(
-                "Исчерпано количество попыток (3).",
-                "Вы будете перенаправлены на главную страницу.",
-                "error"
-              ).then(() => {
-                localStorage.setItem("VerificationAttempts", "0");
-                Router.push("/");
-              });
-            } else {
-              swal(
-                "Подтверждение личности не пройдено.",
-                "Фото не прошло проверку, попробуйте еще раз.",
-                "error"
-              ).then(() => {
-                this.toggleModal();
-              });
-            }
-          }
+          this.checkVerificationAttempts();
         }
       })
       .catch((error) => {
         console.log(error);
-        if (localStorage.getItem("VerificationAttempts")) {
-          if (+localStorage.getItem("VerificationAttempts") >= 3) {
-            swal(
-              "Исчерпано количество попыток (3).",
-              "Вы будете перенаправлены на главную страницу.",
-              "error"
-            ).then(() => {
-              localStorage.setItem("VerificationAttempts", "0");
-              Router.push("/");
-            });
-          } else {
-            swal(
-              "Подтверждение личности не пройдено.",
-              "Фото не прошло проверку, попробуйте еще раз.",
-              "error"
-            ).then(() => {
-              this.toggleModal();
-            });
-          }
-        }
+        this.checkVerificationAttempts();
       })
       .finally(() => {
         this.setState({
@@ -436,6 +370,7 @@ class Aggrement extends React.Component {
           <ModalHeader>Подтверждение личности</ModalHeader>
           <ModalBody>
             <CameraFeed
+              toggleCamera={this.toggleModal}
               sendFile={this.uploadImage}
               sendFileManually={this.uploadImageManually}
               isBMG={this.state.isBMG}

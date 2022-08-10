@@ -239,13 +239,10 @@ export class CameraFeed extends Component {
       this.sendPhoto(data.bestFrame);
     };
 
-    verilive.failCallback = (data) => {
-      swal(
-        "Ошибка",
-        `${data}. Вы будете перенаправлены на главную страницу.`,
-        "error"
-      ).then(() => {
-        Router.push("/");
+    verilive.failCallback = () => {
+      swal("Ошибка", `Вы не прошли! Попробуйте еще раз.`, "error").then(() => {
+        const { toggleCamera } = this.props;
+        toggleCamera();
       });
     };
   };
@@ -261,13 +258,10 @@ export class CameraFeed extends Component {
       await this.enableVerilive();
     };
 
-    veridoc.failCallback = (data) => {
-      swal(
-        "Ошибка",
-        `${data}. Вы будете перенаправлены на главную страницу.`,
-        "error"
-      ).then(() => {
-        Router.push("/");
+    veridoc.failCallback = () => {
+      swal("Ошибка", `Вы не прошли! Попробуйте еще раз.`, "error").then(() => {
+        const { toggleCamera } = this.props;
+        toggleCamera();
       });
     };
   };
