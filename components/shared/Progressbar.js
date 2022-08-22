@@ -68,8 +68,8 @@ class ProgressBar extends Component {
     await // axios.setHeader('Accept', 'application/json')
     axios
       .post(
-        // `https://api.i-credit.kz/api/repeatRequestTest`,
-        `https://api.i-credit.kz/api/repeatRequest`,
+        `https://api.i-credit.kz/api/repeatRequestTest`,
+        // `https://api.i-credit.kz/api/repeatRequest`,
         {
           token: cookie.get("token"),
           period: values.UF_3,
@@ -78,7 +78,7 @@ class ProgressBar extends Component {
         {
           headers: {
             "Content-Type": "application/json",
-            // "Authorization": `Bearer ${cookie.get('token')}`,
+            "Authorization": `Bearer ${cookie.get('token')}`,
             Accept: "application/json",
           },
         }
@@ -96,17 +96,15 @@ class ProgressBar extends Component {
               `Вам необходимо пройти верификацию. Вы будете перенаправлены после подтвердения.`,
               "success"
             ).then(() => {
-              if (response.data.bmg !== "no") {
+              if (response.data.bmg === "auto") {
                 Router.push(
-                  `/newAggrements?token=${cookie.get("token")}&leadID=${
+                  `/newAgreements?token=${cookie.get("token")}&leadID=${
                     response.data?.leadID
                   }`
                 );
               } else {
                 Router.push(
-                  `/newAgreements?token=${cookie.get("token")}&bmg=${
-                    response.data?.bmg
-                  }`
+                  `/newAgreements?token=${cookie.get("token")}&bmg=0`
                 );
               }
             });

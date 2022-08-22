@@ -142,10 +142,9 @@ export const isValidIBANNumber = (input) => {
     { id: "856", name: 'АО "Банк ЦентрКредит"' },
     "",
   ];
-  var iban = String(input)
-      .toUpperCase()
-      .replace(/[^A-Z0-9]/g, ""),
-    code = iban.match(/^([A-Z]{2})(\d{2})(\d{3})([A-Z\d]+)$/),
+  let iban = String(input)
+      .toUpperCase(),
+    code = iban.match(/^([A-Z]{2})(\d{2})(\d{3})([A-Z\d]{13})$/),
     digits;
   if (!code || iban.length !== CODE_LENGTHS) {
     return "Заполните поле до конца";

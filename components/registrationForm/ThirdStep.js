@@ -93,14 +93,14 @@ class FormRegister extends React.Component {
   }
 
   handleSubmit(values) {
-    if (!isValidIBANNumber(values.iban_account)) {
+    if (!isValidIBANNumber(this.state.value)) {
       this.props.errorMessage("Введите другой IBAN.");
       return;
     }
 
     let other = {};
 
-    other.bank_name = isValidIBANNumber(values.iban_account);
+    other.bank_name = isValidIBANNumber(this.state.value);
     other.source = "i-credit.kz";
 
     if (cookie.get("utm_source") !== undefined) {
@@ -253,8 +253,8 @@ class FormRegister extends React.Component {
     const finalObjects = {
       ...other,
       ...values,
+      iban: this.state.value
     };
-
 
     var BANKS = [
       { id: "947", name: 'АО "Дочерний Банк "АЛЬФА-БАНК"' },
@@ -309,14 +309,14 @@ class FormRegister extends React.Component {
 
     let bool = false
     for(let i = 0; i < BANKS.length; i++) {
-      if(values.iban_account.slice(4, 7) === BANKS[i].id) {
+      if(this.state.value.slice(4, 7) === BANKS[i].id) {
         bool = true;
         break
       }
       bool = false
     }
     let regex = new RegExp('[^A-Z0-9]', 'g')
-    if(values.iban_account.replace(regex, '').length === 20 && bool) {
+    if(this.state.value.replace(regex, '').length === 20 && bool) {
       this.props.postRegistrationThird(finalObjects)
         .then(() => {
           this.setState({
@@ -403,12 +403,13 @@ class FormRegister extends React.Component {
 
   render() {
     const ibanMessage =
-      isValidIBANNumber(this.props.registration3.iban_account) ||
+      isValidIBANNumber(this.state.value) ||
       `Временно не принимаем карты данного банка. Попробуйте ввести другой IBAN.`;
 
     const IbanToUppercase = (e) => {
+      const regex = new RegExp('[^A-Z0-9]', 'g')
       this.setState({
-        value: e.target.value.toUpperCase(),
+        value: e.target.value.toUpperCase().replace(regex, '').slice(0, 20),
       });
     };
 
@@ -449,7 +450,7 @@ class FormRegister extends React.Component {
                 value={this.state.value}
                 model=".iban_account"
                 id="iban_account"
-                placeholder="KZ__________________"
+                placeholder="KZ"
                 className="form-control text-uppercase"
               />
             </div>

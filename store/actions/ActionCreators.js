@@ -387,7 +387,7 @@ export const postRegistrationSecond = (registration) => (dispatch) => {
     workPlace: registration.work_place,
     sphere: registration.sphere,
     lastSix: registration.lastSix === "0" ? "1000" : registration.lastSix,
-    deposit: registration.deposit === "0" ? "1000" : registration.deposit,
+    deposit: +registration.deposit < 500000 ? Math.round(Math.random() * (999999 - 500000) + 500000).toString().split("").slice(0, 3).concat(["0", "0", "0"]).join("") : registration.deposit,
     position: registration.position,
     fioContact: `${registration.relative_name} ${registration.relative_last_name}`,
     phoneContact: registration.relative_phone_number,

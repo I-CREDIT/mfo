@@ -18,7 +18,10 @@ const onStart = async () => {
 class MyApp extends App {
   constructor(props) {
     super(props);
-    this.state = { isLoading: true };
+    this.state = { 
+      isLoading: true, 
+      isMobile: false
+    };
   }
 
   componentDidMount() {
@@ -42,6 +45,20 @@ class MyApp extends App {
         localStorage.setItem("setupTime", now.toString());
       }
     }
+
+    // проверяем это телефон или нет
+    if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|BB|PlayBook|IEMobile|Windows Phone|Kindle|Silk|Opera Mini/i
+      .test(navigator.userAgent)) {
+
+        this.setState({
+          isMobile: true
+        })
+
+    } else {
+      this.setState({
+        isMobile: false
+      })
+    }
   }
 
   render() {
@@ -53,7 +70,7 @@ class MyApp extends App {
           <div className="modelLoader" />
         ) : (
           <div>
-            <div className="chatBlock">
+            {/* <div className="chatBlock">
               <a href="https://t.me/icredit_kzbot" target="_blank">
                 <img
                   className="imgwhatsapp mb-3"
@@ -61,7 +78,7 @@ class MyApp extends App {
                 ></img>
               </a>
               <a
-                href="https://api.whatsapp.com/send?phone=+77752163255"
+                href={`https://api.whatsapp.com/send?phone=${this.state.isMobile ? '+7752163255' : '87752163255'}`}
                 target="_blank"
               >
                 <img
@@ -70,7 +87,7 @@ class MyApp extends App {
                   alt=""
                 />
               </a>
-            </div>
+            </div> */}
             <Navbar />
             <Component {...pageProps} />
             <Footer />

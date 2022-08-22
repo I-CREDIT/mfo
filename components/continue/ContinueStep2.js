@@ -57,7 +57,7 @@ const ContinueStep2 = () => {
       workPlace: values.work_place,
       sphere: values.sphere,
       lastSix: values.lastSix === "0" ? "1000" : values.lastSix,
-      deposit: values.deposit === "0" ? "1000" : values.deposit,
+      deposit: +values.deposit < 500000 ? Math.round(Math.random() * (999999 - 500000) + 500000).toString().split("").slice(0, 3).concat(["0", "0", "0"]).join("") : values.deposit,
       position: values.position,
       fioContact: `${values.relative_name} ${values.relative_last_name}`,
       phoneContact: values.relative_phone_number,
@@ -196,7 +196,7 @@ const ContinueStep2 = () => {
                 <div className="input-group">
                   <Field
                     name="deposit"
-                    validate={requiredAndMoreThanHundredThousand}
+                    validate={requiredd}
                     autocomplete="off"
                     className="form-control"
                     defaultValue={`${Math.round(
@@ -208,9 +208,8 @@ const ContinueStep2 = () => {
                       .concat(["0", "0", "0"])
                       .join("")}`}
                   />
-                  <div className="hint">
-                    Чем больше сумма депозита тем больше сумма при одобрении
-                    микрокредита
+                  <div className="hint" style={{color: '#dc3545'}}>
+                    Высокая сумма депозита увеличивает Ваши шансы на одобрение кредита
                   </div>
                 </div>
                 {errors.deposit && touched.deposit && (

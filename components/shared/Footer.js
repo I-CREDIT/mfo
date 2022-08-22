@@ -58,6 +58,7 @@ const Footer = () => {
                 <AppLink href="/difficulty_repayment">Порядок урегулирования задолженности</AppLink>
                 <AppLink href="/guide">{t('footerCol-2-6')}</AppLink>
                 <AppLink href="/contacts">{t('footerCol-2-7')}</AppLink>
+                <AppLink href="/accounting">Отчетность</AppLink>
               </div>
             </div>
             <div className="col-md-4 footerCol">

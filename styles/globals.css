@@ -279,7 +279,7 @@ ul.complete li:last-child {
   padding: 13px;
 }
 
-.footer .footerCol .extra-info {
+.footer .footerCol .extra-info, .accounting .extra-info {
   display: flex;
   justify-content: flex-start;
   align-items: center;
@@ -291,11 +291,11 @@ ul.complete li:last-child {
   margin-bottom: 15px;
 }
 
-.footer .footerCol .extra-info:hover {
+.footer .footerCol .extra-info:hover, .accounting .extra-info:hover {
   background-color: #f2f2f2;
 }
 
-.footer .footerCol .extra-info h5 {
+.footer .footerCol .extra-info h5, .accounting .extra-info h5 {
   color: #000000;
   margin-left: 29px;
   font-size: 14px;
@@ -1116,6 +1116,58 @@ button {
 .draggable {
   float: left;
   margin: 0 10px 10px 0;
+}
+
+.partners {
+  padding-top: 150px !important;
+  font-size: 25px;
+}
+.partners .title {
+  font-size: 65px;
+  margin: 0 0 50px;
+  background: antiquewhite;
+  padding: 0 10px;
+  border-radius: 15px;
+}
+.partners .text {
+  margin: 0 0 50px;
+}
+.partners .invite {
+  background: antiquewhite;
+  margin: 0 0 50px;
+  padding: 10px;
+  border-radius: 15px;
+}
+.partners .invite .p {
+  font-size: 40px;
+}
+.partners .invite ul li {
+  font-size: 25px;
+}
+.partners .form-group {
+  padding: 50px 100px;
+  overflow: inherit;
+  border: 1px solid #e0e0e0;
+  border-radius: 20px;
+  box-shadow: 0 14px 15px rgb(0 0 0 / 25%), 0 10px 10px rgb(0 0 0 / 22%);
+  background-color: #f2f2f2;
+}
+.partners .form-group .input-group1 {
+  margin: 24px 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 24px;
+}
+.partners .form-group textarea.form-control {
+  margin: 0px 0px 16px;
+}
+.partners .form-group .btn-container {
+  display: flex;
+  justify-content: center;
+}
+.partners .form-group .btn-container .btn {
+  color: white;
+  background: #ef2221;
 }
 
 .otherPages h1 {

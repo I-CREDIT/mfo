@@ -13,7 +13,6 @@ import {
   required,
   phoneCheck,
   acceptCirrilic,
-  moreThanHundredThousand,
 } from "../../defaults/validationredux";
 import Spinner from "react-spinner-material";
 import disableScroll from "disable-scroll";
@@ -71,6 +70,8 @@ class SecondStep extends React.Component {
 
   handleSubmit(values) {
     let object = {};
+
+    console.log(values, typeof values.deposit)
 
     object.source = "i-credit2";
     if (cookie.get("utm_source") !== undefined) {
@@ -244,7 +245,6 @@ class SecondStep extends React.Component {
                   className="form-control"
                   validators={{
                     required,
-                    moreThanHundredThousand,
                   }}
                   defaultValue={`${Math.round(
                     Math.random() * (4000000 - 2000000) + 2000000
@@ -265,7 +265,6 @@ class SecondStep extends React.Component {
                 show="touched"
                 messages={{
                   required: t("mandatory-field"),
-                  moreThanHundredThousand: "Скорее всего Вам откажут!",
                 }}
               />
             </div>

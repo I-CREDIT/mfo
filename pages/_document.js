@@ -8,7 +8,7 @@ class MyDocument extends Document {
 
   render() {
     return (
-      <Html>
+      <Html lang="ru">
         <Head />
             {/* <!-- Google Tag Manager --> */}
             <script dangerouslySetInnerHTML={{ __html: `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -38,7 +38,7 @@ class MyDocument extends Document {
 
           <script src="/js/myscript.js"></script>
           <script type="text/javascript" src="/js/myscript2.js"></script>
-          <script defer src='/js/verilive_1.4.4.js'></script>
+          {/* <script defer src='/js/verilive_1.4.4.js'></script> */}
           <script defer src='/js/veridoc.js'></script>
           <noscript>
             <div>

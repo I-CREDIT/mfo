@@ -1,6 +1,11 @@
+import Head from "next/head"
+
 const DifficultyRepayment = () => {
   return (
     <div className="bottom-banner--text" style={{margin: 0, paddingTop: "100px"}}>
+      <Head>
+        <title>Порядок урегулирования задолженности</title>
+      </Head>
       <p className="container">
       <br/>
             ТОО «МФО «I-CREDIT.KZ» (далее – МФО) идя навстречу заемщикам, которые испытывают сложности с погашением микрокредитов в результате ухудшения финансового состояния, сообщает о предоставлении возможности урегулирования просроченной задолженности по договору о предоставлении микрокредита.

@@ -1323,7 +1323,7 @@ class Status extends React.Component {
                 }}
               >
                 <a 
-                  href="https://showcases.site/96497/" 
+                  href="https://extramoney365.net/zhhp" 
                   target="_blank"
                   style={{
                     height: '100%'
@@ -1342,7 +1342,7 @@ class Status extends React.Component {
                   </button>
                 </a>
                 <a 
-                  href="https://extramoney365.net/zhhp" 
+                  href="https://bistriedengi.kz/index.php?adname=hpnlx" 
                   target="_blank"
                   style={{
                     height: '100%'
